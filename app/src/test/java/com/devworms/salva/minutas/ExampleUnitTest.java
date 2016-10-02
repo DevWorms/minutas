@@ -1,4 +1,4 @@
-package com.example.devworms.minutas;
+package com.devworms.salva.minutas;
 
 import org.junit.Test;
 
