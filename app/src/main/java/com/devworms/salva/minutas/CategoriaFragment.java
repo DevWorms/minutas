@@ -20,9 +20,9 @@ public class CategoriaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_categoria, container, false);
+        View view = inflater.inflate(R.layout.item_categoria, container, false);
 
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.viewRecycle);
+     /*   RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.viewRecycle);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -32,7 +32,7 @@ public class CategoriaFragment extends Fragment {
         // specify an adapter (see also next example)
         CategoriasAdapter mAdapter = new CategoriasAdapter();
         mRecyclerView.setAdapter(mAdapter);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+*/
+        return view;
     }
 }
