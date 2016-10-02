@@ -3,6 +3,7 @@ package com.devworms.salva.minutas;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -86,7 +87,9 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.actividad, new CategoriaFragment()).commit();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            Log.d("Cate","entro");
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new CategoriasFragment()).commit();
         } else if (id == R.id.nav_slideshow) {
 
 
