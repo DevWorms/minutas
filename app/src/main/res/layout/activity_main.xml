@@ -14,11 +14,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1">
-    <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <FrameLayout
+
+        <include
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
         android:id="@+id/actividad"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
