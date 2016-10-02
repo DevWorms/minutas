@@ -81,6 +81,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.actividad, new CategoriaFragment()).commit();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
