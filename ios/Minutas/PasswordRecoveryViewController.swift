@@ -23,7 +23,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_user.becomeFirstResponder()
     }
@@ -36,8 +36,8 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Managing the status bar
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     // MARK: UITextFieldDelegate
@@ -45,10 +45,10 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                btn_recoverPassword.isEnabled = false
+                btn_recoverPassword.enabled = false
             }
-        } else if !btn_recoverPassword.isEnabled {
-            btn_recoverPassword.isEnabled = true
+        } else if !btn_recoverPassword.enabled {
+            btn_recoverPassword.enabled = true
         }
         
         return true
@@ -63,7 +63,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func cancelPasswordRecovery() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: Networking
@@ -71,15 +71,15 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     @IBAction
     func recoverPassword() {
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.recoverPassword)\(txtf_user.text!)")!
-        URLSession.sharedSession.dataTaskWithURL(url as URL, completionHandler: parseJson).resume()
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            dispatch_get_main_queue().asynchronously() {
-                if let json = try? JSONSerialization.JSONObjectWithData(data!, options: []) {
+            dispatch_async(dispatch_get_main_queue()) {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {

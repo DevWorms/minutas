@@ -12,12 +12,12 @@ extension UIView {
     
     func drawBorderWithColor(color: UIColor, width: CGFloat, cornerRadius: CGFloat = 0.0) {
         layer.borderWidth = width
-        layer.borderColor = color.cgColor
+        layer.borderColor = color.CGColor
         layer.cornerRadius = cornerRadius
     }
     
     func drawRoundedBorder() {
-        drawBorderWithColor(color: backgroundColor ?? tintColor, width: 1.0, cornerRadius: 5.0)
+        drawBorderWithColor(backgroundColor ?? tintColor, width: 1.0, cornerRadius: 5.0)
     }
     
 }
@@ -33,7 +33,7 @@ extension UIColor {
 extension UIScreen {
     
     func sizeEqualTo3_5Inch() -> Bool {
-        return UIScreen.main.bounds.height == 480.0
+        return UIScreen.mainScreen().bounds.height == 480.0
     }
     
 }

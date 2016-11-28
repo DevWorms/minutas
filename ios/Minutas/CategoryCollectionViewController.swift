@@ -21,7 +21,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         
@@ -33,59 +33,58 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
 
     // MARK: UICollectionViewDataSource
 
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath)
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
         let json = categories[indexPath.item]
         
-        cell.backgroundColor = UIColor.white
+        cell.backgroundColor = UIColor.whiteColor()
         
         let label = cell.contentView.viewWithTag(100) as? UILabel ?? UILabel()
         label.tag = 100
-        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.font = UIFont.systemFontOfSize(14.0)
         cell.contentView.addSubview(label)
         label.text = json[WebServiceResponseKey.created] as? String
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
+        label.topAnchor.constraintEqualToAnchor(cell.contentView.topAnchor).active = true
+        label.leadingAnchor.constraintEqualToAnchor(cell.contentView.leadingAnchor).active = true
+        label.trailingAnchor.constraintEqualToAnchor(cell.contentView.trailingAnchor).active = true
         
         let nombre = cell.contentView.viewWithTag(200) as? UILabel ?? UILabel()
         nombre.numberOfLines = 0
         nombre.tag = 200
-        nombre.textAlignment = .center
+        nombre.textAlignment = .Center
         cell.contentView.addSubview(nombre)
         nombre.text = json[WebServiceResponseKey.categoryName] as? String
         nombre.translatesAutoresizingMaskIntoConstraints = false
-        nombre.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
-        nombre.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+        nombre.centerXAnchor.constraintEqualToAnchor(cell.contentView.centerXAnchor).active = true
+        nombre.centerYAnchor.constraintEqualToAnchor(cell.contentView.centerYAnchor).active = true
         
-        let progress = cell.contentView.viewWithTag(100) as? UIProgressView ?? UIProgressView(progressViewStyle: .default)
+        let progress = cell.contentView.viewWithTag(100) as? UIProgressView ?? UIProgressView(progressViewStyle: .Default)
         progress.tag = 300
         progress.progress = 0.5
         progress.translatesAutoresizingMaskIntoConstraints = false
         cell.contentView.addSubview(progress)
-        progress.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
-        progress.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
-        progress.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+        progress.leadingAnchor.constraintEqualToAnchor(cell.contentView.leadingAnchor).active = true
+        progress.trailingAnchor.constraintEqualToAnchor(cell.contentView.trailingAnchor).active = true
+        progress.bottomAnchor.constraintEqualToAnchor(cell.contentView.bottomAnchor).active = true
         
         return cell
-
     }
+    
     func newCategoryControllerDidCancel() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func newCategoryControllerDidFinish() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         loadCategories()
     }
 
@@ -121,27 +120,27 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        (segue.destination as! NewCategoryViewController).delegate = self
+        (segue.destinationViewController as! NewCategoryViewController).delegate = self
     }
     
     func loadCategories() {
-        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
-        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.categories)\(userId)/\(apiKey)")!
-        URLSession.sharedSession.dataTaskWithURL(url as URL, completionHandler: parseJson).resume()
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? JSONSerialization.jsonObject(with: data! as Data, options: []) {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
-                    dispatch_get_main_queue().asynchronously() {
+                    dispatch_async(dispatch_get_main_queue()) {
                         if self.categories.count > 0 {
                             self.categories.removeAll()
                         }
@@ -154,7 +153,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
                     print("El JSON de respuesta es inválido.")
                 }
             } else {
-                dispatch_get_main_queue().asynchronously() {
+                dispatch_async(dispatch_get_main_queue()) {
                     if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                         let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))

@@ -30,7 +30,7 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
     }
@@ -43,20 +43,19 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Managing the status bar
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
-            
-            if textField.text!.distance(from: textField.text!.startIndex, to:textField.text!.endIndex) - range.length == 0 {
-                btn_create.isEnabled = false
+            if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
+                btn_create.enabled = false
             }
-        } else if !btn_create.isEnabled {
-            btn_create.isEnabled = true
+        } else if !btn_create.enabled {
+            btn_create.enabled = true
         }
         
         return true
@@ -78,26 +77,26 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func createCategory() {
-        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
-        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
         let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtf_name.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
         
-        if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-            let urlRequest = NSMutableURLRequest(url: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")! as URL)
-            urlRequest.httpMethod = "POST"
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
+            urlRequest.HTTPMethod = "POST"
             
-            URLSession.sharedSession.uploadTaskWithRequest(urlRequest as URLRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
         } else {
             print("Error de codificación de caracteres.")
         }
     }
     
-    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            dispatch_get_main_queue().asynchronously() {
+            dispatch_async(dispatch_get_main_queue()) {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in

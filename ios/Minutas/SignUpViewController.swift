@@ -62,18 +62,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btn_passwordVisibility = UIButton(type: .system)
+        let btn_passwordVisibility = UIButton(type: .System)
         btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
-        btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), for: .normal)
+        btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), forState: .Normal)
         btn_passwordVisibility.sizeToFit()
-        btn_passwordVisibility.isOpaque = true
+        btn_passwordVisibility.opaque = true
         txtf_password.rightView = btn_passwordVisibility
-        txtf_password.rightViewMode = .always
+        txtf_password.rightViewMode = .Always
     }
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
     }
@@ -87,41 +87,41 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     // MARK: Managing the status bar
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .lightContent
+        return .LightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        if textField === txtf_password && UIScreen.main.sizeEqualTo3_5Inch() {
-            UIView.animate(withDuration: 0.195, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseIn, animations: {
+        if textField === txtf_password && UIScreen.mainScreen().sizeEqualTo3_5Inch() {
+            UIView.animateWithDuration(0.195, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseIn, animations: {
                 let v_fullNameContainer = self.txtf_name.superview!.superview!
-                v_fullNameContainer.isHidden = true
+                v_fullNameContainer.hidden = true
                 v_fullNameContainer.superview!.layoutIfNeeded()
             }, completion: nil)
         }
         
         v_currentTextFieldSeparator = textField.superview!.viewWithTag(textField.tag + 1)!
         cnstr_currentTextFieldSeparatorHeight = v_currentTextFieldSeparator.constraints[0]
-        v_currentTextFieldSeparator.backgroundColor = UIColor.white
+        v_currentTextFieldSeparator.backgroundColor = UIColor.whiteColor()
         cnstr_currentTextFieldSeparatorHeight.constant = 2.0
         
-        togglesInRealTimeSignUpButton = checkIfFormIsFullByExcludingField(fieldToExclude: textField)
+        togglesInRealTimeSignUpButton = checkIfFormIsFullByExcludingField(textField)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if togglesInRealTimeSignUpButton {
             if textField === txtf_password && passwordEntered && txtf_password.secureTextEntry {
-                btn_signUp.isEnabled = false
+                btn_signUp.enabled = false
                 passwordEntered = false
             }
             
             if string.isEmpty {
                 if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                    btn_signUp.isEnabled = false
+                    btn_signUp.enabled = false
                 }
-            } else if !btn_signUp.isEnabled {
-                btn_signUp.isEnabled = true
+            } else if !btn_signUp.enabled {
+                btn_signUp.enabled = true
             }
         }
         
@@ -130,10 +130,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         if textField === txtf_password {
-            if UIScreen.main.sizeEqualTo3_5Inch() {
-                UIView.animate(withDuration: 0.225, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            if UIScreen.mainScreen().sizeEqualTo3_5Inch() {
+                UIView.animateWithDuration(0.225, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: {
                     let v_fullNameContainer = self.txtf_name.superview!.superview!
-                    v_fullNameContainer.isHidden = false
+                    v_fullNameContainer.hidden = false
                     v_fullNameContainer.superview!.layoutIfNeeded()
                 }, completion: nil)
             }
@@ -172,7 +172,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     func toggleSecureTextEntry(sender: UIButton) {
         txtf_password.secureTextEntry = !txtf_password.secureTextEntry
-        sender.setBackgroundImage(UIImage(named: txtf_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), for: .Normal)
+        sender.setBackgroundImage(UIImage(named: txtf_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), forState: .Normal)
     }
     
     func checkIfFormIsFullByExcludingField(fieldToExclude: UITextField) -> Bool {
@@ -190,28 +190,29 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     func createAccount() {
         let parameterString = "\(WebServiceRequestParameter.name)=\(txtf_name.text!)&\(WebServiceRequestParameter.phone)=\(txtf_phone.text!)&\(WebServiceRequestParameter.email)=\(txtf_email.text!)&\(WebServiceRequestParameter.username)=\(txtf_username.text!)&\(WebServiceRequestParameter.password)=\(txtf_password.text!)"
         
-        if let httpBody = parameterString.data(using: String.Encoding.utf8) {
-            let urlRequest = NSMutableURLRequest(url: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.signup)")! as URL)
-            urlRequest.httpMethod = "POST"
+        let strUrl = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.signup)"
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: strUrl)!)
+            urlRequest.HTTPMethod = "POST"
             
-            URLSession.sharedSession.uploadTaskWithRequest(urlRequest as URLRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
         } else {
             print("Error de codificación de caracteres.")
         }
     }
     
-    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == HttpStatusCode.OK {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 print("Registro exitoso.")
-                DispatchQueue.main.asynchronously() {
-                    self.delegate?.signUpControllerDidFinishWithInfo(info: [WebServiceRequestParameter.email : self.txtf_email.text!, WebServiceRequestParameter.password : self.txtf_password.text!])
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.delegate?.signUpControllerDidFinishWithInfo([WebServiceRequestParameter.email : self.txtf_email.text!, WebServiceRequestParameter.password : self.txtf_password.text!])
                 }
             } else {
-                DispatchQueue.main.asynchronously() {
-                    if let json = try? JSONSerialization.JSONObjectWithData(data! as Data, options: []) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                         let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
                         self.presentViewController(vc_alert, animated: true, completion: nil)
