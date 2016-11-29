@@ -9,7 +9,7 @@
 import Foundation
 
 enum WebServiceEndpoint {
-    static let baseUrl = "http://52.42.236.217/api/"
+    static let baseUrl = "https://52.42.236.217/api/"
     
     static let signup = "user/register"
     static let login = "user/login/"

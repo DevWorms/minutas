@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SignUpControllerDelegate: NSObjectProtocol {
+protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
     
     func signUpControllerDidCancel()
     

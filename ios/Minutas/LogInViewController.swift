@@ -148,7 +148,38 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBAction
     func logIn() {
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+       
+        httpGet(NSMutableURLRequest(URL: url))
+       /* var session = NSURLSession(configuration: configuration, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
+        
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()*/
+    }
+    
+    func httpGet(request: NSMutableURLRequest!) {
+        let configuration =
+            NSURLSessionConfiguration.defaultSessionConfiguration()
+        
+        let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
+        
+        let task = session.dataTaskWithRequest(request){
+            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            if error == nil {
+                let result = NSString(data: data!, encoding:
+                    NSASCIIStringEncoding)!
+                
+                self.parseJson(data, urlResponse: response, error: error)
+                NSLog("result %@", result)
+            }
+        }
+        task.resume()
+    }
+    
+    func URLSession(session: NSURLSession,
+                    task: NSURLSessionTask,
+                    didReceiveChallenge challenge: NSURLAuthenticationChallenge,
+                                        completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?)
+        -> Void) {
+        completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
     }
     
     func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
