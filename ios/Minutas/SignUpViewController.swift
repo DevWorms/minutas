@@ -16,7 +16,7 @@ protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
     
 }
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionDelegate {
     
     // MARK: Properties
     
@@ -194,6 +194,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
             let urlRequest = NSMutableURLRequest(URL: NSURL(string: strUrl)!)
             urlRequest.HTTPMethod = "POST"
+            
+            
+            
+            
+            
             
             NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
         } else {

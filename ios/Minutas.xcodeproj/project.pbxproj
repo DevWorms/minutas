@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
 		5DC27E111DE72FB800857BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0F1DE72FB800857BC0 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DC27E0F1DE72FB800857BC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				5DC27E161DE72FF500857BC0 /* Constants.swift */,
 				5DC27E171DE72FF500857BC0 /* Extensions.swift */,
+				49CC59B11DF000520033E472 /* LlamadaAPI.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
+				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				5DC27E201DE7300B00857BC0 /* LogInViewController.swift in Sources */,
 				5DC27E181DE72FF500857BC0 /* Constants.swift in Sources */,
 			);
@@ -420,6 +424,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -441,6 +446,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
