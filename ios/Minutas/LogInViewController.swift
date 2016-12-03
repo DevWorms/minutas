@@ -147,12 +147,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     @IBAction
     func logIn() {
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
-       
-        httpGet(NSMutableURLRequest(URL: url))
-       /* var session = NSURLSession(configuration: configuration, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
         
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()*/
+        
+        if let savedValue = NSUserDefaults.standardUserDefaults().stringForKey("login") {
+            // Do something with savedValue
+            if(savedValue != "true"){
+                let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
+                
+                httpGet(NSMutableURLRequest(URL: url))
+            }
+        }
+        
+        
     }
     
     func httpGet(request: NSMutableURLRequest!) {
@@ -193,6 +199,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
                     
                     dispatch_async(dispatch_get_main_queue()) {
+                        
+                        NSUserDefaults.standardUserDefaults().setObject("true", forKey: "login")
                         self.performSegueWithIdentifier("toCategories", sender: nil)
                     }
                 } else {
