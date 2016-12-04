@@ -14,26 +14,62 @@ protocol NewPendienteControllerDelegate: NSObjectProtocol {
     func newPendienteControllerDidFinish()
 }
 
-class NewPendienteViewController: UIViewController, UITextFieldDelegate {
+class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: Properties
     
     weak var delegate: NewPendienteControllerDelegate?
     
+    @IBOutlet weak var autopostergarSwitch: UISwitch!
     @IBOutlet
     weak var navigationBar: UINavigationBar!
     
     @IBOutlet
     weak var btn_create: UIBarButtonItem!
     
-    @IBOutlet
-    weak var txtf_name: UITextField!
+    @IBOutlet weak var txtf_descripcion: UITextView!
+    @IBOutlet weak var txtf_name: UITextField!
+    
+    @IBOutlet weak var datePicketFechaTermino: UIDatePicker!
+    @IBOutlet weak var txtf_responsable: UITextField!
+    
+    @IBOutlet weak var opcionesPicker: UIPickerView!
+    
+    
+    
+    let pickerData = ["Selecciona prioridad","Prioridad baja","Prioridad normal","Prioridad alta"]
+    
     
     // MARK: Responding to view events
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
+        
+        opcionesPicker.delegate = self
+        opcionesPicker.dataSource = self
+        
+         self.hideKeyboardWhenTappedAround()
+        NSUserDefaults.standardUserDefaults().setObject(1, forKey: "prioridadSelected")
+        
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject(row, forKey: "prioridadSelected")
     }
     
     // MARK: Configuring the view's layout behavior
@@ -78,18 +114,51 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func createCategory() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtf_name.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
+        let prioridadSelected = NSUserDefaults.standardUserDefaults().valueForKey("prioridadSelected")!
         
-        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
-            urlRequest.HTTPMethod = "POST"
+        
+        if     !((txtf_responsable.text?.isEmpty)!)
+            && !((txtf_descripcion.text?.isEmpty)!)
+            && !((txtf_name.text?.isEmpty)!)
+            && prioridadSelected as? Int > 0{
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-        } else {
-            print("Error de codificación de caracteres.")
+        
+        
+            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            let categoryId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+            
+            if let nombereText = txtf_name.text {
+                print(nombereText)
+                let styler = NSDateFormatter()
+                styler.dateFormat = "yyyy-MM-dd"
+                let fechaFinal = styler.stringFromDate(datePicketFechaTermino.date)
+        
+        
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.categoryId)=\(categoryId)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(txtf_responsable.text!)"
+        
+                if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newPendiente)")!)
+                    urlRequest.HTTPMethod = "POST"
+            
+                    NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody,  completionHandler: parseJson).resume()
+                
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
+                
+            }
+            
+        }
+        else{
+            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos antes de crear un nuevo pendiente", preferredStyle: .Alert)
+            
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            self.presentViewController(vc_alert, animated: true, completion: nil)
+            
         }
     }
     

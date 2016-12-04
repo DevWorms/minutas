@@ -20,6 +20,19 @@ extension UIView {
         drawBorderWithColor(backgroundColor ?? tintColor, width: 1.0, cornerRadius: 5.0)
     }
     
+    
+}
+
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension UIColor {

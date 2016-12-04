@@ -19,6 +19,7 @@ enum WebServiceEndpoint {
     
     static let categories = "category/all/"
     static let newCategory = "category/new"
+    static let newPendiente = "pendientes/new"
     
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
@@ -34,6 +35,16 @@ enum WebServiceRequestParameter {
     static let userId = "Id_Usuario"
     static let apiKey = "API_Key"
     static let categoryName = "Nombre_Categoria"
+    
+    static let categoryId = "id_Categoria"
+    static let pendienteName = "Nombre_Pendiente"
+    static let descripcion = "descripcion"
+    static let autopostergar = "Auto_Postergar"
+    static let prioridad = "prioridad"
+    static let fechaFin = "Fecha_Fin"
+    static let responsable = "responsable"
+    
+    
 }
 
 enum WebServiceResponseKey {
