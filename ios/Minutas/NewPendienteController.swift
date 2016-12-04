@@ -52,6 +52,28 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
          self.hideKeyboardWhenTappedAround()
         NSUserDefaults.standardUserDefaults().setObject(1, forKey: "prioridadSelected")
         
+        
+        let currentDate: NSDate = NSDate()
+        
+        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        // let calendar: NSCalendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let components: NSDateComponents = NSDateComponents()
+        components.calendar = calendar
+        
+        components.year = 0
+        components.month = 0
+        components.day = 0
+        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
+        
+        
+        self.datePicketFechaTermino.minimumDate = minDate
+        
+        
+        
+        
+        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
