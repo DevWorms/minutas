@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
+		49C7463E1DF3FECD00985CE1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */; };
+		49C746401DF496D400985CE1 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463F1DF496D400985CE1 /* GenericCell.swift */; };
+		49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746411DF498BB00985CE1 /* TareasCell.swift */; };
+		49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746431DF49F6500985CE1 /* TareasTableViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
@@ -40,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
+		49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		49C7463F1DF496D400985CE1 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
+		49C746411DF498BB00985CE1 /* TareasCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TareasCell.swift; sourceTree = "<group>"; };
+		49C746431DF49F6500985CE1 /* TareasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TareasTableViewController.swift; sourceTree = "<group>"; };
 		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49C7463C1DF3FEB100985CE1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */,
+				49C7463F1DF496D400985CE1 /* GenericCell.swift */,
+				49C746411DF498BB00985CE1 /* TareasCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		5DC27DF01DE72D0800857BC0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +111,8 @@
 				5DC27E1C1DE7300B00857BC0 /* NewCategoryViewController.swift */,
 				5DC27E1D1DE7300B00857BC0 /* PasswordRecoveryViewController.swift */,
 				5DC27E1E1DE7300B00857BC0 /* SignUpViewController.swift */,
+				49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */,
+				49C746431DF49F6500985CE1 /* TareasTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -131,6 +153,7 @@
 				5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */,
 				5DC27E0F1DE72FB800857BC0 /* Main.storyboard */,
 				5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */,
+				49C7463C1DF3FEB100985CE1 /* Cells */,
 				5DC27DFB1DE72D3900857BC0 /* Utilities */,
 				5DC27DF01DE72D0800857BC0 /* Controllers */,
 			);
@@ -274,7 +297,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
+				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
+				49C746401DF496D400985CE1 /* GenericCell.swift in Sources */,
+				49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */,
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
+				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
@@ -282,6 +309,7 @@
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				5DC27E201DE7300B00857BC0 /* LogInViewController.swift in Sources */,
 				5DC27E181DE72FF500857BC0 /* Constants.swift in Sources */,
+				49C7463E1DF3FECD00985CE1 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

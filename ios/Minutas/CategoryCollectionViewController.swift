@@ -41,6 +41,16 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         return categories.count
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let json = categories[indexPath.item]
+        
+        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.categoryId] as! Int, forKey: WebServiceResponseKey.categoryId)
+        
+        
+        performSegueWithIdentifier("categoria", sender: self)
+    }
+    
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
         let json = categories[indexPath.item]
@@ -83,6 +93,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     func newCategoryControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
         loadCategories()
@@ -120,7 +131,10 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        (segue.destinationViewController as! NewCategoryViewController).delegate = self
+        
+        if segue.identifier == "recetarios"{
+            (segue.destinationViewController as! NewCategoryViewController).delegate = self
+        }
     }
     
     func loadCategories() {

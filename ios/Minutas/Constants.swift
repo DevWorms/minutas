@@ -19,6 +19,9 @@ enum WebServiceEndpoint {
     
     static let categories = "category/all/"
     static let newCategory = "category/new"
+    
+    static let pendientes = "pendientes/all/"
+    static let tareas = "tasks/"
 }
 
 enum WebServiceRequestParameter {
@@ -45,6 +48,28 @@ enum WebServiceResponseKey {
     static let created = "created_at"
     static let updated = "updated_at"
     static let categories = "categorias"
+    
+    static let pendientes = "pendientes"
+    static let prioridad = "prioridad"
+    static let pendienteId = "id_pendiente"
+    static let nombrePendiente = "Nombre_Pendiente"
+    static let descripcion = "descripcion"
+    static let autoPostergar = "Auto_Postergar"
+    static let altaPrioridad = "Alta_Prioridad"
+    static let fechaInicio = "Fecha_Inicio"
+    static let fechaFin = "Fecha_Fin"
+    static let fechaCierre = "2016-12-04"
+    static let pendienteStatus = "status"
+    static let pendienteStatusVisible = "status_visible"
+    static let usuariosAsignados = "Usuarios_Asignados"
+    static let files = "Usuarios_Asignados"
+    static let fileName = "name"
+    static let fileUrl = "url"
+    
+    
+    static let nombreSubPendientes = "nombre_sub_pendiente"
+    
+       
 }
 
 enum HttpStatusCode {

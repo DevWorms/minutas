@@ -33,6 +33,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let savedValue = NSUserDefaults.standardUserDefaults().stringForKey("login")
+        
+        // Do something with savedValue
+        if(savedValue != nil && savedValue == "true"){
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                self.performSegueWithIdentifier("toCategories", sender: nil)
+            }
+        }else{
+        
         let imgv_account = UIImageView(image: UIImage(named: "ic_account_18pt"))
         imgv_account.contentMode = .ScaleAspectFit
         imgv_account.bounds.size.width += 8.0
@@ -57,6 +67,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         
         btn_logIn.drawRoundedBorder()
         btn_signUp.drawRoundedBorder()
+        }
     }
     
     // MARK: Managing the status bar
@@ -148,15 +159,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBAction
     func logIn() {
         
-        
-        if let savedValue = NSUserDefaults.standardUserDefaults().stringForKey("login") {
-            // Do something with savedValue
-            if(savedValue != "true"){
-                let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
                 
-                httpGet(NSMutableURLRequest(URL: url))
-            }
-        }
+        httpGet(NSMutableURLRequest(URL: url))
+        
+        
         
         
     }
