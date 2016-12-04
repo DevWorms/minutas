@@ -1,23 +1,24 @@
 //
-//  NewCategoryViewController.swift
+//  NewPendienteController.swift
 //  Minutas
 //
-//  Created by Uriel Mestas Estrada on 14/11/16.
+//  Created by sergio ivan lopez monzon on 04/12/16.
 //  Copyright © 2016 Uriel Mestas Estrada. All rights reserved.
 //
 
+
 import UIKit
 
-protocol NewCategoryControllerDelegate: NSObjectProtocol {
-    func newCategoryControllerDidCancel()
-    func newCategoryControllerDidFinish()
+protocol NewPendienteControllerDelegate: NSObjectProtocol {
+    func newPendienteControllerDidCancel()
+    func newPendienteControllerDidFinish()
 }
 
-class NewCategoryViewController: UIViewController, UITextFieldDelegate {
+class NewPendienteViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
-    weak var delegate: NewCategoryControllerDelegate?
+    weak var delegate: NewPendienteControllerDelegate?
     
     @IBOutlet
     weak var navigationBar: UINavigationBar!
@@ -70,10 +71,8 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func cancelPasswordRecovery() {
-        delegate?.newCategoryControllerDidCancel()
+        delegate?.newPendienteControllerDidCancel()
     }
-    
-   
     
     // MARK: Networking
     
@@ -103,7 +102,7 @@ class NewCategoryViewController: UIViewController, UITextFieldDelegate {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                            self.delegate?.newCategoryControllerDidFinish()
+                            self.delegate?.newPendienteControllerDidFinish()
                         }
                         })
                     self.presentViewController(vc_alert, animated: true, completion: nil)

@@ -23,8 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="1ue-cG-JQw">
-                                <rect key="frame" x="24" y="15" width="319" height="451"/>
+                            <stackView contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="1ue-cG-JQw">
+                                <rect key="frame" x="28" y="108" width="319" height="451"/>
                                 <subviews>
                                     <stackView userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="8vI-sC-GSM">
                                         <rect key="frame" x="51.5" y="0.0" width="216.5" height="99"/>
@@ -165,8 +165,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-PC-oav">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-PC-oav">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.0" green="0.36862745099999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
@@ -184,17 +184,17 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uhL-RG-y9k">
-                                <rect key="frame" x="24" y="80" width="319" height="80"/>
+                            <stackView contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uhL-RG-y9k">
+                                <rect key="frame" x="28" y="80" width="319" height="79.5"/>
                                 <subviews>
                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correo electrónico, nombre de usuario o teléfono." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otr-1C-vwv">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="319" height="33.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bVp-OX-1Az">
-                                        <rect key="frame" x="0.0" y="50" width="319" height="30"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="319" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="xcl-By-HaH"/>
                                         </constraints>
@@ -239,8 +239,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTu-eS-bwc">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTu-eS-bwc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.0" green="0.36862745099999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
@@ -258,8 +258,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QE1-gb-Tbv">
-                                <rect key="frame" x="24" y="80" width="319" height="219"/>
+                            <stackView contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QE1-gb-Tbv">
+                                <rect key="frame" x="28" y="80" width="319" height="219"/>
                                 <subviews>
                                     <stackView contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gkg-Y8-lI0">
                                         <rect key="frame" x="0.0" y="0.0" width="319" height="31"/>
@@ -905,7 +905,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="oIt-5x-XTM">
                                 <connections>
-                                    <segue destination="uv3-u6-YcR" kind="presentation" id="MFI-jU-CMm"/>
+                                    <segue destination="uv3-u6-YcR" kind="presentation" identifier="nuevoPendiente" id="MFI-jU-CMm"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="ybC-eb-o5l"/>
@@ -917,10 +917,10 @@
             </objects>
             <point key="canvasLocation" x="6116" y="2013.6431784107947"/>
         </scene>
-        <!--New Category View Controller-->
+        <!--New Pendiente View Controller-->
         <scene sceneID="7TG-UP-vqg">
             <objects>
-                <viewController id="uv3-u6-YcR" customClass="NewCategoryViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uv3-u6-YcR" customClass="NewPendienteViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mAx-lK-IzP"/>
                         <viewControllerLayoutGuide type="bottom" id="ivk-zb-pBI"/>
@@ -1009,7 +1009,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Z29-fy-Dyu">
-                                <rect key="frame" x="0.0" y="474" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="449" width="375" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="914-Mw-K67"/>
+                                </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="502573303.08210701">
                                     <!--2016-12-04 19:41:43 +0000-->
                                 </date>
@@ -1017,7 +1020,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Z29-fy-Dyu" firstAttribute="top" secondItem="mAx-lK-IzP" secondAttribute="bottom" constant="454" id="14I-Cu-qNZ"/>
+                            <constraint firstItem="Z29-fy-Dyu" firstAttribute="top" secondItem="mAx-lK-IzP" secondAttribute="bottom" constant="429" id="14I-Cu-qNZ"/>
                             <constraint firstAttribute="trailing" secondItem="16X-sR-3TI" secondAttribute="trailing" id="6es-pt-Oo2"/>
                             <constraint firstItem="DO9-VJ-YFh" firstAttribute="top" secondItem="mAx-lK-IzP" secondAttribute="bottom" constant="241" id="Ajt-4L-27v"/>
                             <constraint firstItem="ly8-Fh-5Wq" firstAttribute="top" secondItem="mAx-lK-IzP" secondAttribute="bottom" constant="185" id="EAP-Oa-KNN"/>
@@ -1043,7 +1046,7 @@
                     <connections>
                         <outlet property="btn_create" destination="quv-a7-50b" id="BwJ-Az-ptW"/>
                         <outlet property="navigationBar" destination="16X-sR-3TI" id="nHb-7t-KTL"/>
-                        <outlet property="txtf_name" destination="wHH-kI-Z9S" id="C15-lw-R6n"/>
+                        <outlet property="txtf_name" destination="wHH-kI-Z9S" id="ZYi-WC-QAQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3K-0l-YmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1130,7 +1133,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="hKi-Ua-gt5">
                                 <connections>
-                                    <segue destination="5Ij-dP-6Uw" kind="presentation" id="cRn-sX-16e"/>
+                                    <segue destination="5Ij-dP-6Uw" kind="presentation" identifier="nuevoTarea" id="cRn-sX-16e"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="KHf-Op-470"/>
@@ -1206,8 +1209,8 @@
                                     <outlet property="delegate" destination="5Ij-dP-6Uw" id="52a-cj-Gti"/>
                                 </connections>
                             </textField>
-                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingresa nombre de la tarea" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZJ-Z7-vLA">
-                                <rect key="frame" x="28" y="167" width="172.5" height="17"/>
+                            <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asigna usuarios" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZJ-Z7-vLA">
+                                <rect key="frame" x="28" y="167" width="102.5" height="17"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>

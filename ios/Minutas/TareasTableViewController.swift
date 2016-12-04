@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TareasTableViewController: UITableViewController {
+class TareasTableViewController: UITableViewController, NewTareaViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -53,6 +53,16 @@ class TareasTableViewController: UITableViewController {
         
     }
     
+    func newTareaControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newTareaControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadTareas()
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tareas.count
     }
@@ -72,13 +82,13 @@ class TareasTableViewController: UITableViewController {
     }
     
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
+        if segue.identifier == "nuevoTarea"{
+            (segue.destinationViewController as! NewTareaViewController).delegate = self
+        }
     }
+    
     
     func loadTareas() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!

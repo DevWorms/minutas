@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PendienteTableViewController: UITableViewController {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -18,6 +18,8 @@ class PendienteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        
         
         loadPendiente()
     }
@@ -74,22 +76,27 @@ class PendienteTableViewController: UITableViewController {
         let json = pendientes[indexPath.item]
         
         NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
-        
-
-        
-        
-        
-     
+    }
+    
+    func newPendienteControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    // MARK: - Navigation
+    func newPendienteControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadPendiente()
+    }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
+        if segue.identifier == "nuevoPendiente"{
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+        }
     }
+
     
     func loadPendiente() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
