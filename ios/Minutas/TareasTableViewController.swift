@@ -45,7 +45,7 @@ class TareasTableViewController: UITableViewController {
         
         let json = tareas[indexPath.item]
         
-        cell.tituloTarea.text = json[WebServiceResponseKey.nombrePendiente] as? String
+        cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
         cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
         
