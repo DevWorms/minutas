@@ -1,5 +1,5 @@
 //
-//  NewTareaViewController.swift
+//  NewReunionesViewControllerDelegate.swift
 //  Minutas
 //
 //  Created by sergio ivan lopez monzon on 04/12/16.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol NewTareaViewControllerDelegate: NSObjectProtocol {
-    func newTareaControllerDidCancel()
-    func newTareaControllerDidFinish()
+protocol NewReunionViewControllerDelegate: NSObjectProtocol  {
+    func newReunionControllerDidCancel()
+    func newReunionControllerDidFinish()
 }
 
-class NewTareaViewController: UIViewController, UITextFieldDelegate {
+class NewReunionViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
-    weak var delegate: NewTareaViewControllerDelegate?
+    weak var delegate: NewReunionViewControllerDelegate?
     
     @IBOutlet
     weak var navigationBar: UINavigationBar!
@@ -33,6 +33,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
+        self.hideKeyboardWhenTappedAround()
     }
     
     // MARK: Configuring the view's layout behavior
@@ -66,11 +67,12 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
     // MARK: Actions
     
     @IBAction
     func cancelPasswordRecovery() {
-        delegate?.newTareaControllerDidCancel()
+        delegate?.newReunionControllerDidCancel()
     }
     
     // MARK: Networking
@@ -101,7 +103,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                            self.delegate?.newTareaControllerDidFinish()
+                            self.delegate?.newReunionControllerDidFinish()
                         }
                         })
                     self.presentViewController(vc_alert, animated: true, completion: nil)

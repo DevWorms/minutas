@@ -26,10 +26,16 @@ class TareasCell: GenericCell {
         
         
     }
+   
     @IBAction func asignarUsuario(sender: AnyObject) {
     }
     
     @IBAction func attachButton(sender: AnyObject) {
     }
+
+    
+    
+
+
 }
  

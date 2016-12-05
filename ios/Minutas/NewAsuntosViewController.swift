@@ -1,5 +1,5 @@
 //
-//  NewTareaViewController.swift
+//  NewAsuntosViewController.swift
 //  Minutas
 //
 //  Created by sergio ivan lopez monzon on 04/12/16.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol NewTareaViewControllerDelegate: NSObjectProtocol {
-    func newTareaControllerDidCancel()
-    func newTareaControllerDidFinish()
+protocol NewAsuntosViewControllerDelegate: NSObjectProtocol {
+    func newAsuntoControllerDidCancel()
+    func newAsuntoControllerDidFinish()
 }
 
-class NewTareaViewController: UIViewController, UITextFieldDelegate {
+class NewAsuntosViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
-    weak var delegate: NewTareaViewControllerDelegate?
+    weak var delegate: NewAsuntosViewControllerDelegate?
     
     @IBOutlet
     weak var navigationBar: UINavigationBar!
@@ -70,7 +70,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func cancelPasswordRecovery() {
-        delegate?.newTareaControllerDidCancel()
+        delegate?.newAsuntoControllerDidCancel()
     }
     
     // MARK: Networking
@@ -101,7 +101,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                            self.delegate?.newTareaControllerDidFinish()
+                            self.delegate?.newAsuntoControllerDidFinish()
                         }
                         })
                     self.presentViewController(vc_alert, animated: true, completion: nil)

@@ -14,6 +14,11 @@
 		49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746431DF49F6500985CE1 /* TareasTableViewController.swift */; };
 		49C746461DF4ABD700985CE1 /* NewPendienteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746451DF4ABD700985CE1 /* NewPendienteController.swift */; };
 		49C7464A1DF4BA7800985CE1 /* NewTareaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746491DF4BA7800985CE1 /* NewTareaViewController.swift */; };
+		49C7464C1DF4E45D00985CE1 /* ReunionesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7464B1DF4E45D00985CE1 /* ReunionesTableViewController.swift */; };
+		49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */; };
+		49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */; };
+		49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */; };
+		49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
@@ -54,6 +59,11 @@
 		49C746431DF49F6500985CE1 /* TareasTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TareasTableViewController.swift; sourceTree = "<group>"; };
 		49C746451DF4ABD700985CE1 /* NewPendienteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPendienteController.swift; sourceTree = "<group>"; };
 		49C746491DF4BA7800985CE1 /* NewTareaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTareaViewController.swift; sourceTree = "<group>"; };
+		49C7464B1DF4E45D00985CE1 /* ReunionesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReunionesTableViewController.swift; sourceTree = "<group>"; };
+		49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReunionViewController.swift; sourceTree = "<group>"; };
+		49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMinutaViewController.swift; sourceTree = "<group>"; };
+		49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntosTableViewController.swift; sourceTree = "<group>"; };
+		49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAsuntosViewController.swift; sourceTree = "<group>"; };
 		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,6 +129,11 @@
 				49C746431DF49F6500985CE1 /* TareasTableViewController.swift */,
 				49C746451DF4ABD700985CE1 /* NewPendienteController.swift */,
 				49C746491DF4BA7800985CE1 /* NewTareaViewController.swift */,
+				49C7464B1DF4E45D00985CE1 /* ReunionesTableViewController.swift */,
+				49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */,
+				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
+				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
+				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -302,17 +317,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */,
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
 				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
+				49C7464C1DF4E45D00985CE1 /* ReunionesTableViewController.swift in Sources */,
 				49C746401DF496D400985CE1 /* GenericCell.swift in Sources */,
 				49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */,
+				49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */,
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
 				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
+				49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */,
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
+				49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */,
 				5DC27E201DE7300B00857BC0 /* LogInViewController.swift in Sources */,
 				5DC27E181DE72FF500857BC0 /* Constants.swift in Sources */,
 				49C7464A1DF4BA7800985CE1 /* NewTareaViewController.swift in Sources */,

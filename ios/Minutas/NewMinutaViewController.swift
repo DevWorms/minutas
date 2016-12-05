@@ -1,5 +1,5 @@
 //
-//  NewTareaViewController.swift
+//  NewMinutaViewController.swift
 //  Minutas
 //
 //  Created by sergio ivan lopez monzon on 04/12/16.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol NewTareaViewControllerDelegate: NSObjectProtocol {
-    func newTareaControllerDidCancel()
-    func newTareaControllerDidFinish()
+protocol NewMinutaViewControllerDelegate: NSObjectProtocol  {
+    func newMinutaControllerDidCancel()
+    func newMinutaControllerDidFinish()
 }
 
-class NewTareaViewController: UIViewController, UITextFieldDelegate {
+class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
-    weak var delegate: NewTareaViewControllerDelegate?
+    weak var delegate: NewMinutaViewControllerDelegate?
     
     @IBOutlet
     weak var navigationBar: UINavigationBar!
@@ -25,14 +25,17 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet
     weak var btn_create: UIBarButtonItem!
     
-    @IBOutlet
-    weak var txtf_name: UITextField!
+    
+    @IBOutlet weak var txtfAsuntoMinuta: UITextField!
+    
+    @IBOutlet weak var txtfAcuerdoMinuta: UITextField!
     
     // MARK: Responding to view events
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        txtf_name.becomeFirstResponder()
+        txtfAcuerdoMinuta.becomeFirstResponder()
+        self.hideKeyboardWhenTappedAround()
     }
     
     // MARK: Configuring the view's layout behavior
@@ -66,11 +69,12 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
     // MARK: Actions
     
     @IBAction
     func cancelPasswordRecovery() {
-        delegate?.newTareaControllerDidCancel()
+        delegate?.newMinutaControllerDidCancel()
     }
     
     // MARK: Networking
@@ -80,7 +84,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtf_name.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
+        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtfAcuerdoMinuta.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
         
         if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
             let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
@@ -101,7 +105,7 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                            self.delegate?.newTareaControllerDidFinish()
+                            self.delegate?.newMinutaControllerDidFinish()
                         }
                         })
                     self.presentViewController(vc_alert, animated: true, completion: nil)
