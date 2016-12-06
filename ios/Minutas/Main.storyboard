@@ -621,9 +621,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tc2-u2-r7V" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Reuniones" id="2el-40-un8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="wmj-VL-bNJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="wmj-VL-bNJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.36862745099999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -648,7 +649,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iRr-AI-QuB" id="GZS-c1-uHd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -727,7 +728,6 @@
         <!--Pendientes-->
         <scene sceneID="Zca-zG-44g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="reg-o6-pdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="5Zs-WU-7nf" customClass="PendienteTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="176" sectionHeaderHeight="28" sectionFooterHeight="28" id="21T-tX-8F3">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -738,7 +738,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="176"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vs5-67-f4e" id="rPI-vW-dT9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Titulo pendiente" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5i-PA-zUb">
@@ -844,7 +844,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <pickerView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Rh-JN-29T">
-                                            <rect key="frame" x="251" y="-1" width="116" height="49"/>
+                                            <rect key="frame" x="246" y="-1" width="114" height="49"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         </pickerView>
                                     </subviews>
@@ -884,6 +884,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="reg-o6-pdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6116" y="2013.6431784107947"/>
         </scene>
@@ -1059,7 +1060,6 @@
         <!--Tareas-->
         <scene sceneID="OaH-sb-bKl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fcC-Ce-I4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Fmn-wj-GdO" customClass="TareasTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" id="bN8-en-D5q">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -1145,6 +1145,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fcC-Ce-I4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6468" y="2781"/>
         </scene>
@@ -1260,7 +1261,6 @@
         <!--Reuniones-->
         <scene sceneID="kdE-VC-Ivz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aDk-eb-79X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKN-uY-NW1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1271,7 +1271,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Aun-fo-hIX" id="eQ7-Du-x3a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx4-3X-CwS">
@@ -1318,7 +1318,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Reuniones" id="S8h-ZW-5o2">
-                        <barButtonItem key="backBarButtonItem" id="JIX-9z-Wzw"/>
+                        <barButtonItem key="leftBarButtonItem" id="JIX-9z-Wzw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="rP4-aZ-MR1">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1339,6 +1341,7 @@
                         <segue destination="E7I-1z-EmV" kind="presentation" identifier="capturarMinutas" id="cq4-vu-lyO"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDk-eb-79X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7980" y="1253.5232383808097"/>
         </scene>
@@ -1480,7 +1483,6 @@
         <!--Asuntos-->
         <scene sceneID="WzA-3j-6wC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sMF-tu-T8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="fbO-Ae-4Ef" customClass="AsuntosTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ae7-w3-fOA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -1491,7 +1493,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I2g-qd-VjS" id="wu0-z8-VmD">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbe-Ab-x3F">
@@ -1553,7 +1555,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Asuntos" id="2is-Gn-Zy0">
-                        <barButtonItem key="backBarButtonItem" id="clX-n2-gN4"/>
+                        <barButtonItem key="leftBarButtonItem" id="clX-n2-gN4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="j9P-uA-4eK">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1571,6 +1575,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sMF-tu-T8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8785" y="2014"/>
         </scene>
@@ -1642,7 +1647,9 @@
                     <connections>
                         <outlet property="btn_create" destination="4Nj-A7-aWk" id="Mxj-Bc-wFz"/>
                         <outlet property="navigationBar" destination="EaU-S7-lpH" id="8eD-er-CWd"/>
+                        <outlet property="switch_autoasignar" destination="Oy9-zf-XNf" id="E0x-Nj-0fK"/>
                         <outlet property="txtf_name" destination="nji-6q-Xju" id="7CP-pW-3Od"/>
+                        <outlet property="txtf_participantes" destination="9eN-So-r8z" id="key-K9-obL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oB5-fU-t9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1709,7 +1716,7 @@
                                     <outlet property="delegate" destination="E7I-1z-EmV" id="P9X-jR-Fbf"/>
                                 </connections>
                             </textField>
-                            <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asignar objetivos de la reunion" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBZ-WX-vVh">
+                            <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asignar objetivo de la reunion" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WBZ-WX-vVh">
                                 <rect key="frame" x="23" y="254" width="319" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1718,8 +1725,8 @@
                                     <outlet property="delegate" destination="E7I-1z-EmV" id="HqF-KK-gHj"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duración" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrq-gf-y8u">
-                                <rect key="frame" x="20" y="422" width="69" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hora:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrq-gf-y8u">
+                                <rect key="frame" x="20" y="422" width="40" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1733,8 +1740,8 @@
                                 </date>
                                 <locale key="locale" localeIdentifier="es_MX"/>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Asignar fecha " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psK-5r-6Bi">
-                                <rect key="frame" x="23" y="315" width="94" height="76"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Asignar fecha: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psK-5r-6Bi">
+                                <rect key="frame" x="23" y="315" width="68" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1752,8 +1759,13 @@
                     </view>
                     <connections>
                         <outlet property="btn_create" destination="bix-ut-u3Z" id="v16-2i-VHm"/>
+                        <outlet property="datePicker_duracion" destination="rpP-zC-1OD" id="XG8-C7-6xw"/>
+                        <outlet property="datePicker_fecha" destination="jfI-uY-24G" id="VFT-wf-zwW"/>
                         <outlet property="navigationBar" destination="CHL-uq-GYP" id="twr-MR-8za"/>
+                        <outlet property="txtf_lugar" destination="Rj7-iI-rLU" id="Yyh-6Y-Ivb"/>
                         <outlet property="txtf_name" destination="02c-4o-esZ" id="JQP-0F-LOd"/>
+                        <outlet property="txtf_objetivos" destination="WBZ-WX-vVh" id="0Pq-Eu-KlJ"/>
+                        <outlet property="txtf_usuarios" destination="8Aq-1W-a5z" id="y5Z-Fo-iz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Y2-eW-SSR" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -28,12 +28,42 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet
     weak var txtf_name: UITextField!
     
+    @IBOutlet weak var txtf_lugar: UITextField!
+    
+    @IBOutlet weak var txtf_usuarios: UITextField!
+    
+    @IBOutlet weak var txtf_objetivos: UITextField!
+    
+    @IBOutlet weak var datePicker_fecha: UIDatePicker!
+    
+    @IBOutlet weak var datePicker_duracion: UIDatePicker!
+    
+    
     // MARK: Responding to view events
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
+        btn_create.enabled = true
+        
+        
+        let currentDate: NSDate = NSDate()
+        
+        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        // let calendar: NSCalendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone(name: "UTC")!
+        
+        let components: NSDateComponents = NSDateComponents()
+        components.calendar = calendar
+        
+        components.year = 0
+        components.month = 0
+        components.day = 0
+        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
+        
+        
+        self.datePicker_fecha.minimumDate = minDate
     }
     
     // MARK: Configuring the view's layout behavior
@@ -79,18 +109,49 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func createCategory() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtf_name.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
         
-        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
-            urlRequest.HTTPMethod = "POST"
+        if     !((txtf_name.text?.isEmpty)!)
+            && !((txtf_usuarios.text?.isEmpty)!)
+            && !((txtf_lugar.text?.isEmpty)!)
+            && !((txtf_objetivos.text?.isEmpty)!){
+        
+            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            if let nombereText = txtf_name.text {
+                if let lugatTxt = txtf_lugar.text {
+                    if let objetivos = txtf_objetivos.text {
+                        let styler = NSDateFormatter()
+                        styler.dateFormat = "yyyy-MM-dd"
+                        let diaReunion = styler.stringFromDate(datePicker_fecha.date)
+        
+                        let stylerH = NSDateFormatter()
+                        stylerH.dateFormat = "HH:mm"
+                        let hora = stylerH.stringFromDate(datePicker_duracion.date)
+
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-        } else {
-            print("Error de codificación de caracteres.")
+                        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.nombreReunion)=\(txtf_name.text!)&\(WebServiceRequestParameter.usuariosAsignados)=\(nombereText)&\(WebServiceRequestParameter.diaReunion)=\(diaReunion)&\(WebServiceRequestParameter.horaReunion)=\(hora)&\(WebServiceRequestParameter.lugarReunion)=\(lugatTxt)&\(WebServiceRequestParameter.objetivoReunion)=\(objetivos)"
+        
+                        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newReunion)")!)
+                        urlRequest.HTTPMethod = "POST"
+            
+                            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                        } else {
+                            print("Error de codificación de caracteres.")
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos antes de agendar una nueva reunion", preferredStyle: .Alert)
+            
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            self.presentViewController(vc_alert, animated: true, completion: nil)
+            
         }
     }
     

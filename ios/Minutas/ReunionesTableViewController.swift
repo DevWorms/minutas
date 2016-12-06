@@ -86,9 +86,6 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         
         
-        
-        
-        
     }
     
     

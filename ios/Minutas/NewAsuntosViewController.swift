@@ -28,6 +28,9 @@ class NewAsuntosViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet
     weak var txtf_name: UITextField!
     
+    @IBOutlet weak var txtf_participantes: UITextField!
+    
+    @IBOutlet weak var switch_autoasignar: UISwitch!
     // MARK: Responding to view events
     
     override func viewDidAppear(animated: Bool) {
@@ -77,18 +80,39 @@ class NewAsuntosViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func createCategory() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtf_name.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
-        
-        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
-            urlRequest.HTTPMethod = "POST"
+        if     !((txtf_name.text?.isEmpty)!)
+            && !((txtf_participantes.text?.isEmpty)!){
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-        } else {
-            print("Error de codificación de caracteres.")
+            if let nombre = txtf_name.text{
+                if let asignados = txtf_participantes.text{
+                    let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+                    let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+                    let reunionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.reunionId)
+        
+                    let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\("null")&\(WebServiceRequestParameter.autoasignar)=\(switch_autoasignar.on)&\(WebServiceRequestParameter.reunionId)=\(reunionId)&\(WebServiceRequestParameter.nombreSubPendiente)=\(nombre)&\(WebServiceRequestParameter.usuariosAsignados)=\(asignados)"
+        
+                    if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.asuntoNuevo)"
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                        urlRequest.HTTPMethod = "POST"
+            
+                        NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                   } else {
+                        print("Error de codificación de caracteres.")
+                    }
+                }
+            
+            }
+        }
+        else{
+            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos antes de agendar una nueva reunion", preferredStyle: .Alert)
+            
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            self.presentViewController(vc_alert, animated: true, completion: nil)
+
         }
     }
     

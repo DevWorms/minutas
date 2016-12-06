@@ -69,12 +69,6 @@ class AsuntosTableViewController: UITableViewController, NewAsuntosViewControlle
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let json = asuntos[indexPath.item]
-        
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
-        
-        
-        
         
         
         
@@ -83,7 +77,7 @@ class AsuntosTableViewController: UITableViewController, NewAsuntosViewControlle
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "nuevAsunto"{
+        if segue.identifier == "crearAsunto"{
             (segue.destinationViewController as! NewAsuntosViewController).delegate = self
         }
     }

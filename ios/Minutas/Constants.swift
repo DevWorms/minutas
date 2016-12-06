@@ -19,11 +19,14 @@ enum WebServiceEndpoint {
     
     static let categories = "category/all/"
     static let newCategory = "category/new"
+    static let newReunion = "meeting/new"
+    
     static let newPendiente = "pendientes/new"
     
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
     static let asuntos = "tasks/reunion/"
+    static let asuntoNuevo = "tasks/new"
     static let reuniones = "meetings/"
 }
 
@@ -41,10 +44,22 @@ enum WebServiceRequestParameter {
     static let categoryId = "id_Categoria"
     static let pendienteName = "Nombre_Pendiente"
     static let descripcion = "descripcion"
+    static let usuariosAsignados = "Usuarios_Asignados"
     static let autopostergar = "Auto_Postergar"
+    static let autoasignar = "auto_asignar"
+    
     static let prioridad = "prioridad"
     static let fechaFin = "Fecha_Fin"
     static let responsable = "responsable"
+    static let nombreReunion = "Nombre_Reunion"
+    
+    static let diaReunion = "Dia_Reunion"
+    static let horaReunion = "Hora_Reunion"
+    static let lugarReunion = "Lugar_Reunion"
+    static let objetivoReunion = "objetivo"
+    static let subPendienteId = "id_sub_pendiente"
+    static let reunionId = "id_reunion"
+    static let nombreSubPendiente = "nombre_sub_pendiente"
     
     
 }
@@ -52,6 +67,7 @@ enum WebServiceRequestParameter {
 enum WebServiceResponseKey {
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
+    
     static let status = "estado"
     static let message = "mensaje"
     

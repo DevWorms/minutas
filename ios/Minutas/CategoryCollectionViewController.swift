@@ -172,6 +172,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
                         let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
                         self.presentViewController(vc_alert, animated: true, completion: nil)
+                         NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
                     } else {
                         print("HTTP Status Code: 400 o 500")
                         print("El JSON de respuesta es inválido.")
