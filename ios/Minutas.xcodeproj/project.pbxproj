@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */; };
 		49C746401DF496D400985CE1 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463F1DF496D400985CE1 /* GenericCell.swift */; };
@@ -52,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
+		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
 		49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		49C7463F1DF496D400985CE1 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
@@ -144,6 +147,7 @@
 				5DC27E161DE72FF500857BC0 /* Constants.swift */,
 				5DC27E171DE72FF500857BC0 /* Extensions.swift */,
 				49CC59B11DF000520033E472 /* LlamadaAPI.swift */,
+				3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -169,6 +173,7 @@
 		5DCBD07A1DC0209F00074C10 /* Minutas */ = {
 			isa = PBXGroup;
 			children = (
+				3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */,
 				5DC27E141DE72FDF00857BC0 /* AppDelegate.swift */,
 				5DC27E121DE72FC900857BC0 /* Info.plist */,
 				5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */,
@@ -251,6 +256,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = FN75477QMR;
 						LastSwiftMigration = 0810;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					5DCBD08B1DC0209F00074C10 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -326,6 +336,7 @@
 				49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */,
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
 				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
+				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
@@ -466,6 +477,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = FN75477QMR;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -489,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = FN75477QMR;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -621,7 +621,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tc2-u2-r7V" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Reuniones" id="2el-40-un8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="wmj-VL-bNJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="wmj-VL-bNJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -738,7 +738,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="176"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vs5-67-f4e" id="rPI-vW-dT9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Titulo pendiente" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5i-PA-zUb">
@@ -1139,7 +1139,11 @@
                                     <segue destination="5Ij-dP-6Uw" kind="presentation" identifier="nuevoTarea" id="cRn-sX-16e"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="KHf-Op-470"/>
+                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="KHf-Op-470">
+                                <connections>
+                                    <action selector="uploadFile:" destination="Fmn-wj-GdO" id="M0p-sh-nNF"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="ic_account_circle_white_24pt" style="plain" id="Qch-Rx-fmZ"/>
                         </rightBarButtonItems>
                     </navigationItem>
