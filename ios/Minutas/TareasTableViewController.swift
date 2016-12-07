@@ -29,27 +29,7 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     }
     
     @IBAction func uploadFile(sender: AnyObject) {
-        
-        // https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1
-        let documentMenu = UIDocumentMenuViewController(documentTypes: [
-            "com.adobe.pdf",
-            "com.microsoft.word.doc",
-            "org.openxmlformats.wordprocessingml.document",
-            "com.microsoft.excel.xls",
-            "org.openxmlformats.spreadsheetml.sheet",
-            "public.png",
-            "public.rtf",
-            "com.pkware.zip-archive",
-            "com.compuserve.gif",
-            "public.jpeg"
-            ], inMode: UIDocumentPickerMode.Import)
-        
-        documentMenu.delegate = self
-        
-        //ipad
-        documentMenu.popoverPresentationController?.sourceView = self.view
-        
-        self.presentViewController(documentMenu, animated: true, completion: nil)
+       
 
     }
     
@@ -130,14 +110,27 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let json = tareas[indexPath.item]
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+        // https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1
+        let documentMenu = UIDocumentMenuViewController(documentTypes: [
+            "com.adobe.pdf",
+            "com.microsoft.word.doc",
+            "org.openxmlformats.wordprocessingml.document",
+            "com.microsoft.excel.xls",
+            "org.openxmlformats.spreadsheetml.sheet",
+            "public.png",
+            "public.rtf",
+            "com.pkware.zip-archive",
+            "com.compuserve.gif",
+            "public.jpeg"
+            ], inMode: UIDocumentPickerMode.Import)
         
+        documentMenu.delegate = self
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.categoryId] as! Int, forKey: WebServiceResponseKey.categoryId)
+        //ipad
+        documentMenu.popoverPresentationController?.sourceView = self.view
         
-        
+        self.presentViewController(documentMenu, animated: true, completion: nil)
         
         
     }

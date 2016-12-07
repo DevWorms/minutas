@@ -58,6 +58,8 @@ enum WebServiceRequestParameter {
     static let lugarReunion = "Lugar_Reunion"
     static let objetivoReunion = "objetivo"
     static let subPendienteId = "id_sub_pendiente"
+    static let pendienteId = "id_pendiente"
+    
     static let reunionId = "id_reunion"
     static let nombreSubPendiente = "nombre_sub_pendiente"
     
