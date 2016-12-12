@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		149949B55E86A0458B28E647 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A835F23A4024BDEE0F332F /* Pods.framework */; };
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
-		49180E0A1DFE341E005ED814 /* CalendarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49180E091DFE341E005ED814 /* CalendarioViewController.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */; };
 		49C746401DF496D400985CE1 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463F1DF496D400985CE1 /* GenericCell.swift */; };
@@ -22,6 +22,7 @@
 		49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */; };
 		49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
+		49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
 		5DC27E111DE72FB800857BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0F1DE72FB800857BC0 /* Main.storyboard */; };
@@ -56,8 +57,6 @@
 /* Begin PBXFileReference section */
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
-		49180E081DFE32D8005ED814 /* Minutas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Minutas-Bridging-Header.h"; sourceTree = "<group>"; };
-		49180E091DFE341E005ED814 /* CalendarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioViewController.swift; sourceTree = "<group>"; };
 		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
 		49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		49C7463F1DF496D400985CE1 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
@@ -71,6 +70,8 @@
 		49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntosTableViewController.swift; sourceTree = "<group>"; };
 		49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAsuntosViewController.swift; sourceTree = "<group>"; };
 		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
+		49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioTableViewController.swift; sourceTree = "<group>"; };
+		49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Minutas-Bridging-Header.h"; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DC27E0F1DE72FB800857BC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -86,6 +87,9 @@
 		5DCBD0781DC0209F00074C10 /* Minutas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minutas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCBD08C1DC0209F00074C10 /* MinutasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinutasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DCBD0971DC0209F00074C10 /* MinutasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinutasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E84D4ABB641352DCA60DC7E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B9A835F23A4024BDEE0F332F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8E0E4E74E874CE8AE8787DB /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149949B55E86A0458B28E647 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,14 +118,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49180E071DFE32A5005ED814 /* FSCalendar */ = {
-			isa = PBXGroup;
-			children = (
-				49180E081DFE32D8005ED814 /* Minutas-Bridging-Header.h */,
-			);
-			name = FSCalendar;
-			sourceTree = "<group>";
-		};
 		49C7463C1DF3FEB100985CE1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,7 +145,7 @@
 				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
 				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
 				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
-				49180E091DFE341E005ED814 /* CalendarioViewController.swift */,
+				49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -169,6 +166,8 @@
 			children = (
 				5DCBD07A1DC0209F00074C10 /* Minutas */,
 				5DCBD0791DC0209F00074C10 /* Products */,
+				DE9FB8DF28FFC9A9878DEF2B /* Pods */,
+				5F6EFE9B166437E535BE0B36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,7 +184,7 @@
 		5DCBD07A1DC0209F00074C10 /* Minutas */ = {
 			isa = PBXGroup;
 			children = (
-				49180E071DFE32A5005ED814 /* FSCalendar */,
+				49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */,
 				3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */,
 				5DC27E141DE72FDF00857BC0 /* AppDelegate.swift */,
 				5DC27E121DE72FC900857BC0 /* Info.plist */,
@@ -199,6 +198,23 @@
 			path = Minutas;
 			sourceTree = "<group>";
 		};
+		5F6EFE9B166437E535BE0B36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9A835F23A4024BDEE0F332F /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE9FB8DF28FFC9A9878DEF2B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E84D4ABB641352DCA60DC7E /* Pods.debug.xcconfig */,
+				D8E0E4E74E874CE8AE8787DB /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,9 +222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DCBD0A01DC0209F00074C10 /* Build configuration list for PBXNativeTarget "Minutas" */;
 			buildPhases = (
+				9BF920C7448C1E32873F0B65 /* Check Pods Manifest.lock */,
 				5DCBD0741DC0209F00074C10 /* Sources */,
 				5DCBD0751DC0209F00074C10 /* Frameworks */,
 				5DCBD0761DC0209F00074C10 /* Resources */,
+				3E94AC8CB0F1DF115562F292 /* Embed Pods Frameworks */,
+				C14782F7D0DD0C809EE3A49F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -335,6 +354,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E94AC8CB0F1DF115562F292 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BF920C7448C1E32873F0B65 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C14782F7D0DD0C809EE3A49F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5DCBD0741DC0209F00074C10 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -350,11 +417,11 @@
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
 				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
 				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
+				49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
-				49180E0A1DFE341E005ED814 /* CalendarioViewController.swift in Sources */,
 				49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */,
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */,
@@ -435,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -477,7 +544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -488,6 +555,7 @@
 		};
 		5DCBD0A11DC0209F00074C10 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E84D4ABB641352DCA60DC7E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -499,19 +567,21 @@
 					"$(PROJECT_DIR)/Minutas",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Minutas/Minutas-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		5DCBD0A21DC0209F00074C10 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8E0E4E74E874CE8AE8787DB /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -523,12 +593,13 @@
 					"$(PROJECT_DIR)/Minutas",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Minutas/Minutas-Bridging-Header.h";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -17,7 +17,7 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadTareas()
     }
@@ -34,15 +34,15 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     }
     
     // MARK: - UIDocumentPickerDelegate
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        if controller.documentPickerMode == UIDocumentPickerMode.import {
+    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+        if controller.documentPickerMode == UIDocumentPickerMode.Import {
             
-            MyFile.url = url as NSURL
+            MyFile.url = url
             
             var fileSize : UInt64 = 0
             
             do {
-                let attr : NSDictionary? = try FileManager.default.attributesOfItem( atPath: MyFile.Path ) as NSDictionary?
+                let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath( MyFile.Path )
                 
                 if let _attr = attr {
                     fileSize = _attr.fileSize();
@@ -67,27 +67,27 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
  */
  
     // MARK: - UIDocumentMenuDelegate
-    func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+    func documentMenu(documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         
         documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
+        presentViewController(documentPicker, animated: true, completion: nil)
     }
     
     // Make the background color show through
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
+        headerView.backgroundColor = UIColor.clearColor()
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath) as! TareasCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
         
         let json = tareas[indexPath.item]
         
         cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
-        cell.tareaCompletaSwitch.isOn = json[WebServiceResponseKey.pendienteStatus] as! Bool
+        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
         
         return cell
@@ -95,21 +95,20 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     }
     
     func newTareaControllerDidCancel() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     func newTareaControllerDidFinish() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         loadTareas()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tareas.count
     }
     
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
         // https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1
@@ -124,92 +123,75 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
             "com.pkware.zip-archive",
             "com.compuserve.gif",
             "public.jpeg"
-            ], in: UIDocumentPickerMode.import)
+            ], inMode: UIDocumentPickerMode.Import)
         
         documentMenu.delegate = self
         
         //ipad
         documentMenu.popoverPresentationController?.sourceView = self.view
         
-        self.present(documentMenu, animated: true, completion: nil)
+        self.presentViewController(documentMenu, animated: true, completion: nil)
         
         
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "nuevoTarea"{
-            (segue.destination as! NewTareaViewController).delegate = self
+            (segue.destinationViewController as! NewTareaViewController).delegate = self
         }
     }
     
     
     func loadTareas() {
-        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
-        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
-        let pendienteId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.pendienteId)
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        let pendienteId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.pendienteId)
         
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.tareas)\(userId)/\(apiKey)/\(pendienteId)")!
-        URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, urlResponse, error) in
-            
-                self.parseJson(data: data as NSData?, urlResponse: urlResponse, error: error as NSError?)
-        }).resume()
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            if (urlResponse as! HTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? JSonSerialization.jsonObject(with: data! as Data, options: []) {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
-                    
-                    
-                    DispatchQueue.main.async( execute:  {
+                    dispatch_async(dispatch_get_main_queue()) {
                         if self.tareas.count > 0 {
                             self.tareas.removeAll()
                         }
                         
-                        do{
-                            let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]
-                            self.tareas.append(contentsOf: json?[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
-                            self.tableView?.reloadData()
-                        }catch{
-                            print("El JSon de respuesta es inválido.")
-                        }
-                        
-                    })
+                        self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        self.tableView?.reloadData()
+                    }
                 } else {
                     print("HTTP Status Code: 200")
-                    print("El JSon de respuesta es inválido.")
+                    print("El JSON de respuesta es inválido.")
                 }
             } else {
-                 DispatchQueue.main.async( execute:  {
-                    
-                    do{
-                        if let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]{
-                        
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
-                        self.present(vc_alert, animated: true, completion: nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
                     } else {
                         print("HTTP Status Code: 400 o 500")
-                        print("El JSon de respuesta es inválido.")
+                        print("El JSON de respuesta es inválido.")
                     }
-                    }catch{
-                        print("El JSon de respuesta es inválido.")
-                    }
-                })
+                }
             }
         }
     }
     
-    
     // para cuadrar las imagenes
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
         return 100
     }
 }
