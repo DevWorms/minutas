@@ -1,11 +1,12 @@
 //
 //  CollapsibleTableViewHeader.swift
-//  ios-swift-collapsible-table-section
+//  Minutas
 //
-//  Created by Yong Su on 5/30/16.
-//  Copyright © 2016 Yong Su. All rights reserved.
+//  Created by sergio ivan lopez monzon on 12/12/16.
+//  Copyright © 2016 Uriel Mestas Estrada. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 protocol CollapsibleTableViewHeaderDelegate {
@@ -59,28 +60,28 @@ class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
         let views = [
             "titleLabel" : titleLabel,
             "arrowLabel" : arrowLabel,
-        ]
+            ]
         
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "H:|-20-[titleLabel]-[arrowLabel]-20-|",
             options: [],
             metrics: nil,
             views: views
-        ))
+            ))
         
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "V:|-[titleLabel]-|",
             options: [],
             metrics: nil,
             views: views
-        ))
+            ))
         
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "V:|-[arrowLabel]-|",
             options: [],
             metrics: nil,
             views: views
-        ))
+            ))
     }
     
     //

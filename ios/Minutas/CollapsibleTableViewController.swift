@@ -1,27 +1,17 @@
 //
 //  CollapsibleTableViewController.swift
-//  ios-swift-collapsible-table-section
+//  Minutas
 //
-//  Created by Yong Su on 5/30/16.
-//  Copyright © 2016 Yong Su. All rights reserved.
+//  Created by sergio ivan lopez monzon on 12/12/16.
+//  Copyright © 2016 Uriel Mestas Estrada. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 //
 // MARK: - Section Data Structure
 //
-struct Section {
-    var name: String!
-    var items: [String]!
-    var collapsed: Bool!
-    
-    init(name: String, items: [String], collapsed: Bool = false) {
-        self.name = name
-        self.items = items
-        self.collapsed = collapsed
-    }
-}
 
 //
 // MARK: - View Controller
@@ -50,7 +40,7 @@ class CollapsibleTableViewController: UITableViewController {
 // MARK: - View Controller DataSource and Delegate
 //
 extension CollapsibleTableViewController {
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
@@ -92,28 +82,6 @@ extension CollapsibleTableViewController {
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
-    }
-
-}
-
-//
-// MARK: - Section Header Delegate
-//
-extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
-    
-    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
-        let collapsed = !sections[section].collapsed
-        
-        // Toggle collapse
-        sections[section].collapsed = collapsed
-        header.setCollapsed(collapsed)
-        
-        // Adjust the height of the rows inside the section
-        tableView.beginUpdates()
-        for i in 0 ..< sections[section].items.count {
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
-        }
-        tableView.endUpdates()
     }
     
 }

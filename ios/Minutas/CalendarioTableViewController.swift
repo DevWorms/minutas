@@ -49,15 +49,41 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CalendarioCell", forIndexPath: indexPath) as! UITableViewCell /*TareasCell
         
+        
+        switch indexPath.row {
+        case 0:
+            
+           let cell = tableView.dequeueReusableCellWithIdentifier("CalendarioCell", forIndexPath: indexPath) as! UITableViewCell
+            return cell
+            
+        case 1:
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("TareasCell", forIndexPath: indexPath) as! CalendarioCell
+            
+            cell.setUpTable()
+            return cell
+            
+            
+            
+            
+        default:
+            return UITableViewCell()
+        }
+        
+        
+        
+        /*TareasCell
+        
+         
+         TareasPendientesCell
         let json = asuntos[indexPath.item]
         
         cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
         cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
         // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
         */
-        return cell
+        
         
     }
     
@@ -72,7 +98,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1//self.asuntos.count
+        return 2//self.asuntos.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

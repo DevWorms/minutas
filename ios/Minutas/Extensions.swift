@@ -20,6 +20,18 @@ extension UIView {
         drawBorderWithColor(backgroundColor ?? tintColor, width: 1.0, cornerRadius: 5.0)
     }
     
+    func rotate(toValue: CGFloat, duration: CFTimeInterval = 0.2) {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        
+        animation.toValue = toValue
+        animation.duration = duration
+        animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        
+        self.layer.addAnimation(animation, forKey: nil)
+    }
+
+    
     
 }
 
@@ -36,6 +48,16 @@ extension UIViewController {
 }
 
 extension UIColor {
+    
+    
+    convenience init(hex:Int, alpha:CGFloat = 1.0) {
+        self.init(
+            red:   CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8)  / 255.0,
+            blue:  CGFloat((hex & 0x0000FF) >> 0)  / 255.0,
+            alpha: alpha
+        )
+    }
     
     class func placeholderColor() -> UIColor {
         return UIColor(red: 0.0, green: 0.0, blue: 25.0/255.0, alpha: 0.22)
@@ -57,4 +79,42 @@ extension NSMutableData {
         let data = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         appendData(data!)
     }
+}
+
+extension CollapsibleTableViewController: CollapsibleTableViewHeaderDelegate {
+    
+    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+        let collapsed = !sections[section].collapsed
+        
+        // Toggle collapse
+        sections[section].collapsed = collapsed
+        header.setCollapsed(collapsed)
+        
+        // Adjust the height of the rows inside the section
+        tableView.beginUpdates()
+        for i in 0 ..< sections[section].items.count {
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+        }
+        tableView.endUpdates()
+    }
+    
+}
+
+extension CalendarioCell: CollapsibleTableViewHeaderDelegate {
+    
+    func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
+        let collapsed = !sections[section].collapsed
+        
+        // Toggle collapse
+        sections[section].collapsed = collapsed
+        header.setCollapsed(collapsed)
+        
+        // Adjust the height of the rows inside the section
+        subMenuTable!.beginUpdates()
+        for i in 0 ..< sections[section].items.count {
+            subMenuTable!.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+        }
+        subMenuTable!.endUpdates()
+    }
+    
 }

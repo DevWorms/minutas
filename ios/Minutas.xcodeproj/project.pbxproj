@@ -23,6 +23,9 @@
 		49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
 		49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */; };
+		49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */; };
+		49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */; };
+		49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
 		5DC27E111DE72FB800857BC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0F1DE72FB800857BC0 /* Main.storyboard */; };
@@ -72,6 +75,9 @@
 		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
 		49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioTableViewController.swift; sourceTree = "<group>"; };
 		49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Minutas-Bridging-Header.h"; sourceTree = "<group>"; };
+		49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
+		49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioCell.swift; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DC27E0F1DE72FB800857BC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 				49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */,
 				49C7463F1DF496D400985CE1 /* GenericCell.swift */,
 				49C746411DF498BB00985CE1 /* TareasCell.swift */,
+				49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -146,6 +153,8 @@
 				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
 				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
 				49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */,
+				49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */,
+				49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -407,15 +416,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */,
 				49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */,
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
 				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
 				49C7464C1DF4E45D00985CE1 /* ReunionesTableViewController.swift in Sources */,
+				49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */,
 				49C746401DF496D400985CE1 /* GenericCell.swift in Sources */,
 				49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */,
 				49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */,
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
 				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
+				49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */,
 				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
 				49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
