@@ -71,7 +71,7 @@ class LlamadaAPI{
                     request.allHTTPHeaderFields = headers
                    // request.HTTPBody = postData
                     
-                    let session = NSURLSession.sharedSession()
+                    let session = URLSession.sharedSession()
                     let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
                         if (error != nil) {
                             print(error)

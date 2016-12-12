@@ -30,12 +30,8 @@ class CategoryCell: GenericCell {
      //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        
+    override func setSelected(_ selected: Bool, animated: Bool) {
         
     }
-    
 }
  

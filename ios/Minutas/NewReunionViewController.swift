@@ -41,29 +41,29 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
-        btn_create.enabled = true
+        btn_create.isEnabled = true
         
         
         let currentDate: NSDate = NSDate()
         
-        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         // let calendar: NSCalendar = NSCalendar.currentCalendar()
-        calendar.timeZone = NSTimeZone(name: "UTC")!
+        calendar.timeZone = NSTimeZone(name: "UTC")! as TimeZone
         
         let components: NSDateComponents = NSDateComponents()
-        components.calendar = calendar
+        components.calendar = calendar as Calendar
         
         components.year = 0
         components.month = 0
         components.day = 0
-        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
+        let minDate: NSDate = calendar.date(byAdding: components as DateComponents, to: currentDate as Date, options: NSCalendar.Options(rawValue: 0))! as NSDate
         
         
-        self.datePicker_fecha.minimumDate = minDate
+        self.datePicker_fecha.minimumDate = minDate as Date
     }
     
     // MARK: Configuring the view's layout behavior
@@ -74,19 +74,19 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Managing the status bar
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
-            if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                btn_create.enabled = false
+             if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
+                btn_create.isEnabled = false
             }
-        } else if !btn_create.enabled {
-            btn_create.enabled = true
+        } else if !btn_create.isEnabled {
+            btn_create.isEnabled = true
         }
         
         return true
@@ -116,27 +116,27 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
             && !((txtf_lugar.text?.isEmpty)!)
             && !((txtf_objetivos.text?.isEmpty)!){
         
-            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
+            let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
             if let nombereText = txtf_name.text {
                 if let lugatTxt = txtf_lugar.text {
                     if let objetivos = txtf_objetivos.text {
-                        let styler = NSDateFormatter()
+                        let styler = DateFormatter()
                         styler.dateFormat = "yyyy-MM-dd"
-                        let diaReunion = styler.stringFromDate(datePicker_fecha.date)
+                        let diaReunion = styler.string(from: datePicker_fecha.date)
         
-                        let stylerH = NSDateFormatter()
+                        let stylerH = DateFormatter()
                         stylerH.dateFormat = "HH:mm"
-                        let hora = stylerH.stringFromDate(datePicker_duracion.date)
+                        let hora = stylerH.string(from: datePicker_duracion.date)
 
             
                         let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.nombreReunion)=\(txtf_name.text!)&\(WebServiceRequestParameter.usuariosAsignados)=\(nombereText)&\(WebServiceRequestParameter.diaReunion)=\(diaReunion)&\(WebServiceRequestParameter.horaReunion)=\(hora)&\(WebServiceRequestParameter.lugarReunion)=\(lugatTxt)&\(WebServiceRequestParameter.objetivoReunion)=\(objetivos)"
         
-                        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-                            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newReunion)")!)
-                        urlRequest.HTTPMethod = "POST"
+                        if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+                            let urlRequest = NSMutableURLRequest(url: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newReunion)")! as URL)
+                        urlRequest.httpMethod = "POST"
             
-                            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                            URLSession.sharedSession.uploadTaskWithRequest(urlRequest as URLRequest, fromData: httpBody, completionHandler: parseJson).resume()
                         } else {
                             print("Error de codificación de caracteres.")
                         }
@@ -145,31 +145,31 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate {
             }
         }
         else{
-            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos antes de agendar una nueva reunion", preferredStyle: .Alert)
+            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos antes de agendar una nueva reunion", preferredStyle: .alert)
             
             vc_alert.addAction(UIAlertAction(title: "OK",
-                style: UIAlertActionStyle.Default,
+                style: UIAlertActionStyle.default,
                 handler: nil))
-            self.presentViewController(vc_alert, animated: true, completion: nil)
+            self.present(vc_alert, animated: true, completion: nil)
             
         }
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            dispatch_async(dispatch_get_main_queue()) {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+            dispatch_get_main_queue().asynchronously() {
+                if let json = try? JSonSerialization.JSonObjectWithData(data!, options: []) {
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                             self.delegate?.newReunionControllerDidFinish()
                         }
                         })
-                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                    self.present(vc_alert, animated: true, completion: nil)
                 } else {
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             }
         }

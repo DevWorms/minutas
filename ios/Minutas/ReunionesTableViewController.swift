@@ -17,7 +17,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         loadReuniones()
     }
@@ -30,23 +30,22 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     
     
     // Make the background color show through
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.clearColor()
+        headerView.backgroundColor = UIColor.clear
         return headerView
     }
     
     
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath) as! TareasCell
         
         let json = reuniones[indexPath.item]
         
         cell.tituloTarea.text = json[WebServiceResponseKey.nombreReunion] as? String
-        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
+        cell.tareaCompletaSwitch.isOn = json[WebServiceResponseKey.pendienteStatus] as! Bool
         // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
         
         return cell
@@ -54,98 +53,119 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     }
     
     func newReunionControllerDidCancel() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
     func newReunionControllerDidFinish() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         loadReuniones()
     }
     
     func newMinutaControllerDidCancel() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
     func newMinutaControllerDidFinish() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         loadReuniones()
     }
     
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.reuniones.count
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let json = reuniones[indexPath.item]
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.reunionId] as! Int, forKey: WebServiceResponseKey.reunionId)
+        UserDefaults.standard.set(json[WebServiceResponseKey.reunionId] as! Int, forKey: WebServiceResponseKey.reunionId)
         
         
         
     }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "capturarMinutas"{
-            (segue.destinationViewController as! NewMinutaViewController).delegate = self
+            (segue.destination as! NewMinutaViewController).delegate = self
         }else if segue.identifier ==  "nuevaReunion"{
-            (segue.destinationViewController as! NewReunionViewController).delegate = self
+            (segue.destination as! NewReunionViewController).delegate = self
         }
     }
     
     
     func loadReuniones() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
+        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
         
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.reuniones)\(userId)/\(apiKey)/")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, urlResponse, error) in
+            
+            self.parseJson(data: data as NSData?, urlResponse: urlResponse, error: error as NSError?)
+        }).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+            if (urlResponse as! HTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? JSonSerialization.jsonObject(with: data! as Data, options: []) {
                     print(json)
-                    dispatch_async(dispatch_get_main_queue()) {
+                    
+                    
+                    DispatchQueue.main.async( execute:  {
                         if self.reuniones.count > 0 {
                             self.reuniones.removeAll()
                         }
                         
-                        self.reuniones.appendContentsOf(json[WebServiceResponseKey.reuniones] as! [[String : AnyObject]])
-                        self.tableView?.reloadData()
-                    }
+                        
+                        do{
+                            let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]
+                            self.reuniones.append(contentsOf: json?[WebServiceResponseKey.reuniones] as! [[String : AnyObject]])
+                            self.tableView?.reloadData()
+                        }catch{
+                            print("El JSon de respuesta es inválido.")
+                        }
+                        
+                    })
+                    
+                    
+                   
                 } else {
                     print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                DispatchQueue.main.async( execute:  {
+                    
+                    do{
+                        
+                        if let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]{
+                            let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                            self.present(vc_alert, animated: true, completion: nil)
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSon de respuesta es inválido.")
+                        }
+                        
+                    }catch{
+                        print("El JSon de respuesta es inválido.")
                     }
-                }
+                })
             }
         }
     }
     
     // para cuadrar las imagenes
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
         return 70
     }
     

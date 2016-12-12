@@ -18,7 +18,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // self.clearsSelectiononViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -45,7 +45,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         
         let json = categories[indexPath.item]
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.categoryId] as! Int, forKey: WebServiceResponseKey.categoryId)
+        UserDefaults.standard.setInteger(json[WebServiceResponseKey.categoryId] as! Int, forKey: WebServiceResponseKey.categoryId)
         
         
         performSegueWithIdentifier("categoria", sender: self)
@@ -77,7 +77,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         nombre.centerXAnchor.constraintEqualToAnchor(cell.contentView.centerXAnchor).active = true
         nombre.centerYAnchor.constraintEqualToAnchor(cell.contentView.centerYAnchor).active = true
         
-        let progress = cell.contentView.viewWithTag(100) as? UIProgressView ?? UIProgressView(progressViewStyle: .Default)
+        let progress = cell.contentView.viewWithTag(100) as? UIProgressView ?? UIProgressView(progressViewStyle: .default)
         progress.tag = 300
         progress.progress = 0.5
         progress.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +130,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     }
     */
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "nuevaCategoria"{
             (segue.destinationViewController as! NewCategoryViewController).delegate = self
@@ -138,21 +138,21 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     }
     
     func loadCategories() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        UserDefaults.standard.value(forKey:WebServiceResponseKey.apiKey)!
+        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
         
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.categories)\(userId)/\(apiKey)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        URLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
                     print(json)
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.categories.count > 0 {
@@ -164,18 +164,18 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
                     }
                 } else {
                     print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
-                         NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                        self.present(vc_alert, animated: true, completion: nil)
+                         UserDefaults.standard.setObject("false", forKey: "login")
                     } else {
                         print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        print("El JSon de respuesta es inválido.")
                     }
                 }
             }

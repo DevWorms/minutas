@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
+protocol SignUpControllerDelegate: NSObjectProtocol, URLSessionDelegate {
     
     func signUpControllerDidCancel()
     
@@ -16,7 +16,7 @@ protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
     
 }
 
-class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, URLSessionDelegate {
     
     // MARK: Properties
     
@@ -59,27 +59,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btn_passwordVisibility = UIButton(type: .System)
-        btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
-        btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), forState: .Normal)
+        let btn_passwordVisibility = UIButton(type: .system)
+        btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry2(_:)), forControlEvents: .TouchUpInside)
+        btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), for: .Normal)
         btn_passwordVisibility.sizeToFit()
-        btn_passwordVisibility.opaque = true
+        btn_passwordVisibility.isOpaque = true
         
-        let btn_passwordVisibility2 = UIButton(type: .System)
-        btn_passwordVisibility2.addTarget(self, action: #selector(toggleSecureTextEntry2(_:)), forControlEvents: .TouchUpInside)
-        btn_passwordVisibility2.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), forState: .Normal)
+        let btn_passwordVisibility2 = UIButton(type: .system)
+        btn_passwordVisibility2.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
+        btn_passwordVisibility2.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), for: .Normal)
         btn_passwordVisibility2.sizeToFit()
-        btn_passwordVisibility2.opaque = true
+        btn_passwordVisibility2.isOpaque = true
         
         txtf_password.rightView = btn_passwordVisibility
-        txtf_password.rightViewMode = .Always
+        txtf_password.rightViewMode = .always
         txtf_confirm_password.rightView = btn_passwordVisibility2
-        txtf_confirm_password.rightViewMode = .Always
+        txtf_confirm_password.rightViewMode = .always
     }
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
     }
@@ -92,27 +92,27 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     // MARK: Managing the status bar
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        if textField === txtf_confirm_password && UIScreen.mainScreen().sizeEqualTo3_5Inch() {
-            UIView.animateWithDuration(0.195, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseIn, animations: {
+        if textField === txtf_confirm_password && UIScreen.mainScreen.sizeEqualTo3_5Inch() {
+            UIView.animate(withDuration: 0.195, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseIn, animations: {
                 let v_fullNameContainer = self.txtf_phone.superview!.superview!
-                v_fullNameContainer.hidden = true
+                v_fullNameContainer.isHidden = true
                 v_fullNameContainer.superview!.layoutIfNeeded()
             }, completion: nil)
         }
         
         v_currentTextFieldSeparator = textField.superview!.viewWithTag(textField.tag + 1)!
         cnstr_currentTextFieldSeparatorHeight = v_currentTextFieldSeparator.constraints[0]
-        v_currentTextFieldSeparator.backgroundColor = UIColor.whiteColor()
+        v_currentTextFieldSeparator.backgroundColor = UIColor.whiteColor
         cnstr_currentTextFieldSeparatorHeight.constant = 2.0
         
-        togglesInRealTimeSignUpButton = checkIfFormIsFullByExcludingField(textField)
+        togglesInRealTimeSignUpButton = checkIfFormIsFullByExcludingField(fieldToExclude: textField)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -123,16 +123,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
             
             if textField === txtf_password && passwordEntered && txtf_password.secureTextEntry && txtf_confirm_password.secureTextEntry {
                 
-                btn_signUp.enabled = false
+                btn_signUp.isEnabled = false
                 passwordEntered = false
             }
             
             if string.isEmpty {
-                if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                    btn_signUp.enabled = false
+                 if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
+                    btn_signUp.isEnabled = false
                 }
-            } else if !btn_signUp.enabled {
-                btn_signUp.enabled = true
+            } else if !btn_signUp.isEnabled {
+                btn_signUp.isEnabled = true
             }
         }
         
@@ -141,10 +141,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     func textFieldDidEndEditing(textField: UITextField) {
         if textField === txtf_confirm_password {
-            if UIScreen.mainScreen().sizeEqualTo3_5Inch() {
-                UIView.animateWithDuration(0.225, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: {
+            if UIScreen.mainScreen.sizeEqualTo3_5Inch() {
+                UIView.animate(withDuration: 0.225, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: {
                     let v_fullNameContainer = self.txtf_phone.superview!.superview!
-                    v_fullNameContainer.hidden = false
+                    v_fullNameContainer.isHidden = false
                     v_fullNameContainer.superview!.layoutIfNeeded()
                 }, completion: nil)
             }
@@ -183,13 +183,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     func toggleSecureTextEntry(sender: UIButton) {
         txtf_password.secureTextEntry = !txtf_password.secureTextEntry
-        sender.setBackgroundImage(UIImage(named: txtf_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), forState: .Normal)
+        sender.setBackgroundImage(UIImage(named: txtf_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), for: .Normal)
         
     }
     
     func toggleSecureTextEntry2(sender: UIButton) {
         txtf_confirm_password.secureTextEntry = !txtf_confirm_password.secureTextEntry
-        sender.setBackgroundImage(UIImage(named: txtf_confirm_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), forState: .Normal)
+        sender.setBackgroundImage(UIImage(named: txtf_confirm_password.secureTextEntry ? "ic_eye_off_18pt" : "ic_eye_18pt"), for: .Normal)
         
     }
     
@@ -216,28 +216,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
             let parameterString = "\(WebServiceRequestParameter.name)=\(txtf_name.text!)&\(WebServiceRequestParameter.phone)=\(txtf_phone.text!)&\(WebServiceRequestParameter.email)=\(txtf_email.text!)&\(WebServiceRequestParameter.username)=\(txtf_username.text!)&\(WebServiceRequestParameter.password)=\(txtf_password.text!)"
         
             let strUrl = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.signup)"
-            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: strUrl)!)
+            if let httpBody = parameterString.data(usingEncoding: NSUTF8StringEncoding) {
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: strUrl)! as URL)
             urlRequest.HTTPMethod = "POST"
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            URLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
             } else {
                 print("Error de codificación de caracteres.")
             }
             
         }
         else{
-            let vc_alert = UIAlertController(title: "Un momento", message: "Las contraseñas no coinciden", preferredStyle: .Alert)
+            let vc_alert = UIAlertController(title: "Un momento", message: "Las contraseñas no coinciden", preferredStyle: .alert)
             
             vc_alert.addAction(UIAlertAction(title: "OK",
-                style: UIAlertActionStyle.Default,
+                style: UIAlertActionStyle.default,
                 handler: nil))
-            self.presentViewController(vc_alert, animated: true, completion: nil)
+            self.present(vc_alert, animated: true, completion: nil)
             
         }
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -248,13 +248,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        self.present(vc_alert, animated: true, completion: nil)
                     } else {
                         print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        print("El JSon de respuesta es inválido.")
                     }
                 }
             }

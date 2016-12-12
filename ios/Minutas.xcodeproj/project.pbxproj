@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
+		49180E0A1DFE341E005ED814 /* CalendarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49180E091DFE341E005ED814 /* CalendarioViewController.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */; };
 		49C746401DF496D400985CE1 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463F1DF496D400985CE1 /* GenericCell.swift */; };
@@ -55,6 +56,8 @@
 /* Begin PBXFileReference section */
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
+		49180E081DFE32D8005ED814 /* Minutas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Minutas-Bridging-Header.h"; sourceTree = "<group>"; };
+		49180E091DFE341E005ED814 /* CalendarioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioViewController.swift; sourceTree = "<group>"; };
 		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
 		49C7463D1DF3FECD00985CE1 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		49C7463F1DF496D400985CE1 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
@@ -110,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49180E071DFE32A5005ED814 /* FSCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				49180E081DFE32D8005ED814 /* Minutas-Bridging-Header.h */,
+			);
+			name = FSCalendar;
+			sourceTree = "<group>";
+		};
 		49C7463C1DF3FEB100985CE1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +148,7 @@
 				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
 				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
 				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
+				49180E091DFE341E005ED814 /* CalendarioViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -173,6 +185,7 @@
 		5DCBD07A1DC0209F00074C10 /* Minutas */ = {
 			isa = PBXGroup;
 			children = (
+				49180E071DFE32A5005ED814 /* FSCalendar */,
 				3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */,
 				5DC27E141DE72FDF00857BC0 /* AppDelegate.swift */,
 				5DC27E121DE72FC900857BC0 /* Info.plist */,
@@ -341,6 +354,7 @@
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
+				49180E0A1DFE341E005ED814 /* CalendarioViewController.swift in Sources */,
 				49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */,
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */,
@@ -421,7 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -463,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -485,13 +499,13 @@
 					"$(PROJECT_DIR)/Minutas",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Minutas/Minutas-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -509,12 +523,12 @@
 					"$(PROJECT_DIR)/Minutas",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_OBJC_BRIDGING_HEADER = "Minutas/Minutas-Bridging-Header.h";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

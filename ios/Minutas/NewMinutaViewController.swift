@@ -32,7 +32,7 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         txtfAcuerdoMinuta.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
@@ -45,20 +45,22 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Managing the status bar
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
-            if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                btn_create.enabled = false
+            
+            
+            if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
+            // if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
+                btn_create.isEnabled = false
             }
-        } else if !btn_create.enabled {
-            btn_create.enabled = true
+        } else if !btn_create.isEnabled {
+            btn_create.isEnabled = true
         }
         
         return true
@@ -81,38 +83,66 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func createCategory() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
+        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
         
         let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtfAcuerdoMinuta.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
         
-        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
-            urlRequest.HTTPMethod = "POST"
+        if let httpBody = parameterString.data(using: String.Encoding.utf8) {
+            let urlRequest = NSMutableURLRequest(url: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")! as URL)
+            urlRequest.httpMethod = "POST"
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            URLSession.shared.uploadTask(with: urlRequest as URLRequest, from: httpBody, completionHandler: {(data, urlResponse, error) in
+                    if error != nil {
+                        print(error!)
+                    } else if urlResponse != nil {
+                        DispatchQueue.main.async( execute:  {
+                            
+                            do{
+                            if let json = try JSonSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:AnyObject]{
+                                
+                                let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
+                                vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel) { action in
+                                    if (urlResponse as! HTTPURLResponse).statusCode == HttpStatusCode.OK {
+                                        self.delegate?.newMinutaControllerDidFinish()
+                                    }
+                                })
+                                self.present(vc_alert, animated: true, completion: nil)
+
+                            }else {
+                                print("El JSon de respuesta es inválido.")
+                            }
+                            }catch{
+                                print("El JSon de respuesta es inválido.")
+                            }
+                           
+                        })
+                    }
+
+            
+            }).resume()
         } else {
             print("Error de codificación de caracteres.")
         }
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+   /* func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            dispatch_async(dispatch_get_main_queue()) {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+            dispatch_get_main_queue().asynchronously() {
+                if let json = try? JSonSerialization.JSonObjectWithData(data!, options: []) {
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                             self.delegate?.newMinutaControllerDidFinish()
                         }
                         })
-                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                    self.present(vc_alert, animated: true, completion: nil)
                 } else {
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             }
         }
-    }
+    }*/
 }

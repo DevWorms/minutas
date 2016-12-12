@@ -26,7 +26,7 @@ enum WebServiceEndpoint {
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
     static let asuntos = "tasks/reunion/"
-    static let asuntoNuevo = "tasks/new"
+    static let asuntonuevo = "tasks/new"
     static let reuniones = "meetings/"
 }
 

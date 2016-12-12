@@ -23,7 +23,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Responding to view events
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         txtf_user.becomeFirstResponder()
     }
@@ -36,15 +36,15 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Managing the status bar
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
-            if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
+             if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
                 btn_recoverPassword.enabled = false
             }
         } else if !btn_recoverPassword.enabled {
@@ -71,24 +71,24 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     @IBAction
     func recoverPassword() {
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.recoverPassword)\(txtf_user.text!)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        URLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
             dispatch_async(dispatch_get_main_queue()) {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                             self.dismissViewControllerAnimated(true, completion: nil)
                         }
                     })
-                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                    self.present(vc_alert, animated: true, completion: nil)
                 } else {
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             }
         }

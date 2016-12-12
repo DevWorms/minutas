@@ -17,7 +17,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         
         
@@ -32,18 +32,18 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     
     // Make the background color show through
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.clearColor()
+        headerView.backgroundColor = UIColor.clear
         return headerView
     }
     
     
-
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CategoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath) as! CategoryCell
         
         let json = pendientes[indexPath.item]
         
@@ -51,7 +51,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         cell.descripcionLabel.text = json[WebServiceResponseKey.descripcion] as? String
         cell.fechaInicio.text = json[WebServiceResponseKey.fechaInicio] as? String
         cell.fechaFin.text = json[WebServiceResponseKey.fechaFin] as? String
-        cell.autopostergarSwictch.on = json[WebServiceResponseKey.autoPostergar] as! Bool
+        cell.autopostergarSwictch.isOn = json[WebServiceResponseKey.autoPostergar] as! Bool
         switch json[WebServiceResponseKey.prioridad] as! Int {
             case 1:
                 cell.prioridadLabel.text = "Baja"
@@ -67,85 +67,107 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pendientes.count
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let json = pendientes[indexPath.item]
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+        UserDefaults.standard.set(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
     }
     
     func newPendienteControllerDidCancel() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
     func newPendienteControllerDidFinish() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         loadPendiente()
     }
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "nuevoPendiente"{
-            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            (segue.destination as! NewPendienteViewController).delegate = self
         }
     }
 
     
     func loadPendiente() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-        let categoryId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+        let apiKey = UserDefaults.standard.value(forKey: WebServiceResponseKey.apiKey)!
+        let userId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.userId)
+        let categoryId = UserDefaults.standard.integer(forKey: WebServiceResponseKey.categoryId)
         
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.pendientes)\(userId)/\(apiKey)/\(categoryId)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        
+        URLSession.shared.dataTask(with: url as URL, completionHandler: {(data, urlResponse, error) in
+            
+            self.parseJson(data: data as NSData?, urlResponse: urlResponse, error: error as NSError?)
+        }).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
-            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+            if (urlResponse as! HTTPURLResponse
+                ).statusCode == HttpStatusCode.OK {
+                if let json = try? JSonSerialization.jsonObject(with: data! as Data, options: []) {
                     print(json)
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async( execute:  {
                         if self.pendientes.count > 0 {
                             self.pendientes.removeAll()
                         }
                         
-                        self.pendientes.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
-                        self.tableView?.reloadData()
-                    }
+                        do{
+                            let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]
+                            self.pendientes.append(contentsOf: json?[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                            self.tableView?.reloadData()
+                        }catch{
+                            print("El JSon de respuesta es inválido.")
+                        }
+                        
+                    })
+
+                    
                 } else {
                     print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
+                }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSon de respuesta es inválido.")
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                DispatchQueue.main.async( execute:  {
+                
+                    do{
+                        
+                        if let json = try JSonSerialization.jsonObject(with: data! as Data, options:.allowFragments) as? [String:AnyObject]{
+                            let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .cancel , handler: nil))
+                            self.present(vc_alert, animated: true, completion: nil)
+                        } else {
+                            print("HTTP Status Code: 400 o 500")
+                            print("El JSon de respuesta es inválido.")
+                        }
+                    }catch{
+                        print("El JSon de respuesta es inválido.")
                     }
-                }
+                })
             }
-        }
     }
     
-    // para cuadrar las imagenes
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }
     

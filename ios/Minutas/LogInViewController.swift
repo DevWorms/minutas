@@ -33,7 +33,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let savedValue = NSUserDefaults.standardUserDefaults().stringForKey("login")
+        let savedValue = UserDefaults.standard.stringForKey("login")
         
         // Do something with savedValue
         if(savedValue != nil && savedValue == "true"){
@@ -76,13 +76,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         return true
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     // MARK: Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSignUp" {
             (segue.destinationViewController as! SignUpViewController).delegate = self
         }
@@ -106,7 +106,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             }
             
             if string.isEmpty {
-                if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
+                 if textField.text!.distance(from: textField.text!.startIndex, to: textField.text!.endIndex) - range.length == 0 {
                     btn_logIn.enabled = false
                 }
             } else if !btn_logIn.enabled {
@@ -170,12 +170,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     func httpGet(request: NSMutableURLRequest!) {
         let configuration =
-            NSURLSessionConfiguration.defaultSessionConfiguration()
+            URLSessionConfiguration.defaultSessionConfiguration()
         
-        let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue:NSOperationQueue.mainQueue())
         
         let task = session.dataTaskWithRequest(request){
-            (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            (data: NSData?, response: URLResponse?, error: NSError?) -> Void in
             if error == nil {
                 let result = NSString(data: data!, encoding:
                     NSASCIIStringEncoding)!
@@ -187,42 +187,42 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         task.resume()
     }
     
-    func URLSession(session: NSURLSession,
-                    task: NSURLSessionTask,
+    func URLSession(session: URLSession,
+                    task: URLSessionTask,
                     didReceiveChallenge challenge: NSURLAuthenticationChallenge,
-                                        completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?)
+                                        completionHandler: (URLSessionAuthChallengeDisposition, NSURLCredential?)
         -> Void) {
-        completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
+        completionHandler(URLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJson(data: NSData?, urlResponse: URLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
                     print(json)
-                    NSUserDefaults.standardUserDefaults().setValue(json[WebServiceResponseKey.apiKey] as! String, forKey: WebServiceResponseKey.apiKey)
-                    NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
+                    UserDefaults.standard.setValue(json[WebServiceResponseKey.apiKey] as! String, forKey: WebServiceResponseKey.apiKey)
+                    UserDefaults.standard.setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        NSUserDefaults.standardUserDefaults().setObject("true", forKey: "login")
+                        UserDefaults.standard.setObject("true", forKey: "login")
                         self.performSegueWithIdentifier("toCategories", sender: nil)
                     }
                 } else {
                     print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
+                    print("El JSon de respuesta es inválido.")
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    if let json = try? NSJSonSerialization.JSonObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .alert)
                         vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        self.present(vc_alert, animated: true, completion: nil)
                     } else {
                         print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
+                        print("El JSon de respuesta es inválido.")
                     }
                 }
             }
