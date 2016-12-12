@@ -1163,18 +1163,26 @@
                                             <rect key="frame" x="8" y="20" width="51" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </switch>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52u-t3-Vr2">
-                                            <rect key="frame" x="299" y="22" width="12" height="24"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-nl-NNR">
+                                            <rect key="frame" x="235" y="23" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="ic_attach"/>
+                                            <state key="normal" image="adduser"/>
                                             <connections>
-                                                <action selector="attachButton:" destination="PAB-be-6lJ" eventType="touchUpInside" id="ZW4-vK-8PA"/>
+                                                <action selector="attachButton:" destination="PAB-be-6lJ" eventType="touchUpInside" id="zrm-qG-Vgu"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J70-XE-AxG">
+                                            <rect key="frame" x="264" y="23" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="reasignar_tarea"/>
+                                            <connections>
+                                                <action selector="attachButton:" destination="PAB-be-6lJ" eventType="touchUpInside" id="bLr-5o-iY9"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8G-Ub-OMO">
-                                            <rect key="frame" x="319" y="22" width="26" height="27"/>
+                                            <rect key="frame" x="293" y="25" width="25" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="ic_account_circle_white_24pt"/>
+                                            <state key="normal" image="transfer"/>
                                             <connections>
                                                 <action selector="asignarUsuario:" destination="PAB-be-6lJ" eventType="touchUpInside" id="zin-65-J9k"/>
                                                 <action selector="attachButton:" destination="PAB-be-6lJ" eventType="touchUpInside" id="fSg-Vi-E1a"/>
@@ -1217,7 +1225,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcC-Ce-I4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6468" y="2781"/>
+            <point key="canvasLocation" x="6468" y="2780.9595202398805"/>
         </scene>
         <!--New Tarea View Controller-->
         <scene sceneID="ZBi-uc-omY">
@@ -1846,6 +1854,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="adduser" width="32" height="32"/>
         <image name="calendario" width="32" height="32"/>
         <image name="categoria" width="32" height="32"/>
         <image name="grafcas" width="32" height="32"/>
@@ -1855,6 +1864,8 @@
         <image name="ic_linkedin_white_36pt" width="36" height="36"/>
         <image name="ic_notifications_none_white_24pt" width="24" height="24"/>
         <image name="ic_twitter_white_36pt" width="36" height="36"/>
+        <image name="reasignar_tarea" width="32" height="32"/>
         <image name="reuniones" width="32" height="32"/>
+        <image name="transfer" width="72" height="72"/>
     </resources>
 </document>
