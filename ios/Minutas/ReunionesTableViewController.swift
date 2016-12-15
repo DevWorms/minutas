@@ -146,7 +146,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 70
+        return 122
     }
     
     
