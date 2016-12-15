@@ -107,11 +107,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
             }, completion: nil)
         }
         
-        v_currentTextFieldSeparator = textField.superview!.viewWithTag(textField.tag + 1)!
+        
+       /* let tag = textField.tag
+        v_currentTextFieldSeparator = textField.superview!.viewWithTag(tag)!
         cnstr_currentTextFieldSeparatorHeight = v_currentTextFieldSeparator.constraints[0]
         v_currentTextFieldSeparator.backgroundColor = UIColor.whiteColor()
         cnstr_currentTextFieldSeparatorHeight.constant = 2.0
-        
+        */
         togglesInRealTimeSignUpButton = checkIfFormIsFullByExcludingField(textField)
     }
     

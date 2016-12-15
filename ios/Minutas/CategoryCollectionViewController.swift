@@ -20,9 +20,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+       
         // Do any additional setup after loading the view.
         
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
@@ -47,46 +45,63 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         
         NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.categoryId] as! Int, forKey: WebServiceResponseKey.categoryId)
         
+        self.performSegueWithIdentifier("categoria", sender: nil)
         
-        performSegueWithIdentifier("categoria", sender: self)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as? CategoriaCell
+        
+        
         let json = categories[indexPath.item]
         
-        cell.backgroundColor = UIColor.whiteColor()
+        cell!.fecha.text = json[WebServiceResponseKey.created] as? String
         
-        let label = cell.contentView.viewWithTag(100) as? UILabel ?? UILabel()
-        label.tag = 100
-        label.font = UIFont.systemFontOfSize(14.0)
-        cell.contentView.addSubview(label)
-        label.text = json[WebServiceResponseKey.created] as? String
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraintEqualToAnchor(cell.contentView.topAnchor).active = true
-        label.leadingAnchor.constraintEqualToAnchor(cell.contentView.leadingAnchor).active = true
-        label.trailingAnchor.constraintEqualToAnchor(cell.contentView.trailingAnchor).active = true
+        if cell!.fecha.text != nil{
+            cell!.fecha.text = "Creado: " + cell!.fecha.text!
+        }
         
-        let nombre = cell.contentView.viewWithTag(200) as? UILabel ?? UILabel()
-        nombre.numberOfLines = 0
-        nombre.tag = 200
-        nombre.textAlignment = .Center
-        cell.contentView.addSubview(nombre)
-        nombre.text = json[WebServiceResponseKey.categoryName] as? String
-        nombre.translatesAutoresizingMaskIntoConstraints = false
-        nombre.centerXAnchor.constraintEqualToAnchor(cell.contentView.centerXAnchor).active = true
-        nombre.centerYAnchor.constraintEqualToAnchor(cell.contentView.centerYAnchor).active = true
+        cell!.nombre.text = json[WebServiceResponseKey.categoryName] as? String
         
-        let progress = cell.contentView.viewWithTag(100) as? UIProgressView ?? UIProgressView(progressViewStyle: .Default)
-        progress.tag = 300
-        progress.progress = 0.5
-        progress.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(progress)
-        progress.leadingAnchor.constraintEqualToAnchor(cell.contentView.leadingAnchor).active = true
-        progress.trailingAnchor.constraintEqualToAnchor(cell.contentView.trailingAnchor).active = true
-        progress.bottomAnchor.constraintEqualToAnchor(cell.contentView.bottomAnchor).active = true
+        let idReunion = json[WebServiceResponseKey.reunionIdCategoria] as? String
         
-        return cell
+        if (idReunion == nil){
+            cell?.reunion.hidden = true
+            cell?.pendientes.hidden = true
+            cell!.fecha.hidden = false
+            
+        }else{
+            cell?.reunion.hidden = false
+            cell?.pendientes.hidden = false
+            
+            cell!.pendientes.tag = Int(idReunion!)!
+            cell!.pendientes.tag = json[WebServiceResponseKey.categoryId] as! Int
+            
+            cell!.pendientes.addTarget(self, action: #selector(CategoryCollectionViewController.pendientes(_:)), forControlEvents: .TouchUpInside)
+            cell!.reunion.addTarget(self, action: #selector(CategoryCollectionViewController.reunion(_:)), forControlEvents: .TouchUpInside)
+            
+            
+            cell!.fecha.hidden = true
+        }
+        
+        
+        
+        return cell!
+    }
+    
+    func pendientes(sender:UIButton) {
+       
+        let idCategoria = sender.tag
+        NSUserDefaults.standardUserDefaults().setInteger(idCategoria, forKey: WebServiceResponseKey.categoryId)
+        self.performSegueWithIdentifier("categoria", sender: nil)
+        
+    }
+    
+    func reunion(sender:UIButton){
+        let idCategoria = sender.tag
+        NSUserDefaults.standardUserDefaults().setInteger(idCategoria, forKey: WebServiceResponseKey.categoryId)
+        self.performSegueWithIdentifier("reunion", sender: nil)
+        
     }
     
     func newCategoryControllerDidCancel() {

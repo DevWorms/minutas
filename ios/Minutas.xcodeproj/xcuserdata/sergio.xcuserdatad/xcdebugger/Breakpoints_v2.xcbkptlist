@@ -73,13 +73,13 @@
                   symbolName = "Minutas.LlamadaAPI.llamarApi () -&gt; ()"
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LlamadaAPI.swift"
-                  timestampString = "503239819.491412"
+                  urlString = "file:///Users/sergio/ios_minutas/Minutas/LlamadaAPI.swift"
+                  timestampString = "503487833.980689"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
                   endingLineNumber = "75"
-                  offsetFromSymbolStart = "4552">
+                  offsetFromSymbolStart = "5831">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -88,13 +88,13 @@
                   symbolName = "Minutas.LlamadaAPI.(llamarApi () -&gt; ()).(closure #1)"
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LlamadaAPI.swift"
-                  timestampString = "503239819.493016"
+                  urlString = "file:///Users/sergio/ios_minutas/Minutas/LlamadaAPI.swift"
+                  timestampString = "503487833.98357"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "76"
                   endingLineNumber = "76"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "23">
                </Location>
             </Locations>
          </BreakpointContent>

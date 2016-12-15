@@ -8,23 +8,29 @@
 
 import UIKit
 
-class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, HeaderPendienteDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var pendientes = [[String : AnyObject]]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         
-        
         loadPendiente()
     }
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44.0
+    }
     
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,36 +38,81 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     
     // Make the background color show through
+    
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clearColor()
-        return headerView
+        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier("header") as? HeaderPendiente ?? HeaderPendiente(reuseIdentifier: "header")
+        
+        
+        header.titleLabel.text = "nombre"//sections[section].name
+        header.arrowLabel.text = ">"
+        header.setCollapsed(true)
+        
+        //header.section = section
+        header.delegate = self
+        
+        return header
     }
+
     
-    
+    func toggleSection(header: HeaderPendiente, section: Int) {
+        /*let collapsed = !sections[section].collapsed
+        
+        // Toggle collapse
+        sections[section].collapsed = collapsed
+        header.setCollapsed(collapsed)
+        
+        // Adjust the height of the rows inside the section
+        tableView.beginUpdates()
+        for i in 0 ..< sections[section].items.count {
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+        }*/
+        tableView.endUpdates()
+    }
+
+   
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CategoryCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PendienteCell
         
         let json = pendientes[indexPath.item]
         
         cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
-        cell.descripcionLabel.text = json[WebServiceResponseKey.descripcion] as? String
-        cell.fechaInicio.text = json[WebServiceResponseKey.fechaInicio] as? String
+        cell.descripcion.text = json[WebServiceResponseKey.descripcion] as? String
+        
         cell.fechaFin.text = json[WebServiceResponseKey.fechaFin] as? String
-        cell.autopostergarSwictch.on = json[WebServiceResponseKey.autoPostergar] as! Bool
+        if json[WebServiceResponseKey.autoPostergar] as! Bool{
+            cell.autopostergar.text = "Autopostergar: si"
+        }
+        else{
+            cell.autopostergar.text = "Autopostergar: no"
+        }
         switch json[WebServiceResponseKey.prioridad] as! Int {
             case 1:
-                cell.prioridadLabel.text = "Baja"
+                cell.prioridadLabel.text = "Prioridad: Baja"
             case 2:
-                cell.prioridadLabel.text = "Media"
+                cell.prioridadLabel.text = "Prioridad: Media"
             case 3:
-                cell.prioridadLabel.text = "Alta"
+                cell.prioridadLabel.text = "Prioridad: Alta"
             default:
-                cell.prioridadLabel.text = "Media"
+                cell.prioridadLabel.text = "Prioridad: Media"
         }
+        
+        cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
+        cell.cerrarabrirTarea.on = (json[WebServiceResponseKey.statusPendiente] as? Bool)!
+        cell.numeroTareasTotal.text = json[WebServiceResponseKey.total] as? String
+        cell.numeroTareasResueltas.text = json[WebServiceResponseKey.completados] as? String
+        
+        if json[WebServiceResponseKey.pendienteStatus] as! Bool{
+            cell.estatus.text = "Estatus: Cerrado"
+        }
+        else{
+            cell.estatus.text = "Estatus: Abierto"
+        }
+        
+               
+        
         
         return cell
         
@@ -146,7 +197,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 180
+        return 306
     }
     
     

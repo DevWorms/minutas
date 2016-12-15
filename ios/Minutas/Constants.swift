@@ -71,6 +71,7 @@ enum WebServiceResponseKey {
     static let userId = "Id_Usuario"
     
     static let status = "estado"
+    static let statusPendiente = "status"
     static let message = "mensaje"
     
     static let categoryId = "id_Categoria"
@@ -84,6 +85,7 @@ enum WebServiceResponseKey {
     static let prioridad = "prioridad"
     static let pendienteId = "id_pendiente"
     static let reunionId = "Id_Reunion"
+    static let reunionIdCategoria = "id_reunion"
     static let nombrePendiente = "Nombre_Pendiente"
     static let descripcion = "descripcion"
     static let autoPostergar = "Auto_Postergar"
@@ -97,6 +99,8 @@ enum WebServiceResponseKey {
     static let files = "Usuarios_Asignados"
     static let fileName = "name"
     static let fileUrl = "url"
+    static let total = "total"
+    static let completados = "completados"
     
     
     static let nombreSubPendientes = "nombre_sub_pendiente"
