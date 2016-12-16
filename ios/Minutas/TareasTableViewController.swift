@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TareasTableViewController: UITableViewController, NewTareaViewControllerDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
+class TareasTableViewController: UITableViewController, NewTareaViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -33,30 +33,7 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
 
     }
     
-    // MARK: - UIDocumentPickerDelegate
-    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
-        if controller.documentPickerMode == UIDocumentPickerMode.Import {
-            
-            MyFile.url = url
-            
-            var fileSize : UInt64 = 0
-            
-            do {
-                let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath( MyFile.Path )
-                
-                if let _attr = attr {
-                    fileSize = _attr.fileSize();
-                    
-                    print("fileSize: \(fileSize)")
-                }
-                
-            } catch {
-                print("Error: \(error)")
-            }
-        }
-    }
-    
-/*
+    /*
  requestBodyData.appendString("--\(boundary)\r\n")
  requestBodyData.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=" + ( MyFile.Name ) + "\r\n")
  requestBodyData.appendString("Content-Type: \(mimeType)\r\n\r\n")
@@ -66,12 +43,6 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
      
  */
  
-    // MARK: - UIDocumentMenuDelegate
-    func documentMenu(documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        
-        documentPicker.delegate = self
-        presentViewController(documentPicker, animated: true, completion: nil)
-    }
     
     // Make the background color show through
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -110,27 +81,6 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        // https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1
-        let documentMenu = UIDocumentMenuViewController(documentTypes: [
-            "com.adobe.pdf",
-            "com.microsoft.word.doc",
-            "org.openxmlformats.wordprocessingml.document",
-            "com.microsoft.excel.xls",
-            "org.openxmlformats.spreadsheetml.sheet",
-            "public.png",
-            "public.rtf",
-            "com.pkware.zip-archive",
-            "com.compuserve.gif",
-            "public.jpeg"
-            ], inMode: UIDocumentPickerMode.Import)
-        
-        documentMenu.delegate = self
-        
-        //ipad
-        documentMenu.popoverPresentationController?.sourceView = self.view
-        
-        self.presentViewController(documentMenu, animated: true, completion: nil)
         
         
     }

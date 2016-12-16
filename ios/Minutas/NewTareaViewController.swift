@@ -80,8 +80,10 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
     @IBAction
     func createCategory() {
         
+        
         if     !((txtf_name.text?.isEmpty)!)
-            && !((txtf_usuarios_asignados.text?.isEmpty)!){
+            && !((txtf_usuarios_asignados.text?.isEmpty)!
+                && switch_autoasignar.on == false){
             
             if let nombre = txtf_name.text{
                 if let asignados = txtf_usuarios_asignados.text{

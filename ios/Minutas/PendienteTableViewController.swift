@@ -78,6 +78,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         let json = pendientes[indexPath.item]
         
+        cell.view = self.view
         cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
         cell.descripcion.text = json[WebServiceResponseKey.descripcion] as? String
         
@@ -101,8 +102,14 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
         cell.cerrarabrirTarea.on = (json[WebServiceResponseKey.statusPendiente] as? Bool)!
-        cell.numeroTareasTotal.text = json[WebServiceResponseKey.total] as? String
-        cell.numeroTareasResueltas.text = json[WebServiceResponseKey.completados] as? String
+        if let tareasTotal = json[WebServiceResponseKey.total] as? Int{
+                cell.numeroTareasTotal.text = String(tareasTotal)
+        }
+        if let tareasResueltas = json[WebServiceResponseKey.completados] as? Int{
+                cell.numeroTareasResueltas.text = "" + String(tareasResueltas)
+        }
+        
+        
         
         if json[WebServiceResponseKey.pendienteStatus] as! Bool{
             cell.estatus.text = "Estatus: Cerrado"
@@ -111,7 +118,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             cell.estatus.text = "Estatus: Abierto"
         }
         
-               
+        cell.contexto = self
         
         
         return cell

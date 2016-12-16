@@ -12,6 +12,14 @@
 		491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491152001E0212A60022F773 /* HeaderPendiente.swift */; };
 		49B3BE431E03DC5800BA7882 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342531E03C0B400E1003D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		49B3BE471E03DC5800BA7882 /* ChartsRealm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342571E03C0B400E1003D /* ChartsRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		49B3BE4D1E03F21800BA7882 /* PopCalendario.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */; };
+		49B3BE4F1E03F23400BA7882 /* PopCalendario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */; };
+		49B3BE511E03FD8300BA7882 /* PopVerComentarios.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */; };
+		49B3BE551E03FDD400BA7882 /* PopVerComentarios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE541E03FDD400BA7882 /* PopVerComentarios.swift */; };
+		49B3BE591E03FE5C00BA7882 /* PopViewNuevoComentario.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE581E03FE5C00BA7882 /* PopViewNuevoComentario.xib */; };
+		49B3BE5B1E03FE6C00BA7882 /* PopViewNuevoComentario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE5A1E03FE6C00BA7882 /* PopViewNuevoComentario.swift */; };
+		49B3BE5E1E0411F800BA7882 /* PopMover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE5D1E0411F800BA7882 /* PopMover.swift */; };
+		49B3BE601E04120A00BA7882 /* PopMover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE5F1E04120A00BA7882 /* PopMover.xib */; };
 		49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* PendienteCell.swift */; };
@@ -123,6 +131,14 @@
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		491152001E0212A60022F773 /* HeaderPendiente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderPendiente.swift; sourceTree = "<group>"; };
+		49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopCalendario.xib; sourceTree = "<group>"; };
+		49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCalendario.swift; sourceTree = "<group>"; };
+		49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopVerComentarios.xib; sourceTree = "<group>"; };
+		49B3BE541E03FDD400BA7882 /* PopVerComentarios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopVerComentarios.swift; sourceTree = "<group>"; };
+		49B3BE581E03FE5C00BA7882 /* PopViewNuevoComentario.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopViewNuevoComentario.xib; sourceTree = "<group>"; };
+		49B3BE5A1E03FE6C00BA7882 /* PopViewNuevoComentario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewNuevoComentario.swift; sourceTree = "<group>"; };
+		49B3BE5D1E0411F800BA7882 /* PopMover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopMover.swift; sourceTree = "<group>"; };
+		49B3BE5F1E04120A00BA7882 /* PopMover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopMover.xib; sourceTree = "<group>"; };
 		49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraficasViewController.swift; sourceTree = "<group>"; };
 		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
 		49C7463D1DF3FECD00985CE1 /* PendienteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteCell.swift; sourceTree = "<group>"; };
@@ -196,6 +212,45 @@
 				491152001E0212A60022F773 /* HeaderPendiente.swift */,
 			);
 			name = Headers;
+			sourceTree = "<group>";
+		};
+		49B3BE4B1E03F1AD00BA7882 /* Dialogos */ = {
+			isa = PBXGroup;
+			children = (
+				49B3BE5C1E0411DD00BA7882 /* mover */,
+				49B3BE571E03FDE600BA7882 /* comentarios */,
+				49B3BE561E03FDDA00BA7882 /* calendario */,
+			);
+			name = Dialogos;
+			sourceTree = "<group>";
+		};
+		49B3BE561E03FDDA00BA7882 /* calendario */ = {
+			isa = PBXGroup;
+			children = (
+				49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */,
+				49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */,
+			);
+			name = calendario;
+			sourceTree = "<group>";
+		};
+		49B3BE571E03FDE600BA7882 /* comentarios */ = {
+			isa = PBXGroup;
+			children = (
+				49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */,
+				49B3BE541E03FDD400BA7882 /* PopVerComentarios.swift */,
+				49B3BE581E03FE5C00BA7882 /* PopViewNuevoComentario.xib */,
+				49B3BE5A1E03FE6C00BA7882 /* PopViewNuevoComentario.swift */,
+			);
+			name = comentarios;
+			sourceTree = "<group>";
+		};
+		49B3BE5C1E0411DD00BA7882 /* mover */ = {
+			isa = PBXGroup;
+			children = (
+				49B3BE5D1E0411F800BA7882 /* PopMover.swift */,
+				49B3BE5F1E04120A00BA7882 /* PopMover.xib */,
+			);
+			name = mover;
 			sourceTree = "<group>";
 		};
 		49C7463C1DF3FEB100985CE1 /* Cells */ = {
@@ -281,6 +336,7 @@
 		5DCBD07A1DC0209F00074C10 /* Minutas */ = {
 			isa = PBXGroup;
 			children = (
+				49B3BE4B1E03F1AD00BA7882 /* Dialogos */,
 				491151FF1E02127A0022F773 /* Headers */,
 				49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */,
 				3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */,
@@ -470,9 +526,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC27E111DE72FB800857BC0 /* Main.storyboard in Resources */,
+				49B3BE591E03FE5C00BA7882 /* PopViewNuevoComentario.xib in Resources */,
 				5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */,
+				49B3BE511E03FD8300BA7882 /* PopVerComentarios.xib in Resources */,
 				5DC27E131DE72FC900857BC0 /* Info.plist in Resources */,
+				49B3BE601E04120A00BA7882 /* PopMover.xib in Resources */,
 				5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */,
+				49B3BE4D1E03F21800BA7882 /* PopCalendario.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,12 +606,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */,
+				49B3BE551E03FDD400BA7882 /* PopVerComentarios.swift in Sources */,
 				491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */,
 				49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */,
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
 				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
 				49C7464C1DF4E45D00985CE1 /* ReunionesTableViewController.swift in Sources */,
 				49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */,
+				49B3BE4F1E03F23400BA7882 /* PopCalendario.swift in Sources */,
 				49C746401DF496D400985CE1 /* GenericCell.swift in Sources */,
 				49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */,
 				49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */,
@@ -574,6 +636,8 @@
 				49C7464A1DF4BA7800985CE1 /* NewTareaViewController.swift in Sources */,
 				49C746461DF4ABD700985CE1 /* NewPendienteController.swift in Sources */,
 				49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */,
+				49B3BE5E1E0411F800BA7882 /* PopMover.swift in Sources */,
+				49B3BE5B1E03FE6C00BA7882 /* PopViewNuevoComentario.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

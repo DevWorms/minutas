@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopMover" customModule="Minutas" customModuleProvider="target">
+            <connections>
+                <outlet property="picker" destination="txk-B1-0P0" id="gGM-M3-7nI"/>
+                <outlet property="popUpView" destination="CL4-AY-mcW" id="CT0-K5-sGn"/>
+                <outlet property="view" destination="CL4-AY-mcW" id="huZ-pn-qmt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="CL4-AY-mcW">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yt-Mt-KfI">
+                    <rect key="frame" x="53" y="92" width="270" height="424"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cambiar fecha a pendiente" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WF-7z-klO">
+                            <rect key="frame" x="32" y="52" width="206" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nueva fecha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoE-8s-tnc">
+                            <rect key="frame" x="87" y="81" width="96" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dC3-De-6L4">
+                            <rect key="frame" x="66" y="346" width="144" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Mover">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txk-B1-0P0">
+                            <rect key="frame" x="-13" y="104" width="297" height="216"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="297" id="yNe-oj-0D8"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="dXP-lP-Jqu"/>
+                                <outlet property="delegate" destination="-1" id="f95-3R-log"/>
+                            </connections>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="NoE-8s-tnc" firstAttribute="centerX" secondItem="6yt-Mt-KfI" secondAttribute="centerX" id="17B-3e-w1c"/>
+                        <constraint firstItem="6WF-7z-klO" firstAttribute="top" secondItem="6yt-Mt-KfI" secondAttribute="top" constant="52" id="5yd-XB-NZp"/>
+                        <constraint firstAttribute="height" constant="924" id="6WX-wI-eo9">
+                            <variation key="heightClass=regular-widthClass=compact" constant="424"/>
+                        </constraint>
+                        <constraint firstItem="NoE-8s-tnc" firstAttribute="top" secondItem="6yt-Mt-KfI" secondAttribute="top" constant="81" id="Ciz-Ys-zZt"/>
+                        <constraint firstItem="txk-B1-0P0" firstAttribute="centerX" secondItem="6yt-Mt-KfI" secondAttribute="centerX" id="E1z-mc-P6W"/>
+                        <constraint firstAttribute="width" constant="270" id="ngE-jR-5ac"/>
+                        <constraint firstItem="6WF-7z-klO" firstAttribute="centerX" secondItem="6yt-Mt-KfI" secondAttribute="centerX" id="ry0-e7-Z0u"/>
+                        <constraint firstItem="txk-B1-0P0" firstAttribute="top" secondItem="6yt-Mt-KfI" secondAttribute="top" constant="104" id="tmX-8o-Oa2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="6yt-Mt-KfI" firstAttribute="centerX" secondItem="CL4-AY-mcW" secondAttribute="centerX" id="QFu-pD-V0z"/>
+                <constraint firstItem="6yt-Mt-KfI" firstAttribute="centerY" secondItem="CL4-AY-mcW" secondAttribute="centerY" constant="-30" id="yZ5-zK-i2N"/>
+            </constraints>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="MHD-Dz-Nb5" appends="YES" id="Z45-CQ-p8f"/>
+            </connections>
+            <point key="canvasLocation" x="873.5" y="400.5"/>
+        </view>
+        <tapGestureRecognizer id="MHD-Dz-Nb5">
+            <connections>
+                <action selector="tap:" destination="-1" id="bVp-46-Uld"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

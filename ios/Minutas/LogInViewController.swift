@@ -176,7 +176,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.perfil)\(userId)/\(apiKey)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonPerfilUsuario).resume()
     }
     
     func parseJsonPerfilUsuario(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
@@ -255,7 +255,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        
+                        self.loadCargarPerfilUsuario()
                         self.performSegueWithIdentifier("toCategories", sender: nil)
                     }
                 } else {
