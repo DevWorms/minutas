@@ -82,6 +82,7 @@
 		49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioCell.swift; sourceTree = "<group>"; };
 		49EC49501E00744A0067B621 /* CategoriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaCell.swift; sourceTree = "<group>"; };
+		49F859681E0316E000D2E90D /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCharts.framework; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DC27E0F1DE72FB800857BC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 		5F6EFE9B166437E535BE0B36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49F859681E0316E000D2E90D /* SwiftCharts.framework */,
 				B9A835F23A4024BDEE0F332F /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -593,6 +595,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Minutas",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -619,6 +622,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Minutas",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Minutas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
