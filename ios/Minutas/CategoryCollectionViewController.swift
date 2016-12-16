@@ -152,6 +152,32 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         }
     }
     
+  
+    
+    @IBAction func usuario(sender: AnyObject) {
+        
+        let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+        
+        
+        let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
+            NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+            self.performSegueWithIdentifier("login", sender: nil)
+        })
+        alertController.addAction(deleteAction)
+        
+        let okAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: {(alert :UIAlertAction!) in
+            print("OK button tapped")
+        })
+        alertController.addAction(okAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = sender.frame
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func loadCategories() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)

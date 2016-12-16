@@ -33,10 +33,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let savedValue = NSUserDefaults.standardUserDefaults().stringForKey("login")
+        let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
         
         // Do something with savedValue
-        if(savedValue != nil && savedValue == "true"){
+        if(apodo != nil && apodo != ""){
             dispatch_async(dispatch_get_main_queue()) {
                 
                 self.performSegueWithIdentifier("toCategories", sender: nil)
@@ -168,6 +168,54 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         
     }
     
+    
+    func loadCargarPerfilUsuario() {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        print(apiKey, userId)
+        
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.perfil)\(userId)/\(apiKey)")!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+    }
+    
+    func parseJsonPerfilUsuario(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        let usuario = json[WebServiceResponseKey.user] as! [String : AnyObject]
+                        
+                        NSUserDefaults.standardUserDefaults().setObject(usuario[WebServiceResponseKey.apodo] as? String, forKey: WebServiceResponseKey.apodo)
+                        
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+    
+
+    
+    
     func httpGet(request: NSMutableURLRequest!) {
         let configuration =
             NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -207,7 +255,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        NSUserDefaults.standardUserDefaults().setObject("true", forKey: "login")
+                        
                         self.performSegueWithIdentifier("toCategories", sender: nil)
                     }
                 } else {

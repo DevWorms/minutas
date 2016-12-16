@@ -18,6 +18,8 @@ enum WebServiceEndpoint {
     static let resetPassword = ""
     
     static let categories = "category/all/"
+    static let perfil = "user/profile/"
+    
     static let newCategory = "category/new"
     static let newReunion = "meeting/new"
     
@@ -80,6 +82,8 @@ enum WebServiceResponseKey {
     static let created = "created_at"
     static let updated = "updated_at"
     static let categories = "categorias"
+    static let user = "user"
+    static let apodo = "apodo"
     
     static let pendientes = "pendientes"
     static let prioridad = "prioridad"
