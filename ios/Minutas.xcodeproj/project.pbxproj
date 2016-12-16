@@ -10,6 +10,8 @@
 		149949B55E86A0458B28E647 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A835F23A4024BDEE0F332F /* Pods.framework */; };
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
 		491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491152001E0212A60022F773 /* HeaderPendiente.swift */; };
+		49B3BE431E03DC5800BA7882 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342531E03C0B400E1003D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		49B3BE471E03DC5800BA7882 /* ChartsRealm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342571E03C0B400E1003D /* ChartsRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* PendienteCell.swift */; };
@@ -24,8 +26,6 @@
 		49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */; };
 		49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
-		49D3425B1E03C10A00E1003D /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342531E03C0B400E1003D /* Charts.framework */; };
-		49D3425C1E03C10A00E1003D /* ChartsRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342571E03C0B400E1003D /* ChartsRealm.framework */; };
 		49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */; };
 		49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */; };
 		49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */; };
@@ -46,6 +46,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49B3BE441E03DC5800BA7882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06165F231D8110E600722320;
+			remoteInfo = Charts;
+		};
+		49B3BE481E03DC5800BA7882 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06B120D41D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
 		49D342521E03C0B400E1003D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
@@ -89,6 +103,21 @@
 			remoteInfo = Minutas;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		49B3BE4A1E03DC5800BA7882 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				49B3BE431E03DC5800BA7882 /* Charts.framework in Embed Frameworks */,
+				49B3BE471E03DC5800BA7882 /* ChartsRealm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
@@ -140,8 +169,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49D3425B1E03C10A00E1003D /* Charts.framework in Frameworks */,
-				49D3425C1E03C10A00E1003D /* ChartsRealm.framework in Frameworks */,
 				149949B55E86A0458B28E647 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,10 +326,13 @@
 				5DCBD0761DC0209F00074C10 /* Resources */,
 				3E94AC8CB0F1DF115562F292 /* Embed Pods Frameworks */,
 				C14782F7D0DD0C809EE3A49F /* Copy Pods Resources */,
+				49B3BE4A1E03DC5800BA7882 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				49B3BE451E03DC5800BA7882 /* PBXTargetDependency */,
+				49B3BE491E03DC5800BA7882 /* PBXTargetDependency */,
 			);
 			name = Minutas;
 			productName = Minutas;
@@ -564,6 +594,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		49B3BE451E03DC5800BA7882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = 49B3BE441E03DC5800BA7882 /* PBXContainerItemProxy */;
+		};
+		49B3BE491E03DC5800BA7882 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ChartsRealm;
+			targetProxy = 49B3BE481E03DC5800BA7882 /* PBXContainerItemProxy */;
+		};
 		5DCBD08E1DC0209F00074C10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5DCBD0771DC0209F00074C10 /* Minutas */;
@@ -671,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E84D4ABB641352DCA60DC7E /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
@@ -698,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D8E0E4E74E874CE8AE8787DB /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;

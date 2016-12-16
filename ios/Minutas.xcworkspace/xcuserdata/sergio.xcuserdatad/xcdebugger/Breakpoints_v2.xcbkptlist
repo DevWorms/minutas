@@ -6,38 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Minutas/CalendarioTableViewController.swift"
-            timestampString = "503238319.794214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "tableView(tableView:cellForRowAtIndexPath:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Minutas/CalendarioTableViewController.swift"
-            timestampString = "503238582.393348"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "tableView(tableView:cellForRowAtIndexPath:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -105,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minutas/CategoryCollectionViewController.swift"
-            timestampString = "503487658.401952"
+            filePath = "Minutas/GraficasViewController.swift"
+            timestampString = "503568567.486544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "pendientes(sender:)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minutas/CategoryCollectionViewController.swift"
-            timestampString = "503487658.401952"
+            filePath = "Minutas/GraficasViewController.swift"
+            timestampString = "503569687.37485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "reunion(sender:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "updateChartWithData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +105,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minutas/CategoryCollectionViewController.swift"
-            timestampString = "503487672.145098"
+            filePath = "Minutas/GraficasViewController.swift"
+            timestampString = "503570642.26262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "collectionView(collectionView:cellForItemAtIndexPath:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "updateChartWithData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/GraficasViewController.swift"
+            timestampString = "503569897.254693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "updateChartWithData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
