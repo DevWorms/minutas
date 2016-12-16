@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import FSCalendar
 
 class CalendarioTableViewController: UITableViewController, FSCalendarDataSource, FSCalendarDelegate{
     
     private weak var calendar: FSCalendar!
+    var agenda = [[String : AnyObject]]()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +27,15 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         view.addSubview(calendar)
         self.calendar = calendar
         
+                
+        
+        
+        
         //self.gregorian = NSCalendar(calendarIdentifier: "NSCalendarIdentifierGregorian")
         
         
         
+
     }
     
     
@@ -116,7 +124,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         }*/
     }
     
-    /*
+    
     func loadAsuntos() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
@@ -136,11 +144,11 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
                     dispatch_async(dispatch_get_main_queue()) {
-                        if self.asuntos.count > 0 {
-                            self.asuntos.removeAll()
+                        if self.agenda.count > 0 {
+                            self.agenda.removeAll()
                         }
                         
-                        self.asuntos.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        self.agenda.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
                         self.tableView?.reloadData()
                     }
                 } else {
@@ -160,7 +168,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
                 }
             }
         }
-    }*/
+    }
     
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat

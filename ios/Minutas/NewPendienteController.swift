@@ -20,6 +20,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     
     weak var delegate: NewPendienteControllerDelegate?
     
+    
     @IBOutlet weak var autopostergarSwitch: UISwitch!
     @IBOutlet
     weak var navigationBar: UINavigationBar!

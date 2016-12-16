@@ -37,8 +37,8 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
         subMenuTable?.delegate = self
         subMenuTable?.dataSource = self
         sections = [
-            Section(name: "Tareas", items: ["MacBook", "MacBook Air", "MacBook Pro", "iMac", "Mac Pro", "Mac mini", "Accessories", "OS X El Capitan"]),
-            Section(name: "Reuniones", items: ["iPad Pro", "iPad Air 2", "iPad mini 4", "Accessories"]),
+            Section(name: "Tareas", items: ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5", "Tarea 6", "Tarea 7", "Tarea 8"]),
+            Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
             
         ]
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReunionesTableViewController: UITableViewController, NewReunionViewControllerDelegate, NewMinutaViewControllerDelegate {
+class ReunionesTableViewController: UITableViewController, NewReunionViewControllerDelegate, NewMinutaViewControllerDelegate, NewPendienteControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -53,6 +53,16 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
     }
     
+    func newPendienteControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newPendienteControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadReuniones()
+    }
+    
     func newReunionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -95,6 +105,8 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
             (segue.destinationViewController as! NewMinutaViewController).delegate = self
         }else if segue.identifier ==  "nuevaReunion"{
             (segue.destinationViewController as! NewReunionViewController).delegate = self
+        }else if segue.identifier ==  "nuevoPendiente"{
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
         }
     }
     

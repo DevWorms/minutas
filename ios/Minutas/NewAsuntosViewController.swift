@@ -55,7 +55,7 @@ class NewAsuntosViewController: UIViewController, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
-                btn_create.enabled = false
+                btn_create.enabled = true
             }
         } else if !btn_create.enabled {
             btn_create.enabled = true
@@ -82,7 +82,7 @@ class NewAsuntosViewController: UIViewController, UITextFieldDelegate {
     func createCategory() {
         
         if     !((txtf_name.text?.isEmpty)!)
-            && !((txtf_participantes.text?.isEmpty)!){
+            && !((txtf_participantes.text?.isEmpty)! && switch_autoasignar.on == false){
             
             if let nombre = txtf_name.text{
                 if let asignados = txtf_participantes.text{
