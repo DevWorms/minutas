@@ -10,6 +10,7 @@
 		149949B55E86A0458B28E647 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9A835F23A4024BDEE0F332F /* Pods.framework */; };
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
 		491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491152001E0212A60022F773 /* HeaderPendiente.swift */; };
+		49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */; };
 		49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */; };
 		49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463D1DF3FECD00985CE1 /* PendienteCell.swift */; };
 		49C746401DF496D400985CE1 /* GenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7463F1DF496D400985CE1 /* GenericCell.swift */; };
@@ -23,6 +24,8 @@
 		49C746541DF4F45700985CE1 /* AsuntosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */; };
 		49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */; };
 		49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC59B11DF000520033E472 /* LlamadaAPI.swift */; };
+		49D3425B1E03C10A00E1003D /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342531E03C0B400E1003D /* Charts.framework */; };
+		49D3425C1E03C10A00E1003D /* ChartsRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D342571E03C0B400E1003D /* ChartsRealm.framework */; };
 		49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */; };
 		49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */; };
 		49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */; };
@@ -43,6 +46,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49D342521E03C0B400E1003D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
+		};
+		49D342541E03C0B400E1003D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
+			remoteInfo = ChartsTests;
+		};
+		49D342561E03C0B400E1003D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06B120D51D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
+		49D342581E03C0B400E1003D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06B120FF1D811F1600D14B02;
+			remoteInfo = ChartsRealmTests;
+		};
 		5DCBD08D1DC0209F00074C10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DCBD0701DC0209E00074C10 /* Project object */;
@@ -63,6 +94,7 @@
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		491152001E0212A60022F773 /* HeaderPendiente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderPendiente.swift; sourceTree = "<group>"; };
+		49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraficasViewController.swift; sourceTree = "<group>"; };
 		49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteTableViewController.swift; sourceTree = "<group>"; };
 		49C7463D1DF3FECD00985CE1 /* PendienteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendienteCell.swift; sourceTree = "<group>"; };
 		49C7463F1DF496D400985CE1 /* GenericCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericCell.swift; sourceTree = "<group>"; };
@@ -76,13 +108,13 @@
 		49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntosTableViewController.swift; sourceTree = "<group>"; };
 		49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAsuntosViewController.swift; sourceTree = "<group>"; };
 		49CC59B11DF000520033E472 /* LlamadaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LlamadaAPI.swift; sourceTree = "<group>"; };
+		49D3424B1E03C0B400E1003D /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Charts-2.3.0/Charts.xcodeproj"; sourceTree = "<group>"; };
 		49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioTableViewController.swift; sourceTree = "<group>"; };
 		49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Minutas-Bridging-Header.h"; sourceTree = "<group>"; };
 		49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
 		49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioCell.swift; sourceTree = "<group>"; };
 		49EC49501E00744A0067B621 /* CategoriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaCell.swift; sourceTree = "<group>"; };
-		49F859681E0316E000D2E90D /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCharts.framework; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5DC27E0F1DE72FB800857BC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D3425B1E03C10A00E1003D /* Charts.framework in Frameworks */,
+				49D3425C1E03C10A00E1003D /* ChartsRealm.framework in Frameworks */,
 				149949B55E86A0458B28E647 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +183,17 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		49D3424C1E03C0B400E1003D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49D342531E03C0B400E1003D /* Charts.framework */,
+				49D342551E03C0B400E1003D /* ChartsTests.xctest */,
+				49D342571E03C0B400E1003D /* ChartsRealm.framework */,
+				49D342591E03C0B400E1003D /* ChartsRealmTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5DC27DF01DE72D0800857BC0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +214,7 @@
 				49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */,
 				49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */,
 				49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */,
+				49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +233,7 @@
 		5DCBD06F1DC0209E00074C10 = {
 			isa = PBXGroup;
 			children = (
+				49D3424B1E03C0B400E1003D /* Charts.xcodeproj */,
 				5DCBD07A1DC0209F00074C10 /* Minutas */,
 				5DCBD0791DC0209F00074C10 /* Products */,
 				DE9FB8DF28FFC9A9878DEF2B /* Pods */,
@@ -225,7 +272,6 @@
 		5F6EFE9B166437E535BE0B36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				49F859681E0316E000D2E90D /* SwiftCharts.framework */,
 				B9A835F23A4024BDEE0F332F /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -342,6 +388,12 @@
 			mainGroup = 5DCBD06F1DC0209E00074C10;
 			productRefGroup = 5DCBD0791DC0209F00074C10 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 49D3424C1E03C0B400E1003D /* Products */;
+					ProjectRef = 49D3424B1E03C0B400E1003D /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5DCBD0771DC0209F00074C10 /* Minutas */,
@@ -350,6 +402,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		49D342531E03C0B400E1003D /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 49D342521E03C0B400E1003D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49D342551E03C0B400E1003D /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 49D342541E03C0B400E1003D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49D342571E03C0B400E1003D /* ChartsRealm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChartsRealm.framework;
+			remoteRef = 49D342561E03C0B400E1003D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49D342591E03C0B400E1003D /* ChartsRealmTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsRealmTests.xctest;
+			remoteRef = 49D342581E03C0B400E1003D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5DCBD0761DC0209F00074C10 /* Resources */ = {
@@ -447,6 +530,7 @@
 				49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */,
 				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
 				49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */,
+				49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
