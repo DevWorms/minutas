@@ -383,6 +383,7 @@
 				3E94AC8CB0F1DF115562F292 /* Embed Pods Frameworks */,
 				C14782F7D0DD0C809EE3A49F /* Copy Pods Resources */,
 				49B3BE4A1E03DC5800BA7882 /* Embed Frameworks */,
+				49177BB61E0AF2A800B7DB95 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -443,8 +444,9 @@
 				TargetAttributes = {
 					5DCBD0771DC0209F00074C10 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = FN75477QMR;
+						DevelopmentTeam = LYQS42L4UG;
 						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -567,6 +569,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		49177BB61E0AF2A800B7DB95 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 61e0d9761208fae8cf2b241b23eb83a6ef7d1528 9571d3ac0b1b75bbe58cbed8fe1f7f67d5fc81b7b51eb03abe1060af9c9165c4";
 		};
 		9BF920C7448C1E32873F0B65 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -780,7 +795,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = FN75477QMR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LYQS42L4UG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Minutas",
@@ -789,7 +805,7 @@
 				INFOPLIST_FILE = Minutas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
+				PRODUCT_BUNDLE_IDENTIFIER = mx.com.fg.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";
@@ -808,7 +824,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = FN75477QMR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LYQS42L4UG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Minutas",
@@ -817,7 +834,7 @@
 				INFOPLIST_FILE = Minutas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = mx.com.scanda.Minutas;
+				PRODUCT_BUNDLE_IDENTIFIER = mx.com.fg.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";

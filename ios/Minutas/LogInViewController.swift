@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControllerDelegate {
     
@@ -166,6 +167,53 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         
         
         
+    }
+    
+    @IBAction func loginFb(sender: AnyObject) {
+        
+    }
+    
+    
+    @IBAction func loginTw(sender: AnyObject) {
+        // Swift
+        Twitter.sharedInstance().logInWithCompletion { session, error in
+            if (session != nil) {
+                print("signed in as \(session!.userName)");
+            } else {
+                print("error: \(error!.localizedDescription)");
+            }
+        }
+    }
+    
+    
+    @IBAction func logInLinkedIn(sender: AnyObject) {
+        //http://stackoverflow.com/questions/28491280/ios-linkedin-authentication
+        LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
+            (returnState) -> Void in
+            print("success called!")
+            print(LISDKSessionManager.sharedInstance().session)
+            
+            let url = "https://api.linkedin.com/v1/people/~:(id,first-name,email-address)"
+            
+            if LISDKSessionManager.hasValidSession() {
+                LISDKAPIHelper.sharedInstance().getRequest(url, success: { (response) -> Void in
+                    print(response?.data!)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.performSegueWithIdentifier("toCategories", sender: nil)
+                    }
+                    
+                    }, error: { (error) -> Void in
+                        print(error!)
+                })
+            }
+
+            }, errorBlock: { (error) -> Void in
+                print("Error: \(error)")
+        })
+        
+
     }
     
     

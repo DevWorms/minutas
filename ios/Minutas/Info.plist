@@ -1,7 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+    
 <dict>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb342910756088185</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>342910756088185</string>
+    <key>FacebookDisplayName</key>
+    <string>Minute</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Imagen de perfil</string>
+    
+    <key>Fabric</key>
+    <dict>
+        <key>APIKey</key>
+        <string>61e0d9761208fae8cf2b241b23eb83a6ef7d1528</string>
+        <key>Kits</key>
+        <array>
+            <dict>
+                <key>KitInfo</key>
+                <dict>
+                    <key>consumerKey</key>
+                    <string>50V1bgqCwmF0F66eTJRaxT3by</string>
+                    <key>consumerSecret</key>
+                    <string>XTqX1kufrb1Tuqj20vwf0BwCpqwGMQRsfLSM3isZL4Rc6bZJd1</string>
+                </dict>
+                <key>KitName</key>
+                <string>Twitter</string>
+            </dict>
+        </array>
+    </dict>
+    <key>LIAppId</key>
+    <string>4314964</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>li4314964</string>
+            </array>
+        </dict>
+    </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>linkedin</string>
+        <string>linkedin-sdk2</string>
+        <string>linkedin-sdk</string>
+    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -22,6 +83,22 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict/>
+        <key>linkedin.com</key>
+        <dict>
+            <key>NSExceptionAllowsInsecureHTTPLoads</key>
+            <true/>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+            <key>NSExceptionRequiresForwardSecrecy</key>
+            <false/>
+        </dict>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -34,12 +111,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict/>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

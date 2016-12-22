@@ -4,7 +4,57 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FSCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookLogin.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookShare.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IOSLinkedInAPIFix.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LinkedinSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>28B1B13EE094A72E744350762BDBF324</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF9645A5A279AE409F149EBF9CA9FB28</key>
+		<key>31418D425B97E292FFAFC566D79FC144</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4CEBCC2D58B51F9F05C50917236EB00C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>533607A808BC64912197562E016B6085</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5A0A28913A1212C2D1EACECBA1E58AC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>657B6AC4085E2AB9BF2B6BCC55D66F76</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8329B4DD82B7A073B34A61C9527865D0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A8F77DC39F7D0CFE46DAA5C135D96A80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD707E469C8D0BEA816D740155A3B629</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD63B3EE97C970C6E45F5F1FE028ACBA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

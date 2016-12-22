@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import TwitterKit
 
 // TODO: use the brand new API for networking
 // TODO: remove all boiler-plate code
@@ -20,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Fabric.with([Twitter.self])
         return true
     }
 
@@ -48,5 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
         completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!))
     }
-
+    
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if LISDKCallbackHandler.shouldHandleUrl(url as NSURL!) {
+            return LISDKCallbackHandler.application(application, openURL: url as NSURL!, sourceApplication: sourceApplication, annotation: annotation)
+        }
+        return true
+    }
+    
+    
 }
