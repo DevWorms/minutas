@@ -1,10 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-pod 'FSCalendar'
-pod 'Fabric'
-pod 'TwitterKit'
-pod 'LinkedinSwift', '~> 1.6.6'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
+target 'Minutas' do
+	pod 'FSCalendar'
+	pod 'Fabric'
+	pod 'TwitterKit'
+	pod 'LinkedinSwift', '~> 1.6.6'
+end

@@ -1,1 +1,0 @@
-../../../LinkedinSwift/LinkedinSwift/LinkedinSwift/sources/LSResponse.h
