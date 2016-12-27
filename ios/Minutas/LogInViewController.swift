@@ -8,6 +8,8 @@
 
 import UIKit
 import TwitterKit
+import FBSDKLoginKit
+
 
 class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControllerDelegate {
     
@@ -170,7 +172,35 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     }
     
     @IBAction func loginFb(sender: AnyObject) {
+        //FBSDKProfile.currentProfile().name
+        /*
+         if FBSDKProfile.currentProfile() != nil {
+         let imageFB = FBSDKProfilePictureView(frame: self.profileImage.frame)
+         imageFB.profileID = FBSDKAccessToken.currentAccessToken().userID // "me"
+         imageFB.layer.borderWidth = 1
+         imageFB.layer.masksToBounds = false
+         imageFB.layer.borderColor = UIColor.blackColor().CGColor
+         imageFB.layer.cornerRadius = self.profileImage.frame.height/2
+         imageFB.clipsToBounds = true
+         //imageFB.pictureMode = FBSDKProfilePictureMode.Normal
+         self.view.addSubview(imageFB)
+         
+         self.profileName.text = FBSDKProfile.currentProfile().name
+         
+         } else {
+         self.profileName.text = NSUserDefaults.standardUserDefaults().stringForKey("NombreUsuario")!
+         
+         self.requestGraphAPIFB()
+         
+         }
+         */
         
+        let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
+        
+        let loginManager = FBSDKLoginManager()
+        loginManager.logInWithReadPermissions(readPermissions) { (FBSDKLoginManagerLoginResult, NSError) in
+            print(FBSDKLoginManagerLoginResult!.token)
+        }
     }
     
     
@@ -188,7 +218,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     @IBAction func logInLinkedIn(sender: AnyObject) {
         //http://stackoverflow.com/questions/28491280/ios-linkedin-authentication
-        LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
+        
+       LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
             (returnState) -> Void in
             print("success called!")
             print(LISDKSessionManager.sharedInstance().session)

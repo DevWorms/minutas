@@ -4,22 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AFNetworking.xcscheme</key>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>FSCalendar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>IOSLinkedInAPIFix.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>LinkedinSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,12 +37,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>184323ED97B0F2121838802D72631F9B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>490873B8AF958B766871669DB23CDC56</key>
+		<key>44CAD6CE523055ED339E87154473A254</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B4121D3B507ACAC290C37AF691D07F53</key>
+		<key>B895E58A8E8BCA6614332113A7A631A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
+		<key>BC5000D645EEAF961C85907CDC796FE1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED2850476F3FDDCCA74BF4A58AD09049</key>
 		<dict>
 			<key>primary</key>
 			<true/>

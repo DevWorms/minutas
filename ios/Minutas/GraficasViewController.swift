@@ -8,13 +8,12 @@
 
 import Foundation
 
-import Charts
 
 
 class GraficasViewController: UIViewController{
     
     
-    @IBOutlet weak var barView: BarChartView!
+   // @IBOutlet weak var barView: BarChartView!
     
     var numeros = [Double]()
     override func viewDidLoad() {
@@ -24,11 +23,11 @@ class GraficasViewController: UIViewController{
         numeros.append(2)
         numeros.append(3)
         
-        updateChartWithData()
+    //    updateChartWithData()
         
     }
     
-    func updateChartWithData() {
+    /*func updateChartWithData() {
         
         
         
@@ -53,7 +52,7 @@ class GraficasViewController: UIViewController{
         
         barView.invalidateIntrinsicContentSize()
     }
-    
+    */
     
     
 }

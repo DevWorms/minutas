@@ -5,5 +5,8 @@ target 'Minutas' do
 	pod 'FSCalendar'
 	pod 'Fabric'
 	pod 'TwitterKit'
-	pod 'LinkedinSwift', '~> 1.6.6'
+	pod 'Bolts'
+	pod 'FBSDKCoreKit'
+	pod 'FBSDKShareKit'
+	pod 'FBSDKLoginKit'
 end

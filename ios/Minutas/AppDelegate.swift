@@ -9,6 +9,8 @@
 import UIKit
 import Fabric
 import TwitterKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 // TODO: use the brand new API for networking
 // TODO: remove all boiler-plate code
@@ -23,6 +25,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Twitter.self])
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+       
+        let apiKeyHurry: String? = NSUserDefaults.standardUserDefaults().stringForKey("ApiKey")
+        
+        print("hello \( apiKeyHurry ) " )
+        
+        //FBSDKAccessToken.currentAccessToken() == nil
+        if ( apiKeyHurry == "" || apiKeyHurry == nil ){
+            print("Not logged in..")
+            if FBSDKProfile.currentProfile() != nil {
+                FBSDKLoginManager().logOut()
+            }
+            
+        }else{
+            print("Logged in..")
+            //print("current key: \( NSUserDefaults.standardUserDefaults().stringForKey("ApiKey")!)")
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("Principal") as! UITabBarController
+            vc.selectedIndex = 0 //optional
+            
+            self.window?.rootViewController = vc
+            
+            /*
+             let vc = storyboard.instantiateViewControllerWithIdentifier("someViewController") as! UIViewController
+             self.presentViewController(vc, animated: true, completion: nil)
+             */
+        }
+
+        
         return true
     }
 
@@ -57,7 +89,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if LISDKCallbackHandler.shouldHandleUrl(url as NSURL!) {
             return LISDKCallbackHandler.application(application, openURL: url as NSURL!, sourceApplication: sourceApplication, annotation: annotation)
         }
-        return true
+        
+        print("nameFile: " + url.lastPathComponent!)
+        print("sourceApplication: " + sourceApplication!)
+        
+        var boolean: Bool = true
+        
+        if sourceApplication == "com.facebook.Facebook" ||      // entra a la app por FB
+            (url.path == "/" &&  url.lastPathComponent == "/") {
+            boolean = FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        }
+        
+        return boolean
     }
     
     
