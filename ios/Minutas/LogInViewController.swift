@@ -31,6 +31,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBOutlet
     weak var btn_signUp: UIButton!
     
+    var nombre = ""
+    var email = ""
     // MARK: Managing the view
 
     override func viewDidLoad() {
@@ -87,7 +89,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toSignUp" {
-            (segue.destinationViewController as! SignUpViewController).delegate = self
+            let destino = (segue.destinationViewController as! SignUpViewController)
+            destino.nombre = self.nombre
+            destino.email = self.email
+            destino.delegate = self
         }
     }
     
@@ -172,8 +177,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     }
     
     @IBAction func loginFb(sender: AnyObject) {
-        //FBSDKProfile.currentProfile().name
-        /*
+       /*
+         //FBSDKProfile.currentProfile().name
+         /*
          if FBSDKProfile.currentProfile() != nil {
          let imageFB = FBSDKProfilePictureView(frame: self.profileImage.frame)
          imageFB.profileID = FBSDKAccessToken.currentAccessToken().userID // "me"
@@ -194,27 +200,103 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
          
          }
          */
-        
+         
+*/
         let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
         
         let loginManager = FBSDKLoginManager()
-        loginManager.logInWithReadPermissions(readPermissions) { (FBSDKLoginManagerLoginResult, NSError) in
-            print(FBSDKLoginManagerLoginResult!.token)
+        loginManager.logInWithReadPermissions(readPermissions) { (resultado, error) in
+           
+            if error != nil{
+                print(error)
+            }else{
+                print(resultado.token)
+                
+                let fbloginresult : FBSDKLoginManagerLoginResult = resultado
+                
+                if(fbloginresult.isCancelled) {
+                    //Show Cancel alert
+                } else if(fbloginresult.grantedPermissions.contains("email")) {
+                    self.returnUserData()
+                    //fbLoginManager.logOut()
+                }
+                
+                           }
+            
+            
+            
+            
         }
     }
     
+    func returnUserData(){
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil){
+                    print(result)
+                    result.valueForKey("email") as! String
+                    result.valueForKey("id") as! String
+                    result.valueForKey("name") as! String
+                    result.valueForKey("first_name") as! String
+                    result.valueForKey("last_name") as! String
+                    
+                    self.nombre = result.valueForKey("name") as! String
+                    self.email = result.valueForKey("email") as! String
+                    
+                    self.performSegueWithIdentifier("toSignUp", sender: nil)
+
+                }
+            })
+        }
+    }
     
     @IBAction func loginTw(sender: AnyObject) {
         // Swift
+        
+        
         Twitter.sharedInstance().logInWithCompletion { session, error in
             if (session != nil) {
+                
                 print("signed in as \(session!.userName)");
-            } else {
+                
+                self.getUserInfo((session?.userName)!)
+               
+            }
+             else {
                 print("error: \(error!.localizedDescription)");
+            }
+            
+            
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
+    func getUserInfo(screenName : String){
+        if let userID = Twitter.sharedInstance().sessionStore.session()!.userID {
+            let client = TWTRAPIClient(userID: userID)
+            let url = "https://api.twitter.com/1.1/users/show.json"
+            let params = ["screen_name": screenName]
+            var clientError : NSError?
+            let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("GET", URL: url, parameters: params, error: &clientError)
+            
+            client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
+                if let someData = data {
+                    do {
+                        let results = try NSJSONSerialization.JSONObjectWithData(someData, options: .AllowFragments) as! NSDictionary
+                        print(results)
+                        
+                    } catch {
+                    }
+                }
             }
         }
     }
-    
+
     
     @IBAction func logInLinkedIn(sender: AnyObject) {
         //http://stackoverflow.com/questions/28491280/ios-linkedin-authentication
@@ -225,7 +307,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             print(LISDKSessionManager.sharedInstance().session)
             
             let url = "https://api.linkedin.com/v1/people/~:(id,first-name,email-address)"
-            
+        
             if LISDKSessionManager.hasValidSession() {
                 LISDKAPIHelper.sharedInstance().getRequest(url, success: { (response) -> Void in
                     print(response?.data!)

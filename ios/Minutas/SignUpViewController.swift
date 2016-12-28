@@ -54,6 +54,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     @IBOutlet
     var form: [UITextField]!
     
+    var nombre = ""
+    var email = ""
+    
     // MARK: Managing the view
     
     override func viewDidLoad() {
@@ -75,6 +78,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
         txtf_password.rightViewMode = .Always
         txtf_confirm_password.rightView = btn_passwordVisibility2
         txtf_confirm_password.rightViewMode = .Always
+        
+        txtf_name.text = nombre
+        txtf_email.text = email
     }
     
     // MARK: Responding to view events
