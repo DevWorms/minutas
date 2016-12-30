@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import TwitterKit
 
 private let reuseIdentifier = "Cell"
 
@@ -162,7 +164,8 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
-            NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+           self.cerrarSesion()
+            
             self.performSegueWithIdentifier("login", sender: nil)
         })
         alertController.addAction(deleteAction)
@@ -221,6 +224,36 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
                 }
             }
         }
+    }
+
+    
+    func cerrarSesion(){
+        
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+       
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
     }
 
 }

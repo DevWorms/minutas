@@ -19,6 +19,8 @@ enum WebServiceEndpoint {
     
     static let categories = "category/all/"
     static let perfil = "user/profile/"
+    static let loginWithSocials = "user/loginwithsocials/"
+
     
     static let newCategory = "category/new"
     static let newReunion = "meeting/new"
@@ -35,6 +37,9 @@ enum WebServiceEndpoint {
 }
 
 enum WebServiceRequestParameter {
+    static let token = "tokenID"
+    static let redSocial = "redSocial"
+    
     static let name = "nombre"
     static let phone = "telefono"
     static let email = "correo"
@@ -71,6 +76,9 @@ enum WebServiceRequestParameter {
 }
 
 enum WebServiceResponseKey {
+    
+    static let token = "tokenId"
+    static let redSocial = "redSocial"
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
     

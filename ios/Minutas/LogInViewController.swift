@@ -31,8 +31,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBOutlet
     weak var btn_signUp: UIButton!
     
+    var registrandose = false
     var nombre = ""
     var email = ""
+    var nombreUsuario = ""
     // MARK: Managing the view
 
     override func viewDidLoad() {
@@ -48,30 +50,38 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             }
         }else{
         
-        let imgv_account = UIImageView(image: UIImage(named: "ic_account_18pt"))
-        imgv_account.contentMode = .ScaleAspectFit
-        imgv_account.bounds.size.width += 8.0
-        imgv_account.opaque = true
-        txtf_user.leftView = imgv_account
-        txtf_user.leftViewMode = .Always
+            let imgv_account = UIImageView(image: UIImage(named: "ic_account_18pt"))
+            imgv_account.contentMode = .ScaleAspectFit
+            imgv_account.bounds.size.width += 8.0
+            imgv_account.opaque = true
+            txtf_user.leftView = imgv_account
+            txtf_user.leftViewMode = .Always
         
-        let imgv_lock = UIImageView(image: UIImage(named: "ic_lock_18pt"))
-        imgv_lock.contentMode = .ScaleAspectFit
-        imgv_lock.bounds.size.width += 8.0
-        imgv_lock.opaque = true
-        txtf_password.leftView = imgv_lock
-        txtf_password.leftViewMode = .Always
+            let imgv_lock = UIImageView(image: UIImage(named: "ic_lock_18pt"))
+            imgv_lock.contentMode = .ScaleAspectFit
+            imgv_lock.bounds.size.width += 8.0
+            imgv_lock.opaque = true
+            txtf_password.leftView = imgv_lock
+            txtf_password.leftViewMode = .Always
         
-        let btn_passwordVisibility = UIButton(type: .System)
-        btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
-        btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), forState: .Normal)
-        btn_passwordVisibility.sizeToFit()
-        btn_passwordVisibility.opaque = true
-        txtf_password.rightView = btn_passwordVisibility
-        txtf_password.rightViewMode = .Always
+            let btn_passwordVisibility = UIButton(type: .System)
+            btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
+            btn_passwordVisibility.setBackgroundImage(UIImage(named: "ic_eye_off_18pt"), forState: .Normal)
+            btn_passwordVisibility.sizeToFit()
+            btn_passwordVisibility.opaque = true
+            txtf_password.rightView = btn_passwordVisibility
+            txtf_password.rightViewMode = .Always
         
-        btn_logIn.drawRoundedBorder()
-        btn_signUp.drawRoundedBorder()
+            btn_logIn.drawRoundedBorder()
+            btn_signUp.drawRoundedBorder()
+            
+            NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+            NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+            
+            self.nombre = ""
+            self.email = ""
+            self.registrandose = false
+            
         }
     }
     
@@ -92,7 +102,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             let destino = (segue.destinationViewController as! SignUpViewController)
             destino.nombre = self.nombre
             destino.email = self.email
+            destino.nombreUsuario = self.nombreUsuario
             destino.delegate = self
+            
+            self.nombre = ""
+            self.email = ""
+            self.nombreUsuario = ""
         }
     }
     
@@ -155,6 +170,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         logIn()
     }
     
+    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String) {
+        self.registrandose = true
+        consultarInicioSesionRedesSociales(id)
+    }
+    
+    
     // MARK: Actions
     
     func toggleSecureTextEntry(sender: UIButton) {
@@ -177,31 +198,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     }
     
     @IBAction func loginFb(sender: AnyObject) {
-       /*
-         //FBSDKProfile.currentProfile().name
-         /*
-         if FBSDKProfile.currentProfile() != nil {
-         let imageFB = FBSDKProfilePictureView(frame: self.profileImage.frame)
-         imageFB.profileID = FBSDKAccessToken.currentAccessToken().userID // "me"
-         imageFB.layer.borderWidth = 1
-         imageFB.layer.masksToBounds = false
-         imageFB.layer.borderColor = UIColor.blackColor().CGColor
-         imageFB.layer.cornerRadius = self.profileImage.frame.height/2
-         imageFB.clipsToBounds = true
-         //imageFB.pictureMode = FBSDKProfilePictureMode.Normal
-         self.view.addSubview(imageFB)
-         
-         self.profileName.text = FBSDKProfile.currentProfile().name
-         
-         } else {
-         self.profileName.text = NSUserDefaults.standardUserDefaults().stringForKey("NombreUsuario")!
-         
-         self.requestGraphAPIFB()
-         
-         }
-         */
-         
-*/
+        self.registrandose == false
         let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
         
         let loginManager = FBSDKLoginManager()
@@ -234,16 +231,23 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
                 if (error == nil){
                     print(result)
+                    
+                    
                     result.valueForKey("email") as! String
-                    result.valueForKey("id") as! String
+                    let id = result.valueForKey("id") as! String
                     result.valueForKey("name") as! String
                     result.valueForKey("first_name") as! String
                     result.valueForKey("last_name") as! String
                     
                     self.nombre = result.valueForKey("name") as! String
                     self.email = result.valueForKey("email") as! String
+                    NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                    NSUserDefaults.standardUserDefaults().setObject("fb", forKey: WebServiceResponseKey.redSocial)
+                   
                     
-                    self.performSegueWithIdentifier("toSignUp", sender: nil)
+                    self.consultarInicioSesionRedesSociales(id)
+                    
+                    
 
                 }
             })
@@ -253,7 +257,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBAction func loginTw(sender: AnyObject) {
         // Swift
         
-        
+        self.registrandose == false
         Twitter.sharedInstance().logInWithCompletion { session, error in
             if (session != nil) {
                 
@@ -277,24 +281,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     }
     
     func getUserInfo(id : String){
-        /*if let userID = Twitter.sharedInstance().sessionStore.session()!.userID {
-            let client = TWTRAPIClient(userID: userID)
-            let url = "https://api.twitter.com/1.1/users/show.json"
-            let params = ["screen_name": screenName]
-            var clientError : NSError?
-            let request = Twitter.sharedInstance().APIClient.URLRequestWithMethod("GET", URL: url, parameters: params, error: &clientError)
-            
-            client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-                if let someData = data {
-                    do {
-                        let results = try NSJSONSerialization.JSONObjectWithData(someData, options: .AllowFragments) as! NSDictionary
-                        print(results)
-                        
-                    } catch {
-                    }
-                }
-            }
-        }*/
+ 
         
         // Swift
         let client = TWTRAPIClient(userID: id)
@@ -310,10 +297,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
                     self.nombre =  (json["name"] as? String)!
-                    dispatch_async(dispatch_get_main_queue()) {
-                        
-                        self.performSegueWithIdentifier("toSignUp", sender: nil)
-                    }
+                    self.nombreUsuario =  (json["screen_name"] as? String)!
+                    NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                    NSUserDefaults.standardUserDefaults().setObject("tw", forKey: WebServiceResponseKey.redSocial)
+                    
+                    self.consultarInicioSesionRedesSociales(id)
+                    
+                   
                     
                 } else {
                     print("HTTP Status Code: 200")
@@ -332,7 +322,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     @IBAction func logInLinkedIn(sender: AnyObject) {
         //http://stackoverflow.com/questions/28491280/ios-linkedin-authentication
-        
+       self.registrandose == false
        LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
             (returnState) -> Void in
             print("success called!")
@@ -345,28 +335,20 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     print(response.data)
                     
                     
-                    if let dataFromString = response.data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                        if let json = try? NSJSONSerialization.JSONObjectWithData(dataFromString, options: []) {
-                            print(json.description)
-                            self.email =  (json["emailAddress"] as? String)!
-                            self.nombre =  (json["firstName"] as? String)! + " " + (json["lastName"] as? String)!
-                            dispatch_async(dispatch_get_main_queue()) {
-                                
-                                self.performSegueWithIdentifier("toSignUp", sender: nil)
-
+                        if let dataFromString = response.data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                            if let json = try? NSJSONSerialization.JSONObjectWithData(dataFromString, options: []) {
+                                print(json.description)
+                                self.email =  (json["emailAddress"] as? String)!
+                                self.nombre =  (json["firstName"] as? String)! + " " + (json["lastName"] as? String)!
+                                let id = (json["id"] as? String)!
+                                NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                                NSUserDefaults.standardUserDefaults().setObject("in", forKey: WebServiceResponseKey.redSocial)
+                            
+                                self.consultarInicioSesionRedesSociales(id)
                             }
-                        }
                         
-                    }
+                        }
                    
-                    
-                    /*if let json = try? NSJSONSerialization.JSONObjectWithData(response?.data!, options: []) {
-                        print(json)
-                        self.nombre =  (json["name"] as? String)!
-                        */
-                    
-                    //}
-                    
                     }, error: { (error) -> Void in
                         print(error!)
                 })
@@ -379,6 +361,74 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
 
     }
     
+    /**********
+     Consumo de apis
+    ***/
+    
+    func consultarInicioSesionRedesSociales(id:String) {
+      
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.loginWithSocials)\(id)/")!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonRedesSociales).resume()
+    }
+    
+    func parseJsonRedesSociales(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        let apiKey = json[WebServiceResponseKey.apiKey] as! String
+                        
+                        NSUserDefaults.standardUserDefaults().setObject(apiKey, forKey: WebServiceResponseKey.apiKey)
+                        
+                        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
+                        
+                        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.userId] as! Int, forKey: WebServiceResponseKey.userId)
+                        self.loadCargarPerfilUsuario()
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            
+                            if self.registrandose {
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                            }
+                            
+                            self.registrandose = false
+                            self.performSegueWithIdentifier("toCategories", sender: nil)
+                            NSUserDefaults.standardUserDefaults().setObject("true", forKey: "login")
+                        }
+                        
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                       
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if self.registrandose == false{
+                                self.registrandose = true
+                                self.performSegueWithIdentifier("toSignUp", sender: nil)
+                                
+                            }
+                            
+                        }
+                        
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+    
+
     
     func loadCargarPerfilUsuario() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!

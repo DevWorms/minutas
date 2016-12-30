@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import TwitterKit
+import FBSDKLoginKit
 
 protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
     
     func signUpControllerDidCancel()
     
     func signUpControllerDidFinishWithInfo(info: [String : String])
+    
+    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String)
+    
+    
     
 }
 
@@ -56,6 +62,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     var nombre = ""
     var email = ""
+    var nombreUsuario = ""
     
     // MARK: Managing the view
     
@@ -81,6 +88,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
         
         txtf_name.text = nombre
         txtf_email.text = email
+        txtf_username.text = nombreUsuario
+        
+        self.hideKeyboardWhenTappedAround()
     }
     
     // MARK: Responding to view events
@@ -172,11 +182,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
         switch textField {
         case txtf_name:
             txtf_phone.becomeFirstResponder()
-        case txtf_username:
+        case txtf_phone:
             txtf_email.becomeFirstResponder()
         case txtf_email:
-            txtf_phone.becomeFirstResponder()
-        case txtf_phone:
+            txtf_username.becomeFirstResponder()
+        case txtf_username:
             txtf_password.becomeFirstResponder()
         case txtf_password:
             txtf_confirm_password.becomeFirstResponder()
@@ -208,6 +218,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     @IBAction
     func cancelAccountCreation() {
+        cerrarSesion()
         delegate?.signUpControllerDidCancel()
     }
     
@@ -221,7 +232,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
             && txtf_password?.text == txtf_confirm_password?.text {
             
             
-            let parameterString = "\(WebServiceRequestParameter.name)=\(txtf_name.text!)&\(WebServiceRequestParameter.phone)=\(txtf_phone.text!)&\(WebServiceRequestParameter.email)=\(txtf_email.text!)&\(WebServiceRequestParameter.username)=\(txtf_username.text!)&\(WebServiceRequestParameter.password)=\(txtf_password.text!)"
+            let token = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.token)! as! String
+           
+            
+            var parameterString = "\(WebServiceRequestParameter.name)=\(txtf_name.text!)&\(WebServiceRequestParameter.phone)=\(txtf_phone.text!)&\(WebServiceRequestParameter.email)=\(txtf_email.text!)&\(WebServiceRequestParameter.username)=\(txtf_username.text!)&\(WebServiceRequestParameter.password)=\(txtf_password.text!)"
+            
+            if token  != ""{
+                parameterString = parameterString + "&\(WebServiceRequestParameter.token)=\(token)"
+            }
+            
+            print(parameterString)
         
             let strUrl = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.signup)"
             if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
@@ -271,15 +291,216 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     
     @IBAction func fbButton(sender: AnyObject) {
-    
+        self.cerrarSesion()
+        let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
+        
+        let loginManager = FBSDKLoginManager()
+        loginManager.logInWithReadPermissions(readPermissions) { (resultado, error) in
+            
+            if error != nil{
+                print(error)
+            }else{
+                print(resultado.token)
+                
+                let fbloginresult : FBSDKLoginManagerLoginResult = resultado
+                
+                if(fbloginresult.isCancelled) {
+                    //Show Cancel alert
+                } else if(fbloginresult.grantedPermissions.contains("email")) {
+                    self.returnUserData()
+                    //fbLoginManager.logOut()
+                }
+                
+            }
+            
+            
+            
+            
+        }
+
     }
     
+    func returnUserData(){
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil){
+                    print(result)
+                    result.valueForKey("email") as! String
+                    let id = result.valueForKey("id") as! String
+                    result.valueForKey("name") as! String
+                    result.valueForKey("first_name") as! String
+                    result.valueForKey("last_name") as! String
+                    
+                    self.nombre = result.valueForKey("name") as! String
+                    self.email = result.valueForKey("email") as! String
+                    NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                    NSUserDefaults.standardUserDefaults().setObject("fb", forKey: WebServiceResponseKey.redSocial)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.txtf_name.text = self.nombre
+                        self.txtf_email.text = self.email
+                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                        
+                    }
+                    
+                    
+                }
+            })
+        }
+    }
+    
+
     @IBAction func twButton(sender: AnyObject) {
+        self.cerrarSesion()
+        
+        Twitter.sharedInstance().logInWithCompletion { session, error in
+            if (session != nil) {
+                
+                print("signed in as \(session!.userName)");
+                
+                self.getUserInfo((session?.userID)!)
+                
+            }
+            else {
+                print("error: \(error!.localizedDescription)");
+            }
+            
+            
+            
+            
+            
+        }
+        
+
+    }
+    
+    func getUserInfo(id : String){
+        
+        
+        // Swift
+        let client = TWTRAPIClient(userID: id)
+        let request = client.URLRequestWithMethod("GET",
+                                                  URL: "https://api.twitter.com/1.1/account/verify_credentials.json",
+                                                  parameters: ["include_email": "true", "skip_status": "true"],
+                                                  error: nil)
+        
+        client.sendTwitterRequest(request, completion: { (response, data, connectionError) in
+            if connectionError == nil{
+                print(data?.description)
+                
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    self.nombre =  (json["name"] as? String)!
+                    self.nombreUsuario =  (json["screen_name"] as? String)!
+                    NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                    NSUserDefaults.standardUserDefaults().setObject("tw", forKey: WebServiceResponseKey.redSocial)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.txtf_name.text = self.nombre
+                        self.txtf_username.text = self.nombreUsuario
+                       
+                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                        
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+                
+                
+            }else{
+                print(connectionError?.description)
+            }
+        })
+        
         
     }
+
     
     @IBAction func inButton(sender: AnyObject) {
+        self.cerrarSesion()
+        LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
+            (returnState) -> Void in
+            print("success called!")
+            print(LISDKSessionManager.sharedInstance().session)
+            
+            let url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address)"
+            
+            if LISDKSessionManager.hasValidSession() {
+                LISDKAPIHelper.sharedInstance().getRequest(url, success: { (response) -> Void in
+                    print(response.data)
+                    
+                    
+                    if let dataFromString = response.data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                        if let json = try? NSJSONSerialization.JSONObjectWithData(dataFromString, options: []) {
+                            print(json.description)
+                            self.email =  (json["emailAddress"] as? String)!
+                            self.nombre =  (json["firstName"] as? String)! + " " + (json["lastName"]
+                                as? String)!
+                            let id = (json["id"] as? String)!
+                            
+                            NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
+                            NSUserDefaults.standardUserDefaults().setObject("in", forKey: WebServiceResponseKey.redSocial)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                self.txtf_name.text = self.nombre
+                                self.txtf_email.text = self.email
+                                self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                                
+                            }
+                        }
+                        
+                    }
+                    
+                    }, error: { (error) -> Void in
+                        print(error!)
+                })
+            }
+            
+            }, errorBlock: { (error) -> Void in
+                print("Error: \(error)")
+        })
+    }
+    
+    func cerrarSesion(){
+        
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+        self.nombre = ""
+        self.email = ""
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            self.txtf_name.text = ""
+            self.txtf_email.text = ""
+            self.txtf_username.text = ""
+            
+        }
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
         
     }
+
+   
     
 }

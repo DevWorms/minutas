@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504578346.8384"
+            filePath = "Minutas/SignUpViewController.swift"
+            timestampString = "504774725.992969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "loginTw(sender:)"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "createAccount()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504578346.8384"
+            timestampString = "504775455.207449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "loginTw(sender:)"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504578315.145418"
+            timestampString = "504775455.207449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "getUserInfo(id:)"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
+            landmarkName = "consultarInicioSesionRedesSociales(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504578366.421084"
+            timestampString = "504775455.207449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "getUserInfo(id:)"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
+            landmarkName = "getUserInfo(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +74,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504757368.457306"
+            timestampString = "504775455.207449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/LogInViewController.swift"
+            timestampString = "504775455.207449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.LogInViewController.parseJsonRedesSociales (Swift.Optional&lt;__ObjC.NSData&gt;, urlResponse : Swift.Optional&lt;__ObjC.NSURLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
+                  timestampString = "504775188.164808"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "408"
+                  endingLineNumber = "408"
+                  offsetFromSymbolStart = "1880">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.LogInViewController.(parseJsonRedesSociales (Swift.Optional&lt;__ObjC.NSData&gt;, urlResponse : Swift.Optional&lt;__ObjC.NSURLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()).(closure #2)"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
+                  timestampString = "504775188.167075"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "409"
+                  endingLineNumber = "409"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/LogInViewController.swift"
+            timestampString = "504775455.207449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
             landmarkName = "logInLinkedIn(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,29 +154,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504755773.541931"
+            timestampString = "504775455.207449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
-            landmarkName = "logInLinkedIn(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504757156.850091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "logInLinkedIn(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.LogInViewController.(logInLinkedIn (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
+                  timestampString = "504775188.174058"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "1956">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.LogInViewController.(logInLinkedIn (Swift.AnyObject) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
+                  timestampString = "504775188.175746"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "340"
+                  endingLineNumber = "340"
+                  offsetFromSymbolStart = "4252">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
