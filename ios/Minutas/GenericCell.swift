@@ -14,7 +14,7 @@ class GenericCell: UITableViewCell {
 
     override func layoutSubviews() {
         let f = contentView.frame
-        let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(5, 0, 5, 0))
+        let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(2, 0, 2, 0))
         contentView.frame = fr
     }
 }

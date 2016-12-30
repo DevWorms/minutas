@@ -12,14 +12,65 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
+    @IBOutlet weak var tituloPendiente: UILabel!
     var tareas = [[String : AnyObject]]()
-    
+    var pendienteJson = [String : AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadTareas()
+        
+        
+        tituloPendiente.text = pendienteJson[WebServiceResponseKey.nombrePendiente] as? String
+        
+        //cell.view = self.view
+        
+        /*cell.descripcion.text = json[WebServiceResponseKey.descripcion] as? String
+         
+         cell.fechaFin.text = json[WebServiceResponseKey.fechaFin] as? String
+         if json[WebServiceResponseKey.autoPostergar] as! Bool{
+         cell.autopostergar.text = "Autopostergar: si"
+         }
+         else{
+         cell.autopostergar.text = "Autopostergar: no"
+         }
+         switch json[WebServiceResponseKey.prioridad] as! Int {
+         case 1:
+         cell.prioridadLabel.text = "Prioridad: Baja"
+         case 2:
+         cell.prioridadLabel.text = "Prioridad: Media"
+         case 3:
+         cell.prioridadLabel.text = "Prioridad: Alta"
+         default:
+         cell.prioridadLabel.text = "Prioridad: Media"
+         }
+         
+         cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
+         cell.cerrarabrirTarea.on = (json[WebServiceResponseKey.statusPendiente] as? Bool)!
+         if let tareasTotal = json[WebServiceResponseKey.total] as? Int{
+         cell.numeroTareasTotal.text = String(tareasTotal)
+         }
+         if let tareasResueltas = json[WebServiceResponseKey.completados] as? Int{
+         cell.numeroTareasResueltas.text = "" + String(tareasResueltas)
+         }
+         
+         
+         
+         if json[WebServiceResponseKey.pendienteStatus] as! Bool{
+         cell.estatus.text = "Estatus: Cerrado"
+         }
+         else{
+         cell.estatus.text = "Estatus: Abierto"
+         }*/
+        
+        /* cell.contexto = self
+         
+         */
+
+        
+        
     }
     
     
@@ -32,16 +83,7 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
        
 
     }
-    
-    /*
- requestBodyData.appendString("--\(boundary)\r\n")
- requestBodyData.appendString("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=" + ( MyFile.Name ) + "\r\n")
- requestBodyData.appendString("Content-Type: \(mimeType)\r\n\r\n")
- requestBodyData.appendData( NSData(contentsOfFile: MyFile.Path )! ) //ya esta como extension
- requestBodyData.appendString("\r\n")
- requestBodyData.appendString("--\(boundary)--\r\n")
-     
- */
+   
  
     
     // Make the background color show through

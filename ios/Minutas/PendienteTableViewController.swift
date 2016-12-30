@@ -8,12 +8,12 @@
 
 import UIKit
 
-class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, HeaderPendienteDelegate {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var pendientes = [[String : AnyObject]]()
-    
+    var pendienteJson = [String : AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +23,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         loadPendiente()
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44.0
-    }
+    
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
@@ -37,39 +35,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     }
     
     
-    // Make the background color show through
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterViewWithIdentifier("header") as? HeaderPendiente ?? HeaderPendiente(reuseIdentifier: "header")
-        
-        
-        header.titleLabel.text = "nombre"//sections[section].name
-        header.arrowLabel.text = ">"
-        header.setCollapsed(true)
-        
-        //header.section = section
-        header.delegate = self
-        
-        return header
-    }
-
-    
-    func toggleSection(header: HeaderPendiente, section: Int) {
-        /*let collapsed = !sections[section].collapsed
-        
-        // Toggle collapse
-        sections[section].collapsed = collapsed
-        header.setCollapsed(collapsed)
-        
-        // Adjust the height of the rows inside the section
-        tableView.beginUpdates()
-        for i in 0 ..< sections[section].items.count {
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
-        }*/
-        tableView.endUpdates()
-    }
-
-   
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -78,49 +44,8 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         let json = pendientes[indexPath.item]
         
-        cell.view = self.view
         cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
-        cell.descripcion.text = json[WebServiceResponseKey.descripcion] as? String
-        
-        cell.fechaFin.text = json[WebServiceResponseKey.fechaFin] as? String
-        if json[WebServiceResponseKey.autoPostergar] as! Bool{
-            cell.autopostergar.text = "Autopostergar: si"
-        }
-        else{
-            cell.autopostergar.text = "Autopostergar: no"
-        }
-        switch json[WebServiceResponseKey.prioridad] as! Int {
-            case 1:
-                cell.prioridadLabel.text = "Prioridad: Baja"
-            case 2:
-                cell.prioridadLabel.text = "Prioridad: Media"
-            case 3:
-                cell.prioridadLabel.text = "Prioridad: Alta"
-            default:
-                cell.prioridadLabel.text = "Prioridad: Media"
-        }
-        
-        cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
-        cell.cerrarabrirTarea.on = (json[WebServiceResponseKey.statusPendiente] as? Bool)!
-        if let tareasTotal = json[WebServiceResponseKey.total] as? Int{
-                cell.numeroTareasTotal.text = String(tareasTotal)
-        }
-        if let tareasResueltas = json[WebServiceResponseKey.completados] as? Int{
-                cell.numeroTareasResueltas.text = "" + String(tareasResueltas)
-        }
-        
-        
-        
-        if json[WebServiceResponseKey.pendienteStatus] as! Bool{
-            cell.estatus.text = "Estatus: Cerrado"
-        }
-        else{
-            cell.estatus.text = "Estatus: Abierto"
-        }
-        
-        cell.contexto = self
-        
-        
+       
         return cell
         
     }
@@ -132,6 +57,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let json = pendientes[indexPath.item]
+        self.pendienteJson = json
         
         NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
     }
@@ -152,6 +78,13 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         if segue.identifier == "nuevoPendiente"{
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
+        }
+        
+        if segue.identifier == "tareas"{
+            
+            let destino = segue.destinationViewController as! TareasTableViewController
+            destino.pendienteJson = self.pendienteJson
+            
         }
     }
 
@@ -204,7 +137,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 306
+        return 64
     }
     
     

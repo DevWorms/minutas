@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2D1005A4A55D22CF95743215 /* Pods_Minutas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D75CF8391AD6228EB36E859 /* Pods_Minutas.framework */; };
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
-		491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491152001E0212A60022F773 /* HeaderPendiente.swift */; };
 		493C5C561E13241B00C10B85 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493C5C541E13236500C10B85 /* linkedin-sdk.framework */; };
+		494B1E6E1E16E26D00940FC3 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494B1E6D1E16E26D00940FC3 /* CheckBox.swift */; };
 		49B3BE4D1E03F21800BA7882 /* PopCalendario.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */; };
 		49B3BE4F1E03F23400BA7882 /* PopCalendario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */; };
 		49B3BE511E03FD8300BA7882 /* PopVerComentarios.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */; };
@@ -85,8 +85,8 @@
 /* Begin PBXFileReference section */
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
-		491152001E0212A60022F773 /* HeaderPendiente.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderPendiente.swift; sourceTree = "<group>"; };
 		493C5C541E13236500C10B85 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
+		494B1E6D1E16E26D00940FC3 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopCalendario.xib; sourceTree = "<group>"; };
 		49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCalendario.swift; sourceTree = "<group>"; };
 		49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopVerComentarios.xib; sourceTree = "<group>"; };
@@ -171,12 +171,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		491151FF1E02127A0022F773 /* Headers */ = {
+		494B1E6F1E16E27300940FC3 /* Componentes */ = {
 			isa = PBXGroup;
 			children = (
-				491152001E0212A60022F773 /* HeaderPendiente.swift */,
+				494B1E6D1E16E26D00940FC3 /* CheckBox.swift */,
 			);
-			name = Headers;
+			name = Componentes;
 			sourceTree = "<group>";
 		};
 		49B3BE4B1E03F1AD00BA7882 /* Dialogos */ = {
@@ -289,8 +289,8 @@
 		5DCBD07A1DC0209F00074C10 /* Minutas */ = {
 			isa = PBXGroup;
 			children = (
+				494B1E6F1E16E27300940FC3 /* Componentes */,
 				49B3BE4B1E03F1AD00BA7882 /* Dialogos */,
-				491151FF1E02127A0022F773 /* Headers */,
 				49E15D651DFEB68400084EFB /* Minutas-Bridging-Header.h */,
 				3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */,
 				5DC27E141DE72FDF00857BC0 /* AppDelegate.swift */,
@@ -528,7 +528,6 @@
 			files = (
 				49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */,
 				49B3BE551E03FDD400BA7882 /* PopVerComentarios.swift in Sources */,
-				491152011E0212A60022F773 /* HeaderPendiente.swift in Sources */,
 				49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */,
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
 				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
@@ -541,6 +540,7 @@
 				5DC27E211DE7300B00857BC0 /* NewCategoryViewController.swift in Sources */,
 				49C746421DF498BB00985CE1 /* TareasCell.swift in Sources */,
 				49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */,
+				494B1E6E1E16E26D00940FC3 /* CheckBox.swift in Sources */,
 				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
 				49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */,
 				49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */,

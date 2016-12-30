@@ -9,14 +9,18 @@
 import Foundation
 import UIKit
 
-class PendienteCell: GenericCell, HeaderPendienteDelegate, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
+class PendienteCell: GenericCell{//, UIDocumentMenuDelegate, UIDocumentPickerDelegate {
     
-    var view: UIView!
+    
+  @IBOutlet weak var checkBox: UIButton!
+    
+  /*  var view: UIView!
     
     var contexto: PendienteTableViewController!
-    
+ */
+    @IBOutlet weak var viewStatusCerrado: UIView!
     @IBOutlet weak var tituloPendiente: UILabel!
-    @IBOutlet weak var numeroTareasTotal: UILabel!
+    /*@IBOutlet weak var numeroTareasTotal: UILabel!
     @IBOutlet weak var numeroTareasResueltas: UILabel!
     //@IBOutlet weak var inicioDatePicker: UIDatePicker!
     @IBOutlet weak var fechaFin: UILabel!
@@ -35,14 +39,20 @@ class PendienteCell: GenericCell, HeaderPendienteDelegate, UIDocumentMenuDelegat
     
     @IBOutlet weak var archivos: UILabel!
     @IBOutlet weak var abrirPopComentarios: UIButton!
-    @IBOutlet weak var abrirPopCalendario: UIButton!
+    @IBOutlet weak var abrirPopCalendario: UIButton!*/
+    
+    let checkedImage = UIImage(named: "ic_check_box")! as UIImage
+    
+    let uncheckedImage = UIImage(named: "ic_check_box_outline_blank")! as UIImage
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
      //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+   /* override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         
@@ -117,18 +127,18 @@ class PendienteCell: GenericCell, HeaderPendienteDelegate, UIDocumentMenuDelegat
     
     @IBAction func abrirPopComentarios(sender: AnyObject) {
         let popComentarios = PopVerComentarios(nibName: "PopVerComentarios", bundle: nil)
-        popComentarios.showInView(view, nombre: tituloPendiente.text! )
+      //  popComentarios.showInView(view, nombre: tituloPendiente.text! )
     }
     
     @IBAction func abrirPopMensajes(sender: AnyObject) {
         let popMensajes = PopViewNuevoComentario(nibName: "PopViewNuevoComentario", bundle: nil)
-        popMensajes.showInView(view, nombre: tituloPendiente.text! )
+        //popMensajes.showInView(view, nombre: tituloPendiente.text! )
 
     }
     
     @IBAction func abrirPopCalendario(sender: AnyObject) {
         
-        let popCalendario = PopCalendario(nibName: "PopCalendario", bundle: nil)
+        /*let popCalendario = PopCalendario(nibName: "PopCalendario", bundle: nil)
         
         var dateString = fechaFin.text
         
@@ -139,24 +149,28 @@ class PendienteCell: GenericCell, HeaderPendienteDelegate, UIDocumentMenuDelegat
         
         
         
-        popCalendario.showInView(view, fechaTermino: date!)
+        popCalendario.showInView(view, fechaTermino: date!)*/
 
     }
     
-    func toggleSection(header: HeaderPendiente, section: Int) {
-       /* let collapsed = !sections[section].collapsed
-        
-        // Toggle collapse
-        sections[section].collapsed = collapsed
-        header.setCollapsed(collapsed)
-        
-        // Adjust the height of the rows inside the section
-        tableView.beginUpdates()
-        for i in 0 ..< sections[section].items.count {
-            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+  */
+    
+    // Bool property
+    var isChecked: Bool = false {
+        didSet{
+            if isChecked == true {
+                self.checkBox.setImage(checkedImage, forState: .Normal)
+                viewStatusCerrado.hidden = false
+            } else {
+                self.checkBox.setImage(uncheckedImage, forState: .Normal)
+                viewStatusCerrado.hidden = true
+            }
         }
-        tableView.endUpdates()*/
     }
-
+    
+    
+    @IBAction func checkButton(sender: AnyObject) {
+        isChecked = !isChecked
+    }
 }
  
