@@ -28,7 +28,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>li4314964</string>
+				<string>li4350214</string>
 				<string>fb880131518745577</string>
 			</array>
 		</dict>
@@ -66,7 +66,7 @@
 		</array>
 	</dict>
 	<key>LIAppId</key>
-	<string>4314964</string>
+	<string>4350214</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

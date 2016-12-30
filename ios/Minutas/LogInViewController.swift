@@ -259,7 +259,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                 
                 print("signed in as \(session!.userName)");
                 
-                self.getUserInfo((session?.userName)!)
+                self.getUserInfo((session?.userID)!)
                
             }
              else {
@@ -276,8 +276,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         
     }
     
-    func getUserInfo(screenName : String){
-        if let userID = Twitter.sharedInstance().sessionStore.session()!.userID {
+    func getUserInfo(id : String){
+        /*if let userID = Twitter.sharedInstance().sessionStore.session()!.userID {
             let client = TWTRAPIClient(userID: userID)
             let url = "https://api.twitter.com/1.1/users/show.json"
             let params = ["screen_name": screenName]
@@ -294,7 +294,39 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     }
                 }
             }
-        }
+        }*/
+        
+        // Swift
+        let client = TWTRAPIClient(userID: id)
+        let request = client.URLRequestWithMethod("GET",
+                                                  URL: "https://api.twitter.com/1.1/account/verify_credentials.json",
+                                                  parameters: ["include_email": "true", "skip_status": "true"],
+                                                  error: nil)
+        
+        client.sendTwitterRequest(request, completion: { (response, data, connectionError) in
+            if connectionError == nil{
+                print(data?.description)
+                
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    self.nombre =  (json["name"] as? String)!
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.performSegueWithIdentifier("toSignUp", sender: nil)
+                    }
+                    
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+
+                
+            }else{
+                print(connectionError?.description)
+            }
+        })
+        
+        
     }
 
     
@@ -306,16 +338,34 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             print("success called!")
             print(LISDKSessionManager.sharedInstance().session)
             
-            let url = "https://api.linkedin.com/v1/people/~:(id,first-name,email-address)"
+            let url = "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address)"
         
             if LISDKSessionManager.hasValidSession() {
                 LISDKAPIHelper.sharedInstance().getRequest(url, success: { (response) -> Void in
-                    print(response?.data!)
+                    print(response.data)
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    
+                    if let dataFromString = response.data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                        if let json = try? NSJSONSerialization.JSONObjectWithData(dataFromString, options: []) {
+                            print(json.description)
+                            self.email =  (json["emailAddress"] as? String)!
+                            self.nombre =  (json["firstName"] as? String)! + " " + (json["lastName"] as? String)!
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                self.performSegueWithIdentifier("toSignUp", sender: nil)
+
+                            }
+                        }
                         
-                        self.performSegueWithIdentifier("toCategories", sender: nil)
                     }
+                   
+                    
+                    /*if let json = try? NSJSONSerialization.JSONObjectWithData(response?.data!, options: []) {
+                        print(json)
+                        self.nombre =  (json["name"] as? String)!
+                        */
+                    
+                    //}
                     
                     }, error: { (error) -> Void in
                         print(error!)
