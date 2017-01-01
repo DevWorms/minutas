@@ -8,43 +8,70 @@
 
 import UIKit
 
-class TareasTableViewController: UITableViewController, NewTareaViewControllerDelegate {
+class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var archivos: UILabel!
     @IBOutlet weak var tituloPendiente: UILabel!
+    @IBOutlet weak var fechaFin: UILabel!
+    @IBOutlet weak var descripcion: UITextView!
+    
+    @IBOutlet weak var prioridadLabel: UILabel!
+    @IBOutlet weak var estatus: UILabel!
+    
+    @IBOutlet weak var responsables: UITextView!
+    
     var tareas = [[String : AnyObject]]()
     var pendienteJson = [String : AnyObject]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadTareas()
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        print(pendienteJson.description)
         
         tituloPendiente.text = pendienteJson[WebServiceResponseKey.nombrePendiente] as? String
         
+        fechaFin.text = pendienteJson[WebServiceResponseKey.fechaFin] as? String
+        
+        if pendienteJson[WebServiceResponseKey.pendienteStatus] as! Bool{
+            estatus.text = "Cerrado"
+        }
+        else{
+            estatus.text = "Abierto"
+        }
+        
+        switch pendienteJson[WebServiceResponseKey.prioridad] as! Int {
+        case 1:
+            prioridadLabel.text = "Prioridad: Baja"
+        case 2:
+            prioridadLabel.text = "Prioridad: Media"
+        case 3:
+            prioridadLabel.text = "Prioridad: Alta"
+        default:
+            prioridadLabel.text = "Prioridad: Media"
+        }
+
+        descripcion.text = pendienteJson[WebServiceResponseKey.descripcion] as? String
+        
+        responsables.text = pendienteJson[WebServiceResponseKey.usuariosAsignados] as? String
+        
         //cell.view = self.view
         
-        /*cell.descripcion.text = json[WebServiceResponseKey.descripcion] as? String
+        /*
          
-         cell.fechaFin.text = json[WebServiceResponseKey.fechaFin] as? String
+         
          if json[WebServiceResponseKey.autoPostergar] as! Bool{
          cell.autopostergar.text = "Autopostergar: si"
          }
          else{
          cell.autopostergar.text = "Autopostergar: no"
-         }
-         switch json[WebServiceResponseKey.prioridad] as! Int {
-         case 1:
-         cell.prioridadLabel.text = "Prioridad: Baja"
-         case 2:
-         cell.prioridadLabel.text = "Prioridad: Media"
-         case 3:
-         cell.prioridadLabel.text = "Prioridad: Alta"
-         default:
-         cell.prioridadLabel.text = "Prioridad: Media"
          }
          
          cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
@@ -87,13 +114,13 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
  
     
     // Make the background color show through
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clearColor()
         return headerView
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
         
@@ -117,11 +144,11 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
         loadTareas()
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tareas.count
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
         
@@ -182,7 +209,7 @@ class TareasTableViewController: UITableViewController, NewTareaViewControllerDe
     }
     
     // para cuadrar las imagenes
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 100
     }

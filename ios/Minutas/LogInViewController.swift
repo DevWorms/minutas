@@ -170,9 +170,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         logIn()
     }
     
-    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String) {
+    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String, redSocial: String) {
         self.registrandose = true
-        consultarInicioSesionRedesSociales(id)
+        consultarInicioSesionRedesSociales(id, redSocial: redSocial)
     }
     
     
@@ -234,7 +234,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     
                     
                     result.valueForKey("email") as! String
-                    let id = result.valueForKey("id") as! String
+                    let id = FBSDKAccessToken.currentAccessToken().tokenString
+                    print(id)
                     result.valueForKey("name") as! String
                     result.valueForKey("first_name") as! String
                     result.valueForKey("last_name") as! String
@@ -245,7 +246,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     NSUserDefaults.standardUserDefaults().setObject("fb", forKey: WebServiceResponseKey.redSocial)
                    
                     
-                    self.consultarInicioSesionRedesSociales(id)
+                    self.consultarInicioSesionRedesSociales(id, redSocial: "fb")
                     
                     
 
@@ -301,7 +302,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
                     NSUserDefaults.standardUserDefaults().setObject("tw", forKey: WebServiceResponseKey.redSocial)
                     
-                    self.consultarInicioSesionRedesSociales(id)
+                    self.consultarInicioSesionRedesSociales(id, redSocial: "tw")
                     
                    
                     
@@ -344,7 +345,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                                 NSUserDefaults.standardUserDefaults().setObject(id, forKey: WebServiceResponseKey.token)
                                 NSUserDefaults.standardUserDefaults().setObject("in", forKey: WebServiceResponseKey.redSocial)
                             
-                                self.consultarInicioSesionRedesSociales(id)
+                                self.consultarInicioSesionRedesSociales(id, redSocial: "in")
                             }
                         
                         }
@@ -365,9 +366,21 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
      Consumo de apis
     ***/
     
-    func consultarInicioSesionRedesSociales(id:String) {
+    func consultarInicioSesionRedesSociales(id:String, redSocial: String) {
       
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.loginWithSocials)\(id)/")!
+        var apuntarAMetodoWeb  = ""
+        switch redSocial {
+        case "fb":
+            apuntarAMetodoWeb = WebServiceEndpoint.loginWithFb
+        case "tw":
+            apuntarAMetodoWeb = WebServiceEndpoint.loginWithTw
+        case "in":
+            apuntarAMetodoWeb = WebServiceEndpoint.loginWithIn
+        default:
+            apuntarAMetodoWeb = WebServiceEndpoint.loginWithFb
+            
+        }
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(apuntarAMetodoWeb)\(id)/")!
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonRedesSociales).resume()
     }
     

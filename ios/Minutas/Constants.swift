@@ -19,8 +19,9 @@ enum WebServiceEndpoint {
     
     static let categories = "category/all/"
     static let perfil = "user/profile/"
-    static let loginWithSocials = "user/loginwithsocials/"
-
+    static let loginWithTw = "user/loginwithttwitter/"
+    static let loginWithIn = "user/loginwithlinkedin/"
+    static let loginWithFb = "user/loginwithfacebook/"
     
     static let newCategory = "category/new"
     static let newReunion = "meeting/new"

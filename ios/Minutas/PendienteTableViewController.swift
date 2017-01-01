@@ -60,6 +60,8 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         self.pendienteJson = json
         
         NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+        
+        self.performSegueWithIdentifier("tareas", sender: nil)
     }
     
     func newPendienteControllerDidCancel() {
@@ -80,7 +82,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
         }
         
-        if segue.identifier == "tareas"{
+        else if segue.identifier == "tareas"{
             
             let destino = segue.destinationViewController as! TareasTableViewController
             destino.pendienteJson = self.pendienteJson

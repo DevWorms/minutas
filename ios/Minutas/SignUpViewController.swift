@@ -16,7 +16,7 @@ protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
     
     func signUpControllerDidFinishWithInfo(info: [String : String])
     
-    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String)
+    func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String, redSocial: String)
     
     
     
@@ -340,7 +340,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
                         
                         self.txtf_name.text = self.nombre
                         self.txtf_email.text = self.email
-                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id, redSocial: "fb")
                         
                     }
                     
@@ -401,7 +401,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
                         self.txtf_name.text = self.nombre
                         self.txtf_username.text = self.nombreUsuario
                        
-                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                        self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id, redSocial: "tw")
                         
                     }
                 } else {
@@ -448,7 +448,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
                                 
                                 self.txtf_name.text = self.nombre
                                 self.txtf_email.text = self.email
-                                self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id)
+                                self.delegate?.signUpWithSocialNetworkControllerDidFinishWithInfo(id, redSocial:  "in")
                                 
                             }
                         }
