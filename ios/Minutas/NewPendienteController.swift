@@ -14,9 +14,12 @@ protocol NewPendienteControllerDelegate: NSObjectProtocol {
     func newPendienteControllerDidFinish()
 }
 
-class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate {
+class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate,UITableViewDataSource {
     
     // MARK: Properties
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     
     weak var delegate: NewPendienteControllerDelegate?
     
@@ -40,10 +43,15 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     
     let pickerData = ["Selecciona prioridad","Prioridad baja","Prioridad normal","Prioridad alta"]
     
+    let usuarios = ["@sergio", "@ivan", "@lopez", "@monzon"]
     
     // MARK: Responding to view events
     
     override func viewDidAppear(animated: Bool) {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
         
@@ -110,6 +118,19 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == self.txtf_responsable{
+            print("responsable clikeado" + self.txtf_responsable.text!)
+            if self.tableView.hidden == true {
+                self.tableView.hidden = false
+            }
+            dispatch_async(dispatch_get_main_queue()) {
+                self.filterString = self.txtf_responsable.text
+                
+                self.tableView?.reloadData()
+            }
+            
+        }
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
                 btn_create.enabled = false
@@ -203,5 +224,77 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                 }
             }
         }
+    }
+    
+    // Make the background color show through
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clearColor()
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SearchUsuarioCell
+        
+        cell.txtNombreUsuario.text = visibleResults[indexPath.item]
+        
+        /*let json = tareas[indexPath.item]
+        
+        cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
+        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
+        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
+        */
+        return cell
+        
+    }
+
+    
+    
+    lazy var visibleResults: [String] = self.usuarios
+    
+    /// A `nil` / empty filter string means show all results. Otherwise, show only results containing the filter.
+    var filterString: String? = nil {
+        didSet {
+            if filterString == nil || filterString!.isEmpty || self.usuarios.count <= 0 {
+                visibleResults = usuarios
+            }
+            else {
+                // Filter the results using a predicate based on the filter string.
+                let filterPredicate = NSPredicate(format: "self contains[c] %@", argumentArray: [filterString!.lowercaseString])
+                visibleResults = usuarios.filter { filterPredicate.evaluateWithObject($0) }
+                
+            }
+            
+            tableView.reloadData()
+        }
+    }
+    
+    
+    
+    // MARK: UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if visibleResults.count == 0{
+            self.tableView.hidden = true
+        }
+        return visibleResults.count
+    }
+
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    @IBAction func tapGesture(sender: AnyObject) {
+        if(tableView.hidden == false){
+            tableView.hidden = true
+        }
+    }
+    // para cuadrar las imagenes
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 52
     }
 }
