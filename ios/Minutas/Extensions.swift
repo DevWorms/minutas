@@ -35,11 +35,24 @@ extension UIView {
     
 }
 
+extension String
+{
+    func replace(target: String, withString: String) -> String
+    {
+        return self.stringByReplacingOccurrencesOfString(target, withString: withString, options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+}
 
 extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
+    
+    func hideKeyboardWhenTappedAround() -> UITapGestureRecognizer{
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        return tap
+    }
+    
+    func removeGestureRecognitionText(tap: UITapGestureRecognizer) {
+        view.removeGestureRecognizer(tap)
     }
     
     func dismissKeyboard() {

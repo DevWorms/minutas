@@ -19,10 +19,10 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     // MARK: Properties
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var myView: UIView!
     
     weak var delegate: NewPendienteControllerDelegate?
-    
+    var tap:UITapGestureRecognizer!
     
     @IBOutlet weak var autopostergarSwitch: UISwitch!
     @IBOutlet
@@ -52,13 +52,16 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         tableView.delegate = self
         tableView.dataSource = self
         
+        
+        //self.tableView.allowsSelection = true
+        
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
         
         opcionesPicker.delegate = self
         opcionesPicker.dataSource = self
         
-         self.hideKeyboardWhenTappedAround()
+        tap = self.hideKeyboardWhenTappedAround()
         NSUserDefaults.standardUserDefaults().setObject(1, forKey: "prioridadSelected")
         
         
@@ -80,7 +83,10 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         self.datePicketFechaTermino.minimumDate = minDate
         
         
-        
+        // Add tap gesture recognizer to view
+       /* let tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        myView.addGestureRecognizer(tapGesture)
+        */
         
         
     }
@@ -101,6 +107,8 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         
         
         NSUserDefaults.standardUserDefaults().setObject(row, forKey: "prioridadSelected")
+        
+        
     }
     
     // MARK: Configuring the view's layout behavior
@@ -120,13 +128,18 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
         if textField == self.txtf_responsable{
-            print("responsable clikeado" + self.txtf_responsable.text!)
+            
+            let arrayResponsables = self.txtf_responsable.text!.componentsSeparatedByString("@")
+            let ultimaPalabra = arrayResponsables[arrayResponsables.count-1]
+            print("responsable clikeado" + ultimaPalabra)
             if self.tableView.hidden == true {
                 self.tableView.hidden = false
+                
+                
             }
             dispatch_async(dispatch_get_main_queue()) {
-                self.filterString = self.txtf_responsable.text
-                
+                self.filterString = ultimaPalabra
+                self.removeGestureRecognitionText(self.tap)
                 self.tableView?.reloadData()
             }
             
@@ -152,6 +165,23 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     @IBAction
     func cancelPasswordRecovery() {
         delegate?.newPendienteControllerDidCancel()
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        
+        var pickerLabel = view as? UILabel;
+        
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: "Montserrat", size: 16)
+            pickerLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        pickerLabel?.text = pickerData[row]
+        
+        return pickerLabel!;
     }
     
     // MARK: Networking
@@ -226,6 +256,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         }
     }
     
+    
     // Make the background color show through
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
@@ -285,13 +316,33 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        var arrayResponsables = self.txtf_responsable.text!.componentsSeparatedByString("@")
+        print("texto basura " + arrayResponsables.popLast()!)
+        
+        var responsables = ""
+        print(arrayResponsables.description)
+        for str in arrayResponsables {
+            if(str != ""){
+                responsables = responsables +  "@" + str
+                print(responsables)
+            }
+        }
+       
+        let responsable =  visibleResults[indexPath.item] + ", "
+        
+        self.txtf_responsable.text =  responsables + responsable
+        
+        tableView.hidden = true
+        tap = self.hideKeyboardWhenTappedAround()
     }
     
-    @IBAction func tapGesture(sender: AnyObject) {
+
+    
+   /* func handleTap(sender: UITapGestureRecognizer) {
         if(tableView.hidden == false){
             tableView.hidden = true
         }
-    }
+    }*/
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
