@@ -18,6 +18,7 @@ enum WebServiceEndpoint {
     static let resetPassword = ""
     
     static let categories = "category/all/"
+    static let find = "user/find/"
     static let perfil = "user/profile/"
     static let loginWithTw = "user/loginwithttwitter/"
     static let loginWithIn = "user/loginwithlinkedin/"
@@ -93,6 +94,7 @@ enum WebServiceResponseKey {
     static let created = "created_at"
     static let updated = "updated_at"
     static let categories = "categorias"
+    static let usuarios = "users"
     static let user = "user"
     static let apodo = "apodo"
     

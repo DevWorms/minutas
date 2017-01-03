@@ -21,6 +21,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var myView: UIView!
     
+    @IBOutlet weak var autoasignar: UISwitch!
     weak var delegate: NewPendienteControllerDelegate?
     var tap:UITapGestureRecognizer!
     
@@ -43,7 +44,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     
     let pickerData = ["Selecciona prioridad","Prioridad baja","Prioridad normal","Prioridad alta"]
     
-    let usuarios = ["@sergio", "@ivan", "@lopez", "@monzon"]
+    var usuarios = [String]()
     
     // MARK: Responding to view events
     
@@ -88,6 +89,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         myView.addGestureRecognizer(tapGesture)
         */
         
+        self.loadUsuarios("@")
         
     }
     
@@ -144,6 +146,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
             }
             
         }
+        else{
+            tap = self.hideKeyboardWhenTappedAround()
+        }
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
                 btn_create.enabled = false
@@ -192,7 +197,12 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         let prioridadSelected = NSUserDefaults.standardUserDefaults().valueForKey("prioridadSelected")!
         
         
-        if     !((txtf_responsable.text?.isEmpty)!)
+        if  ( ((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
+        
+        
+        !((txtf_responsable.text?.isEmpty)!) && autoasignar.on == false )
+
+        
             && !((txtf_descripcion.text?.isEmpty)!)
             && !((txtf_name.text?.isEmpty)!)
             && prioridadSelected as? Int > 0{
@@ -209,8 +219,33 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                 styler.dateFormat = "yyyy-MM-dd"
                 let fechaFinal = styler.stringFromDate(datePicketFechaTermino.date)
         
-        
-                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.categoryId)=\(categoryId)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(txtf_responsable.text!)"
+                let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+                
+                var responsables = txtf_responsable.text!
+                if autoasignar.on {
+                    
+                    if ((txtf_responsable.text?.isEmpty) != nil){
+                        responsables = apodo!
+                    }else{
+                        if txtf_responsable.text![txtf_responsable.text!.endIndex.predecessor()] != ","{
+                            responsables = responsables + "," + apodo!
+                        }else{
+                            responsables = responsables + apodo!
+                        }
+                    }
+                    
+                    
+                    print(responsables)
+                }else{
+                    
+                    if txtf_responsable.text![txtf_responsable.text!.endIndex.predecessor()] == ","{
+                        txtf_responsable.text! = txtf_responsable.text!.substringToIndex(txtf_responsable.text!.endIndex.predecessor())
+                        
+                    }
+                    print(txtf_responsable.text!)
+                }
+                
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.categoryId)=\(categoryId)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)"
         
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                     let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newPendiente)")!)
@@ -348,4 +383,63 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     {
         return 52
     }
+    
+    func loadUsuarios(strUsuario:String) {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        print(apiKey, userId)
+        
+        let urlStr = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.find)\(userId)/\(apiKey)/\(strUsuario)/"
+        print(urlStr)
+        let url = NSURL(string: urlStr)!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonUsuarios).resume()
+    }
+    
+    func parseJsonUsuarios(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.usuarios.count > 0 {
+                            self.usuarios.removeAll()
+                        }
+                        
+                        let jsonArray = json[WebServiceResponseKey.usuarios] as! [[String : AnyObject]]
+                        
+                        for jsonItem in jsonArray{
+                            
+                            let strApodo = jsonItem[WebServiceResponseKey.apodo] as? String
+                            self.usuarios.append(strApodo!)
+                            
+                        }
+                        
+                        print(self.usuarios.description)
+                        
+                        
+                        self.tableView?.reloadData()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+
 }
