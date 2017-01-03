@@ -87,6 +87,7 @@ enum WebServiceResponseKey {
     static let status = "estado"
     static let statusPendiente = "status"
     static let message = "mensaje"
+    static let responsable = "responsable"
     
     static let categoryId = "id_Categoria"
     static let cUserId = "id_usuario"

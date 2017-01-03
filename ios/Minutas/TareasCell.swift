@@ -11,6 +11,7 @@ import UIKit
 
 class TareasCell: GenericCell {
   
+    @IBOutlet weak var responsableTarea: UILabel!
     @IBOutlet weak var documentosAttachados: UILabel!
     @IBOutlet weak var tituloTarea: UILabel!
     @IBOutlet weak var tareaCompletaSwitch: UISwitch!

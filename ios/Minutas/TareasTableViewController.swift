@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate {
+class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -22,15 +22,23 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var estatus: UILabel!
     
     @IBOutlet weak var responsables: UITextView!
+    @IBOutlet weak var categorias: UIPickerView!
     
     var tareas = [[String : AnyObject]]()
     var pendienteJson = [String : AnyObject]()
+    var categories = [[String : AnyObject]]()
+
+    var pickerData = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadTareas()
+        loadCategories()
+        categorias.delegate = self
+        categorias.dataSource = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -60,42 +68,36 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         descripcion.text = pendienteJson[WebServiceResponseKey.descripcion] as? String
         
-        responsables.text = pendienteJson[WebServiceResponseKey.usuariosAsignados] as? String
+        var responsablesVar = pendienteJson[WebServiceResponseKey.usuariosAsignados] as? String
         
-        //cell.view = self.view
+        if responsablesVar == nil || responsablesVar == "" {
+            responsablesVar = "No se asigno un responsable"
+        }
         
-        /*
-         
-         
-         if json[WebServiceResponseKey.autoPostergar] as! Bool{
-         cell.autopostergar.text = "Autopostergar: si"
-         }
-         else{
-         cell.autopostergar.text = "Autopostergar: no"
-         }
-         
-         cell.responsables.text = json[WebServiceResponseKey.usuariosAsignados] as? String
-         cell.cerrarabrirTarea.on = (json[WebServiceResponseKey.statusPendiente] as? Bool)!
-         if let tareasTotal = json[WebServiceResponseKey.total] as? Int{
-         cell.numeroTareasTotal.text = String(tareasTotal)
-         }
-         if let tareasResueltas = json[WebServiceResponseKey.completados] as? Int{
-         cell.numeroTareasResueltas.text = "" + String(tareasResueltas)
-         }
-         
-         
-         
-         if json[WebServiceResponseKey.pendienteStatus] as! Bool{
-         cell.estatus.text = "Estatus: Cerrado"
-         }
-         else{
-         cell.estatus.text = "Estatus: Abierto"
-         }*/
+        print(responsablesVar)
         
-        /* cell.contexto = self
-         
-         */
-
+        responsables.text = responsablesVar
+        
+        
+        
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject(row, forKey: "prioridadSelected")
         
         
     }
@@ -128,6 +130,8 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
         cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
+        cell.responsableTarea.text = json[WebServiceResponseKey.responsable] as? String
+        
        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
         
         return cell
@@ -208,9 +212,84 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        
+        var pickerLabel = view as? UILabel;
+        
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: "Montserrat", size: 16)
+            pickerLabel?.textColor = UIColor.whiteColor()
+            pickerLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        pickerLabel?.text = pickerData[row]
+        
+        return pickerLabel!;
+    }
+
+    
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 100
     }
+    
+    func loadCategories() {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        print(apiKey, userId)
+        
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.categories)\(userId)/\(apiKey)")!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonCategorias).resume()
+    }
+    
+    func parseJsonCategorias(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.categories.count > 0 {
+                            self.categories.removeAll()
+                        }
+                        
+                        self.categories.appendContentsOf(json[WebServiceResponseKey.categories] as! [[String : AnyObject]])
+                        
+                        for categoria in self.categories{
+                            
+                            let strApodo = categoria[WebServiceResponseKey.categoryName] as? String
+                            self.pickerData.append(strApodo!)
+                            
+                        }
+
+                        
+                        
+                        self.categorias?.reloadAllComponents()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+
 }
