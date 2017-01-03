@@ -14,7 +14,7 @@ protocol NewPendienteControllerDelegate: NSObjectProtocol {
     func newPendienteControllerDidFinish()
 }
 
-class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate,UITableViewDataSource {
+class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate {
     
     // MARK: Properties
     
@@ -52,7 +52,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         
         tableView.delegate = self
         tableView.dataSource = self
-        
+        txtf_descripcion.delegate = self;
         
         //self.tableView.allowsSelection = true
         
@@ -62,7 +62,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         opcionesPicker.delegate = self
         opcionesPicker.dataSource = self
         
-        tap = self.hideKeyboardWhenTappedAround()
+        if tap == nil{
+            tap = self.hideKeyboardWhenTappedAround()
+        }
         NSUserDefaults.standardUserDefaults().setObject(1, forKey: "prioridadSelected")
         
         
@@ -139,16 +141,14 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                 
                 
             }
+            
             dispatch_async(dispatch_get_main_queue()) {
                 self.filterString = ultimaPalabra
-                self.removeGestureRecognitionText(self.tap)
                 self.tableView?.reloadData()
             }
             
         }
-        else{
-            tap = self.hideKeyboardWhenTappedAround()
-        }
+        
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
                 btn_create.enabled = false
@@ -160,8 +160,52 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        if textField == self.txtf_responsable{
+            
+            if self.tableView.hidden == true {
+                self.tableView.hidden = false
+                
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.removeGestureRecognitionText(self.tap)
+                self.tap = nil
+                self.tableView?.reloadData()
+            }
+            
+        }else{
+            if tap == nil{
+                tap = self.hideKeyboardWhenTappedAround()
+            }
+            if self.tableView.hidden == false {
+                self.tableView.hidden = true
+                
+                
+            }
+        }
+        
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+        if textView == self.txtf_descripcion{
+            
+            if tap == nil{
+                tap = self.hideKeyboardWhenTappedAround()
+            }
+            if self.tableView.hidden == false {
+                self.tableView.hidden = true
+            }
+        }
+        
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
+
         return true
     }
     
@@ -197,7 +241,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         let prioridadSelected = NSUserDefaults.standardUserDefaults().valueForKey("prioridadSelected")!
         
         
-        if  ( ((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
+        if  ( !((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
+            
+            ((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
         
         
         !((txtf_responsable.text?.isEmpty)!) && autoasignar.on == false )
@@ -368,7 +414,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         self.txtf_responsable.text =  responsables + responsable
         
         tableView.hidden = true
-        tap = self.hideKeyboardWhenTappedAround()
+        if tap == nil{
+            tap = self.hideKeyboardWhenTappedAround()
+        }
     }
     
 
