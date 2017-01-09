@@ -282,7 +282,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func btnSendButton(sender: AnyObject) {
         
         if let texto = txtfmensaje.text {
-           if let texto != "" {
+           if  texto != "" {
                 let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
                 let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
                 let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
