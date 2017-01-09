@@ -25,10 +25,17 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet
     weak var btn_create: UIBarButtonItem!
     
-    
-    @IBOutlet weak var txtfAsuntoMinuta: UITextField!
-    
+    @IBOutlet weak var temalbl: UILabel!
+    @IBOutlet weak var fechalbl: UILabel!
+    @IBOutlet weak var horalbl: UILabel!
+    @IBOutlet weak var objlbl: UILabel!
     @IBOutlet weak var txtfAcuerdoMinuta: UITextField!
+    
+    var temaMinuta = ""
+    var horaMinuta = ""
+    var fechaMinuta = ""
+    var objMinuta = ""
+    var reunionID = ""
     
     // MARK: Responding to view events
     
@@ -36,6 +43,16 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         txtfAcuerdoMinuta.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        temalbl.text = temaMinuta
+        fechalbl.text = fechaMinuta
+        horalbl.text = horaMinuta
+        objlbl.text = objMinuta
     }
     
     // MARK: Configuring the view's layout behavior
@@ -74,7 +91,7 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction
     func cancelPasswordRecovery() {
-        delegate?.newMinutaControllerDidCancel()
+        delegate?.newMinutaControllerDidFinish()
     }
     
     // MARK: Networking
@@ -84,15 +101,29 @@ class NewMinutaViewController: UIViewController, UITextFieldDelegate {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.categoryName)=\(txtfAcuerdoMinuta.text!)&\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)"
+        if let acuerdo = txtfAcuerdoMinuta.text {
         
-        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newCategory)")!)
-            urlRequest.HTTPMethod = "POST"
+            let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.reunionIDq)=\(reunionID)&\(WebServiceRequestParameter.obj_Reunion)=\(objMinuta)&\(WebServiceRequestParameter.acuerdoMinuta)=\(acuerdo)&\(WebServiceRequestParameter.asunto_Minuta)=\(temaMinuta)"
+        
+            print(parameterString)
+        
+            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newMinute)")!)
+                urlRequest.HTTPMethod = "POST"
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-        } else {
-            print("Error de codificación de caracteres.")
+                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            } else {
+                print("Error de codificación de caracteres.")
+            }
+        }
+        else{
+            let vc_alert = UIAlertController(title: "Un momento", message: "Debe llenar todos los campos", preferredStyle: .Alert)
+            
+            vc_alert.addAction(UIAlertAction(title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: nil))
+            self.presentViewController(vc_alert, animated: true, completion: nil)
+            
         }
     }
     

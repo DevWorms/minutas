@@ -86,11 +86,6 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         self.datePicketFechaTermino.minimumDate = minDate
         
         
-        // Add tap gesture recognizer to view
-       /* let tapGesture = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
-        myView.addGestureRecognizer(tapGesture)
-        */
-        
         self.loadUsuarios("@")
         
     }
@@ -216,7 +211,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         delegate?.newPendienteControllerDidCancel()
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         
         var pickerLabel = view as? UILabel;
         
@@ -419,13 +414,6 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         }
     }
     
-
-    
-   /* func handleTap(sender: UITapGestureRecognizer) {
-        if(tableView.hidden == false){
-            tableView.hidden = true
-        }
-    }*/
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D1005A4A55D22CF95743215 /* Pods_Minutas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D75CF8391AD6228EB36E859 /* Pods_Minutas.framework */; };
+		3BE3EC111E230DEB0056AE83 /* ReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */; };
+		3BE3EC131E231C7C0056AE83 /* AsuntoReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */; };
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
 		492896311E1AE644000F7CE3 /* SearchUsuarioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */; };
 		493C5C561E13241B00C10B85 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493C5C541E13236500C10B85 /* linkedin-sdk.framework */; };
@@ -83,6 +85,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReunionCell.swift; sourceTree = "<group>"; };
+		3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntoReunionCell.swift; sourceTree = "<group>"; };
 		3BE90A9A1DF78B270089DD90 /* Minutas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minutas.entitlements; sourceTree = "<group>"; };
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsuarioCell.swift; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 				49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */,
 				49EC49501E00744A0067B621 /* CategoriaCell.swift */,
 				492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */,
+				3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */,
+				3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -548,6 +554,8 @@
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
+				3BE3EC111E230DEB0056AE83 /* ReunionCell.swift in Sources */,
+				3BE3EC131E231C7C0056AE83 /* AsuntoReunionCell.swift in Sources */,
 				49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */,
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */,
