@@ -13,6 +13,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var reuniones = [[String : AnyObject]]()
+    var noCellReunion : Int = 0
     
     
     override func viewDidLoad() {
@@ -36,43 +37,64 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         return headerView
     }
     
-    
-    
+    func switchChanged(mySwitch: UISwitch) {
+        print(mySwitch.tag)
+        
+        self.noCellReunion = mySwitch.tag
+        
+        if mySwitch.on {
+            performSegueWithIdentifier("capturarMinutas", sender: nil)
+        }
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReunionCell
         
         let json = reuniones[indexPath.item]
         
-        cell.tituloTarea.text = json[WebServiceResponseKey.nombreReunion] as? String
-        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
-        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
+        cell.tituloReunion.text = json[WebServiceResponseKey.nombreReunion] as? String
+        cell.reunionComplete.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
+        
+        if cell.reunionComplete.on {
+            cell.reunionComplete.enabled = false
+        }
+        
+        cell.reunionComplete.tag = indexPath.row
+        cell.reunionComplete.addTarget(self, action: #selector(ReunionesTableViewController.switchChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        
+        let str = (json[WebServiceResponseKey.horaReunion] as? String)!
+        
+        
+        let startIndex = str[str.startIndex.advancedBy(0)...str.startIndex.advancedBy(4)]
+        
+        cell.fechaReunion.text = "El " + (json[WebServiceResponseKey.diaReunion] as? String)! + " a las " + startIndex;
+        cell.invitados.text = json[WebServiceResponseKey.participantes] as? String
         
         return cell
-        
+ 
     }
-    
+ 
     func newPendienteControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
+ 
+ 
     func newPendienteControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
         loadReuniones()
     }
-    
+ 
     func newReunionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
+ 
+ 
     func newReunionControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
         loadReuniones()
     }
-    
+ 
     func newMinutaControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -102,7 +124,16 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "capturarMinutas"{
+            
+            let json = reuniones[noCellReunion]
+            
             (segue.destinationViewController as! NewMinutaViewController).delegate = self
+            (segue.destinationViewController as! NewMinutaViewController).temaMinuta = (json[WebServiceResponseKey.nombreReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).fechaMinuta = (json[WebServiceResponseKey.diaReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).horaMinuta = (json[WebServiceResponseKey.horaReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).objMinuta = (json[WebServiceResponseKey.objetivoReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).reunionID = String((json[WebServiceResponseKey.reunionId] as? Int)!)
+            
         }else if segue.identifier ==  "nuevaReunion"{
             (segue.destinationViewController as! NewReunionViewController).delegate = self
         }else if segue.identifier ==  "nuevoPendiente"{
