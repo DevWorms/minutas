@@ -43,6 +43,7 @@ enum WebServiceEndpoint {
     static let reuniones = "meetings/"
     static let conversaciones = "conversations/"
     static let pendientecomments = "pendientes/comments/"
+    static let mensajes = "/messages"
 }
 
 enum WebServiceRequestParameter {
