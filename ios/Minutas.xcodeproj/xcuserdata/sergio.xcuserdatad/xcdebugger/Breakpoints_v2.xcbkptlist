@@ -58,12 +58,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LlamadaAPI.swift"
-                  timestampString = "505182649.581933"
+                  timestampString = "505619143.647852"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
                   endingLineNumber = "75"
-                  offsetFromSymbolStart = "5831">
+                  offsetFromSymbolStart = "4552">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -73,12 +73,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LlamadaAPI.swift"
-                  timestampString = "505182649.587767"
+                  timestampString = "505619143.649446"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "76"
                   endingLineNumber = "76"
-                  offsetFromSymbolStart = "23">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
          </BreakpointContent>

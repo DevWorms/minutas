@@ -106,12 +106,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505182649.475705"
+                  timestampString = "505619143.620954"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "422"
                   endingLineNumber = "422"
-                  offsetFromSymbolStart = "2315">
+                  offsetFromSymbolStart = "1880">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -121,12 +121,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505182649.481553"
+                  timestampString = "505619143.622546"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "423"
                   endingLineNumber = "423"
-                  offsetFromSymbolStart = "33">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -170,12 +170,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505182649.506191"
+                  timestampString = "505619143.628656"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "342"
                   endingLineNumber = "342"
-                  offsetFromSymbolStart = "2447">
+                  offsetFromSymbolStart = "1956">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -185,12 +185,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505182649.51327"
+                  timestampString = "505619143.630249"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "342"
                   endingLineNumber = "342"
-                  offsetFromSymbolStart = "5357">
+                  offsetFromSymbolStart = "4312">
                </Location>
             </Locations>
          </BreakpointContent>
