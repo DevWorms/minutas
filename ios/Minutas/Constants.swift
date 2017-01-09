@@ -37,6 +37,7 @@ enum WebServiceEndpoint {
     static let asuntoNuevo = "tasks/new"
     static let reuniones = "meetings/"
     static let conversaciones = "conversations/"
+    static let mensajes = "/messages"
 }
 
 enum WebServiceRequestParameter {
@@ -44,6 +45,7 @@ enum WebServiceRequestParameter {
     static let redSocial = "redSocial"
     
     static let name = "nombre"
+    static let texto = "text"
     static let phone = "telefono"
     static let email = "correo"
     static let username = "apodo"

@@ -106,7 +106,7 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505624694.224102"
+                  timestampString = "505627815.463609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "422"
@@ -121,7 +121,7 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505624694.225694"
+                  timestampString = "505627815.465631"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "423"
@@ -170,7 +170,7 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505624694.231935"
+                  timestampString = "505627815.472562"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "342"
@@ -185,7 +185,7 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505624694.233537"
+                  timestampString = "505627815.474236"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "342"
@@ -298,12 +298,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/ConversacionViewController.swift"
-            timestampString = "505624612.292764"
+            timestampString = "505628534.062049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "keyboardWasShown(_:)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/ConversacionViewController.swift"
+            timestampString = "505628534.062049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "btnSendButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -314,12 +330,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/ConversacionViewController.swift"
-            timestampString = "505624613.454695"
+            timestampString = "505628534.062049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "keyboardWillHide(_:)"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "parseJson(_:urlResponse:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,12 +346,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/ConversacionViewController.swift"
-            timestampString = "505624626.176844"
+            timestampString = "505628534.062049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "keyboardWasShown(_:)"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/ConversacionViewController.swift"
+            timestampString = "505628280.871546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
