@@ -42,6 +42,9 @@ enum WebServiceEndpoint {
     static let asuntoNuevo = "tasks/new"
     static let reuniones = "meetings/"
     static let conversaciones = "conversations/"
+    static let conversacion = "conversations"
+    static let conversacionAddUser = "conversations/addUsers"
+    
     static let pendientecomments = "pendientes/comments/"
     static let mensajes = "/messages"
 }
@@ -65,6 +68,9 @@ enum WebServiceRequestParameter {
     static let pendienteName = "Nombre_Pendiente"
     static let descripcion = "descripcion"
     static let usuariosAsignados = "Usuarios_Asignados"
+    static let usuarios = "Usuarios"
+    static let users = "usuarios"
+    static let titulo = "Titulo"
     static let autopostergar = "Auto_Postergar"
     static let autoasignar = "auto_asignar"
     
@@ -87,6 +93,8 @@ enum WebServiceRequestParameter {
     static let obj_Reunion = "Objetivo_Reunion"
     static let acuerdoMinuta = "Acuerdo_Minuta[]"
     static let asunto_Minuta = "Asunto_Minuta"
+    static let conversacionId = "conversation_id"
+    
     
 
 }

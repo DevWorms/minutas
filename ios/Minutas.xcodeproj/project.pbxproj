@@ -39,6 +39,7 @@
 		49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */; };
 		49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */; };
 		49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */; };
+		49EA2A241E240A9E0000B5F5 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */; };
 		49EC49511E00744A0067B621 /* CategoriaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EC49501E00744A0067B621 /* CategoriaCell.swift */; };
 		49ECFE451E2312DB0046F26C /* ConversacionesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE431E2312DB0046F26C /* ConversacionesTableViewController.swift */; };
 		49ECFE461E2312DB0046F26C /* ConversacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */; };
@@ -121,6 +122,7 @@
 		49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewController.swift; sourceTree = "<group>"; };
 		49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioCell.swift; sourceTree = "<group>"; };
+		49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
 		49EC49501E00744A0067B621 /* CategoriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaCell.swift; sourceTree = "<group>"; };
 		49ECFE431E2312DB0046F26C /* ConversacionesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionesTableViewController.swift; sourceTree = "<group>"; };
 		49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */,
 				49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */,
 				49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */,
+				49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49E15D671DFEC05000084EFB /* CollapsibleTableViewController.swift in Sources */,
+				49EA2A241E240A9E0000B5F5 /* SearchUserViewController.swift in Sources */,
 				49B3BE551E03FDD400BA7882 /* PopVerComentarios.swift in Sources */,
 				492896311E1AE644000F7CE3 /* SearchUsuarioCell.swift in Sources */,
 				49ECFE481E2315410046F26C /* ConversacionCell.swift in Sources */,

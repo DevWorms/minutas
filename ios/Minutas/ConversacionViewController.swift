@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class ConversacionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversacionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewSearchViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -39,6 +39,16 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadConversacion()
+    }
+
     
    /* // must be internal or public.
     func actualizacion() {
@@ -204,7 +214,9 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "nuevoTarea"{
+        if segue.identifier == "adduser"{
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = true
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
             
         }
     }
@@ -215,7 +227,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
         
-        print(apiKey, userId)
+        print(apiKey, userId, conversacionId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(userId)/\(apiKey)/\(conversacionId)/")!
         print(url)
