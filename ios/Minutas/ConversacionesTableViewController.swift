@@ -20,6 +20,7 @@ class ConversacionesTableViewController: UITableViewController{
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
+    
     var conversaciones = [[String : AnyObject]]()
     
     
@@ -28,16 +29,6 @@ class ConversacionesTableViewController: UITableViewController{
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadConversaciones()
-        
-        //Swift 2.2 selector syntax
-        var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
-        
-    }
-    
-    // must be internal or public.
-    func consultaElServicioWeb() {
-        loadConversaciones()
-        print("tick")
     }
 
     
@@ -147,7 +138,6 @@ class ConversacionesTableViewController: UITableViewController{
                         
                         print(self.conversaciones[0].count)
                         self.tableView?.reloadData()
-                        self.consultaElServicioWeb()
                     }
                 } else {
                     print("HTTP Status Code: 200")
@@ -162,7 +152,6 @@ class ConversacionesTableViewController: UITableViewController{
                     } else {
                         print("HTTP Status Code: 400 o 500")
                         print("El JSON de respuesta es inválido.")
-                        self.consultaElServicioWeb()
                     }
                 }
             }

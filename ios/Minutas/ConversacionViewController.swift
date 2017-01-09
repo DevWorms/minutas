@@ -19,7 +19,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var conversacion = [[String : AnyObject]]()
-    
+    var peticiones = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,31 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
+        
+        //let thread = NSThread(target:self, selector:#selector(actualizacion), object:nil)
+        
+        
+    }
+    
+    
+   /* // must be internal or public.
+    func actualizacion() {
+        //Swift 2.2 selector syntax
+        
+    }*/
+    
+    
+    // must be internal or public.
+    func consultaElServicioWeb() {
+        //if peticiones <= 10{
+        loadConversacion()
+        //sleep(4)
+        //        }
+        
+        print("tick \(peticiones++)")
     }
     
     deinit {
