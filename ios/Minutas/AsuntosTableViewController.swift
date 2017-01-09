@@ -88,8 +88,6 @@ class AsuntosTableViewController: UITableViewController, NewAsuntosViewControlle
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         let reunionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.reunionId)
         
-        print(apiKey, userId)
-        
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.asuntos)\(userId)/\(apiKey)/\(reunionId)")!
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }

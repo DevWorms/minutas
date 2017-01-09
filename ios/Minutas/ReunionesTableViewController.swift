@@ -42,8 +42,12 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         self.noCellReunion = mySwitch.tag
         
-        if mySwitch.on {
+        if !mySwitch.on {
+            mySwitch.setOn(true, animated: true)
+            
+        } else {
             performSegueWithIdentifier("capturarMinutas", sender: nil)
+            
         }
     }
     
@@ -56,15 +60,10 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         cell.tituloReunion.text = json[WebServiceResponseKey.nombreReunion] as? String
         cell.reunionComplete.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
         
-        if cell.reunionComplete.on {
-            cell.reunionComplete.enabled = false
-        }
-        
         cell.reunionComplete.tag = indexPath.row
-        cell.reunionComplete.addTarget(self, action: #selector(ReunionesTableViewController.switchChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        cell.reunionComplete.addTarget(self, action: #selector(ReunionesTableViewController.switchChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         let str = (json[WebServiceResponseKey.horaReunion] as? String)!
-        
         
         let startIndex = str[str.startIndex.advancedBy(0)...str.startIndex.advancedBy(4)]
         

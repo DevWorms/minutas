@@ -126,9 +126,13 @@ extension CalendarioCell: CollapsibleTableViewHeaderDelegate {
         
         // Adjust the height of the rows inside the section
         subMenuTable!.beginUpdates()
-        for i in 0 ..< sections[section].items.count {
-            subMenuTable!.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+        
+        if sections[section].items != nil {
+            for i in 0 ..< sections[section].items.count {
+                subMenuTable!.reloadRowsAtIndexPaths([NSIndexPath(forRow: i, inSection: section)], withRowAnimation: .Automatic)
+            }
         }
+        
         subMenuTable!.endUpdates()
     }
     
