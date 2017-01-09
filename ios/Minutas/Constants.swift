@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum ApplicationConstants{
+    static let tiempoParaConsultarServicioWeb = 3.0
+}
+
 enum WebServiceEndpoint {
     static let baseUrl = "https://dev.minute.mx/api/"
     
@@ -46,6 +50,7 @@ enum WebServiceRequestParameter {
     static let redSocial = "redSocial"
     
     static let name = "nombre"
+    static let texto = "text"
     static let phone = "telefono"
     static let email = "correo"
     static let username = "apodo"

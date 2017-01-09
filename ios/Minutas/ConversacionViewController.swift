@@ -14,6 +14,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var bottonConstrintButton: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var txtfmensaje: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -83,15 +84,35 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         return headerView
     }
     
+    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        
+        cell.aparecio = false
+        
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-       let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        
+       /* cell.contentView.backgroundColor = UIColor.clearColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(10, 8, self.view.frame.size.width - 20, 149))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [1.0, 1.0, 1.0, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 2.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(-1, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)*/
         
         let json = conversacion[indexPath.item]
         
         let jsonMiembro = json[WebServiceResponseKey.miembro] as? [String : AnyObject]
         
-        print(jsonMiembro?.description)
+        print(json.description)
        
         cell.usuarios.text = jsonMiembro![WebServiceResponseKey.apodo] as? String
         
@@ -102,15 +123,34 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        
-        if jsonMiembro![WebServiceResponseKey.id] as? Int
-            != userId
-        {
-            cell.imagenDeUsuarioConstraint.constant = 5
-            cell.usuarios.textAlignment = .Left
-            cell.fechaChat.textAlignment = .Left
-            cell.conversacion.textAlignment = .Left
+        if let idDeUsuarioQueMandaElMensaje = jsonMiembro![WebServiceResponseKey.id] as? Int {
+            if idDeUsuarioQueMandaElMensaje != userId
+            {
+                let str = "Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)" + " el mensaje es: "
+                
+                print(str + cell.conversacion.text!)
+                
+                cell.imagenDeUsuarioConstraint.constant = 5
+                cell.usuarios.textAlignment = .Left
+                cell.fechaChat.textAlignment = .Left
+                cell.conversacion.textAlignment = .Left
+                
+                
+            }else{
+                let str = "Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)" + " el mensaje es: "
+                
+                print(str + cell.conversacion.text!)
+                
+                cell.imagenDeUsuarioConstraint.constant = 299
+                cell.usuarios.textAlignment = .Right
+                cell.fechaChat.textAlignment = .Right
+                cell.conversacion.textAlignment = .Right
+            }
+        }else{
+            print("El idDeUsuarioQueMandaElMensaje fue nil: el mensaje fue... " + cell.conversacion.text!)
+            
         }
+        
         
         return cell
         
@@ -178,10 +218,9 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                    if let _ = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        self.txtfmensaje.text = ""
+                        self.loadConversacion()
                     } else {
                         print("HTTP Status Code: 400 o 500")
                         print("El JSON de respuesta es inválido.")
@@ -199,6 +238,44 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     {
         return 86
     }
+    
+    
+    //Mandar un mensaje
+    
+    @IBAction func btnSendButton(sender: AnyObject) {
+        
+        if let texto = txtfmensaje.text {
+            
+            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
+                    
+            let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.texto)=\(texto)"
+            
+            print(parameterString)
+                    
+            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(conversacionId)\(WebServiceEndpoint.mensajes)"
+                
+                print(url)
+                let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                urlRequest.HTTPMethod = "POST"
+                        
+                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            } else {
+                print("Error de codificación de caracteres.")
+            }
+            
+        }
+        
+
+        
+    }
+    
+    
+    
+    
+    
     
     
 }

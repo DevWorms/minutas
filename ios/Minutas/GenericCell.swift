@@ -12,10 +12,21 @@ import UIKit
 
 class GenericCell: UITableViewCell {
 
+    var aparecio = false
     override func layoutSubviews() {
-        let f = contentView.frame
-        let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(2, 0, 2, 0))
-        contentView.frame = fr
+        if aparecio == false{
+            let f = contentView.frame
+            let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(2, 0, 2, 0))
+            contentView.frame = fr
+            aparecio = true
+        }
     }
-}
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        
+    }
+    
+}
+
