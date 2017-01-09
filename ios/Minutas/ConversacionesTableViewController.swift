@@ -77,14 +77,15 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         
         cell.tituloChat.text = json[WebServiceResponseKey.tituloChat] as? String
         let miembros = json[WebServiceResponseKey.miembros] as! [[String : AnyObject]]
-        
+        cell.usuarios.text = ""
         for jsonMiembros in miembros{
             
-            if !((cell.tituloChat.text?.isEmpty)!){
-                cell.usuarios.text = ", " + cell.usuarios.text!
-            }
+            if !((cell.usuarios.text?.isEmpty)!){
+                cell.usuarios.text = cell.usuarios.text! + ", " + (jsonMiembros[WebServiceResponseKey.apodo] as? String)!
+            }else{
             
-            cell.usuarios.text = jsonMiembros[WebServiceResponseKey.apodo] as? String
+                cell.usuarios.text = jsonMiembros[WebServiceResponseKey.apodo] as? String
+            }
             
         }
         

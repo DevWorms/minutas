@@ -282,25 +282,26 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func btnSendButton(sender: AnyObject) {
         
         if let texto = txtfmensaje.text {
-            
-            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-            let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
+           if let texto != "" {
+                let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+                let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+                let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
                     
-            let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.texto)=\(texto)"
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.texto)=\(texto)"
             
-            print(parameterString)
+                print(parameterString)
                     
-            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-                let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(conversacionId)\(WebServiceEndpoint.mensajes)"
+                if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(conversacionId)\(WebServiceEndpoint.mensajes)"
                 
-                print(url)
-                let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
-                urlRequest.HTTPMethod = "POST"
+                    print(url)
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                    urlRequest.HTTPMethod = "POST"
                         
-                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-            } else {
-                print("Error de codificación de caracteres.")
+                    NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
             }
             
         }
