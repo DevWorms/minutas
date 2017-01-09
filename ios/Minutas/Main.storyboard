@@ -1271,20 +1271,14 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-4C-KG7">
                                                     <rect key="frame" x="319" y="37" width="25" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<<<<<<< HEAD
+
                                                     <state key="normal" image="C933A098-6728-4EA5-BC78-313B317CE307"/>
-=======
-                                                    <state key="normal" image="9AFCAB66-9FAD-4AAE-820A-FB1B941C1228"/>
->>>>>>> origin/master
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-ue-vn1">
                                                     <rect key="frame" x="347" y="36" width="25" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<<<<<<< HEAD
-                                                    <state key="normal" image="EA5246FE-BEC4-4B76-A547-54AEBF54F74D"/>
-=======
                                                     <state key="normal" image="77AECE78-5955-4D3C-936A-845E20A0D7CF"/>
->>>>>>> origin/master
+
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZu-JL-RND">
                                                     <rect key="frame" x="66" y="35" width="158" height="31"/>
@@ -2712,9 +2706,6 @@
         </scene>
     </scenes>
     <resources>
-<<<<<<< HEAD
-        <image name="C933A098-6728-4EA5-BC78-313B317CE307" width="48" height="48">
-=======
         <image name="77AECE78-5955-4D3C-936A-845E20A0D7CF" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
@@ -2921,7 +2912,7 @@ AAAAAAAAAAAAAAAALkw
 </mutableData>
         </image>
         <image name="9AFCAB66-9FAD-4AAE-820A-FB1B941C1228" width="48" height="48">
->>>>>>> origin/master
+
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3358,6 +3349,7 @@ AAAAAAAAAAAAAAAALkw
         <image name="reuniones" width="32" height="32"/>
         <image name="send" width="32" height="32"/>
         <image name="sharedfolder" width="48" height="48"/>
+        
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jwn-G5-OGI"/>

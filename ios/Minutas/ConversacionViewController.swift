@@ -106,7 +106,9 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         if let idDeUsuarioQueMandaElMensaje = jsonMiembro![WebServiceResponseKey.id] as? Int {
             if idDeUsuarioQueMandaElMensaje != userId
             {
-                  print("Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)" + " el mensaje es: " + cell.conversacion.text)
+                let str = "Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)" + " el mensaje es: "
+                
+                print(str + cell.conversacion.text!)
                 
                 cell.imagenDeUsuarioConstraint.constant = 5
                 cell.usuarios.textAlignment = .Left
