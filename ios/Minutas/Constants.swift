@@ -37,11 +37,12 @@ enum WebServiceEndpoint {
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
     static let asuntos = "tasks/reunion/"
-    static let calendarioSemanal = "calendar/week"
-    static let calendarioMensual = "calendar/week"
+    static let calendarioSemanal = "calendar/week/"
+    static let calendarioMensual = "calendar/month/"
     static let asuntoNuevo = "tasks/new"
     static let reuniones = "meetings/"
     static let conversaciones = "conversations/"
+    static let pendientecomments = "pendientes/comments/"
     static let mensajes = "/messages"
 }
 
@@ -87,6 +88,7 @@ enum WebServiceRequestParameter {
     static let acuerdoMinuta = "Acuerdo_Minuta[]"
     static let asunto_Minuta = "Asunto_Minuta"
     
+
 }
 
 enum WebServiceResponseKey {
@@ -151,7 +153,6 @@ enum WebServiceResponseKey {
     static let participantes = "Usuarios_Asignados"
     static let reuniones = "reuniones"
     static let conversaciones = "conversations"
-    
     
     
 }

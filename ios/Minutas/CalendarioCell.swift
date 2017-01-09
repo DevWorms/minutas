@@ -12,7 +12,7 @@ struct Section {
     var items: [String]!
     var collapsed: Bool!
     
-    init(name: String, items: [String], collapsed: Bool = false) {
+    init(name: String, items: [String]?, collapsed: Bool = false) {
         self.name = name
         self.items = items
         self.collapsed = collapsed
@@ -25,20 +25,21 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     
     var sections = [Section]()
     var subMenuTable:UITableView?
-        override func awakeFromNib() {
+    
+    override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setUpTable()
+        setUpTable(nil)
     }
     
-    func setUpTable()
+    func setUpTable(items: [String]?)
     {
         subMenuTable = UITableView(frame: CGRectZero, style:UITableViewStyle.Plain)
         subMenuTable?.delegate = self
         subMenuTable?.dataSource = self
         sections = [
-            Section(name: "Tareas", items: ["Tarea 1", "Tarea 2", "Tarea 3", "Tarea 4", "Tarea 5", "Tarea 6", "Tarea 7", "Tarea 8"]),
-            Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
+            Section(name: "Actividades", items: items),
+            //Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
             
         ]
         
@@ -61,7 +62,11 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     }
     
      func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].items.count
+        if sections[section].items != nil {
+            return sections[section].items.count
+        } else {
+            return 0
+        }
     }
     
     
@@ -98,6 +103,10 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
     }
     
 }

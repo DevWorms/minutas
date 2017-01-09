@@ -14,11 +14,16 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     
     private weak var calendar: FSCalendar!
     var agenda = [[String : AnyObject]]()
+    var agendiaEvento = [String]()
+    
+    var celdaActiv = CalendarioCell()
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        loadCalendario()
         
         // In loadView or viewDidLoad
         let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: 320, height: 300))
@@ -27,14 +32,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         view.addSubview(calendar)
         self.calendar = calendar
         
-                
-        
-        
-        
         //self.gregorian = NSCalendar(calendarIdentifier: "NSCalendarIdentifierGregorian")
-        
-        
-        
 
     }
     
@@ -52,28 +50,26 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         return headerView
     }
     
-    
-    
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
         
         switch indexPath.row {
         case 0:
             
-           let cell = tableView.dequeueReusableCellWithIdentifier("CalendarioCell", forIndexPath: indexPath) as! UITableViewCell
+           let cell = tableView.dequeueReusableCellWithIdentifier("CalendarioCell", forIndexPath: indexPath)
             return cell
             
         case 1:
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("TareasCell", forIndexPath: indexPath) as! CalendarioCell
+            self.celdaActiv = tableView.dequeueReusableCellWithIdentifier("TareasCell", forIndexPath: indexPath) as! CalendarioCell
             
-            cell.setUpTable()
-            return cell
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = dateFormatter.stringFromDate( self.calendar.today! )
+            print(dateString)
             
+            self.celdaActiv.setUpTable( actividades(dateString) )
             
-            
+            return self.celdaActiv
             
         default:
             return UITableViewCell()
@@ -95,27 +91,9 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
     }
     
-    func newAsuntoControllerDidCancel() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    func newAsuntoControllerDidFinish() {
-        dismissViewControllerAnimated(true, completion: nil)
-        //loadAsuntos()
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2//self.asuntos.count
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        
-        
-    }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -125,14 +103,13 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     }
     
     
-    func loadAsuntos() {
+    func loadCalendario() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-        let reunionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.reunionId)
-        
+        print("mmm")
         print(apiKey, userId)
         
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.asuntos)\(userId)/\(apiKey)/\(reunionId)")!
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.calendarioMensual)\(userId)/\(apiKey)")!
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
@@ -176,7 +153,63 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         return 300
     }
 
+    // MARK - Calendar
+    
+    func calendar(calendar: FSCalendar, subtitleForDate date: NSDate) -> String? {
+        return nil
+    }
+
+    var num = 0
+    
+    func calendar(calendar: FSCalendar, hasEventForDate date: NSDate) -> Bool {
+        
+        var buleano = false
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.stringFromDate( date )
+        
+        for item in agendiaEvento {
+            if item == dateString {
+                buleano = true
+            }
+        }
+        
+        return buleano
+    }
+    
+    func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
+        print(date)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.stringFromDate(date)
+        print(dateString)
+        
+        self.celdaActiv.setUpTable( actividades(dateString) )
+        
+    }
+    
+    func actividades(fecha: String?) -> [String]? {
+        
+        var actividad = [String]()
+        
+        
+        for dia in agenda {
+            if (dia[WebServiceResponseKey.fechaInicio] as? String) == fecha {
+                print("dia")
+                print(dia)
+                actividad.append((dia[WebServiceResponseKey.nombrePendiente] as? String)!)
+            }
+            
+            agendiaEvento.append( (dia[WebServiceResponseKey.fechaInicio] as? String)! )
+        }
+        
+        self.calendar.reloadData()
+        
+        return actividad
+    }
     
     
-   
+    
 }
