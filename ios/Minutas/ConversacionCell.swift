@@ -18,6 +18,7 @@ class ConversacionCell: GenericCell {
     @IBOutlet weak var fechaChat: UILabel!
     @IBOutlet weak var imagenUsuario: UIImageView!
     @IBOutlet weak var conversacion: UILabel!
+    @IBOutlet weak var imagenDeUsuarioConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

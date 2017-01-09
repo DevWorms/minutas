@@ -14,6 +14,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var bottonConstrintButton: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    
     @IBOutlet weak var tableView: UITableView!
     
     var conversacion = [[String : AnyObject]]()
@@ -90,12 +91,26 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
         let jsonMiembro = json[WebServiceResponseKey.miembro] as? [String : AnyObject]
         
+        print(jsonMiembro?.description)
+       
+        cell.usuarios.text = jsonMiembro![WebServiceResponseKey.apodo] as? String
         
-        cell.fechaChat.text = jsonMiembro![WebServiceResponseKey.elaborado] as? String
+        
+        cell.fechaChat.text = json[WebServiceResponseKey.elaborado] as? String
         
         cell.conversacion.text = json[WebServiceResponseKey.texto] as? String
         
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
+        
+        if jsonMiembro![WebServiceResponseKey.id] as? Int
+            != userId
+        {
+            cell.imagenDeUsuarioConstraint.constant = 5
+            cell.usuarios.textAlignment = .Left
+            cell.fechaChat.textAlignment = .Left
+            cell.conversacion.textAlignment = .Left
+        }
         
         return cell
         
@@ -182,7 +197,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 100
+        return 86
     }
     
     

@@ -84,6 +84,7 @@ enum WebServiceResponseKey {
     static let redSocial = "redSocial"
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
+    static let id = "id"
     
     static let status = "estado"
     static let statusPendiente = "status"
