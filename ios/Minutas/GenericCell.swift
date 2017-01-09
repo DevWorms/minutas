@@ -12,10 +12,14 @@ import UIKit
 
 class GenericCell: UITableViewCell {
 
-   /* override func layoutSubviews() {
-        let f = contentView.frame
-        let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(2, 0, 2, 0))
-        contentView.frame = fr
-    }*/
+    var aparecio = false
+    override func layoutSubviews() {
+        if aparecio == false{
+            let f = contentView.frame
+            let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(2, 0, 2, 0))
+            contentView.frame = fr
+            aparecio = true
+        }
+    }
 }
     
