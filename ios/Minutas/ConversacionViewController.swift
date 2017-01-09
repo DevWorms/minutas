@@ -11,19 +11,51 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
+    @IBOutlet weak var bottonConstrintButton: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: UITableView!
     
-    var tareas = [[String : AnyObject]]()
+    var conversacion = [[String : AnyObject]]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadTareas()
+        loadConversacion()
+        self.hideKeyboardWhenTappedAround()
         
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.bottomConstraint.constant = keyboardFrame.size.height - 40
+            self.bottonConstrintButton.constant = keyboardFrame.size.height - 40
+            
+        })
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.bottomConstraint.constant = 5
+            self.bottonConstrintButton.constant = 5
+            
+        })
+    }
+    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -52,15 +84,18 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
+       let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
         
-        let json = tareas[indexPath.item]
+        let json = conversacion[indexPath.item]
         
-        cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
-        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
-        cell.responsableTarea.text = json[WebServiceResponseKey.responsable] as? String
+        let jsonMiembro = json[WebServiceResponseKey.miembro] as? [String : AnyObject]
         
-        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
+        
+        cell.fechaChat.text = jsonMiembro![WebServiceResponseKey.elaborado] as? String
+        
+        cell.conversacion.text = json[WebServiceResponseKey.texto] as? String
+        
+        
         
         return cell
         
@@ -73,11 +108,11 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     
     func newTareaControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
-        loadTareas()
+        loadConversacion()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tareas.count
+        return self.conversacion.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -95,14 +130,15 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
-    func loadTareas() {
+    func loadConversacion() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-        let pendienteId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.pendienteId)
+        let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
         
         print(apiKey, userId)
         
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.tareas)\(userId)/\(apiKey)/\(pendienteId)")!
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(userId)/\(apiKey)/\(conversacionId)/")!
+        print(url)
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
@@ -114,11 +150,11 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
                     dispatch_async(dispatch_get_main_queue()) {
-                        if self.tareas.count > 0 {
-                            self.tareas.removeAll()
+                        if self.conversacion.count > 0 {
+                            self.conversacion.removeAll()
                         }
                         
-                        self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        self.conversacion.appendContentsOf(json[WebServiceResponseKey.mensajes] as! [[String : AnyObject]])
                         self.tableView?.reloadData()
                     }
                 } else {

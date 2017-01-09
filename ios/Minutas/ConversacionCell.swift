@@ -15,7 +15,9 @@ class ConversacionCell: GenericCell {
     @IBOutlet weak var tituloChat: UILabel!
     @IBOutlet weak var usuarios: UILabel!
     
+    @IBOutlet weak var fechaChat: UILabel!
     @IBOutlet weak var imagenUsuario: UIImageView!
+    @IBOutlet weak var conversacion: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -101,11 +101,14 @@ enum WebServiceResponseKey {
     static let apodo = "apodo"
     
     static let pendientes = "pendientes"
+    static let mensajes = "messages"
     static let prioridad = "prioridad"
     static let pendienteId = "id_pendiente"
     static let reunionId = "Id_Reunion"
     
     static let conversacionId = "id_conversation"
+    static let elaborado = "updated"
+    static let texto = "text"
     
     static let reunionIdCategoria = "id_reunion"
     static let nombrePendiente = "Nombre_Pendiente"
@@ -117,6 +120,7 @@ enum WebServiceResponseKey {
     static let fechaCierre = "2016-12-04"
     static let pendienteStatus = "status"
     static let miembros = "members"
+    static let miembro = "member"
     
     static let pendienteStatusVisible = "status_visible"
     static let usuariosAsignados = "Usuarios_Asignados"
