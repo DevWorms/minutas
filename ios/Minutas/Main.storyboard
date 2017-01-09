@@ -554,6 +554,7 @@
                         <segue destination="Tc2-u2-r7V" kind="relationship" relationship="viewControllers" id="9kY-zG-a2S"/>
                         <segue destination="iQn-pc-69l" kind="relationship" relationship="viewControllers" id="8jn-ux-lUh"/>
                         <segue destination="oWD-Mc-Lbi" kind="relationship" relationship="viewControllers" id="wVn-A4-Z1u"/>
+                        <segue destination="8eI-9T-Yc1" kind="relationship" relationship="viewControllers" id="tbS-eq-WsS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N9L-Un-XDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2835,8 +2836,10 @@ AAAAAAAAAAAAAAAALkw
         <image name="comentario" width="48" height="48"/>
         <image name="goto" width="50" height="50"/>
         <image name="grafcas" width="32" height="32"/>
+        <image name="ic_account_circle_48pt" width="48" height="48"/>
         <image name="ic_account_circle_white_24pt" width="24" height="24"/>
         <image name="ic_attach" width="64" height="146"/>
+        <image name="ic_chat" width="32" height="32"/>
         <image name="ic_check_box_outline_blank" width="24" height="24"/>
         <image name="ic_date" width="48" height="48"/>
         <image name="ic_facebook_white_36pt" width="36" height="36"/>
@@ -2852,6 +2855,7 @@ AAAAAAAAAAAAAAAALkw
         <image name="logo" width="256" height="56"/>
         <image name="mensaje" width="48" height="48"/>
         <image name="reuniones" width="32" height="32"/>
+        <image name="send" width="32" height="32"/>
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>

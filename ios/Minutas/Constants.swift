@@ -37,6 +37,7 @@ enum WebServiceEndpoint {
     static let calendarioMensual = "calendar/week"
     static let asuntoNuevo = "tasks/new"
     static let reuniones = "meetings/"
+    static let conversaciones = "conversations/"
 }
 
 enum WebServiceRequestParameter {
@@ -88,6 +89,7 @@ enum WebServiceResponseKey {
     static let redSocial = "redSocial"
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
+    static let id = "id"
     
     static let status = "estado"
     static let statusPendiente = "status"
@@ -105,9 +107,15 @@ enum WebServiceResponseKey {
     static let apodo = "apodo"
     
     static let pendientes = "pendientes"
+    static let mensajes = "messages"
     static let prioridad = "prioridad"
     static let pendienteId = "id_pendiente"
     static let reunionId = "Id_Reunion"
+    
+    static let conversacionId = "id_conversation"
+    static let elaborado = "updated"
+    static let texto = "text"
+    
     static let reunionIdCategoria = "id_reunion"
     static let nombrePendiente = "Nombre_Pendiente"
     static let descripcion = "descripcion"
@@ -117,6 +125,9 @@ enum WebServiceResponseKey {
     static let fechaFin = "Fecha_Fin"
     static let fechaCierre = "2016-12-04"
     static let pendienteStatus = "status"
+    static let miembros = "members"
+    static let miembro = "member"
+    
     static let pendienteStatusVisible = "status_visible"
     static let usuariosAsignados = "Usuarios_Asignados"
     static let files = "Usuarios_Asignados"
@@ -132,7 +143,10 @@ enum WebServiceResponseKey {
     static let horaReunion = "Hora_Reunion"
     static let participantes = "Usuarios_Asignados"
     static let reuniones = "reuniones"
-       
+    static let conversaciones = "conversations"
+    
+    
+    
 }
 
 enum HttpStatusCode {
