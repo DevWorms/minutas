@@ -139,6 +139,7 @@ enum WebServiceResponseKey {
     
     static let nombreSubPendientes = "nombre_sub_pendiente"
     static let nombreReunion = "Nombre_Reunion"
+    static let tituloChat = "title"
     static let diaReunion = "Dia_Reunion"
     static let horaReunion = "Hora_Reunion"
     static let participantes = "Usuarios_Asignados"
