@@ -21,5 +21,12 @@ class GenericCell: UITableViewCell {
             aparecio = true
         }
     }
-}
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        
+    }
+    
+}
+

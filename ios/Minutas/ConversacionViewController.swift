@@ -84,15 +84,35 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         return headerView
     }
     
+    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        
+        cell.aparecio = false
+        
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-       let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        
+       /* cell.contentView.backgroundColor = UIColor.clearColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(10, 8, self.view.frame.size.width - 20, 149))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [1.0, 1.0, 1.0, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 2.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(-1, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)*/
         
         let json = conversacion[indexPath.item]
         
         let jsonMiembro = json[WebServiceResponseKey.miembro] as? [String : AnyObject]
         
-        print(jsonMiembro?.description)
+        print(json.description)
        
         cell.usuarios.text = jsonMiembro![WebServiceResponseKey.apodo] as? String
         
@@ -115,17 +135,24 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
                 cell.fechaChat.textAlignment = .Left
                 cell.conversacion.textAlignment = .Left
                 
-                return cell
-            }else{
-                print("Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)")
                 
-                return cell
+            }else{
+                let str = "Id del usuario que mensajea: " + "\(idDeUsuarioQueMandaElMensaje)" + " Id del usuario    acutual: " + "\(userId)" + " el mensaje es: "
+                
+                print(str + cell.conversacion.text!)
+                
+                cell.imagenDeUsuarioConstraint.constant = 299
+                cell.usuarios.textAlignment = .Right
+                cell.fechaChat.textAlignment = .Right
+                cell.conversacion.textAlignment = .Right
             }
         }else{
-            print("El idDeUsuarioQueMandaElMensaje fue nil")
-            return cell
+            print("El idDeUsuarioQueMandaElMensaje fue nil: el mensaje fue... " + cell.conversacion.text!)
+            
         }
         
+        
+        return cell
         
     }
     

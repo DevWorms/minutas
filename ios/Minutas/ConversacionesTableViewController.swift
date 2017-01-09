@@ -28,7 +28,18 @@ class ConversacionesTableViewController: UITableViewController{
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadConversaciones()
+        
+        //Swift 2.2 selector syntax
+        var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
+        
     }
+    
+    // must be internal or public.
+    func consultaElServicioWeb() {
+        loadConversaciones()
+        print("tick")
+    }
+
     
     
     override func didReceiveMemoryWarning() {
@@ -79,6 +90,14 @@ class ConversacionesTableViewController: UITableViewController{
         dismissViewControllerAnimated(true, completion: nil)
         loadConversaciones()
     }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ConversacionCell
+        
+        cell.aparecio = false
+        
+    }
+    
    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversaciones.count
@@ -125,7 +144,10 @@ class ConversacionesTableViewController: UITableViewController{
                         }
                         
                         self.conversaciones.appendContentsOf(json[WebServiceResponseKey.conversaciones] as! [[String : AnyObject]])
+                        
+                        print(self.conversaciones[0].count)
                         self.tableView?.reloadData()
+                        self.consultaElServicioWeb()
                     }
                 } else {
                     print("HTTP Status Code: 200")
@@ -140,6 +162,7 @@ class ConversacionesTableViewController: UITableViewController{
                     } else {
                         print("HTTP Status Code: 400 o 500")
                         print("El JSON de respuesta es inválido.")
+                        self.consultaElServicioWeb()
                     }
                 }
             }
@@ -151,6 +174,8 @@ class ConversacionesTableViewController: UITableViewController{
     {
         return 80
     }
+    
+    
     
     
     

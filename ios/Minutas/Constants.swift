@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum ApplicationConstants{
+    static let tiempoParaConsultarServicioWeb = 3.0
+}
+
 enum WebServiceEndpoint {
     static let baseUrl = "https://dev.minute.mx/api/"
     
