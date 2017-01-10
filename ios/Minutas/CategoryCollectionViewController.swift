@@ -149,8 +149,10 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "nuevaCategoria"{
+        if segue.identifier == "nuevaCategoria" {
             (segue.destinationViewController as! NewCategoryViewController).delegate = self
+        } else if segue.identifier == "categoria" {
+            
         }
     }
     

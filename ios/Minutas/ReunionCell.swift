@@ -15,6 +15,7 @@ class ReunionCell: GenericCell {
     @IBOutlet weak var reunionComplete: UISwitch!
     @IBOutlet weak var fechaReunion: UILabel!
     @IBOutlet weak var invitados: UITextView!
+    @IBOutlet weak var btnPendiente: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
