@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import TwitterKit
 
 class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -292,4 +294,61 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
+    @IBAction func usuario(sender: AnyObject) {
+        let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+        
+        
+        let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
+            self.cerrarSesion()
+            
+            //self.performSegueWithIdentifier("login", sender: nil)
+        })
+        alertController.addAction(deleteAction)
+        
+        let okAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: {(alert :UIAlertAction!) in
+            print("OK button tapped")
+        })
+        alertController.addAction(okAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = sender.frame
+        
+        presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func cerrarSesion(){
+        
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
+        self.presentViewController( vc , animated: true, completion: nil)
+        
+    }
+    
 }
