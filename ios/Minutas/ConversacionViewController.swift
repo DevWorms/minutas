@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class ConversacionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConversacionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewSearchViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -19,7 +19,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var conversacion = [[String : AnyObject]]()
-    
+    var peticiones = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,41 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
+        
+        //let thread = NSThread(target:self, selector:#selector(actualizacion), object:nil)
+        
+        
+    }
+    
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadConversacion()
+    }
+
+    
+   /* // must be internal or public.
+    func actualizacion() {
+        //Swift 2.2 selector syntax
+        
+    }*/
+    
+    
+    // must be internal or public.
+    func consultaElServicioWeb() {
+        //if peticiones <= 10{
+        loadConversacion()
+        //sleep(4)
+        //        }
+        
+        print("tick \(peticiones++)")
     }
     
     deinit {
@@ -179,7 +214,9 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "nuevoTarea"{
+        if segue.identifier == "adduser"{
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = true
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
             
         }
     }
@@ -190,7 +227,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
         
-        print(apiKey, userId)
+        print(apiKey, userId, conversacionId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(userId)/\(apiKey)/\(conversacionId)/")!
         print(url)
@@ -245,25 +282,26 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func btnSendButton(sender: AnyObject) {
         
         if let texto = txtfmensaje.text {
-            
-            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-            let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
+           if  texto != "" {
+                let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+                let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+                let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
                     
-            let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.texto)=\(texto)"
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.texto)=\(texto)"
             
-            print(parameterString)
+                print(parameterString)
                     
-            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-                let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(conversacionId)\(WebServiceEndpoint.mensajes)"
+                if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(conversacionId)\(WebServiceEndpoint.mensajes)"
                 
-                print(url)
-                let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
-                urlRequest.HTTPMethod = "POST"
+                    print(url)
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                    urlRequest.HTTPMethod = "POST"
                         
-                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
-            } else {
-                print("Error de codificación de caracteres.")
+                    NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
             }
             
         }

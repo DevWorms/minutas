@@ -1,10 +1,4 @@
-//
-//  ConversacionesTableViewController.swift
-//  Minutas
-//
-//  Created by sergio ivan lopez monzon on 08/01/17.
-//  Copyright © 2017 Uriel Mestas Estrada. All rights reserved.
-//
+
 
 //
 //  ReunionesTableViewController.swift
@@ -16,9 +10,21 @@
 
 import UIKit
 
-class ConversacionesTableViewController: UITableViewController{
+class ConversacionesTableViewController: UITableViewController, NewSearchViewControllerDelegate{
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
+    var peticiones = 1
+    
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadConversaciones()
+    }
+
     
     var conversaciones = [[String : AnyObject]]()
     
@@ -28,18 +34,23 @@ class ConversacionesTableViewController: UITableViewController{
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadConversaciones()
-        
-        //Swift 2.2 selector syntax
         var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
+        
+        //let thread = NSThread(target:self, selector:#selector(actualizacion), object:nil)
+        
         
     }
     
+    
     // must be internal or public.
     func consultaElServicioWeb() {
+        
         loadConversaciones()
-        print("tick")
+        
+        print("tick \(peticiones++)")
     }
 
+   
     
     
     override func didReceiveMemoryWarning() {
@@ -66,29 +77,20 @@ class ConversacionesTableViewController: UITableViewController{
         
         cell.tituloChat.text = json[WebServiceResponseKey.tituloChat] as? String
         let miembros = json[WebServiceResponseKey.miembros] as! [[String : AnyObject]]
-        
+        cell.usuarios.text = ""
         for jsonMiembros in miembros{
             
-            if !((cell.tituloChat.text?.isEmpty)!){
-                cell.usuarios.text = ", " + cell.tituloChat.text!
-            }
+            if !((cell.usuarios.text?.isEmpty)!){
+                cell.usuarios.text = cell.usuarios.text! + ", " + (jsonMiembros[WebServiceResponseKey.apodo] as? String)!
+            }else{
             
-            cell.usuarios.text = jsonMiembros[WebServiceResponseKey.apodo] as? String
+                cell.usuarios.text = jsonMiembros[WebServiceResponseKey.apodo] as? String
+            }
             
         }
         
         return cell
         
-    }
-    
-    func newConversacionControllerDidCancel() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    
-    func newConversacionControllerDidFinish() {
-        dismissViewControllerAnimated(true, completion: nil)
-        loadConversaciones()
     }
     
     override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -116,7 +118,9 @@ class ConversacionesTableViewController: UITableViewController{
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        
+        if segue.identifier == "nuevaconversacion"{
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+        }
     }
     
     
@@ -144,10 +148,7 @@ class ConversacionesTableViewController: UITableViewController{
                         }
                         
                         self.conversaciones.appendContentsOf(json[WebServiceResponseKey.conversaciones] as! [[String : AnyObject]])
-                        
-                        print(self.conversaciones[0].count)
                         self.tableView?.reloadData()
-                        self.consultaElServicioWeb()
                     }
                 } else {
                     print("HTTP Status Code: 200")
@@ -162,7 +163,6 @@ class ConversacionesTableViewController: UITableViewController{
                     } else {
                         print("HTTP Status Code: 400 o 500")
                         print("El JSON de respuesta es inválido.")
-                        self.consultaElServicioWeb()
                     }
                 }
             }
