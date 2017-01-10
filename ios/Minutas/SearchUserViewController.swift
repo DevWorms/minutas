@@ -272,7 +272,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             
                             if let strApodo = jsonItem[WebServiceResponseKey.apodo] as? String{
                                 self.usuarios.append(strApodo)
-                            
                             }
                             
                         }

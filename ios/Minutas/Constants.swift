@@ -47,6 +47,9 @@ enum WebServiceEndpoint {
     
     static let pendientecomments = "pendientes/comments/"
     static let mensajes = "/messages"
+    
+    static let notificaciones = "notifications/full/"
+    
 }
 
 enum WebServiceRequestParameter {
@@ -123,6 +126,8 @@ enum WebServiceResponseKey {
     static let apodo = "apodo"
     
     static let pendientes = "pendientes"
+    static let notificaciones = "notificaciones"
+    
     static let mensajes = "messages"
     static let prioridad = "prioridad"
     static let pendienteId = "id_pendiente"
@@ -134,6 +139,10 @@ enum WebServiceResponseKey {
     
     static let reunionIdCategoria = "id_reunion"
     static let nombrePendiente = "Nombre_Pendiente"
+    static let notificacionText = "Texto_Notificacion"
+    static let notificacionLeida = "Leido_Notificacion"
+    
+    
     static let descripcion = "descripcion"
     static let autoPostergar = "Auto_Postergar"
     static let altaPrioridad = "Alta_Prioridad"

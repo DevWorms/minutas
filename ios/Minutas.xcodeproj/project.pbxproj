@@ -40,6 +40,8 @@
 		49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */; };
 		49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */; };
 		49EA2A241E240A9E0000B5F5 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */; };
+		49EA2A261E2466620000B5F5 /* NotificacionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA2A251E2466620000B5F5 /* NotificacionCell.swift */; };
+		49EA2A281E24670D0000B5F5 /* NotificacionesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */; };
 		49EC49511E00744A0067B621 /* CategoriaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EC49501E00744A0067B621 /* CategoriaCell.swift */; };
 		49ECFE451E2312DB0046F26C /* ConversacionesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE431E2312DB0046F26C /* ConversacionesTableViewController.swift */; };
 		49ECFE461E2312DB0046F26C /* ConversacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */; };
@@ -123,6 +125,8 @@
 		49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		49E15D6C1DFEC89E00084EFB /* CalendarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarioCell.swift; sourceTree = "<group>"; };
 		49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserViewController.swift; sourceTree = "<group>"; };
+		49EA2A251E2466620000B5F5 /* NotificacionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificacionCell.swift; sourceTree = "<group>"; };
+		49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificacionesTableViewController.swift; sourceTree = "<group>"; };
 		49EC49501E00744A0067B621 /* CategoriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriaCell.swift; sourceTree = "<group>"; };
 		49ECFE431E2312DB0046F26C /* ConversacionesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionesTableViewController.swift; sourceTree = "<group>"; };
 		49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */,
 				3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */,
 				3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */,
+				49EA2A251E2466620000B5F5 /* NotificacionCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */,
 				49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */,
 				49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */,
+				49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -567,6 +573,7 @@
 				49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,
 				5DC27E221DE7300B00857BC0 /* PasswordRecoveryViewController.swift in Sources */,
+				49EA2A261E2466620000B5F5 /* NotificacionCell.swift in Sources */,
 				5DC27E191DE72FF500857BC0 /* Extensions.swift in Sources */,
 				49ECFE451E2312DB0046F26C /* ConversacionesTableViewController.swift in Sources */,
 				5DC27E1F1DE7300B00857BC0 /* CategoryCollectionViewController.swift in Sources */,
@@ -581,6 +588,7 @@
 				49C7464A1DF4BA7800985CE1 /* NewTareaViewController.swift in Sources */,
 				49C746461DF4ABD700985CE1 /* NewPendienteController.swift in Sources */,
 				49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */,
+				49EA2A281E24670D0000B5F5 /* NotificacionesTableViewController.swift in Sources */,
 				49B3BE5E1E0411F800BA7882 /* PopMover.swift in Sources */,
 				49B3BE5B1E03FE6C00BA7882 /* PopViewNuevoComentario.swift in Sources */,
 			);
