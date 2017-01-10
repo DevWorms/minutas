@@ -14,6 +14,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     
     var reuniones = [[String : AnyObject]]()
     var noCellReunion : Int = 0
+    var noCellReunionPend : Int = 0
     
     
     override func viewDidLoad() {
@@ -51,6 +52,12 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         }
     }
     
+    func buttonClicked(sender:UIButton) {
+        
+        self.noCellReunionPend = sender.tag
+        performSegueWithIdentifier("nuevoPendiente", sender: nil)
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ReunionCell
@@ -62,6 +69,10 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         cell.reunionComplete.tag = indexPath.row
         cell.reunionComplete.addTarget(self, action: #selector(ReunionesTableViewController.switchChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.btnPendiente.tag = indexPath.row
+        cell.btnPendiente.addTarget(self, action: #selector(ReunionesTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
         
         let str = (json[WebServiceResponseKey.horaReunion] as? String)!
         
@@ -115,8 +126,6 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.reunionId] as! Int, forKey: WebServiceResponseKey.reunionId)
         
-        
-        
     }
     
     
@@ -135,9 +144,40 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
             
         }else if segue.identifier ==  "nuevaReunion"{
             (segue.destinationViewController as! NewReunionViewController).delegate = self
-        }else if segue.identifier ==  "nuevoPendiente"{
+        }else if segue.identifier == "nuevoPendiente" {
+            
+            let json = reuniones[noCellReunionPend]
+            let rID = (json[WebServiceResponseKey.reunionId] as? Int)!
+            
+            print(rID)
+            
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
+            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
         }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        if identifier == "pendientes" {
+        
+        
+            if let cell = sender as? UITableViewCell, let indexPath = self.tableView.indexPathForCell(cell) {
+            
+                let json = reuniones[indexPath.item]
+                let json1 = json[WebServiceResponseKey.categoria] as? [String : AnyObject]
+                let categoria = json1?[WebServiceResponseKey.categoryId] as? Int
+            
+                if categoria != nil {
+                    NSUserDefaults.standardUserDefaults().setInteger(categoria!, forKey: WebServiceResponseKey.categoryId)
+                } else {
+                    return false
+                }
+            }
+        }
+            
+        return true
     }
     
     

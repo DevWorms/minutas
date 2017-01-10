@@ -191,14 +191,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.login)\(txtf_user.text!)/\(txtf_password.text!)")!
                 
         httpGet(NSMutableURLRequest(URL: url))
-        
-        
-        
-        
     }
     
     @IBAction func loginFb(sender: AnyObject) {
-        self.registrandose == false
+        self.registrandose = false
         let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
         
         let loginManager = FBSDKLoginManager()
@@ -207,7 +203,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             if error != nil{
                 print(error)
             }else{
-                print(resultado.token)
+                print(resultado.token.tokenString)
                 
                 let fbloginresult : FBSDKLoginManagerLoginResult = resultado
                 
@@ -218,11 +214,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     //fbLoginManager.logOut()
                 }
                 
-                           }
-            
-            
-            
-            
+            }
         }
     }
     
@@ -235,7 +227,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                     
                     result.valueForKey("email") as! String
                     let id = FBSDKAccessToken.currentAccessToken().tokenString
-                    print(id)
+                    
                     result.valueForKey("name") as! String
                     result.valueForKey("first_name") as! String
                     result.valueForKey("last_name") as! String
@@ -247,8 +239,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
                    
                     
                     self.consultarInicioSesionRedesSociales(id, redSocial: "fb")
-                    
-                    
 
                 }
             })
@@ -258,7 +248,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     @IBAction func loginTw(sender: AnyObject) {
         // Swift
         
-        self.registrandose == false
+        self.registrandose = false
         Twitter.sharedInstance().logInWithCompletion { session, error in
             if (session != nil) {
                 
@@ -270,10 +260,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
              else {
                 print("error: \(error!.localizedDescription)");
             }
-            
-            
-            
-            
             
         }
         
@@ -323,7 +309,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     @IBAction func logInLinkedIn(sender: AnyObject) {
         //http://stackoverflow.com/questions/28491280/ios-linkedin-authentication
-       self.registrandose == false
+       self.registrandose = false
        LISDKSessionManager.createSessionWithAuth([LISDK_EMAILADDRESS_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {
             (returnState) -> Void in
             print("success called!")

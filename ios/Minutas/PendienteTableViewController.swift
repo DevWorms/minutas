@@ -34,10 +34,6 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PendienteCell
@@ -78,8 +74,11 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "nuevoPendiente"{
+        if segue.identifier == "nuevoPendiente" {
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.categoryId
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
         }
         
         else if segue.identifier == "tareas"{

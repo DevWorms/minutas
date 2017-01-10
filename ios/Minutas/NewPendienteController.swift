@@ -40,7 +40,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
     
     @IBOutlet weak var opcionesPicker: UIPickerView!
     
-    
+    var idRequest = ""
+    var idRequested = 0
+    var endPointPendiente = ""
     
     let pickerData = ["Selecciona prioridad","Prioridad baja","Prioridad normal","Prioridad alta"]
     
@@ -252,7 +254,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         
             let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
             let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-            let categoryId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+            //let categoryId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
             
             if let nombereText = txtf_name.text {
                 print(nombereText)
@@ -286,10 +288,10 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                     print(txtf_responsable.text!)
                 }
                 
-                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.categoryId)=\(categoryId)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)"
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)"
         
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
-                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.newPendiente)")!)
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(self.endPointPendiente)")!)
                     urlRequest.HTTPMethod = "POST"
             
                     NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody,  completionHandler: parseJson).resume()

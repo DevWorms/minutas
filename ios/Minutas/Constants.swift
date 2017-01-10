@@ -47,6 +47,7 @@ enum WebServiceEndpoint {
     
     static let pendientecomments = "pendientes/comments/"
     static let mensajes = "/messages"
+    static let newPendienteReunion = "meetings/pendiente/new"
     
     static let notificaciones = "notifications/full/"
     
@@ -121,6 +122,7 @@ enum WebServiceResponseKey {
     static let created = "created_at"
     static let updated = "updated_at"
     static let categories = "categorias"
+    static let categoria = "categoria"
     static let usuarios = "users"
     static let user = "user"
     static let apodo = "apodo"
