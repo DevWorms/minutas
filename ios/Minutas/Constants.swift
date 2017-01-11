@@ -52,6 +52,10 @@ enum WebServiceEndpoint {
     
     static let notificaciones = "notifications/full/"
     
+    static let favoritos = "favoritos"
+    static let buscador = "search"
+    static let buscadorTodo = "/all"
+    
 }
 
 enum WebServiceRequestParameter {
@@ -99,6 +103,12 @@ enum WebServiceRequestParameter {
     static let acuerdoMinuta = "Acuerdo_Minuta[]"
     static let asunto_Minuta = "Asunto_Minuta"
     static let conversacionId = "conversation_id"
+    
+    static let apiKeyFavoritos = "api_key"
+    static let userIdFavoritos = "user_id"
+    static let idFavoritos = "favorito_id"
+    static let paramBuscar = "q"
+    
     
     
 
@@ -173,6 +183,11 @@ enum WebServiceResponseKey {
     static let participantes = "Usuarios_Asignados"
     static let reuniones = "reuniones"
     static let conversaciones = "conversations"
+    static let favoritosList = "fav_users"
+    static let nombreFavorito = "nombre"
+   
+    static let buscarResult = "resultados"
+    static let buscarResultUser = "Usuario"
     
     
 }
