@@ -33,6 +33,7 @@ enum WebServiceEndpoint {
     static let newMinute = "minuta/new"
     
     static let newPendiente = "pendientes/new"
+    static let closePendiente = "pendientes/close"
     
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
@@ -56,14 +57,14 @@ enum WebServiceEndpoint {
 enum WebServiceRequestParameter {
     static let token = "tokenID"
     static let redSocial = "redSocial"
-    
+    static let mensaje = "mensaje"
     static let name = "nombre"
     static let texto = "text"
     static let phone = "telefono"
     static let email = "correo"
     static let username = "apodo"
     static let password = "contrasena"
-    
+    static let fileClose = "file[]"
     static let userId = "Id_Usuario"
     static let apiKey = "API_Key"
     static let categoryName = "Nombre_Categoria"

@@ -42,6 +42,8 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
+        print("pendienteJson<<<<<")
+        
         print(pendienteJson.description)
         
         tituloPendiente.text = pendienteJson[WebServiceResponseKey.nombrePendiente] as? String
@@ -172,6 +174,9 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         let pendienteId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.pendienteId)
         
+        print("jum")
+        print(pendienteId)
+        
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.tareas)\(userId)/\(apiKey)/\(pendienteId)")!
@@ -241,8 +246,6 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        print(apiKey, userId)
-        
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.categories)\(userId)/\(apiKey)")!
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonCategorias).resume()
     }
@@ -253,7 +256,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
+                    //print(json)
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.categories.count > 0 {
                             self.categories.removeAll()
@@ -268,7 +271,6 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
                             
                         }
 
-                        
                         
                         self.categorias?.reloadAllComponents()
                     }

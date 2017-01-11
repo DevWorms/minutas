@@ -25,14 +25,16 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     
     var sections = [Section]()
     var subMenuTable:UITableView?
+    var tableMadre: UITableViewController?
+    var idPendientes = [Int]?()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setUpTable(nil)
+        setUpTable(nil, items: nil, tvc: nil)
     }
     
-    func setUpTable(items: [String]?)
+    func setUpTable(idItems: [Int]?, items: [String]?, tvc: UITableViewController?)
     {
         subMenuTable = UITableView(frame: CGRectZero, style:UITableViewStyle.Plain)
         subMenuTable?.delegate = self
@@ -42,13 +44,18 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
             //Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
             
         ]
+        print("jajajajajajaj<<<<<<")
+        print(idItems)
+        
+        self.idPendientes = idItems
+        self.tableMadre = tvc
         
         self.addSubview(subMenuTable!)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        subMenuTable?.frame = CGRectMake(0.2, 0.3, self.bounds.size.width-5, self.bounds.size.height-5)
+        subMenuTable?.frame = CGRectMake(0.2, 0.3, self.bounds.size.width-5, self.bounds.size.height-30)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -106,8 +113,21 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
+        
+        let tM = self.tableMadre as! CalendarioTableViewController
+        tM.rowCell = indexPath.item
+        
+        let pendienteId = idPendientes?[indexPath.item]
+        
+        print("<<<<<<")
+        print(pendienteId)
+        
+        if pendienteId != nil {
+            NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
+            
+            self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+        }
+        
     }
-    
 }
 

@@ -8,17 +8,17 @@
 
 import UIKit
 
-class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, CerrarPendienteViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var pendientes = [[String : AnyObject]]()
     var pendienteJson = [String : AnyObject]()
+    var noCellReunionPend : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
         
         loadPendiente()
     }
@@ -34,6 +34,12 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         // Dispose of any resources that can be recreated.
     }
     
+    func buttonClicked(sender:UIButton) {
+        
+        self.noCellReunionPend = sender.tag
+        performSegueWithIdentifier("cerrarPendiente", sender: nil)
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PendienteCell
@@ -41,9 +47,21 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         let json = pendientes[indexPath.item]
         
         cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
+        
+        let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int //
+        
+        if isChecked == 1 {
+            cell.checkBox.setImage(cell.checkedImage, forState: .Normal)
+            cell.viewStatusCerrado.hidden = false
+        } else {
+            cell.checkBox.setImage(cell.uncheckedImage, forState: .Normal)
+            cell.viewStatusCerrado.hidden = true
+        }
+        
+        cell.checkBox.tag = indexPath.row
+        cell.checkBox.addTarget(self, action: #selector(PendienteTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
        
         return cell
-        
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,6 +88,17 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         loadPendiente()
     }
     
+    func cerrarPendienteDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadPendiente()
+    }
+    
+    
+    func cerrarPendienteDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadPendiente()
+    }
+    
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -82,10 +111,15 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         }
         
         else if segue.identifier == "tareas"{
+            (segue.destinationViewController as! TareasTableViewController).pendienteJson = self.pendienteJson
             
-            let destino = segue.destinationViewController as! TareasTableViewController
-            destino.pendienteJson = self.pendienteJson
+        } else if segue.identifier == "cerrarPendiente" {
             
+            let json = pendientes[noCellReunionPend]
+            let rID = (json[WebServiceResponseKey.pendienteId] as? Int)!
+            
+            (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
+            (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = rID
         }
     }
 
@@ -136,8 +170,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     }
     
     // para cuadrar las imagenes
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
-    {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 64
     }
     

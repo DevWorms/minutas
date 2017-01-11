@@ -149,8 +149,6 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
             let json = reuniones[noCellReunionPend]
             let rID = (json[WebServiceResponseKey.reunionId] as? Int)!
             
-            print(rID)
-            
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
             (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
             (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
