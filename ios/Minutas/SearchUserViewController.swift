@@ -22,17 +22,26 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     var usuarios = [String]()
     var searchActive : Bool = false
     var anadirUsuarioSolamente = false
+    var caminoFavorito = false
     
     lazy var visibleResults: [String] = self.usuarios
     
     @IBOutlet weak var txtf_titulo: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtf_responsable: UISearchBar!
+    
+    @IBOutlet weak var checkFav: UIButton!
     override func viewDidLoad() {
+        
         self.loadUsuarios("@")
         txtf_responsable.delegate = self
-
+       
             txtf_titulo.hidden = anadirUsuarioSolamente
+        
+        if caminoFavorito == true {
+            
+            txtf_titulo.hidden = caminoFavorito
+        }
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -77,17 +86,79 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         headerView.backgroundColor = UIColor.clearColor()
         return headerView
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func buttonClicked(sender:UIButton) {
         
+      //  self.noCellReunionPend = sender.tag
+       // performSegueWithIdentifier("nuevoPendiente", sender: nil)
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        let parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.userIdFavoritos)= apiKey"
+
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SearchUsuarioCell
+        cell.a.tag = indexPath.row
+        cell.a.addTarget(self, action: #selector(SearchUserViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        if caminoFavorito == false{
+        
+                 cell.a.hidden = true
+        }
+       
         
         cell.txtNombreUsuario.text = visibleResults[indexPath.item]
         print(cell.txtNombreUsuario.text)
         return cell
         
     }
-    
+    func parseJsonFav(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.usuarios.count > 0 {
+                            self.usuarios.removeAll()
+                        }
+                        
+                        let jsonArray = json[WebServiceResponseKey.usuarios] as! [[String : AnyObject]]
+                        
+                        for jsonItem in jsonArray{
+                            
+                            if let strApodo = jsonItem[WebServiceResponseKey.apodo] as? String{
+                                self.usuarios.append(strApodo)
+                            }
+                            
+                        }
+                        
+                        self.visibleResults = self.usuarios
+                        print(self.usuarios.description)
+                        
+                        
+                        self.tableView?.reloadData()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
     
     @IBAction func ok(sender: AnyObject) {
        
@@ -97,7 +168,9 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         
         var mensajeStr = ""
         
-        if let usuarios = txtf_responsable.text{
+        if caminoFavorito == false {
+        
+            if let usuarios = txtf_responsable.text{
             
             
             
@@ -160,8 +233,14 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 
                 }
             
-        }
+            }
         
+            
+        } else {
+        
+        
+        
+        }
     
         
         
@@ -247,11 +326,73 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         
         print(apiKey, userId)
         
-        let urlStr = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.find)\(userId)/\(apiKey)/\(strUsuario)/"
-        print(urlStr)
-        let url = NSURL(string: urlStr)!
         
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonUsuarios).resume()
+        if caminoFavorito == true{
+             var parameterString = ""
+            parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.paramBuscar)= a"
+            
+                     
+            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                
+                let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.buscador)\(WebServiceEndpoint.buscadorTodo)")!)
+                urlRequest.HTTPMethod = "POST"
+                print(urlRequest)
+         
+                
+                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJsonFavo).resume()
+                
+            } else {
+                
+                print("Error de codificación de caracteres.")
+            }
+        }else{
+            let urlStr = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.find)\(userId)/\(apiKey)/\(strUsuario)/"
+            print(urlStr)
+            let url = NSURL(string: urlStr)!
+            NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonUsuarios).resume()
+        }
+    }
+    
+    func parseJsonFavo(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.usuarios.count > 0 {
+                            self.usuarios.removeAll()
+                        }
+                        print(json[WebServiceResponseKey.buscarResult])
+                    //    let jsonArray = json[WebServiceResponseKey.buscarResult] as! [String : AnyObject]
+                     
+                        //print(jsonArray[0])
+                                              
+                        self.visibleResults = self.usuarios
+                       
+                        
+                        
+                        self.tableView?.reloadData()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
     }
     
     func parseJsonUsuarios(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
