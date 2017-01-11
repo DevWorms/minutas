@@ -39,8 +39,55 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     func buttonClicked(sender:UIButton) {
         
-        self.noCellReunionPend = sender.tag
-        performSegueWithIdentifier("cerrarPendiente", sender: nil)
+        var indexPath : NSIndexPath
+        indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+        
+        let json = pendientes[indexPath.item]
+        
+        let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int
+        
+        if isChecked == 1 {
+            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(json[WebServiceResponseKey.pendienteId] as! Int)"
+                
+                print(parameterString)
+                
+                if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.reabrirPend)")!)
+                    urlRequest.HTTPMethod = "POST"
+                    
+                    NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJsonReAbrir).resume()
+                } else {
+                    print("Error de codificación de caracteres.")
+                }
+            
+            
+        } else {
+            self.noCellReunionPend = sender.tag
+            performSegueWithIdentifier("cerrarPendiente", sender: nil)
+        }
+    }
+    
+    func parseJsonReAbrir(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            dispatch_async(dispatch_get_main_queue()) {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
+                        if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                            self.loadPendiente()
+                        }
+                        })
+                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                } else {
+                    print("El JSON de respuesta es inválido.")
+                }
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
