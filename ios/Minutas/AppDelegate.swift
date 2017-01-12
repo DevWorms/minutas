@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var notificaciones = [[String : AnyObject]]()
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var updateTimer: NSTimer?
-    
+    var mostrarNotificacion: Bool!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -61,7 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // mandar notificaciones
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
+      
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(loadNotificaciones), userInfo: nil, repeats: true)
         
+        mostrarNotificacion = false
+        registerBackgroundTask()
+
         
         return true
     }
@@ -121,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func reinstateBackgroundTask() {
         if backgroundTask == UIBackgroundTaskInvalid {
             
-            //loadNotificaciones()
+            loadNotificaciones()
             
             registerBackgroundTask()
         }
@@ -145,6 +150,149 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         backgroundTask = UIBackgroundTaskInvalid
     }
     
+    
+    func loadNotificaciones() {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        print(apiKey, userId)
+        
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
+        
+        print(url)
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+    }
+    
+    
+    func leerNotificaciones(idNotificacion:Int!) {
+        
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        
+        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.notificaciones)=\(idNotificacion)"
+        
+        print(parameterString)
+        
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificacionesLeidas)"
+            
+            print(url)
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+            urlRequest.HTTPMethod = "POST"
+            
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+        } else {
+            print("Error de codificación de caracteres.")
+        }
+        
+        
+    }
+    
+    
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        
+                        if self.notificaciones.count > 0 {
+                            self.notificaciones.removeAll()
+                        }
+                        
+                        if let mensajesArray = json[WebServiceResponseKey.notificaciones] {
+                            
+                            print(mensajesArray?.description)
+                            if mensajesArray?.description != nil{
+                                self.notificaciones.appendContentsOf(mensajesArray as! [[String : AnyObject]])
+                                
+                                switch UIApplication.sharedApplication().applicationState {
+                                case .Active:
+                                    
+                                    if (self.mostrarNotificacion != nil) {
+                                        print("App esta en otra pantalla")
+                                        
+                                    }
+                                case .Background:
+                                    self.mandarNotificacion()
+                                    
+                                    print("App is backgrounded.")
+                                    print("Background notifications = \(self.notificaciones.count) seconds")
+                                case .Inactive:
+                                    print("App is inactive.")
+                                    
+                                    self.mandarNotificacion()
+                                    break
+                                }
+                            }
+                            
+                            
+                        }
+                        
+                        
+                        
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        //self.presentViewController(vc_alert, animated: true, completion: nil)
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+    
+    func mandarNotificacion(){
+        
+        for notificacion in self.notificaciones {
+            
+            if (notificacion[WebServiceResponseKey.notificacionLeida] as! Bool) == false {
+                
+                let txt = (notificacion[WebServiceResponseKey.notificacionText] as? String)!
+                let attrStr = try! NSAttributedString(
+                    data: txt.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                    options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                    documentAttributes: nil)
+                
+                
+                
+                let label = UILabel()
+                label.attributedText = attrStr
+                
+                
+                
+                // create a corresponding local notification
+                let notification = UILocalNotification()
+                notification.alertBody = label.text // text that will be displayed in the notification
+                notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+                notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+                
+                notification.userInfo = ["title": notificacion[WebServiceResponseKey.notificacionText]!, "UUID": notificacion[WebServiceResponseKey.notificacionText]!] // assign a unique identifier to the notification so that we can retrieve it later
+                
+                
+                self.leerNotificaciones(notificacion[WebServiceResponseKey.notificacionId] as! Int)
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            }
+            
+        }
+        
+    }
+
 
     
 
