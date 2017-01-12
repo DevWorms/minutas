@@ -44,12 +44,21 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
     }
     
     
+    
     // must be internal or public.
     func consultaElServicioWeb() {
         
         loadConversaciones()
         
         print("tick \(peticiones++)")
+        
+        // create a corresponding local notification
+        let notification = UILocalNotification()
+        notification.alertBody = "Todo ItIs Overdue" // text that will be displayed in the notification
+        notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
     }
 
    

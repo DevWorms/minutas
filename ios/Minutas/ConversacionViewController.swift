@@ -19,7 +19,8 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var conversacion = [[String : AnyObject]]()
-    var peticiones = 1
+    var conversaciones = 0
+    var tick = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,17 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         //sleep(4)
         //        }
         
-        print("tick \(peticiones++)")
+        // create a corresponding local notification
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "TIs Overdue" // text that will be displayed in the notification
+        notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+        UILocalNotificationDefaultSoundName // play default sound
+        notification.userInfo = ["title": "conversacion", "UUID": "uud"] // assign a unique identifier to the notification so that we can retrieve it later
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
+        print("tick \(tick++)")
     }
     
     deinit {

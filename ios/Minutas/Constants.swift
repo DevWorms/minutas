@@ -52,6 +52,7 @@ enum WebServiceEndpoint {
     static let newPendienteReunion = "meetings/pendiente/new"
     
     static let notificaciones = "notifications/full/"
+    static let notificacionesLeidas = "notifications/taken"
     
     static let favoritos = "favoritos"
     static let buscador = "search"
@@ -110,6 +111,8 @@ enum WebServiceRequestParameter {
     static let idFavoritos = "favorito_id"
     static let paramBuscar = "q"
     
+    static let notificaciones = "notificaciones"
+    
     
     
 
@@ -154,6 +157,7 @@ enum WebServiceResponseKey {
     static let reunionIdCategoria = "id_reunion"
     static let nombrePendiente = "Nombre_Pendiente"
     static let notificacionText = "Texto_Notificacion"
+    static let notificacionId = "Id_Notificacion"
     static let notificacionLeida = "Leido_Notificacion"
     
     

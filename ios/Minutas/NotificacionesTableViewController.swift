@@ -15,16 +15,59 @@ class NotificacionesTableViewController: UITableViewController {
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var notificaciones = [[String : AnyObject]]()
+    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    var updateTimer: NSTimer?
+    var mostrarNotificacion:Bool!
     
+    override func viewDidDisappear(animated: Bool) {
+        mostrarNotificacion = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         
-        loadNotificaciones()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reinstateBackgroundTask), name: UIApplicationDidBecomeActiveNotification, object: nil)
+    
+        
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(loadNotificaciones), userInfo: nil, repeats: true)
+        
+        mostrarNotificacion = false
+        registerBackgroundTask()
+
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+        
+    func reinstateBackgroundTask() {
+        if backgroundTask == UIBackgroundTaskInvalid {
+            
+            loadNotificaciones()
+            
+            registerBackgroundTask()
+        }
+    }
+    
+    func registerBackgroundTask() {
+        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({ 
+            
+            self.endBackgroundTask()
+            
+        })
+        
+        assert(backgroundTask != UIBackgroundTaskInvalid)
+    }
+    
+    
+    
+    func endBackgroundTask() {
+        print("Background task ended.")
+        UIApplication.sharedApplication().endBackgroundTask(backgroundTask)
+        backgroundTask = UIBackgroundTaskInvalid
+    }
     
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -94,7 +137,34 @@ class NotificacionesTableViewController: UITableViewController {
         print(url)
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
+
     
+    func leerNotificaciones(idNotificacion:Int!) {
+        
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        
+        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.notificaciones)=\(idNotificacion)"
+        
+        print(parameterString)
+        
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificacionesLeidas)"
+            
+            print(url)
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+            urlRequest.HTTPMethod = "POST"
+            
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+        } else {
+            print("Error de codificación de caracteres.")
+        }
+    
+
+    }
+
+
     func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
@@ -102,13 +172,46 @@ class NotificacionesTableViewController: UITableViewController {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     print(json)
+                    
                     dispatch_async(dispatch_get_main_queue()) {
+                        
+                        
                         if self.notificaciones.count > 0 {
                             self.notificaciones.removeAll()
                         }
                         
-                        self.notificaciones.appendContentsOf(json[WebServiceResponseKey.notificaciones] as! [[String : AnyObject]])
-                        self.tableView?.reloadData()
+                        if let mensajesArray = json[WebServiceResponseKey.notificaciones] {
+                        
+                            print(mensajesArray?.description)
+                            if mensajesArray?.description != nil{
+                                self.notificaciones.appendContentsOf(mensajesArray as! [[String : AnyObject]])
+                                
+                                switch UIApplication.sharedApplication().applicationState {
+                                case .Active:
+                                    self.tableView?.reloadData()
+                                    
+                                    if (self.mostrarNotificacion != nil) {
+                                        print("App esta en otra pantalla")
+                                        
+                                    }
+                                case .Background:
+                                    self.mandarNotificacion()
+                                    
+                                    print("App is backgrounded.")
+                                    print("Background notifications = \(self.notificaciones.count) seconds")
+                                case .Inactive:
+                                    print("App is inactive.")
+                                    
+                                    self.mandarNotificacion()
+                                    break
+                                }
+                            }
+                            
+                           
+                        }
+                        
+                        
+                        
                     }
                 } else {
                     print("HTTP Status Code: 200")
@@ -127,6 +230,43 @@ class NotificacionesTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    func mandarNotificacion(){
+        
+        for notificacion in self.notificaciones {
+            
+            if (notificacion[WebServiceResponseKey.notificacionLeida] as! Bool) == false {
+                
+                let txt = (notificacion[WebServiceResponseKey.notificacionText] as? String)!
+                let attrStr = try! NSAttributedString(
+                    data: txt.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                    options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                    documentAttributes: nil)
+                
+                
+                
+                let label = UILabel()
+                label.attributedText = attrStr
+                
+                
+                
+                // create a corresponding local notification
+                let notification = UILocalNotification()
+                notification.alertBody = label.text // text that will be displayed in the notification
+                notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+                notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+            
+                notification.userInfo = ["title": notificacion[WebServiceResponseKey.notificacionText]!, "UUID": notificacion[WebServiceResponseKey.notificacionText]!] // assign a unique identifier to the notification so that we can retrieve it later
+                
+                
+                self.leerNotificaciones(notificacion[WebServiceResponseKey.notificacionId] as! Int)
+                
+                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            }
+            
+        }
+
     }
     
     // para cuadrar las imagenes
