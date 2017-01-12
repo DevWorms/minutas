@@ -1762,7 +1762,7 @@
                                                         <constraint firstAttribute="height" constant="26" id="aGH-1e-bnK"/>
                                                         <constraint firstAttribute="width" constant="25" id="kee-6u-zOA"/>
                                                     </constraints>
-                                                    <state key="normal" image="7857732B-4572-4FFD-AAE6-19E0A380F306"/>
+                                                    <state key="normal" image="667CA20A-1B54-4503-B4DC-71210AB68E6A"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-ue-vn1">
                                                     <rect key="frame" x="369" y="38" width="25" height="28"/>
@@ -1770,7 +1770,7 @@
                                                         <constraint firstAttribute="height" constant="28" id="MMV-9r-PHG"/>
                                                         <constraint firstAttribute="width" constant="25" id="Xx5-it-hyL"/>
                                                     </constraints>
-                                                    <state key="normal" image="FB85F8EF-CEFF-4A83-B21D-A82CBA6D8F5E"/>
+                                                    <state key="normal" image="E3029DC8-4CA2-4CA7-BFF8-D9D5E829BC98"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zp-dq-ZpK">
                                                     <rect key="frame" x="316" y="37" width="26" height="27"/>
@@ -3471,7 +3471,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7857732B-4572-4FFD-AAE6-19E0A380F306" width="48" height="48">
+        <image name="667CA20A-1B54-4503-B4DC-71210AB68E6A" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3676,7 +3676,7 @@ Lcgt0C3TLdgt5y3rLfIt+i4HLgwuDi4QLhUuHS4gLiUuLS4wLkIuRS5KAAAAAAAAAgEAAAAAAAAAQQAA
 AAAAAAAAAAAAAAAALkw
 </mutableData>
         </image>
-        <image name="FB85F8EF-CEFF-4A83-B21D-A82CBA6D8F5E" width="48" height="48">
+        <image name="E3029DC8-4CA2-4CA7-BFF8-D9D5E829BC98" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

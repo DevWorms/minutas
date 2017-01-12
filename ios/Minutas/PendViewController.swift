@@ -50,7 +50,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if pendienteJson[WebServiceResponseKey.pendienteStatus] as! Bool{
             estatus.text = "Cerrado"
         }
-        
+        else{
             estatus.text = "Abierto"
         }
         
