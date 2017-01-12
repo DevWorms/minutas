@@ -375,7 +375,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         for iUser in j {
                             
 
-                            if iUser[0] as! String == "Usuario" {
+                            if (iUser as! [String])[0] == "Usuario" {
                                 if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
                                     self.usuarios.append(strApodo)
                                 }
