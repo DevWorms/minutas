@@ -374,7 +374,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         for iUser in j {
                             
-                            if iUser[0] as! String == "Usuario" {
+                           /* if iUser[0] as! String == "Usuario" {
                                 if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
                                     self.usuarios.append(strApodo)
                                 }
@@ -386,7 +386,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                                 if let iFav = iUser[3]["is_favorite"] as? Int {
                                     self.isFav.append(iFav)
                                 }
-                            }
+                            }*/
                         }
                         
                         print("Termina")
