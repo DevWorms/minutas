@@ -130,9 +130,7 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        print(apiKey, userId)
         let str = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversaciones)\(userId)/\(apiKey)/"
-        print(str)
         let url = NSURL(string: str)!
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
@@ -143,7 +141,7 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
+                    //print(json)
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.conversaciones.count > 0 {
                             self.conversaciones.removeAll()

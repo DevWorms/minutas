@@ -34,6 +34,7 @@ enum WebServiceEndpoint {
     
     static let newPendiente = "pendientes/new"
     static let closePendiente = "pendientes/close"
+    static let reabrirPend = "pendientes/reabrir"
     
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
@@ -54,7 +55,7 @@ enum WebServiceEndpoint {
     
     static let favoritos = "favoritos"
     static let buscador = "search"
-    static let buscadorTodo = "/all"
+    static let buscadorTodo = "search/all"
     
 }
 

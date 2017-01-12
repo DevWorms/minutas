@@ -29,7 +29,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         loadCalendario()
         
         // In loadView or viewDidLoad
-        let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: 320, height: 300))
+        let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: (self.tableView.frame.width), height: 300))
         calendar.dataSource = self
         calendar.delegate = self
         view.addSubview(calendar)
@@ -101,14 +101,14 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "tareas"{
+        if segue.identifier == "pend" {
             //(segue.destinationViewController as! NewAsuntosViewController).delegate = self
             print("tareasSegue>>>>>")
             
             let json = tareas[self.rowCell]
             print(self.rowCell)
             print(json)
-            let destino = segue.destinationViewController as! TareasTableViewController
+            let destino = segue.destinationViewController as! PendViewController
             destino.pendienteJson = json
         }
     }

@@ -155,6 +155,8 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
             (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
             (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
             (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
+        }else if segue.identifier == "pendientes" {
+            (segue.destinationViewController as! PendienteTableViewController).initial = false
         }
     }
     

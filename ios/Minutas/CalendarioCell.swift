@@ -125,7 +125,7 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
         if pendienteId != nil {
             NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
             
-            self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+            self.tableMadre!.performSegueWithIdentifier("pend", sender: nil)
         }
         
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D1005A4A55D22CF95743215 /* Pods_Minutas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D75CF8391AD6228EB36E859 /* Pods_Minutas.framework */; };
+		3BCFDF221E27111000FF0C31 /* PendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCFDF211E27111000FF0C31 /* PendViewController.swift */; };
 		3BE3EC111E230DEB0056AE83 /* ReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */; };
 		3BE3EC131E231C7C0056AE83 /* AsuntoReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */; };
 		3BE3EC151E25D7A60056AE83 /* CerrarPendienteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC141E25D7A60056AE83 /* CerrarPendienteViewController.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BCFDF211E27111000FF0C31 /* PendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendViewController.swift; sourceTree = "<group>"; };
 		3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReunionCell.swift; sourceTree = "<group>"; };
 		3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntoReunionCell.swift; sourceTree = "<group>"; };
 		3BE3EC141E25D7A60056AE83 /* CerrarPendienteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CerrarPendienteViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				5DC27E1D1DE7300B00857BC0 /* PasswordRecoveryViewController.swift */,
 				5DC27E1E1DE7300B00857BC0 /* SignUpViewController.swift */,
 				49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */,
+				3BCFDF211E27111000FF0C31 /* PendViewController.swift */,
 				49C746431DF49F6500985CE1 /* TareasTableViewController.swift */,
 				49C746451DF4ABD700985CE1 /* NewPendienteController.swift */,
 				49C746491DF4BA7800985CE1 /* NewTareaViewController.swift */,
@@ -597,6 +600,7 @@
 				49C746461DF4ABD700985CE1 /* NewPendienteController.swift in Sources */,
 				49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */,
 				49EA2A281E24670D0000B5F5 /* NotificacionesTableViewController.swift in Sources */,
+				3BCFDF221E27111000FF0C31 /* PendViewController.swift in Sources */,
 				49B3BE5E1E0411F800BA7882 /* PopMover.swift in Sources */,
 				49B3BE5B1E03FE6C00BA7882 /* PopViewNuevoComentario.swift in Sources */,
 			);

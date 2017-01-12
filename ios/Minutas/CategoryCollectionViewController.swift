@@ -152,7 +152,7 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         if segue.identifier == "nuevaCategoria" {
             (segue.destinationViewController as! NewCategoryViewController).delegate = self
         } else if segue.identifier == "categoria" {
-            
+            (segue.destinationViewController as! PendienteTableViewController).initial = false
         }
     }
     
