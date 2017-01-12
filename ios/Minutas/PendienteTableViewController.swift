@@ -10,22 +10,30 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, CerrarPendienteViewControllerDelegate {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, CerrarPendienteViewControllerDelegate, PendViewControllerDelegate {
+    
+    @IBOutlet weak var buttonOk: UIBarButtonItem!
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var pendientes = [[String : AnyObject]]()
     var pendienteJson = [String : AnyObject]()
     var noCellReunionPend : Int = 0
+    var initial = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
-        loadPendiente()
+        if initial {
+            loadPendienteInit()
+            
+            buttonOk.tintColor = UIColor.clearColor()
+            buttonOk.enabled = false
+        } else {
+            loadPendiente()
+        }
     }
-    
-    
  
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -39,10 +47,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     func buttonClicked(sender:UIButton) {
         
-        var indexPath : NSIndexPath
-        indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
-        
-        let json = pendientes[indexPath.item]
+        let json = pendientes[sender.tag]
         
         let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int
         
@@ -90,6 +95,19 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         }
     }
     
+    func buttonClickedTareas(sender:UIButton) {
+        if initial {
+            print("mm")
+        } else {
+            let json = pendientes[sender.tag]
+            self.pendienteJson = json
+            
+            NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+            
+            self.performSegueWithIdentifier("tareas", sender: nil)
+        }
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PendienteCell
@@ -108,8 +126,17 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             cell.viewStatusCerrado.hidden = true
         }
         
+        let statVis = json[WebServiceResponseKey.pendienteStatusVisible] as? String
+        
+        if statVis == "Vencido" {
+            cell.status.hidden = false
+        }
+        
         cell.checkBox.tag = indexPath.row
         cell.checkBox.addTarget(self, action: #selector(PendienteTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.btnTareas.tag = indexPath.row
+        cell.btnTareas.addTarget(self, action: #selector(PendienteTableViewController.buttonClickedTareas(_:)), forControlEvents: UIControlEvents.TouchUpInside)
        
         return cell
     }
@@ -120,12 +147,17 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let json = pendientes[indexPath.item]
-        self.pendienteJson = json
+        if initial {
+            print("mm")
+        } else {
+            let json = pendientes[indexPath.item]
+            self.pendienteJson = json
+            
+            NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+            
+            self.performSegueWithIdentifier("pend", sender: nil)
+        }
         
-        NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
-        
-        self.performSegueWithIdentifier("tareas", sender: nil)
     }
     
     func newPendienteControllerDidCancel() {
@@ -140,16 +172,26 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     func cerrarPendienteDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
-        loadPendiente()
     }
     
     
     func cerrarPendienteDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
-        loadPendiente()
+        if initial {
+            loadPendienteInit()
+            print("mm")
+        } else {
+            loadPendiente()
+        }
     }
     
+    func pendienteDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
+    func pendienteDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -160,9 +202,9 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
         }
         
-        else if segue.identifier == "tareas"{
-            (segue.destinationViewController as! TareasTableViewController).pendienteJson = self.pendienteJson
-            
+        else if segue.identifier == "pend"{
+            (segue.destinationViewController as! PendViewController).pendienteJson = self.pendienteJson
+            (segue.destinationViewController as! PendViewController).delegate = self
         } else if segue.identifier == "cerrarPendiente" {
             
             let json = pendientes[noCellReunionPend]
@@ -170,9 +212,17 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             
             (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
             (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = rID
+            (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = json[WebServiceResponseKey.nombrePendiente] as? String
         }
     }
-
+    
+    func loadPendienteInit() {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\("search/mispendientes/")\(userId)/\(apiKey)")!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+    }
     
     func loadPendiente() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!

@@ -18,8 +18,11 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     
     weak var delegate: NewSearchViewControllerDelegate?
     
+    @IBOutlet weak var buttonOk: UIBarButtonItem!
 
     var usuarios = [String]()
+    var idUsuarios = [Int]()
+    var isFav = [Int]()
     var searchActive : Bool = false
     var anadirUsuarioSolamente = false
     var caminoFavorito = false
@@ -30,7 +33,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtf_responsable: UISearchBar!
     
-    @IBOutlet weak var checkFav: UIButton!
     override func viewDidLoad() {
         
         self.loadUsuarios("@")
@@ -41,6 +43,9 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         if caminoFavorito == true {
             
             txtf_titulo.hidden = caminoFavorito
+            buttonOk.tintColor = UIColor.clearColor()
+            buttonOk.enabled = false
+            
         }
     }
     
@@ -76,9 +81,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         self.tableView.reloadData()
     }
-
-
-
     
     // Make the background color show through
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -86,78 +88,85 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         headerView.backgroundColor = UIColor.clearColor()
         return headerView
     }
+    
+    func parseFav(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            dispatch_async(dispatch_get_main_queue()) {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
+                        if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                            self.delegate?.newConversacionControllerDidFinish()
+                        }
+                        })
+                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                } else {
+                    print("El JSON de respuesta es inválido.")
+                }
+            }
+        }
+    }
+    
     func buttonClicked(sender:UIButton) {
         
-      //  self.noCellReunionPend = sender.tag
-       // performSegueWithIdentifier("nuevoPendiente", sender: nil)
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print(idUsuarios)
+        print(sender.tag)
+        
+        let idU = idUsuarios[sender.tag]
+        
+        let isChecked = isFav[sender.tag]
+        
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        let parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.userIdFavoritos)= apiKey"
+        let parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.idFavoritos)=\(idU)"
+        
+        print(parameterString)
+        
+        var endP = ""
+        
+        if isChecked == 1 {
+            endP = "favoritos/del"
+        } else {
+            endP = "favoritos/add"
+        }
+        
+        //  self.noCellReunionPend = sender.tag
+        // performSegueWithIdentifier("nuevoPendiente", sender: nil)
+        
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(endP)")!)
+            urlRequest.HTTPMethod = "POST"
+            
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseFav).resume()
+        } else {
+            print("Error de codificación de caracteres.")
+        }
 
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SearchUsuarioCell
+        
         cell.a.tag = indexPath.row
         cell.a.addTarget(self, action: #selector(SearchUserViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        if caminoFavorito == false{
         
-                 cell.a.hidden = true
+        if caminoFavorito == false{
+            cell.a.hidden = true
+        } else {
+            if isFav[indexPath.item] == 0 {
+                cell.a.setImage(cell.checkedImage, forState: .Normal)
+            } else {
+                cell.a.setImage(cell.uncheckedImage, forState: .Normal)
+            }
         }
        
-        
         cell.txtNombreUsuario.text = visibleResults[indexPath.item]
         print(cell.txtNombreUsuario.text)
         return cell
         
-    }
-    func parseJsonFav(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
-        if error != nil {
-            print(error!)
-        } else if urlResponse != nil {
-            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if self.usuarios.count > 0 {
-                            self.usuarios.removeAll()
-                        }
-                        
-                        let jsonArray = json[WebServiceResponseKey.usuarios] as! [[String : AnyObject]]
-                        
-                        for jsonItem in jsonArray{
-                            
-                            if let strApodo = jsonItem[WebServiceResponseKey.apodo] as? String{
-                                self.usuarios.append(strApodo)
-                            }
-                            
-                        }
-                        
-                        self.visibleResults = self.usuarios
-                        print(self.usuarios.description)
-                        
-                        
-                        self.tableView?.reloadData()
-                    }
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
-                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
-                        self.presentViewController(vc_alert, animated: true, completion: nil)
-                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
-                    } else {
-                        print("HTTP Status Code: 400 o 500")
-                        print("El JSON de respuesta es inválido.")
-                    }
-                }
-            }
-        }
     }
     
     @IBAction func ok(sender: AnyObject) {
@@ -172,11 +181,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         
             if let usuarios = txtf_responsable.text{
             
-            
-            
                 if let titulo = txtf_titulo.text{
-                    
-                    
                    
                     if titulo == "" && txtf_titulo.hidden == false{
                         mensajeStr = "Debes asignar un titulo a la conversación"
@@ -184,7 +189,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                     else if usuarios == ""{
                         mensajeStr = "Debes asignar por lo menos un usuario a la conversación"
                     }
-                    
                     
                     if mensajeStr != ""{
                         let vc_alert = UIAlertController(title: "Un momento", message: mensajeStr, preferredStyle: .Alert)
@@ -196,7 +200,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         
 
                     }else{
-                        
                         
                         var parameterString = ""
                         print(parameterString)
@@ -236,14 +239,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         
             
-        } else {
-        
-        
-        
         }
-    
-        
-        
     }
     
     func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
@@ -269,9 +265,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func cancel(sender: AnyObject) {
         delegate?.newConversacionControllerDidCancel()
     }
-  
-    
-    
     
     // MARK: UITableViewDataSource
     
@@ -298,9 +291,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         let responsable =  visibleResults[indexPath.item] + ", "
         
         self.txtf_responsable.text =  responsables + responsable
-        
-       
-        
         
         dismissKeyboard()
         
@@ -329,12 +319,12 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if caminoFavorito == true{
              var parameterString = ""
-            parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.paramBuscar)= a"
+                 parameterString = "\(WebServiceRequestParameter.userIdFavoritos)=\(userId)&\(WebServiceRequestParameter.apiKeyFavoritos)=\(apiKey)&\(WebServiceRequestParameter.paramBuscar)="
             
                      
             if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                 
-                let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.buscador)\(WebServiceEndpoint.buscadorTodo)")!)
+                let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.buscadorTodo)")!)
                 urlRequest.HTTPMethod = "POST"
                 print(urlRequest)
          
@@ -359,21 +349,53 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
+                    //print(json)
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.usuarios.count > 0 {
                             self.usuarios.removeAll()
+                            self.idUsuarios.removeAll()
+                            self.isFav.removeAll()
                         }
-                        print(json[WebServiceResponseKey.buscarResult])
-                    //    let jsonArray = json[WebServiceResponseKey.buscarResult] as! [String : AnyObject]
-                     
+                        print("Aqui")
+                        
+                        
+                        let j=json[WebServiceResponseKey.buscarResult] as! [AnyObject]
+                        /*
+                        print(j)
+                        print(j.count)
+                        
+                        let js = j[0]
+                        print(js)
+                        
+                        let jss = js[3] as! [String:AnyObject]
+                        print(jss)
+                        */
+                        print("empieza for:")
+                        
+                        for iUser in j {
+                            
+                            if iUser[0] as! String == "Usuario" {
+                                if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
+                                    self.usuarios.append(strApodo)
+                                }
+                                
+                                if let id = iUser[3]["user_id"] as? Int {
+                                    self.idUsuarios.append(id)
+                                }
+                                
+                                if let iFav = iUser[3]["is_favorite"] as? Int {
+                                    self.isFav.append(iFav)
+                                }
+                            }
+                        }
+                        
+                        print("Termina")
                         //print(jsonArray[0])
                                               
                         self.visibleResults = self.usuarios
                        
-                        
-                        
                         self.tableView?.reloadData()
+                        
                     }
                 } else {
                     print("HTTP Status Code: 200")

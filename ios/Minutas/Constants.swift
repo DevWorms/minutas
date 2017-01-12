@@ -55,7 +55,7 @@ enum WebServiceEndpoint {
     
     static let favoritos = "favoritos"
     static let buscador = "search"
-    static let buscadorTodo = "/all"
+    static let buscadorTodo = "search/all"
     
 }
 

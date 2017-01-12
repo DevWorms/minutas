@@ -21,7 +21,7 @@ class FavoritosViewController:  UITableViewController, NewSearchViewControllerDe
     
     func newConversacionControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
-        
+        loadFavoritos()
     }
     
     // Make the background color show through

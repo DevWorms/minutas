@@ -21,10 +21,26 @@ class CerrarPendienteViewController: UIViewController {
     @IBOutlet weak var textP: UITextView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var nombreUno: UILabel!
+    @IBOutlet weak var nombreDos: UILabel!
+    @IBOutlet weak var nombreTres: UILabel!
+    @IBOutlet weak var nombreCuatro: UILabel!
+    @IBOutlet weak var nombreCinco: UILabel!
+    
+    @IBOutlet weak var adjuntarUno: UIButton!
+    @IBOutlet weak var adjuntarDos: UIButton!
+    @IBOutlet weak var adjuntarTres: UIButton!
+    @IBOutlet weak var adjuntarCuatro: UIButton!
+    @IBOutlet weak var adjuntarCinco: UIButton!
+    
     var pendienteJson = Int?()
+    var nombrePendiente = String?()
+    var anadidos = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titlePend.text = nombrePendiente
 
         // Do any additional setup after loading the view.
     }
@@ -35,6 +51,39 @@ class CerrarPendienteViewController: UIViewController {
     }
     
     @IBAction func archivoExtra(sender: AnyObject) {
+        
+        switch anadidos {
+        case 0:
+            nombreDos.hidden = false
+            adjuntarDos.hidden = false
+            anadidos = anadidos + 1
+        case 1:
+            nombreTres.hidden = false
+            adjuntarTres.hidden = false
+            anadidos = anadidos + 1
+        case 2:
+            nombreCuatro.hidden = false
+            adjuntarCuatro.hidden = false
+            anadidos = anadidos + 1
+        case 3:
+            nombreCinco.hidden = false
+            adjuntarCinco.hidden = false
+            anadidos = anadidos + 1
+        default: break
+            //
+        }
+        
+    }
+    
+    @IBAction func archivoUno(sender: AnyObject) {
+    }
+    @IBAction func archivoDos(sender: AnyObject) {
+    }
+    @IBAction func archivoTres(sender: AnyObject) {
+    }
+    @IBAction func archivoCuatro(sender: AnyObject) {
+    }
+    @IBAction func archivoCinco(sender: AnyObject) {
     }
     
     
