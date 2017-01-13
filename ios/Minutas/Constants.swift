@@ -9,7 +9,9 @@
 import Foundation
 
 enum ApplicationConstants{
-    static let tiempoParaConsultarServicioWeb = 3.0
+    static let tiempoParaConsultarServicioWeb = 5.0
+    static let ritmoNotificaciones = "ritmoNotificaciones"
+    
 }
 
 enum WebServiceEndpoint {

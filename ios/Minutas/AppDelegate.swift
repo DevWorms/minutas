@@ -62,7 +62,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // mandar notificaciones
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil))
       
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(loadNotificaciones), userInfo: nil, repeats: true)
+        var tiempoPush = NSUserDefaults.standardUserDefaults().doubleForKey(ApplicationConstants.ritmoNotificaciones
+        )
+        
+        if tiempoPush <= 1 {
+            tiempoPush = ApplicationConstants.tiempoParaConsultarServicioWeb
+            
+            NSUserDefaults.standardUserDefaults().setObject("5.0", forKey: ApplicationConstants.ritmoNotificaciones)
+            
+        }
+        
+        
+        
+        
+        print(tiempoPush)
+        
+        
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(tiempoPush, target: self, selector: #selector(loadNotificaciones), userInfo: nil, repeats: true)
         
         mostrarNotificacion = false
         registerBackgroundTask()
@@ -152,15 +168,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func loadNotificaciones() {
-        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
-        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        print(apiKey, userId)
+        if let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey){
         
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            print(apiKey, userId)
+            
+            let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
+            
+            print(url)
+            NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        }
         
-        print(url)
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        
+        
+       
     }
     
     
