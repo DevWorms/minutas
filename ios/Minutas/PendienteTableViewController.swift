@@ -130,6 +130,8 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         if statVis == "Vencido" {
             cell.status.hidden = false
+        } else {
+            cell.status.hidden = true
         }
         
         cell.checkBox.tag = indexPath.row
@@ -191,6 +193,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     func pendienteDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
+        loadPendiente()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

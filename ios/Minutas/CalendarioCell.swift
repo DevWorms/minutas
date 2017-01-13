@@ -44,8 +44,6 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
             //Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
             
         ]
-        print("jajajajajajaj<<<<<<")
-        print(idItems)
         
         self.idPendientes = idItems
         self.tableMadre = tvc
@@ -125,7 +123,7 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
         if pendienteId != nil {
             NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
             
-            self.tableMadre!.performSegueWithIdentifier("pend", sender: nil)
+            self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
         }
         
     }
