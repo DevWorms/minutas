@@ -77,21 +77,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
             
         default:
             return UITableViewCell()
-        }
-        
-        
-        
-        /*TareasCell
-        
-         
-         TareasPendientesCell
-        let json = asuntos[indexPath.item]
-        
-        cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
-        cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
-        // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
-        */
-        
+        }       
         
     }
     
@@ -102,14 +88,14 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "pend" {
-            //(segue.destinationViewController as! NewAsuntosViewController).delegate = self
+            /*
             print("tareasSegue>>>>>")
             
             let json = tareas[self.rowCell]
             print(self.rowCell)
             print(json)
             let destino = segue.destinationViewController as! PendViewController
-            destino.pendienteJson = json
+            destino.pendienteJson = json*/
         }
     }
     
