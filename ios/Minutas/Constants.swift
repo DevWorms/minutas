@@ -40,6 +40,8 @@ enum WebServiceEndpoint {
     
     static let pendientes = "pendientes/all/"
     static let tareas = "tasks/"
+    static let reportesMe = "reportes/me"
+    
     static let asuntos = "tasks/reunion/"
     static let calendarioSemanal = "calendar/week/"
     static let calendarioMensual = "calendar/month/"
@@ -76,6 +78,8 @@ enum WebServiceRequestParameter {
     static let userId = "Id_Usuario"
     static let apiKey = "API_Key"
     static let categoryName = "Nombre_Categoria"
+    static let fecha1 = "fecha1"
+    static let fecha2 = "fecha2"
     
     static let categoryId = "id_Categoria"
     static let pendienteName = "Nombre_Pendiente"
@@ -127,11 +131,17 @@ enum WebServiceResponseKey {
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
     static let id = "id"
+    static let nombre = "nombre"
+    static let numeroPendientes = "no_pendientes"
+    
     
     static let status = "estado"
     static let statusPendiente = "status"
     static let message = "mensaje"
     static let responsable = "responsable"
+    static let diasAtraso = "dias_atraso"
+    static let indice = "indice"
+    
     
     static let categoryId = "id_Categoria"
     static let cUserId = "id_usuario"

@@ -49,6 +49,8 @@
 		49ECFE461E2312DB0046F26C /* ConversacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */; };
 		49ECFE481E2315410046F26C /* ConversacionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ECFE471E2315410046F26C /* ConversacionCell.swift */; };
 		49FE68B71E2869D6002002CE /* ConfiguracionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE68B61E2869D6002002CE /* ConfiguracionViewController.swift */; };
+		49FE68BB1E289F52002002CE /* ReporteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE68BA1E289F52002002CE /* ReporteViewController.swift */; };
+		49FE68BD1E28A382002002CE /* IndiceEficienciaTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE68BC1E28A382002002CE /* IndiceEficienciaTopCell.swift */; };
 		4C2E48661E2585DD00720E8C /* FavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2E48651E2585DD00720E8C /* FavoritosViewController.swift */; };
 		5DC27E0D1DE72F9F00857BC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */; };
 		5DC27E101DE72FB800857BC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC27E0E1DE72FB800857BC0 /* LaunchScreen.storyboard */; };
@@ -138,6 +140,8 @@
 		49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionViewController.swift; sourceTree = "<group>"; };
 		49ECFE471E2315410046F26C /* ConversacionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversacionCell.swift; sourceTree = "<group>"; };
 		49FE68B61E2869D6002002CE /* ConfiguracionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfiguracionViewController.swift; sourceTree = "<group>"; };
+		49FE68BA1E289F52002002CE /* ReporteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReporteViewController.swift; sourceTree = "<group>"; };
+		49FE68BC1E28A382002002CE /* IndiceEficienciaTopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndiceEficienciaTopCell.swift; sourceTree = "<group>"; };
 		4C2E48651E2585DD00720E8C /* FavoritosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritosViewController.swift; sourceTree = "<group>"; };
 		58D759B489433C5C4945579A /* Pods-Minutas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minutas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Minutas/Pods-Minutas.debug.xcconfig"; sourceTree = "<group>"; };
 		5DC27E0C1DE72F9F00857BC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */,
 				3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */,
 				49EA2A251E2466620000B5F5 /* NotificacionCell.swift */,
+				49FE68BC1E28A382002002CE /* IndiceEficienciaTopCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */,
 				4C2E48651E2585DD00720E8C /* FavoritosViewController.swift */,
 				49FE68B61E2869D6002002CE /* ConfiguracionViewController.swift */,
+				49FE68BA1E289F52002002CE /* ReporteViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				49B3BE551E03FDD400BA7882 /* PopVerComentarios.swift in Sources */,
 				492896311E1AE644000F7CE3 /* SearchUsuarioCell.swift in Sources */,
 				49ECFE481E2315410046F26C /* ConversacionCell.swift in Sources */,
+				49FE68BD1E28A382002002CE /* IndiceEficienciaTopCell.swift in Sources */,
 				49C746521DF4F1C400985CE1 /* NewMinutaViewController.swift in Sources */,
 				5DC27E151DE72FDF00857BC0 /* AppDelegate.swift in Sources */,
 				49C746441DF49F6500985CE1 /* TareasTableViewController.swift in Sources */,
@@ -607,6 +614,7 @@
 				49C746461DF4ABD700985CE1 /* NewPendienteController.swift in Sources */,
 				49C7463E1DF3FECD00985CE1 /* PendienteCell.swift in Sources */,
 				49EA2A281E24670D0000B5F5 /* NotificacionesTableViewController.swift in Sources */,
+				49FE68BB1E289F52002002CE /* ReporteViewController.swift in Sources */,
 				3BCFDF221E27111000FF0C31 /* PendViewController.swift in Sources */,
 				49B3BE5E1E0411F800BA7882 /* PopMover.swift in Sources */,
 				49B3BE5B1E03FE6C00BA7882 /* PopViewNuevoComentario.swift in Sources */,
