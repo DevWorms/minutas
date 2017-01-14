@@ -46,6 +46,7 @@ enum WebServiceEndpoint {
     static let calendarioSemanal = "calendar/week/"
     static let calendarioMensual = "calendar/month/"
     static let asuntoNuevo = "tasks/new"
+    
     static let reuniones = "meetings/"
     static let conversaciones = "conversations/"
     static let conversacion = "conversations"
@@ -65,6 +66,11 @@ enum WebServiceEndpoint {
 }
 
 enum WebServiceRequestParameter {
+    
+    static let userIdmin = "user_id"
+    static let apiKeymin = "api_key"
+    static let busqueda = "q"
+    
     static let token = "tokenID"
     static let redSocial = "redSocial"
     static let mensaje = "mensaje"
@@ -133,6 +139,7 @@ enum WebServiceResponseKey {
     static let id = "id"
     static let nombre = "nombre"
     static let numeroPendientes = "no_pendientes"
+    static let resultados = "resultados"
     
     
     static let status = "estado"

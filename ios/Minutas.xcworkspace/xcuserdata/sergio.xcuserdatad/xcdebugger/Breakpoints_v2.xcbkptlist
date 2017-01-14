@@ -42,12 +42,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505983183.509013"
+                  timestampString = "506052409.450452"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "391"
                   endingLineNumber = "391"
-                  offsetFromSymbolStart = "2232">
+                  offsetFromSymbolStart = "2768">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -57,12 +57,12 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "505983183.511025"
+                  timestampString = "506052409.452375"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "393"
                   endingLineNumber = "393"
-                  offsetFromSymbolStart = "28">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -271,7 +271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
             endingLineNumber = "148"
-            landmarkName = "buttonClicked(_:)"
+            landmarkName = "buttonClicked(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,13 +281,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minutas/ConversacionViewController.swift"
-            timestampString = "505946821.283263"
+            filePath = "Minutas/BuscadorViewController.swift"
+            timestampString = "506043023.859846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "ConversacionViewController"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "BuscadorViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,6 +15,8 @@
 		3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */; };
 		492896311E1AE644000F7CE3 /* SearchUsuarioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */; };
 		493C5C561E13241B00C10B85 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 493C5C541E13236500C10B85 /* linkedin-sdk.framework */; };
+		4948DC3D1E297435001596F1 /* BuscadorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948DC3C1E297435001596F1 /* BuscadorCell.swift */; };
+		4948DC3F1E29901D001596F1 /* BuscadorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4948DC3E1E29901D001596F1 /* BuscadorViewController.swift */; };
 		49B3BE4D1E03F21800BA7882 /* PopCalendario.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */; };
 		49B3BE4F1E03F23400BA7882 /* PopCalendario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */; };
 		49B3BE511E03FD8300BA7882 /* PopVerComentarios.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */; };
@@ -105,6 +107,8 @@
 		3BE90A9B1DF78CBD0089DD90 /* MyFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFile.swift; sourceTree = "<group>"; };
 		492896301E1AE644000F7CE3 /* SearchUsuarioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsuarioCell.swift; sourceTree = "<group>"; };
 		493C5C541E13236500C10B85 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
+		4948DC3C1E297435001596F1 /* BuscadorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscadorCell.swift; sourceTree = "<group>"; };
+		4948DC3E1E29901D001596F1 /* BuscadorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuscadorViewController.swift; sourceTree = "<group>"; };
 		49B3BE4C1E03F21800BA7882 /* PopCalendario.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopCalendario.xib; sourceTree = "<group>"; };
 		49B3BE4E1E03F23400BA7882 /* PopCalendario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCalendario.swift; sourceTree = "<group>"; };
 		49B3BE501E03FD8300BA7882 /* PopVerComentarios.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopVerComentarios.xib; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */,
 				49EA2A251E2466620000B5F5 /* NotificacionCell.swift */,
 				49FE68BC1E28A382002002CE /* IndiceEficienciaTopCell.swift */,
+				4948DC3C1E297435001596F1 /* BuscadorCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				4C2E48651E2585DD00720E8C /* FavoritosViewController.swift */,
 				49FE68B61E2869D6002002CE /* ConfiguracionViewController.swift */,
 				49FE68BA1E289F52002002CE /* ReporteViewController.swift */,
+				4948DC3E1E29901D001596F1 /* BuscadorViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				4C2E48661E2585DD00720E8C /* FavoritosViewController.swift in Sources */,
 				49C7464C1DF4E45D00985CE1 /* ReunionesTableViewController.swift in Sources */,
 				49E15D691DFEC07000084EFB /* CollapsibleTableViewHeader.swift in Sources */,
+				4948DC3D1E297435001596F1 /* BuscadorCell.swift in Sources */,
 				49B3BE4F1E03F23400BA7882 /* PopCalendario.swift in Sources */,
 				49C746401DF496D400985CE1 /* GenericCell.swift in Sources */,
 				49C7463B1DF3673200985CE1 /* PendienteTableViewController.swift in Sources */,
@@ -593,6 +600,7 @@
 				49E15D6D1DFEC89E00084EFB /* CalendarioCell.swift in Sources */,
 				3BE90A9C1DF78CBD0089DD90 /* MyFile.swift in Sources */,
 				49ECFE461E2312DB0046F26C /* ConversacionViewController.swift in Sources */,
+				4948DC3F1E29901D001596F1 /* BuscadorViewController.swift in Sources */,
 				49E15D631DFEB4C700084EFB /* CalendarioTableViewController.swift in Sources */,
 				49BC23771E03BC5C0030EEF9 /* GraficasViewController.swift in Sources */,
 				5DC27E231DE7300B00857BC0 /* SignUpViewController.swift in Sources */,

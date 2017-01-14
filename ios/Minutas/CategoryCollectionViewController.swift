@@ -257,5 +257,6 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
         
     }
+    
 
 }
