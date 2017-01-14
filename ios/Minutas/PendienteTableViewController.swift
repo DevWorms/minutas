@@ -20,7 +20,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     var pendienteJson = [String : AnyObject]()
     var noCellReunionPend : Int = 0
     var initial = true
-    
+    var idPendiente: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -250,7 +250,22 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
                             self.pendientes.removeAll()
                         }
                         
-                        self.pendientes.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        //Cuando el pendiente es buscado por medio de la lupa del menu se debe mostrar unicamente el pendiente cuyo idPendiente sea diferente de 0
+                        if self.idPendiente > 0 {
+                            
+                            for pend in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]]{
+                                if self.idPendiente == pend[WebServiceResponseKey.pendienteId] as! Int{
+                                    self.pendientes.append(pend)
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        else{
+                            self.pendientes.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        }
+                        
                         self.tableView?.reloadData()
                     }
                 } else {

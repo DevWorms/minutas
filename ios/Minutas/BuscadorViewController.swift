@@ -22,7 +22,7 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         
         self.loadBusqueda("")
-        //txtf_busqueda.delegate = self
+        txtf_busqueda.delegate = self
         
     }
     
@@ -40,7 +40,12 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false;
+        if let textoBusqueda = txtf_busqueda.text{
+                self.loadBusqueda(textoBusqueda)
+        }
+        
     }
+    
     
    /* func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -105,11 +110,69 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         
-        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
-        self.presentViewController( vc , animated: true, completion: nil)
+        let json = resultados[indexPath.item] as! NSArray
+       
+        if let tipo = (json[0] as? String)?.lowercaseString {
+            if let texto = (json[1] as? String)?.lowercaseString {
+                if let url = (json[2] as? String)?.lowercaseString {
+                    let jsonArray = json[3] as? [String : AnyObject]
+                    var activity = ""
+                    print(tipo, texto, url, jsonArray?.description)
+                    
+                    switch tipo {
+                    case "pendiente":
+                        activity = "PenientesViewController"
+                        var pendienteJson = [String : AnyObject]()
+                        
+                       /* pendienteJson[WebServiceResponseKey.pendienteId] = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                        
+                        pendienteJson[WebServiceResponseKey.fechaFin] = jsonArray![WebServiceResponseKey.fechaFin] as! String
+                        
+                        pendienteJson[WebServiceResponseKey.pendienteStatus] = jsonArray![WebServiceResponseKey.pendienteStatus] as! Bool
+                        
+                        pendienteJson[WebServiceResponseKey.prioridad] = jsonArray![WebServiceResponseKey.prioridad] as! Int
+                        
+                        pendienteJson[WebServiceResponseKey.descripcion] = jsonArray![WebServiceResponseKey.descripcion] as! String
+                        
+                        pendienteJson[WebServiceResponseKey.usuariosAsignados] = ""
+                        //jsonArray![WebServiceResponseKey.usuariosAsignados]
+                        
+                        print(pendienteJson.description)*/
+                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
+                        vc.initial = false
+                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                        
+                        self.navigationController!.pushViewController(vc, animated: true)
+                        break
+                    case "tarea":
+                        activity = "TareasViewController"
+                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
+                        vc.initial = false
+                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                        
+                        self.navigationController!.pushViewController(vc, animated: true)
+                        break
+                    default:
+                        
+                        break
+                    }
+                    
+                    
+                    
+                    
 
+                   // self.presentViewController( vc , animated: true, completion: nil)
+
+                }
+            }
+        }
         
-    }
+        
+        
+        
+        
+        
+           }
     
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -169,18 +232,20 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
                             self.visibleResults = NSArray()
                         }
                         
-                         let jsonResultados = json[WebServiceResponseKey.resultados] as? NSArray
-                        print(jsonResultados![0])
-                        /* let tipo = jsonResultados![0]
-                         let texto = jsonResultados![1]
-                         let url = jsonResultados![2]
-                         //let informacionArray = jsonResultados![3] as? [String]*/
+                        let jsonResultados = json[WebServiceResponseKey.resultados] as? NSArray
+                        if jsonResultados?.count > 0 {
+                            print(jsonResultados![0])
+                            /* let tipo = jsonResultados![0]
+                             let texto = jsonResultados![1]
+                             let url = jsonResultados![2]
+                             //let informacionArray = jsonResultados![3] as? [String]*/
                         
-                        self.resultados = (json[WebServiceResponseKey.resultados] as? NSArray)!
+                            self.resultados = (json[WebServiceResponseKey.resultados] as? NSArray)!
                         
-                        self.visibleResults = self.resultados
-                        print(self.visibleResults.count)
-                        self.tableView?.reloadData()
+                            self.visibleResults = self.resultados
+                            print(self.visibleResults.count)
+                            self.tableView?.reloadData()
+                        }
                         
                     }
                 } else {
@@ -202,6 +267,8 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
+    
+    
     
     
 }
