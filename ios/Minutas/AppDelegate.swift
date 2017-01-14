@@ -172,11 +172,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey){
         
             let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
-            print(apiKey, userId)
+            //print(apiKey, userId)
             
             let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
             
-            print(url)
+            //print(url)
             NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
         }
         
@@ -218,7 +218,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
+                    //print(json)
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
@@ -229,7 +229,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         if let mensajesArray = json[WebServiceResponseKey.notificaciones] {
                             
-                            print(mensajesArray?.description)
+                            //print(mensajesArray?.description)
                             if mensajesArray?.description != nil{
                                 self.notificaciones.appendContentsOf(mensajesArray as! [[String : AnyObject]])
                                 
