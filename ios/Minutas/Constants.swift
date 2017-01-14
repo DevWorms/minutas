@@ -140,7 +140,7 @@ enum WebServiceResponseKey {
     static let nombre = "nombre"
     static let numeroPendientes = "no_pendientes"
     static let resultados = "resultados"
-    
+    static let subPendienteId = "id_sub_pendiente"
     
     static let status = "estado"
     static let statusPendiente = "status"
@@ -149,7 +149,7 @@ enum WebServiceResponseKey {
     static let diasAtraso = "dias_atraso"
     static let indice = "indice"
     
-    
+    static let categoryIdMin = "id_categoria"
     static let categoryId = "id_Categoria"
     static let cUserId = "id_usuario"
     static let categoryName = "nombre_categoria"

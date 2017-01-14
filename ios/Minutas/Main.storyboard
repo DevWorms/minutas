@@ -1423,12 +1423,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-4C-KG7">
                                                     <rect key="frame" x="266" y="63" width="25" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="5FB989A9-A073-4830-B90B-9EACAE0D23E2"/>
+                                                    <state key="normal" image="BF607A86-AB15-4039-8CFD-F6DBBE8E7782"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-ue-vn2">
                                                     <rect key="frame" x="347" y="36" width="25" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="20BD5402-0E50-4EE3-B75B-C0645ECBBA68"/>
+                                                    <state key="normal" image="CF572A51-0343-4D37-BFBE-674B24B62A46"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="245" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZu-JL-RND">
                                                     <rect key="frame" x="66" y="35" width="158" height="31"/>
@@ -3155,7 +3155,7 @@
                                         <rect key="frame" x="0.0" y="28" width="376" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uoI-fQ-mfF" id="9JG-ab-DDx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwT-DI-4f4">
@@ -3229,7 +3229,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="20BD5402-0E50-4EE3-B75B-C0645ECBBA68" width="48" height="48">
+        <image name="BF607A86-AB15-4039-8CFD-F6DBBE8E7782" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3434,7 +3434,7 @@ Lcgt0C3TLdgt5y3rLfIt+i4HLgwuDi4QLhUuHS4gLiUuLS4wLkIuRS5KAAAAAAAAAgEAAAAAAAAAQQAA
 AAAAAAAAAAAAAAAALkw
 </mutableData>
         </image>
-        <image name="5FB989A9-A073-4830-B90B-9EACAE0D23E2" width="48" height="48">
+        <image name="CF572A51-0343-4D37-BFBE-674B24B62A46" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

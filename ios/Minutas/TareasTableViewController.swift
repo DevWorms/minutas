@@ -17,7 +17,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var tareas = [[String : AnyObject]]()
-    
+    var idTarea:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +120,23 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
                             self.tareas.removeAll()
                         }
                         
-                        self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        
+                        if self.idTarea > 0 {
+                            
+                            for tarea in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]] {
+                                if self.idTarea == tarea[WebServiceResponseKey.subPendienteId] as! Int{
+                                    self.tareas.append(tarea)
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        else{
+                            self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        }
+
+                        
                         self.tableView?.reloadData()
                     }
                 } else {

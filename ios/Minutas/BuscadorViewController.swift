@@ -138,17 +138,22 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
                         //jsonArray![WebServiceResponseKey.usuariosAsignados]
                         
                         print(pendienteJson.description)*/
+                        
+                        let categoriaId = jsonArray![WebServiceResponseKey.categoryIdMin]
+                        NSUserDefaults.standardUserDefaults().setObject(categoriaId, forKey: WebServiceResponseKey.categoryId)
+                        
+                        
                         let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
                         vc.initial = false
-                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
                         
+                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                        print(vc.idPendiente, categoriaId)
                         self.navigationController!.pushViewController(vc, animated: true)
                         break
                     case "tarea":
                         activity = "TareasViewController"
-                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
-                        vc.initial = false
-                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! TareasTableViewController
+                        vc.idTarea = jsonArray![WebServiceResponseKey.subPendienteId] as! Int
                         
                         self.navigationController!.pushViewController(vc, animated: true)
                         break
