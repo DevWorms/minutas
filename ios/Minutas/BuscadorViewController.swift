@@ -119,52 +119,77 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
                     var activity = ""
                     print(tipo, texto, url, jsonArray?.description)
                     
-                    switch tipo {
-                    case "pendiente":
-                        activity = "PenientesViewController"
-                        var pendienteJson = [String : AnyObject]()
-                        
-                       /* pendienteJson[WebServiceResponseKey.pendienteId] = jsonArray![WebServiceResponseKey.pendienteId] as! Int
-                        
-                        pendienteJson[WebServiceResponseKey.fechaFin] = jsonArray![WebServiceResponseKey.fechaFin] as! String
-                        
-                        pendienteJson[WebServiceResponseKey.pendienteStatus] = jsonArray![WebServiceResponseKey.pendienteStatus] as! Bool
-                        
-                        pendienteJson[WebServiceResponseKey.prioridad] = jsonArray![WebServiceResponseKey.prioridad] as! Int
-                        
-                        pendienteJson[WebServiceResponseKey.descripcion] = jsonArray![WebServiceResponseKey.descripcion] as! String
-                        
-                        pendienteJson[WebServiceResponseKey.usuariosAsignados] = ""
-                        //jsonArray![WebServiceResponseKey.usuariosAsignados]
-                        
-                        print(pendienteJson.description)*/
-                        
-                        let categoriaId = jsonArray![WebServiceResponseKey.categoryIdMin]
-                        NSUserDefaults.standardUserDefaults().setObject(categoriaId, forKey: WebServiceResponseKey.categoryId)
-                        
-                        
-                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
-                        vc.initial = false
-                        
-                        vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
-                        print(vc.idPendiente, categoriaId)
-                        self.navigationController!.pushViewController(vc, animated: true)
-                        break
-                    case "tarea":
-                        activity = "TareasViewController"
-                        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! TareasTableViewController
-                        vc.idTarea = jsonArray![WebServiceResponseKey.subPendienteId] as! Int
-                        
-                        self.navigationController!.pushViewController(vc, animated: true)
-                        break
-                    default:
-                        
-                        break
+                    var categoria = ""
+                    var pendienteIdBuscado = jsonArray![WebServiceResponseKey.userIdMin] as? Int
+                    if pendienteIdBuscado == nil || pendienteIdBuscado <= 0 {
+                        pendienteIdBuscado = jsonArray!["id_user"] as? Int
                     }
                     
+                    let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+                    print(pendienteIdBuscado, userId)
+                    if url != "" && url != "#"{
+                        var arrayUrl = url.componentsSeparatedByString("#")
+                        print("texto basura " + arrayUrl.popLast()!)
+                        
+                        var arrayUrlStr = arrayUrl.popLast()!.componentsSeparatedByString("/")
+                        
+                        categoria = arrayUrlStr.popLast()!
+                        print("categoria " + categoria)
+                        
+                    }
+                    
+                    if userId == pendienteIdBuscado{
+                        
+                        switch tipo {
+                            case "pendiente":
+                                activity = "PenientesViewController"
+                                /* var pendienteJson = [String : AnyObject]()
+                        
+                                pendienteJson[WebServiceResponseKey.pendienteId] = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                                 
+                                 pendienteJson[WebServiceResponseKey.fechaFin] = jsonArray![WebServiceResponseKey.fechaFin] as! String
+                                 
+                                 pendienteJson[WebServiceResponseKey.pendienteStatus] = jsonArray![WebServiceResponseKey.pendienteStatus] as! Bool
+                                 
+                                 pendienteJson[WebServiceResponseKey.prioridad] = jsonArray![WebServiceResponseKey.prioridad] as! Int
+                                 
+                                 pendienteJson[WebServiceResponseKey.descripcion] = jsonArray![WebServiceResponseKey.descripcion] as! String
+                                 
+                                 pendienteJson[WebServiceResponseKey.usuariosAsignados] = ""
+                                 //jsonArray![WebServiceResponseKey.usuariosAsignados]
+                                 
+                                 print(pendienteJson.description)*/
+                                
+                                let categoriaId = jsonArray![WebServiceResponseKey.categoryIdMin]
+                                if categoriaId != nil{
+                                    NSUserDefaults.standardUserDefaults().setObject(categoriaId, forKey: WebServiceResponseKey.categoryId)
+                                }else{
+                                    NSUserDefaults.standardUserDefaults().setObject(categoria, forKey: WebServiceResponseKey.categoryId)
+                                    
+                                }
+                                
+                                let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! PendienteTableViewController
+                                vc.initial = false
+                                
+                                vc.idPendiente = jsonArray![WebServiceResponseKey.pendienteId] as! Int
+                                print(vc.idPendiente, categoriaId)
+                                self.navigationController!.pushViewController(vc, animated: true)
+                            break
+                        case "tarea":
+                            activity = "TareasViewController"
+                            let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! TareasTableViewController
+                            vc.idTarea = jsonArray![WebServiceResponseKey.subPendienteId] as! Int
+                            
+                            self.navigationController!.pushViewController(vc, animated: true)
+                            break
+                        default:
+                            
+                            break
+                        }
                     
                     
                     
+                    }
 
                    // self.presentViewController( vc , animated: true, completion: nil)
 
