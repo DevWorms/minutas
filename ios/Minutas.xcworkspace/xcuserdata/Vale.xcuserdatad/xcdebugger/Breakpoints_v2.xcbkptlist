@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/CerrarPendienteViewController.swift"
-            timestampString = "506058529.694357"
+            timestampString = "506059311.200069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "ok(_:)"
             landmarkType = "7">
          </BreakpointContent>
