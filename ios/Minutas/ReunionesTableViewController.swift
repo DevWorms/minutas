@@ -130,36 +130,6 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
     }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "capturarMinutas"{
-            
-            let json = reuniones[noCellReunion]
-            
-            (segue.destinationViewController as! NewMinutaViewController).delegate = self
-            (segue.destinationViewController as! NewMinutaViewController).temaMinuta = (json[WebServiceResponseKey.nombreReunion] as? String)!
-            (segue.destinationViewController as! NewMinutaViewController).fechaMinuta = (json[WebServiceResponseKey.diaReunion] as? String)!
-            (segue.destinationViewController as! NewMinutaViewController).horaMinuta = (json[WebServiceResponseKey.horaReunion] as? String)!
-            (segue.destinationViewController as! NewMinutaViewController).objMinuta = (json[WebServiceResponseKey.objetivoReunion] as? String)!
-            (segue.destinationViewController as! NewMinutaViewController).reunionID = String((json[WebServiceResponseKey.reunionId] as? Int)!)
-            
-        }else if segue.identifier ==  "nuevaReunion"{
-            (segue.destinationViewController as! NewReunionViewController).delegate = self
-        }else if segue.identifier == "nuevoPendiente" {
-            
-            let json = reuniones[noCellReunionPend]
-            let rID = (json[WebServiceResponseKey.reunionId] as? Int)!
-            
-            (segue.destinationViewController as! NewPendienteViewController).delegate = self
-            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
-            (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
-            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
-        }else if segue.identifier == "pendientes" {
-            (segue.destinationViewController as! PendienteTableViewController).initial = false
-        }
-    }
-    
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         
         if identifier == "pendientes" {
@@ -290,5 +260,35 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         self.presentViewController( vc , animated: true, completion: nil)
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "capturarMinutas"{
+            
+            let json = reuniones[noCellReunion]
+            
+            (segue.destinationViewController as! NewMinutaViewController).delegate = self
+            (segue.destinationViewController as! NewMinutaViewController).temaMinuta = (json[WebServiceResponseKey.nombreReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).fechaMinuta = (json[WebServiceResponseKey.diaReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).horaMinuta = (json[WebServiceResponseKey.horaReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).objMinuta = (json[WebServiceResponseKey.objetivoReunion] as? String)!
+            (segue.destinationViewController as! NewMinutaViewController).reunionID = String((json[WebServiceResponseKey.reunionId] as? Int)!)
+            
+        }else if segue.identifier ==  "nuevaReunion"{
+            (segue.destinationViewController as! NewReunionViewController).delegate = self
+        }else if segue.identifier == "nuevoPendiente" {
+            
+            let json = reuniones[noCellReunionPend]
+            let rID = (json[WebServiceResponseKey.reunionId] as? Int)!
+            
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
+            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
+        }else if segue.identifier == "pendientes" {
+            (segue.destinationViewController as! PendienteTableViewController).initial = false
+        }
+    }
+
     
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D1005A4A55D22CF95743215 /* Pods_Minutas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D75CF8391AD6228EB36E859 /* Pods_Minutas.framework */; };
+		3B50F79F1E2C7F04009534A9 /* CerrarTareaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B50F79E1E2C7F04009534A9 /* CerrarTareaViewController.swift */; };
 		3BCFDF221E27111000FF0C31 /* PendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCFDF211E27111000FF0C31 /* PendViewController.swift */; };
 		3BE3EC111E230DEB0056AE83 /* ReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */; };
 		3BE3EC131E231C7C0056AE83 /* AsuntoReunionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3B50F79E1E2C7F04009534A9 /* CerrarTareaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CerrarTareaViewController.swift; sourceTree = "<group>"; };
 		3BCFDF211E27111000FF0C31 /* PendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendViewController.swift; sourceTree = "<group>"; };
 		3BE3EC101E230DEB0056AE83 /* ReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReunionCell.swift; sourceTree = "<group>"; };
 		3BE3EC121E231C7C0056AE83 /* AsuntoReunionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsuntoReunionCell.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */,
 				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
 				3BE3EC141E25D7A60056AE83 /* CerrarPendienteViewController.swift */,
+				3B50F79E1E2C7F04009534A9 /* CerrarTareaViewController.swift */,
 				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
 				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
 				49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */,
@@ -612,6 +615,7 @@
 				3BE3EC111E230DEB0056AE83 /* ReunionCell.swift in Sources */,
 				3BE3EC131E231C7C0056AE83 /* AsuntoReunionCell.swift in Sources */,
 				49C7464E1DF4E4AD00985CE1 /* NewReunionViewController.swift in Sources */,
+				3B50F79F1E2C7F04009534A9 /* CerrarTareaViewController.swift in Sources */,
 				49CC59B21DF000520033E472 /* LlamadaAPI.swift in Sources */,
 				49C746581DF4F51900985CE1 /* NewAsuntosViewController.swift in Sources */,
 				3BE3EC151E25D7A60056AE83 /* CerrarPendienteViewController.swift in Sources */,

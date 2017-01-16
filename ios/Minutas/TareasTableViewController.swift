@@ -10,7 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, NewSearchViewControllerDelegate {
+class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, NewSearchViewControllerDelegate, CerrarTareaViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -18,6 +18,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     var tareas = [[String : AnyObject]]()
     var idTarea = Int()
+    var tarea = ""
     
     func newConversacionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
@@ -25,6 +26,15 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     
     func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadTareas()
+    }
+    
+    func cerrarTareaDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func cerrarTareaDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
         loadTareas()
     }
@@ -50,6 +60,21 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clearColor()
         return headerView
+    }
+    
+    func switchChanged(sender: UISwitch) {
+        let json = tareas[sender.tag]
+        
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        tarea = json["nombre_sub_pendiente"] as! String
+        
+        if !sender.on {
+            sender.setOn(true, animated: true)
+            
+        } else {
+            performSegueWithIdentifier("cerrarTarea", sender: nil)
+            
+        }
     }
     
     func buttonAsignar(sender:UIButton) {
@@ -87,7 +112,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         cell.responsableTarea.text = json[WebServiceResponseKey.responsable] as? String
         
         cell.tareaCompletaSwitch.tag = indexPath.row
-        //cell.tareaCompletaSwitch.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.tareaCompletaSwitch.addTarget(self, action: #selector(self.switchChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         cell.asignarBtn.tag = indexPath.row
         cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -116,12 +141,6 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         return self.tareas.count
     }
     
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        
-    }
-    
     func loadTareas() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
@@ -133,10 +152,10 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         print(apiKey, userId)
         
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.tareas)\(userId)/\(apiKey)/\(pendienteId)")!
-        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonTareas).resume()
     }
     
-    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+    func parseJsonTareas(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
         if error != nil {
             print(error!)
         } else if urlResponse != nil {
@@ -277,6 +296,11 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
             (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 5
             (segue.destinationViewController as! SearchUserViewController).delegate = self
             (segue.destinationViewController as! SearchUserViewController).idAsignar = self.idTarea
+            
+        }else if segue.identifier == "cerrarTarea"{
+            (segue.destinationViewController as! CerrarTareaViewController).delegate = self
+            (segue.destinationViewController as! CerrarTareaViewController).idTarea = self.idTarea
+            (segue.destinationViewController as! CerrarTareaViewController).nameTarea = self.tarea
         }
         
         
