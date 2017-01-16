@@ -10,14 +10,24 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate {
+class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, NewSearchViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     @IBOutlet weak var tableView: UITableView!
     
     var tareas = [[String : AnyObject]]()
-    var idTarea:Int = 0
+    var idTarea = Int()
+    
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        //loadFavoritos()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,18 +45,19 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func uploadFile(sender: AnyObject) {
-       
-
-    }
-   
- 
-    
     // Make the background color show through
      func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clearColor()
         return headerView
+    }
+    
+    func buttonAsignar(sender:UIButton) {
+        let json = tareas[sender.tag]
+        //NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        
+        self.performSegueWithIdentifier("asignarTarea", sender: nil)
     }
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -59,7 +70,17 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
         cell.responsableTarea.text = json[WebServiceResponseKey.responsable] as? String
         
-       // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
+        cell.tareaCompletaSwitch.tag = indexPath.row
+        //cell.tareaCompletaSwitch.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.asignarBtn.tag = indexPath.row
+        cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.reasignarBtn.tag = indexPath.row
+        //cell.reasignarBtn.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        cell.delegarBtn.tag = indexPath.row
+        //cell.delegarBtn.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell
         
@@ -84,15 +105,6 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         
     }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "nuevoTarea"{
-            (segue.destinationViewController as! NewTareaViewController).delegate = self
-        }
-    }
-    
     
     func loadTareas() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
@@ -121,20 +133,24 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
                         }
                         
                         
-                        if self.idTarea > 0 {
+                        //if self.idTarea > 0 {
                             
                             for tarea in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]] {
-                                if self.idTarea == tarea[WebServiceResponseKey.subPendienteId] as! Int{
+                                //if self.idTarea == tarea[WebServiceResponseKey.subPendienteId] as! Int{
                                     self.tareas.append(tarea)
-                                }
+                                //}
                                 
                             }
+                        
+                        //let t = self.tareas[0]
+                        //let ta = t[WebServiceResponseKey.subPendienteId]
+                        //print(ta)
                             
                             
-                        }
-                        else{
-                            self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
-                        }
+                        //}
+                        //else{
+                        //    self.tareas.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        //}
 
                         
                         self.tableView?.reloadData()
@@ -223,6 +239,30 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
         self.presentViewController( vc , animated: true, completion: nil)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "nuevoTarea"{
+            (segue.destinationViewController as! NewTareaViewController).delegate = self
+            
+        }else if segue.identifier == "asignarTarea" {
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 3
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.idTarea
+            
+        }else if segue.identifier == "reasignarTarea" {
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 4
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            //(segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+            
+        }else if segue.identifier == "delegarTarea" {
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 5
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            //(segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+        }
+        
         
     }
     

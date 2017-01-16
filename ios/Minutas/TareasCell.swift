@@ -12,9 +12,15 @@ import UIKit
 class TareasCell: GenericCell {
   
     @IBOutlet weak var responsableTarea: UILabel!
-    @IBOutlet weak var documentosAttachados: UILabel!
     @IBOutlet weak var tituloTarea: UILabel!
     @IBOutlet weak var tareaCompletaSwitch: UISwitch!
+    @IBOutlet weak var asignarBtn: UIButton!
+    @IBOutlet weak var reasignarBtn: UIButton!
+    @IBOutlet weak var delegarBtn: UIButton!
+    @IBOutlet weak var addComentarioBtn: UIButton!
+    @IBOutlet weak var comentariosBtn: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         

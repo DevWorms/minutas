@@ -27,7 +27,11 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     var anadirUsuarioSolamente = 0
     // 0 conversacion
     // 1 añadir usuario conversacion
-    // 2 asignar usuario a pendiente∫
+    // 2 asignar usuario a pendiente
+    // 3 asignar usuario tarea
+    // 4 reasignar usuario tarea
+    // 5 delegar tarea
+    
     var caminoFavorito = false
     var idAsignar = Int()
     
@@ -224,10 +228,12 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversacionAddUser)"
                         }else if anadirUsuarioSolamente == 2{
                             
-                            
-                            
-                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\(WebServiceRequestParameter.usuariosAsignados)=\(usuarios)"
+                           parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\(WebServiceRequestParameter.usuariosAsignados)=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\("pendientes/asignar")"
+                        }else if anadirUsuarioSolamente == 3{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("tasks/asignar")"
                         }
                         
                         print(url)

@@ -196,29 +196,6 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         loadPendiente()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "nuevoPendiente" {
-            (segue.destinationViewController as! NewPendienteViewController).delegate = self
-            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.categoryId
-            (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
-            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
-        }
-        
-        else if segue.identifier == "pend"{
-            (segue.destinationViewController as! PendViewController).pendienteJson = self.pendienteJson
-            (segue.destinationViewController as! PendViewController).delegate = self
-        } else if segue.identifier == "cerrarPendiente" {
-            
-            let json = pendientes[noCellReunionPend]
-            let rID = (json[WebServiceResponseKey.pendienteId] as? Int)!
-            
-            (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
-            (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = rID
-            (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = json[WebServiceResponseKey.nombrePendiente] as? String
-        }
-    }
-    
     func loadPendienteInit() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
@@ -350,6 +327,30 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         self.presentViewController( vc , animated: true, completion: nil)
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "nuevoPendiente" {
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.categoryId
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
+        }
+            
+        else if segue.identifier == "pend"{
+            (segue.destinationViewController as! PendViewController).pendienteJson = self.pendienteJson
+            (segue.destinationViewController as! PendViewController).delegate = self
+        } else if segue.identifier == "cerrarPendiente" {
+            
+            let json = pendientes[noCellReunionPend]
+            let rID = (json[WebServiceResponseKey.pendienteId] as? Int)!
+            
+            (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
+            (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = rID
+            (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = json[WebServiceResponseKey.nombrePendiente] as? String
+        }
+    }
+
     
 
     
