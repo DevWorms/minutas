@@ -237,18 +237,14 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         
         let prioridadSelected = NSUserDefaults.standardUserDefaults().valueForKey("prioridadSelected")!
         
-        
-        if  ( !((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
-            
-            ((txtf_responsable.text?.isEmpty)! && autoasignar.on)  ||
-        
-        
-        !((txtf_responsable.text?.isEmpty)!) && autoasignar.on == false )
+        if  ( !((txtf_responsable.text?.isEmpty)!) && autoasignar.on  ||
+              (txtf_responsable.text?.isEmpty)! && autoasignar.on  ||
+              !((txtf_responsable.text?.isEmpty)!) && autoasignar.on == false )
 
         
             && !((txtf_descripcion.text?.isEmpty)!)
             && !((txtf_name.text?.isEmpty)!)
-            && prioridadSelected as? Int > 0{
+            && prioridadSelected as? Int > 0 {
             
         
         
@@ -262,12 +258,18 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                 styler.dateFormat = "yyyy-MM-dd"
                 let fechaFinal = styler.stringFromDate(datePicketFechaTermino.date)
         
-                let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+                /*let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
                 
-                var responsables = txtf_responsable.text!
+                print(apodo)
+                return*/
+                
+                let responsables = txtf_responsable.text!
+                var autoasig = 0
                 if autoasignar.on {
-                    
-                    if ((txtf_responsable.text?.isEmpty) != nil){
+                    autoasig = 1
+                }
+                
+                   /* if ((txtf_responsable.text?.isEmpty) != nil){
                         responsables = apodo!
                     }else{
                         if txtf_responsable.text![txtf_responsable.text!.endIndex.predecessor()] != ","{
@@ -286,9 +288,9 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                         
                     }
                     print(txtf_responsable.text!)
-                }
+               }*/
                 
-                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)"
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)&\("auto_asignar")=\(autoasig)"
         
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                     let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(self.endPointPendiente)")!)
