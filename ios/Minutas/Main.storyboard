@@ -595,7 +595,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W6W-iS-bII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5750" y="461"/>
+            <point key="canvasLocation" x="6942" y="459"/>
         </scene>
         <!--Categorías-->
         <scene sceneID="glm-5N-2oc">
@@ -712,13 +712,12 @@
                     </navigationItem>
                     <connections>
                         <segue destination="8wR-kl-PI0" kind="show" identifier="reunion" id="Jwn-G5-OGI"/>
-                        <segue destination="qGN-dN-Ahd" kind="presentation" identifier="login" id="OUA-R3-m9x"/>
                         <segue destination="5Zs-WU-7nf" kind="show" identifier="categoria" id="jBp-a8-zAI"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7dc-T3-vtw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3796" y="1221"/>
+            <point key="canvasLocation" x="6943" y="1226"/>
         </scene>
         <!--New Category View Controller-->
         <scene sceneID="SDh-VB-3Lf">
@@ -792,7 +791,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEC-Bc-T9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3484" y="1984"/>
+            <point key="canvasLocation" x="6942" y="1984"/>
         </scene>
         <!--Reuniones-->
         <scene sceneID="8y0-yC-jhM">
@@ -813,7 +812,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7c-sv-1jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7980" y="460"/>
+            <point key="canvasLocation" x="9012" y="460"/>
         </scene>
         <!--Calendario-->
         <scene sceneID="rxc-nm-V2n">
@@ -889,7 +888,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XS-UJ-axd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9377" y="2749"/>
+            <point key="canvasLocation" x="6118" y="1187"/>
         </scene>
         <!--Índice eficiencia-->
         <scene sceneID="5R2-Qz-Uog">
@@ -1092,7 +1091,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ood-Li-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9377" y="460"/>
+            <point key="canvasLocation" x="6118" y="459"/>
         </scene>
         <!--Gráficas-->
         <scene sceneID="uDb-4c-vZc">
@@ -1215,7 +1214,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reg-o6-pdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4153" y="1984"/>
+            <point key="canvasLocation" x="7730" y="1984"/>
         </scene>
         <!--New Pendiente View Controller-->
         <scene sceneID="7TG-UP-vqg">
@@ -1385,7 +1384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3K-0l-YmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6768.8000000000002" y="1981.2593703148427"/>
+            <point key="canvasLocation" x="8556" y="1979"/>
         </scene>
         <!--Tareas-->
         <scene sceneID="9oC-bY-D2u">
@@ -1423,12 +1422,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufk-4C-KG7">
                                                     <rect key="frame" x="266" y="63" width="25" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="BF607A86-AB15-4039-8CFD-F6DBBE8E7782"/>
+                                                    <state key="normal" image="2518129D-777E-434C-852C-5D450D9755D3"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-ue-vn2">
                                                     <rect key="frame" x="347" y="36" width="25" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="CF572A51-0343-4D37-BFBE-674B24B62A46"/>
+                                                    <state key="normal" image="3ADEF3D4-5265-4E63-9C24-8626C1C63B45"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="245" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZu-JL-RND">
                                                     <rect key="frame" x="66" y="35" width="158" height="31"/>
@@ -1510,7 +1509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RqV-oX-RTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5527" y="2749"/>
+            <point key="canvasLocation" x="6118" y="2749"/>
         </scene>
         <!--New Tarea View Controller-->
         <scene sceneID="ZBi-uc-omY">
@@ -1658,7 +1657,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jQ-a7-zMK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5526" y="3473"/>
+            <point key="canvasLocation" x="6118" y="3493"/>
         </scene>
         <!--Reuniones-->
         <scene sceneID="kdE-VC-Ivz">
@@ -1775,7 +1774,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDk-eb-79X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7980" y="1222.9385307346329"/>
+            <point key="canvasLocation" x="9012" y="1218"/>
         </scene>
         <!--New Minuta View Controller-->
         <scene sceneID="pb5-PR-ZrE">
@@ -1914,7 +1913,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55W-3D-VX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8919.2000000000007" y="1983.9580209895055"/>
+            <point key="canvasLocation" x="9998" y="1979"/>
         </scene>
         <!--Pend View Controller-->
         <scene sceneID="uiU-3M-HOi">
@@ -1938,12 +1937,6 @@
                                         <barButtonItem key="leftBarButtonItem" title="Cancelar" style="plain" id="AN2-eY-J8t">
                                             <connections>
                                                 <action selector="cancelar:" destination="saP-v3-pdE" id="N7a-Zw-ePI"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="OK" style="done" id="4Nj-A7-aWk">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <action selector="ok:" destination="saP-v3-pdE" id="N72-jr-HoI"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1975,11 +1968,6 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRw-gS-VO8">
-                                        <rect key="frame" x="8" y="129" width="30" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="ic_date"/>
-                                    </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Descripción" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uMr-NU-CJD">
                                         <rect key="frame" x="8" y="38" width="232" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2039,27 +2027,20 @@
                                         </cells>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zz-Dw-gZM">
-                                        <rect key="frame" x="101" y="130" width="15" height="27"/>
+                                        <rect key="frame" x="62" y="131" width="15" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ic_attach"/>
                                         <connections>
                                             <action selector="adjuntarArchivo:" destination="saP-v3-pdE" eventType="touchUpInside" id="WkQ-UP-2h5"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-5h-bx8">
-                                        <rect key="frame" x="204" y="130" width="32" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="comentario"/>
-                                        <connections>
-                                            <action selector="verComentarios:" destination="saP-v3-pdE" eventType="touchUpInside" id="fhi-jp-hui"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRX-FL-Ebv">
-                                        <rect key="frame" x="51" y="131" width="30" height="27"/>
+                                        <rect key="frame" x="8" y="131" width="30" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="adduser"/>
                                         <connections>
                                             <action selector="agregarUser:" destination="saP-v3-pdE" eventType="touchUpInside" id="Uct-YE-8UV"/>
+                                            <segue destination="f5W-kk-2hy" kind="presentation" identifier="asignarPendiente" id="yn2-1d-H5l"/>
                                         </connections>
                                     </button>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g7S-ei-wsC">
@@ -2103,11 +2084,19 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgs-su-62C">
-                                        <rect key="frame" x="146" y="129" width="31" height="29"/>
+                                        <rect key="frame" x="109" y="131" width="31" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="mensaje"/>
                                         <connections>
                                             <action selector="agregarComentarios:" destination="saP-v3-pdE" eventType="touchUpInside" id="mJx-w6-Erd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-5h-bx8">
+                                        <rect key="frame" x="165" y="130" width="32" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="comentario"/>
+                                        <connections>
+                                            <action selector="verComentarios:" destination="saP-v3-pdE" eventType="touchUpInside" id="fhi-jp-hui"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2130,7 +2119,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oB5-fU-t9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4719" y="2749"/>
+            <point key="canvasLocation" x="7729" y="2749"/>
         </scene>
         <!--New Reunion View Controller-->
         <scene sceneID="DT7-jY-p7t">
@@ -2320,7 +2309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Y2-eW-SSR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8184.8000000000002" y="1982.1589205397304"/>
+            <point key="canvasLocation" x="9265" y="1979"/>
         </scene>
         <!--conversaciones-->
         <scene sceneID="A7o-m6-ZhT">
@@ -2526,7 +2515,7 @@
                 <tapGestureRecognizer id="fDa-st-Bnr"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6M-eq-TsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11780" y="1983.9580209895055"/>
+            <point key="canvasLocation" x="11305" y="2104"/>
         </scene>
         <!--Conversaciones-->
         <scene sceneID="7Ai-XR-h2c">
@@ -2566,7 +2555,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.057483343909999998" green="0.057483343909999998" blue="0.057483343909999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
-                                    <navigationItem title="usuarios" id="bdE-3B-p45">
+                                    <navigationItem title="Usuarios" id="bdE-3B-p45">
                                         <barButtonItem key="leftBarButtonItem" title="Cancelar" style="plain" id="f9i-ZH-Map">
                                             <connections>
                                                 <action selector="cancel:" destination="f5W-kk-2hy" id="Oyn-BA-Exs"/>
@@ -2652,7 +2641,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gh-lG-Di3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="13384.799999999999" y="1980.3598200899551"/>
+            <point key="canvasLocation" x="12446" y="2104"/>
         </scene>
         <!--notificaciones-->
         <scene sceneID="EUM-X5-74D">
@@ -3069,7 +3058,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJF-Pi-oso" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3900" y="2749"/>
+            <point key="canvasLocation" x="5446" y="2749"/>
         </scene>
         <!--Pendientes-->
         <scene sceneID="jKj-jX-JP2">
@@ -3090,7 +3079,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8B7-xx-u3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6769" y="460"/>
+            <point key="canvasLocation" x="7729" y="459"/>
         </scene>
         <!--Configuración-->
         <scene sceneID="YnP-FP-pHD">
@@ -3118,7 +3107,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eOR-LY-M1P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Buscador" image="lupa" id="9Od-gd-ak2"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="mOj-eg-Jp5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="mOj-eg-Jp5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3152,10 +3141,10 @@
                                 <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="81" id="uoI-fQ-mfF" customClass="BuscadorCell" customModule="Minutas" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="376" height="81"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uoI-fQ-mfF" id="9JG-ab-DDx">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwT-DI-4f4">
@@ -3229,7 +3218,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BF607A86-AB15-4039-8CFD-F6DBBE8E7782" width="48" height="48">
+        <image name="2518129D-777E-434C-852C-5D450D9755D3" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3434,7 +3423,7 @@ Lcgt0C3TLdgt5y3rLfIt+i4HLgwuDi4QLhUuHS4gLiUuLS4wLkIuRS5KAAAAAAAAAgEAAAAAAAAAQQAA
 AAAAAAAAAAAAAAAALkw
 </mutableData>
         </image>
-        <image name="CF572A51-0343-4D37-BFBE-674B24B62A46" width="48" height="48">
+        <image name="3ADEF3D4-5265-4E63-9C24-8626C1C63B45" width="48" height="48">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3653,7 +3642,6 @@ AAAAAAAAAAAAAAAALkw
         <image name="ic_attach" width="64" height="146"/>
         <image name="ic_chat" width="32" height="32"/>
         <image name="ic_check_box_outline_blank" width="24" height="24"/>
-        <image name="ic_date" width="48" height="48"/>
         <image name="ic_facebook_white_36pt" width="36" height="36"/>
         <image name="ic_linkedin_white_36pt" width="36" height="36"/>
         <image name="ic_lock" width="48" height="48"/>
@@ -3675,10 +3663,10 @@ AAAAAAAAAAAAAAAALkw
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jwn-G5-OGI"/>
         <segue reference="Com-2J-zQf"/>
         <segue reference="tIp-NX-JgW"/>
         <segue reference="MFI-jU-CMm"/>
-        <segue reference="OyL-kS-Hjm"/>
+        <segue reference="yn2-1d-H5l"/>
+        <segue reference="Jwn-G5-OGI"/>
     </inferredMetricsTieBreakers>
 </document>

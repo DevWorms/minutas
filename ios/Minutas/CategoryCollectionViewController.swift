@@ -162,13 +162,12 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         
         let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
         
-        
         let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
-           self.cerrarSesion()
+            self.cerrarSesion()
             
-            self.performSegueWithIdentifier("login", sender: nil)
+            //self.performSegueWithIdentifier("login", sender: nil)
         })
         alertController.addAction(deleteAction)
         
@@ -255,6 +254,9 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
         NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
         NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
+        self.presentViewController( vc , animated: true, completion: nil)
         
     }
     

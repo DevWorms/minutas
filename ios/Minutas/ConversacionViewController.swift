@@ -226,7 +226,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "adduser"{
-            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = true
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 1
             (segue.destinationViewController as! SearchUserViewController).delegate = self
             
         }

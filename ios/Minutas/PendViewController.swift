@@ -13,7 +13,7 @@ protocol PendViewControllerDelegate: NSObjectProtocol  {
     func pendienteDidFinish()
 }
 
-class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, NewSearchViewControllerDelegate {
     
     weak var delegate: PendViewControllerDelegate?
     
@@ -33,6 +33,16 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var categories = [[String : AnyObject]]()
     var pendienteIDm = Int()
     var nameCat = String?()
+    
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        //loadFavoritos()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -291,6 +301,14 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "asignarPendiente"{
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 2
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+        }
+    }
 
     /*
     // MARK: - Navigation

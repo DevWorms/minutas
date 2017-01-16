@@ -24,8 +24,12 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     var idUsuarios = [Int]()
     var isFav = [Int]()
     var searchActive : Bool = false
-    var anadirUsuarioSolamente = false
+    var anadirUsuarioSolamente = 0
+    // 0 conversacion
+    // 1 añadir usuario conversacion
+    // 2 asignar usuario a pendiente∫
     var caminoFavorito = false
+    var idAsignar = Int()
     
     lazy var visibleResults: [String] = self.usuarios
     
@@ -37,8 +41,10 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.loadUsuarios("@")
         txtf_responsable.delegate = self
-       
-            txtf_titulo.hidden = anadirUsuarioSolamente
+        
+        if anadirUsuarioSolamente != 0 {
+            txtf_titulo.hidden = true
+        }
         
         if caminoFavorito == true {
             
@@ -207,15 +213,21 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         print(url)
                         
                         
-                        if anadirUsuarioSolamente == false{
+                        if anadirUsuarioSolamente == 0{
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.usuarios)=\(usuarios)&\(WebServiceRequestParameter.titulo)=\(titulo)"
                             url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversacion)"
-                        }else{
+                        }else if anadirUsuarioSolamente == 1{
                             
                             let conversacionId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.conversacionId)
                           
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.conversacionId)=\(conversacionId)&\(WebServiceRequestParameter.users)=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.conversacionAddUser)"
+                        }else if anadirUsuarioSolamente == 2{
+                            
+                            
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\(WebServiceRequestParameter.usuariosAsignados)=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("pendientes/asignar")"
                         }
                         
                         print(url)
@@ -374,7 +386,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         for iUser in j {
                             
-                            if (iUser as! [String])[0] == "Usuario" {
+                            if iUser[0] as! String == "Usuario" {
                                 if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
                                     self.usuarios.append(strApodo)
                                 }
