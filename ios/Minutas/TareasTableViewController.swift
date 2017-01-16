@@ -62,6 +62,27 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         return headerView
     }
     
+    func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            dispatch_async(dispatch_get_main_queue()) {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                    vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
+                        
+                        self.loadTareas()
+                        
+                        })
+                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                } else {
+                    print("El JSON de respuesta es inválido.")
+                }
+            }
+        }
+    }
+    
     func switchChanged(sender: UISwitch) {
         let json = tareas[sender.tag]
         
@@ -69,7 +90,24 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         tarea = json["nombre_sub_pendiente"] as! String
         
         if !sender.on {
-            sender.setOn(true, animated: true)
+            //sender.setOn(true, animated: true)
+            let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+            let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+            
+            let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idTarea)"
+            let url = "\(WebServiceEndpoint.baseUrl)\("tasks/set/reabrir")"
+            
+            if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                
+                let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                urlRequest.HTTPMethod = "POST"
+                NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+                
+            } else {
+                
+                print("Error de codificación de caracteres.")
+            }
+
             
         } else {
             performSegueWithIdentifier("cerrarTarea", sender: nil)
