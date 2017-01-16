@@ -26,7 +26,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     func newConversacionControllerDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
-        //loadFavoritos()
+        loadTareas()
     }
     
     override func viewDidLoad() {
@@ -54,10 +54,26 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     func buttonAsignar(sender:UIButton) {
         let json = tareas[sender.tag]
-        //NSUserDefaults.standardUserDefaults().setInteger(json[WebServiceResponseKey.pendienteId] as! Int, forKey: WebServiceResponseKey.pendienteId)
+        
         idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
         
         self.performSegueWithIdentifier("asignarTarea", sender: nil)
+    }
+    
+    func buttonReAsignar(sender:UIButton) {
+        let json = tareas[sender.tag]
+        
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        
+        self.performSegueWithIdentifier("reasignarTarea", sender: nil)
+    }
+    
+    func buttonDelegar(sender:UIButton) {
+        let json = tareas[sender.tag]
+        
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        
+        self.performSegueWithIdentifier("delegarTarea", sender: nil)
     }
     
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,10 +93,10 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         cell.reasignarBtn.tag = indexPath.row
-        //cell.reasignarBtn.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.reasignarBtn.addTarget(self, action: #selector(self.buttonReAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         cell.delegarBtn.tag = indexPath.row
-        //cell.delegarBtn.addTarget(self, action: #selector(.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.delegarBtn.addTarget(self, action: #selector(self.buttonDelegar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell
         
@@ -255,12 +271,12 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         }else if segue.identifier == "reasignarTarea" {
             (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 4
             (segue.destinationViewController as! SearchUserViewController).delegate = self
-            //(segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.idTarea
             
         }else if segue.identifier == "delegarTarea" {
             (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 5
             (segue.destinationViewController as! SearchUserViewController).delegate = self
-            //(segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.idTarea
         }
         
         

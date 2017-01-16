@@ -234,6 +234,14 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\("tasks/asignar")"
+                        }else if anadirUsuarioSolamente == 4{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\(WebServiceRequestParameter.usuariosAsignados)=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("tasks/set/reasignar")"
+                        }else if anadirUsuarioSolamente == 5{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("tasks/delegar")"
                         }
                         
                         print(url)
