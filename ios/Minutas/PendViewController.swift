@@ -13,7 +13,7 @@ protocol PendViewControllerDelegate: NSObjectProtocol  {
     func pendienteDidFinish()
 }
 
-class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, NewSearchViewControllerDelegate {
+class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, NewSearchViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     weak var delegate: PendViewControllerDelegate?
     
@@ -30,7 +30,6 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var cambiarFechaBtn: UIButton!
     @IBOutlet weak var addComentario: UIButton!
     @IBOutlet weak var addUser: UIButton!
-    
     
     var pendienteJson = [String : AnyObject]()
     var pickerData = [String]()
@@ -126,6 +125,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     @IBAction func verComentarios(sender: AnyObject) {
+        self.performSegueWithIdentifier("showComentarios", sender: nil)
     }
     
     @IBAction func cambiarCategoria(sender: AnyObject) {
@@ -321,7 +321,23 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 2
             (segue.destinationViewController as! SearchUserViewController).delegate = self
             (segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
+            
+        }else if segue.identifier == "showComentarios" {
+            let vc = segue.destinationViewController as! ComentariosViewController
+            
+            vc.idPaComentarios = self.pendienteIDm
+            vc.endpoint = "pendientes/comments/"
+            
+            let controller = vc.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
         }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
 
     /*
