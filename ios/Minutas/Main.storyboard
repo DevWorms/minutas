@@ -888,7 +888,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XS-UJ-axd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6118" y="1187"/>
+            <point key="canvasLocation" x="6118" y="1226"/>
         </scene>
         <!--Índice eficiencia-->
         <scene sceneID="5R2-Qz-Uog">
@@ -1210,6 +1210,7 @@
                         <segue destination="X26-Ow-OA9" kind="show" identifier="tareas" id="tIp-NX-JgW"/>
                         <segue destination="oRX-Vg-pHW" kind="presentation" identifier="cerrarPendiente" id="eNv-bc-Ana"/>
                         <segue destination="saP-v3-pdE" kind="presentation" identifier="pend" id="Xwf-ea-QVx"/>
+                        <segue destination="Hlw-BS-FGB" kind="presentation" identifier="cerrarTarea" id="gHp-Li-Azp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reg-o6-pdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1662,7 +1663,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jQ-a7-zMK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5724" y="3512"/>
+            <point key="canvasLocation" x="6118" y="3458"/>
         </scene>
         <!--Reuniones-->
         <scene sceneID="kdE-VC-Ivz">
@@ -2124,7 +2125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oB5-fU-t9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7729" y="2749"/>
+            <point key="canvasLocation" x="7983" y="3083"/>
         </scene>
         <!--New Reunion View Controller-->
         <scene sceneID="DT7-jY-p7t">
@@ -3286,7 +3287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OuW-iq-0Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6605.6000000000004" y="3510.4947526236883"/>
+            <point key="canvasLocation" x="7230" y="3083"/>
         </scene>
     </scenes>
     <resources>
@@ -3325,10 +3326,11 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jwn-G5-OGI"/>
         <segue reference="DIM-it-vlr"/>
-        <segue reference="e2b-m4-vOf"/>
+        <segue reference="Jwn-G5-OGI"/>
         <segue reference="tIp-NX-JgW"/>
-        <segue reference="Lgt-JW-Pyb"/>
+        <segue reference="gHp-Li-Azp"/>
+        <segue reference="MFI-jU-CMm"/>
+        <segue reference="yn2-1d-H5l"/>
     </inferredMetricsTieBreakers>
 </document>

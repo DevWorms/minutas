@@ -10,7 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, CerrarPendienteViewControllerDelegate, PendViewControllerDelegate {
+class PendienteTableViewController: UITableViewController, NewPendienteControllerDelegate, CerrarPendienteViewControllerDelegate, PendViewControllerDelegate, CerrarTareaViewControllerDelegate {
     
     @IBOutlet weak var buttonOk: UIBarButtonItem!
     
@@ -18,9 +18,12 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     var pendientes = [[String : AnyObject]]()
     var pendienteJson = [String : AnyObject]()
-    var noCellReunionPend : Int = 0
     var initial = true
     var idPendiente: Int = 0
+    
+    var rNombrePend = String()
+    var rIdPend = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -34,12 +37,12 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             loadPendiente()
         }
     }
- 
+    
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,12 +52,34 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         let json = pendientes[sender.tag]
         
+        var idProvisional = Int()
+        var nameProvisional = String()
+        
         let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int
         
         if isChecked == 1 {
+            
             let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
             let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
             
+            if let provisional = json[WebServiceResponseKey.nombreSubPendientes] {
+                nameProvisional = (provisional as? String)!
+                idProvisional = (json[WebServiceResponseKey.subPendienteId] as? Int)!
+                
+                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idProvisional)"
+                let url = "\(WebServiceEndpoint.baseUrl)\("tasks/set/reabrir")"
+                
+                if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+                    
+                    let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+                    urlRequest.HTTPMethod = "POST"
+                    NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJsonReAbrir).resume()
+                    
+                } else {
+                    
+                    print("Error de codificación de caracteres.")
+                }
+            }else {
                 let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(json[WebServiceResponseKey.pendienteId] as! Int)"
                 
                 print(parameterString)
@@ -67,11 +92,25 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
                 } else {
                     print("Error de codificación de caracteres.")
                 }
-            
+            }
             
         } else {
-            self.noCellReunionPend = sender.tag
-            performSegueWithIdentifier("cerrarPendiente", sender: nil)
+            
+            if let provisional = json[WebServiceResponseKey.nombreSubPendientes] {
+                nameProvisional = (provisional as? String)!
+                idProvisional = (json[WebServiceResponseKey.subPendienteId] as? Int)!
+                
+                self.rIdPend = idProvisional
+                self.rNombrePend = nameProvisional
+                performSegueWithIdentifier("cerrarTarea", sender: nil)
+            }else {
+                idProvisional = (json[WebServiceResponseKey.pendienteId] as? Int)!
+                nameProvisional = (json[WebServiceResponseKey.nombrePendiente] as? String)!
+                
+                self.rIdPend = idProvisional
+                self.rNombrePend = nameProvisional
+                performSegueWithIdentifier("cerrarPendiente", sender: nil)
+            }
         }
     }
     
@@ -84,7 +123,12 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                            self.loadPendiente()
+                            
+                            if self.initial {
+                                self.loadPendienteInit()
+                            } else {
+                                self.loadPendiente()
+                            }
                         }
                         })
                     self.presentViewController(vc_alert, animated: true, completion: nil)
@@ -114,7 +158,11 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         let json = pendientes[indexPath.item]
         
-        cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
+        if let sub_pend = json[WebServiceResponseKey.nombreSubPendientes] {
+            cell.tituloPendiente.text = sub_pend as? String
+        } else {
+            cell.tituloPendiente.text = json[WebServiceResponseKey.nombrePendiente] as? String
+        }
         
         let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int //
         
@@ -137,9 +185,16 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         cell.checkBox.tag = indexPath.row
         cell.checkBox.addTarget(self, action: #selector(PendienteTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
-        cell.btnTareas.tag = indexPath.row
-        cell.btnTareas.addTarget(self, action: #selector(PendienteTableViewController.buttonClickedTareas(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-       
+        if !self.initial {
+            cell.btnTareas.hidden = false
+            cell.btnTareas.tag = indexPath.row
+            cell.btnTareas.addTarget(self, action: #selector(PendienteTableViewController.buttonClickedTareas(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        } else {
+            cell.btnTareas.hidden = true
+        }
+        
+        
+        
         return cell
     }
     
@@ -178,6 +233,20 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     
     func cerrarPendienteDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        if initial {
+            loadPendienteInit()
+            print("mm")
+        } else {
+            loadPendiente()
+        }
+    }
+    
+    func cerrarTareaDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func cerrarTareaDidFinish() {
         dismissViewControllerAnimated(true, completion: nil)
         if initial {
             loadPendienteInit()
@@ -342,16 +411,17 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             (segue.destinationViewController as! PendViewController).delegate = self
         } else if segue.identifier == "cerrarPendiente" {
             
-            let json = pendientes[noCellReunionPend]
-            let rID = (json[WebServiceResponseKey.pendienteId] as? Int)!
-            
             (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
-            (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = rID
-            (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = json[WebServiceResponseKey.nombrePendiente] as? String
+            (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = self.rIdPend
+            (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = self.rNombrePend
+        }else if segue.identifier == "cerrarTarea"{
+            (segue.destinationViewController as! CerrarTareaViewController).delegate = self
+            (segue.destinationViewController as! CerrarTareaViewController).idTarea = self.rIdPend
+            (segue.destinationViewController as! CerrarTareaViewController).nameTarea = self.rNombrePend
         }
     }
-
     
-
+    
+    
     
 }
