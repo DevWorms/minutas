@@ -20,6 +20,10 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     var pendienteJson = [String : AnyObject]()
     var initial = true
     var idPendiente: Int = 0
+    
+    var rNombrePend = String()
+    var rIdPend = Int()
+    
     var barButton:BBBadgeBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()

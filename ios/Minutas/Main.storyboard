@@ -3361,10 +3361,17 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="DIM-it-vlr"/>
+        <segue reference="JRs-HU-D0B"/>
+        <segue reference="Jwn-G5-OGI"/>
         <segue reference="OyL-kS-Hjm"/>
         <segue reference="zL4-1A-9Lg"/>
         <segue reference="e2b-m4-vOf"/>
         <segue reference="DIM-it-vlr"/>
+        <segue reference="tIp-NX-JgW"/>
+        <segue reference="gHp-Li-Azp"/>
+        <segue reference="MFI-jU-CMm"/>
+        <segue reference="yn2-1d-H5l"/>
         <segue reference="J9U-HL-Jh4"/>
     </inferredMetricsTieBreakers>
 </document>
