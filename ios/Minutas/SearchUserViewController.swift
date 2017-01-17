@@ -375,7 +375,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    //print(json)
+                    print(json)
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.usuarios.count > 0 {
                             self.usuarios.removeAll()
@@ -385,7 +385,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         print("Aqui")
                         
                         
-                        let j=json[WebServiceResponseKey.buscarResult] as! [AnyObject]
+                        let j = json[WebServiceResponseKey.buscarResult] as! [AnyObject]
                         /*
                         print(j)
                         print(j.count)
@@ -400,21 +400,25 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         for iUser in j {
                             
-                            if iUser[0] as! String == "Usuario" {
+                            
+                           // if let user = iUser[0][""] as? String{
+                                
+                            //    print(user)
+                                
                                 if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
                                     self.usuarios.append(strApodo)
+                               // }
+                                    
+                                //if let id = iUser[3]["user_id"] as? Int {
+                                    self.idUsuarios.append((iUser[3]["user_id"] as? Int)!)
+                               // }
+                                    
+                               // if let iFav = iUser[3]["is_favorite"] as? Int {
+                                    self.isFav.append((iUser[3]["is_favorite"] as? Int)!)
                                 }
-                                
-                                if let id = iUser[3]["user_id"] as? Int {
-                                    self.idUsuarios.append(id)
-                                }
-                                
-                                if let iFav = iUser[3]["is_favorite"] as? Int {
-                                    self.isFav.append(iFav)
-                                }
-                            }
+                           // }
                         }
-                        
+                            
                         print("Termina")
                         //print(jsonArray[0])
                                               
