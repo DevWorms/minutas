@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 protocol NewSearchViewControllerDelegate: NSObjectProtocol {
     func newConversacionControllerDidCancel()
     func newConversacionControllerDidFinish()
@@ -30,7 +31,9 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     // 2 asignar usuario a pendiente
     // 3 asignar usuario tarea
     // 4 reasignar usuario tarea
-    // 5 delegar tarea
+    // 5 delegar tarea o subpendiente
+    // 6 delegar un pendiente
+    
     
     var caminoFavorito = false
     var idAsignar = Int()
@@ -57,6 +60,8 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
             buttonOk.enabled = false
             
         }
+        
+        
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -242,6 +247,11 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\("tasks/delegar")"
+                        }else if anadirUsuarioSolamente == 6{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("pendientes/delegar")"
+                            
                         }
                         
                         print(url)
@@ -274,6 +284,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if urlResponse != nil {
             dispatch_async(dispatch_get_main_queue()) {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         

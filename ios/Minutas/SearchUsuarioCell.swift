@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SearchUsuarioCell: GenericCell{
+class SearchUsuarioCell: GenericCell {
     
     @IBOutlet weak var imgUsuario: UIImageView!
     @IBOutlet weak var txtNombreUsuario: UILabel!

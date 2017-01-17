@@ -56,8 +56,12 @@ enum WebServiceEndpoint {
     static let mensajes = "/messages"
     static let newPendienteReunion = "meetings/pendiente/new"
     
-    static let notificaciones = "notifications/full/"
+    static let notificaciones = "notifications/all/"
+    static let notificacionesFull = "notifications/full/"
     static let notificacionesLeidas = "notifications/taken"
+    static let rechazarpendiente = "pendientes/rechazar"
+    static let rechazartarea = "tasks/rechazar"
+    
     
     static let favoritos = "favoritos"
     static let buscador = "search"
@@ -137,12 +141,16 @@ enum WebServiceResponseKey {
     static let apiKey = "APIkey"
     static let userId = "Id_Usuario"
     static let userIdMin = "user_id"
+    static let notificacionObligatoria = "obligatorio"
+    
     
     static let id = "id"
     static let nombre = "nombre"
     static let numeroPendientes = "no_pendientes"
     static let resultados = "resultados"
     static let subPendienteId = "id_sub_pendiente"
+    static let subPendienteIdNotificaciones = "id_subpendiente"
+    
     
     static let status = "estado"
     static let statusPendiente = "status"

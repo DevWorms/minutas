@@ -37,6 +37,15 @@ class FavoritosViewController:  UITableViewController, NewSearchViewControllerDe
         
         
         loadFavoritos()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
         
         
     }

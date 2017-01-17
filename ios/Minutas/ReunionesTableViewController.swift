@@ -24,6 +24,16 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadReuniones()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
     }
     
     

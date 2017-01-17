@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
-            landmarkName = "parseJsonRedesSociales(data:urlResponse:error:)"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -42,11 +42,11 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "506070829.07541"
+                  timestampString = "506318960.073906"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "391"
-                  endingLineNumber = "391"
+                  startingLineNumber = "397"
+                  endingLineNumber = "397"
                   offsetFromSymbolStart = "2232">
                </Location>
                <Location
@@ -57,11 +57,11 @@
                   moduleName = "Minutas"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sergio/minutas/ios/Minutas/LogInViewController.swift"
-                  timestampString = "506070829.077047"
+                  timestampString = "506318960.07582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "393"
-                  endingLineNumber = "393"
+                  startingLineNumber = "399"
+                  endingLineNumber = "399"
                   offsetFromSymbolStart = "28">
                </Location>
             </Locations>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
-            landmarkName = "parseJsonRedesSociales(data:urlResponse:error:)"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "getUserInfo(id:)"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "getUserInfo(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
-            landmarkName = "parseJsonRedesSociales(data:urlResponse:error:)"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
-            landmarkName = "parseJsonRedesSociales(data:urlResponse:error:)"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
+            landmarkName = "parseJsonRedesSociales(_:urlResponse:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,28 +138,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
+            timestampString = "506302116.428126"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "logInLinkedIn(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/LogInViewController.swift"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "348"
             endingLineNumber = "348"
-            landmarkName = "logInLinkedIn(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504992953.965827"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
-            landmarkName = "logInLinkedIn(sender:)"
+            landmarkName = "logInLinkedIn(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/LogInViewController.swift"
-            timestampString = "504993152.753087"
+            timestampString = "506302116.428126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "returnUserData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,12 +266,156 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minutas/SearchUserViewController.swift"
-            timestampString = "505697762.609436"
+            timestampString = "506312015.364056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "buttonClicked(sender:)"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "buttonClicked(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "ok(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "ok(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.SearchUserViewController.parseJson (Swift.Optional&lt;__ObjC.NSData&gt;, urlResponse : Swift.Optional&lt;__ObjC.NSURLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/SearchUserViewController.swift"
+                  timestampString = "506318960.149081"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "285"
+                  endingLineNumber = "285"
+                  offsetFromSymbolStart = "460">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Minutas.SearchUserViewController.(parseJson (Swift.Optional&lt;__ObjC.NSData&gt;, urlResponse : Swift.Optional&lt;__ObjC.NSURLResponse&gt;, error : Swift.Optional&lt;__ObjC.NSError&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Minutas"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergio/minutas/ios/Minutas/SearchUserViewController.swift"
+                  timestampString = "506318960.151364"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "286"
+                  endingLineNumber = "286"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/SearchUserViewController.swift"
+            timestampString = "506312015.364056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "parseJson(_:urlResponse:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Minutas/NotificacionesTableViewController.swift"
+            timestampString = "506318958.720797"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

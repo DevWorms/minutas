@@ -13,8 +13,13 @@ import UIKit
 class NotificacionCell: GenericCell {
     
     
+    @IBOutlet weak var btnDelegar: UIButton!
     @IBOutlet weak var textoNotificacion: UILabel!
-    @IBOutlet weak var notificacionIconNew: UIImageView!
+    @IBOutlet weak var btnAceptar: UIButton!
+    @IBOutlet weak var btnRechazar: UIButton!
+    
+    var idTarea = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -23,6 +28,14 @@ class NotificacionCell: GenericCell {
     
     
     
+    @IBAction func btnAceptar(sender: AnyObject) {
+        
+    }
+    
+    
+    @IBAction func btnDelegar(sender: AnyObject) {
+    
+    }
 }
 
 

@@ -20,6 +20,15 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         loadIndice()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

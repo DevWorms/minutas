@@ -67,13 +67,6 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         
         // create a corresponding local notification
         
-        let notification = UILocalNotification()
-        notification.alertBody = "TIs Overdue" // text that will be displayed in the notification
-        notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-        UILocalNotificationDefaultSoundName // play default sound
-        notification.userInfo = ["title": "conversacion", "UUID": "uud"] // assign a unique identifier to the notification so that we can retrieve it later
-        
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
         
         print("tick \(tick++)")
     }
