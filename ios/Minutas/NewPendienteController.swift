@@ -291,6 +291,8 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                }*/
                 
                 let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)&\("auto_asignar")=\(autoasig)"
+                
+                print(parameterString)
         
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                     let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(self.endPointPendiente)")!)
@@ -322,6 +324,7 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
         } else if urlResponse != nil {
             dispatch_async(dispatch_get_main_queue()) {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {

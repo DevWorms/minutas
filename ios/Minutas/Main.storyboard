@@ -1627,8 +1627,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="uv3-u6-YcR" id="rxc-s7-JUA"/>
-                                    <outlet property="delegate" destination="uv3-u6-YcR" id="26p-5t-fet"/>
+                                    <outlet property="dataSource" destination="5Ij-dP-6Uw" id="KpO-nq-NA4"/>
+                                    <outlet property="delegate" destination="5Ij-dP-6Uw" id="tBr-e9-Z5b"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1655,6 +1655,7 @@
                         <outlet property="btn_create" destination="p6R-93-f3k" id="11q-Tz-DLk"/>
                         <outlet property="navigationBar" destination="ua3-Xq-lfc" id="X10-Ov-axJ"/>
                         <outlet property="switch_autoasignar" destination="ecU-Dk-hld" id="Plj-GJ-sQx"/>
+                        <outlet property="tableView" destination="Xx0-Rw-OsF" id="qtS-nm-Xlh"/>
                         <outlet property="txtf_name" destination="SgI-8U-gdE" id="scR-Kz-syi"/>
                         <outlet property="txtf_usuarios_asignados" destination="9L7-qi-AKu" id="erB-iM-dbA"/>
                     </connections>
