@@ -25,6 +25,7 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
     
     var idOperacion = Int()
     
+    var tick = 0
     
     
     
@@ -39,9 +40,35 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         appDelegate.tabBarController = tabBarController
         
         let currentIndex = appDelegate.tabBarController.selectedIndex
-        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NotificacionesTableViewController.loadNotificaciones), name:UIApplicationDidBecomeActiveNotification, object: nil);
+        
+       /* var timer = NSTimer.scheduledTimerWithTimeInterval(ApplicationConstants.tiempoParaConsultarServicioWeb, target: self, selector: #selector(consultaElServicioWeb), userInfo: nil, repeats: true)
+        */
+        
+        
         
     }
+    
+    func consultaElServicioWeb() {
+        //if peticiones <= 10{
+        loadNotificaciones()
+        //sleep(4)
+        //        }
+        
+        print("tick \(tick++)")
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! GenericCell
+        
+        cell.aparecio = false
+        
+    }
+    
     
     
     func newConversacionControllerDidCancel() {
@@ -92,7 +119,27 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         print(attrStr)
         
         
-        let obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as? Bool
+        var obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as? Bool
+        
+        
+        let notificacionesSubPendientes = json[WebServiceResponseKey.subPendienteIdNotificaciones]  as? Int
+        
+        let pendienteId = json[WebServiceResponseKey.pendienteId] as? Int
+        
+        if  notificacionesSubPendientes != nil && notificacionesSubPendientes > 0 {
+            print(notificacionesSubPendientes)
+         
+        }
+        else{
+            if pendienteId != nil && pendienteId > 0 {
+                print(pendienteId)
+            }else{
+                obligatorio = true
+                let idNotificacion = json[WebServiceResponseKey.notificacionId] as? Int
+                print(idNotificacion)
+                leerNotificaciones(idNotificacion)
+            }
+        }
         
         if obligatorio == false {
             cell.btnAceptar.hidden = false
@@ -127,10 +174,10 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
     func buttonDelegar(sender:UIButton) {
         let json = notificaciones[sender.tag]
         
-        if json[WebServiceResponseKey.subPendienteId] != nil {
+        if json[WebServiceResponseKey.subPendienteIdNotificaciones] != nil {
             idOperacion = 5
-            idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
-        }else{
+            idTarea = (json[WebServiceResponseKey.subPendienteIdNotificaciones] as? Int)!
+        }else if json[WebServiceResponseKey.pendienteId] != nil {
             idOperacion = 6
             idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
         }
@@ -141,16 +188,22 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
     func buttonAceptar(sender:UIButton) {
         let json = notificaciones[sender.tag]
         
-        
-        if json[WebServiceResponseKey.subPendienteId] != nil {
-            idOperacion = 5
-            idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
-        }else{
-            idOperacion = 6
+        print(json)
+        if json[WebServiceResponseKey.subPendienteIdNotificaciones] != nil {
+            
+            idTarea = (json[WebServiceResponseKey.subPendienteIdNotificaciones] as? Int)!
+            manejarNotificaciones(idTarea, opcion: 4)
+        }else if json[WebServiceResponseKey.pendienteId] != nil {
+            
             idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
+            manejarNotificaciones(idTarea, opcion: 3)
+        }else{
+            
         }
         
-        self.performSegueWithIdentifier("delegarTarea", sender: nil)
+        
+       // leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
+        
     }
   
     func buttonRechazar(sender:UIButton) {
@@ -161,16 +214,16 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         if json[WebServiceResponseKey.subPendienteId] != nil {
             
             idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
-            rechazarNotificaciones(idTarea, opcion: 1)
+            manejarNotificaciones(idTarea, opcion: 1)
         }else{
             
             idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
-            rechazarNotificaciones(idTarea, opcion: 2)
+            manejarNotificaciones(idTarea, opcion: 2)
         }
         
         
         
-        leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
+      //  leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
     }
   
     
@@ -220,29 +273,50 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         
     }
 
-    func rechazarNotificaciones(pendienteId:Int, opcion: Int) {
+    func manejarNotificaciones(pendienteId:Int, opcion: Int) {
         
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
         
-        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(pendienteId)"
+        var parameterString = ""
+        var url = ""
         
-        print(parameterString)
-        var url = WebServiceEndpoint.baseUrl
+        
         
         switch opcion {
-        case 1:// sub pendiente
+        case 1:// rechazar sub pendiente
+            
+            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(pendienteId)"
+            
             url = url + "\(WebServiceEndpoint.rechazartarea)"
             
             break
-        case 2: // pendiente
+        case 2: // rechazar pendiente
+            
+            
+            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(pendienteId)"
+            
             url = url + "\(WebServiceEndpoint.rechazarpendiente)"
+            break
+        case 3: // aceptar pendiente
+            
+            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(pendienteId)"
+                url = "\(WebServiceEndpoint.baseUrl)\("pendientes/aceptar")"
+            
+            break
+        case 4: // aceptar subpendiente
+            
+            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(pendienteId)"
+            url = "\(WebServiceEndpoint.baseUrl)\("tasks/aceptar")"
+            
             break
         default:
             break
             
         }
+        
+        print(parameterString)
         
         print(url)
         
@@ -252,7 +326,7 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
             let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
             urlRequest.HTTPMethod = "POST"
             
-            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJsonNotificacion).resume()
         } else {
             print("Error de codificación de caracteres.")
         }
@@ -267,10 +341,50 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         
         print(apiKey, userId)
         
-        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/\(false)")!
         
         print(url)
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
+    }
+    
+    func parseJsonNotificacion(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                print(data)
+                
+                if data != nil{
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                            vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
+                                if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                                    self.loadNotificaciones()
+                                }
+                                })
+                            self.presentViewController(vc_alert, animated: true, completion: nil)
+                        }
+                    } else {
+                        print("HTTP Status Code: 200")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
     }
     
     func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
@@ -278,19 +392,25 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
             print(error!)
         } else if urlResponse != nil {
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
-                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
-                    print(json)
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if self.notificaciones.count > 0 {
-                            self.notificaciones.removeAll()
-                        }
+                print(data)
+                
+                if data != nil{
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    
+                    
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if self.notificaciones.count > 0 {
+                                self.notificaciones.removeAll()
+                            }
                         
-                        self.notificaciones.appendContentsOf(json[WebServiceResponseKey.notificaciones] as! [[String : AnyObject]])
-                        self.tableView?.reloadData()
+                            
+                            self.notificaciones.appendContentsOf(json[WebServiceResponseKey.notificaciones] as! [[String : AnyObject]])
+                            self.tableView?.reloadData()
+                        }
+                    } else {
+                        print("HTTP Status Code: 200")
+                        print("El JSON de respuesta es inválido.")
                     }
-                } else {
-                    print("HTTP Status Code: 200")
-                    print("El JSON de respuesta es inválido.")
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {

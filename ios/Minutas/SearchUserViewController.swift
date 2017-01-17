@@ -33,8 +33,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     // 4 reasignar usuario tarea
     // 5 delegar tarea o subpendiente
     // 6 delegar un pendiente
-    // 7 delegar un pendiente
-    // 8 aceptar un subpendiente
+    
     
     var caminoFavorito = false
     var idAsignar = Int()
@@ -61,6 +60,8 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
             buttonOk.enabled = false
             
         }
+        
+        
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -251,16 +252,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\("user")=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\("pendientes/delegar")"
                             
-                        }else if anadirUsuarioSolamente == 7{
-                            
-                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\("user")=\(usuarios)"
-                            url = "\(WebServiceEndpoint.baseUrl)\("pendientes/aceptar")"
-                        }else if anadirUsuarioSolamente == 8{
-                            
-                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
-                            url = "\(WebServiceEndpoint.baseUrl)\("tasks/aceptar")"
                         }
-
                         
                         print(url)
                         print(parameterString)
@@ -292,6 +284,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
         } else if urlResponse != nil {
             dispatch_async(dispatch_get_main_queue()) {
                 if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
                     let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
                     vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel) { action in
                         

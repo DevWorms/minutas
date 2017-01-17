@@ -45,7 +45,10 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         appDelegate.tabBarController = tabBarController
         
         let currentIndex = appDelegate.tabBarController.selectedIndex
-        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
         
     }
     
@@ -57,13 +60,13 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         loadConversaciones()
         
         print("tick \(peticiones++)")
-        
+      /*
         // create a corresponding local notification
         let notification = UILocalNotification()
         notification.alertBody = "Todo ItIs Overdue" // text that will be displayed in the notification
         notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
         notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)*/
         
     }
 

@@ -30,8 +30,10 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         appDelegate.tabBarController = tabBarController
         
         let currentIndex = appDelegate.tabBarController.selectedIndex
-        print(currentIndex)
-        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
+        
     }
     
     

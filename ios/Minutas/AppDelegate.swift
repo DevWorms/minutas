@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var updateTimer: NSTimer?
     var mostrarNotificacion: Bool!
     var tabBarController: UITabBarController!
+    var notificacionesPush: [Int]!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -91,6 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
         application.applicationIconBadgeNumber = badgeCount
         
+        notificacionesPush = NSUserDefaults.standardUserDefaults().valueForKey("notificacionesMostradas") as? [Int]
+        if notificacionesPush == nil{
+            notificacionesPush = [Int]()
+        }
         
         return true
     }
@@ -322,8 +327,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func mandarNotificacion(){
         
         for notificacion in self.notificaciones {
-            
-            if (notificacion[WebServiceResponseKey.notificacionLeida] as! Bool) == false {
+            let idNotificacion = notificacion[WebServiceResponseKey.notificacionId] as! Int
+            let posicion = notificacionesPush.indexOf(idNotificacion)
+            print(posicion)
+            if  posicion == nil {
                 
                 let txt = (notificacion[WebServiceResponseKey.notificacionText] as? String)!
                 let attrStr = try! NSAttributedString(
@@ -347,8 +354,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 notification.userInfo = ["title": notificacion[WebServiceResponseKey.notificacionText]!, "UUID": notificacion[WebServiceResponseKey.notificacionText]!] // assign a unique identifier to the notification so that we can retrieve it later
                 
                 
-                self.leerNotificaciones(notificacion[WebServiceResponseKey.notificacionId] as! Int)
-                
+                let obligatoria =  notificacion[WebServiceResponseKey.notificacionObligatoria] as? Bool
+                print(obligatoria)
+                if obligatoria != nil && obligatoria! {
+                    
+                    self.leerNotificaciones(notificacion[WebServiceResponseKey.notificacionId] as! Int)
+                }else{
+                    notificacionesPush.append(idNotificacion)
+                    NSUserDefaults.standardUserDefaults().setObject(notificacionesPush, forKey: "notificacionesMostradas")
+                }
                 UIApplication.sharedApplication().scheduleLocalNotification(notification)
             }
             

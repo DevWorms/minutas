@@ -26,8 +26,9 @@ class ConfiguracionViewController: UIViewController{
         appDelegate.tabBarController = tabBarController
         
         let currentIndex = appDelegate.tabBarController.selectedIndex
-        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-       
+        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
+            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        }
         
         let tiempoPush = NSUserDefaults.standardUserDefaults().doubleForKey(ApplicationConstants.ritmoNotificaciones)
         
@@ -60,7 +61,6 @@ class ConfiguracionViewController: UIViewController{
             opcionCadaHora.on = false
             NSUserDefaults.standardUserDefaults().setObject("5.0", forKey: ApplicationConstants.ritmoNotificaciones)
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.updateTimer?.invalidate()
             
             appDelegate.updateTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: appDelegate, selector: #selector(appDelegate.loadNotificaciones), userInfo: nil, repeats: true)
