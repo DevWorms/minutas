@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FBSDKLoginKit
+import TwitterKit
 
 class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
 
@@ -18,21 +20,70 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtf_busqueda: UISearchBar!
-    
+    var barButton: BBBadgeBarButtonItem!
     override func viewDidLoad() {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.tabBarController = tabBarController
-        
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
         
         self.loadBusqueda("")
         txtf_busqueda.delegate = self
         
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
+        
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
+        
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
+        
+    }
+    
+    func revisarNotificaciones(){
+        
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
+    
+    @IBAction func cerrarSesion(sender: AnyObject) {
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
+        self.presentViewController( vc , animated: true, completion: nil)
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

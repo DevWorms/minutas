@@ -1,10 +1,12 @@
 PODS:
+  - BBBadgeBarButtonItem (1.2)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DatePickerCell (1.0.4)
   - Fabric (1.6.10)
   - FBSDKCoreKit (4.16.0):
     - Bolts (~> 1.7)
@@ -19,7 +21,9 @@ PODS:
     - TwitterCore (= 1.15.1)
 
 DEPENDENCIES:
+  - BBBadgeBarButtonItem
   - Bolts
+  - DatePickerCell
   - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -28,7 +32,9 @@ DEPENDENCIES:
   - TwitterKit
 
 SPEC CHECKSUMS:
+  BBBadgeBarButtonItem: c2fbca0bff18e21b70defc9438a8a5048008e7ca
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DatePickerCell: 20d2ba8b5cd5bb8a5a79e2b43bc7758e3b65daf2
   Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
   FBSDKCoreKit: 7a6baaed4a2b2a244ba253346713bdbc74df135b
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
@@ -37,6 +43,6 @@ SPEC CHECKSUMS:
   TwitterCore: 12983a7464e34afbbf18881347898a9db526ac71
   TwitterKit: b5821570887ec2d77650fa232eaec175665dc443
 
-PODFILE CHECKSUM: cd0a978d2418df13b955d9e19a0155e125f894d7
+PODFILE CHECKSUM: 47ea2887fb05074bfde0ea1bdae4a0748ad58b6e
 
 COCOAPODS: 1.1.1

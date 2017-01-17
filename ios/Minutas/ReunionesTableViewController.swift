@@ -17,7 +17,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
     var reuniones = [[String : AnyObject]]()
     var noCellReunion : Int = 0
     var noCellReunionPend : Int = 0
-    
+    var barButton:BBBadgeBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +25,34 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         loadReuniones()
         
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        appDelegate.tabBarController = tabBarController
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
         
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
+        
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
         
     }
     
+    func revisarNotificaciones(){
+        
+        
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import FSCalendar
+import FBSDKLoginKit
+import TwitterKit
 
 class CalendarioTableViewController: UITableViewController, FSCalendarDataSource, FSCalendarDelegate{
     
@@ -20,6 +22,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     var actividad = [String]()
     var idActividad = [Int]()
     var rowCell = Int()
+    var barButton:BBBadgeBarButtonItem!
    
     
     override func viewDidLoad() {
@@ -27,14 +30,6 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadCalendario()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        appDelegate.tabBarController = tabBarController
-        
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
         
         // In loadView or viewDidLoad
         let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: 320, height: 300))
@@ -45,8 +40,33 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
         //self.gregorian = NSCalendar(calendarIdentifier: "NSCalendarIdentifierGregorian")
 
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
+        
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
+        
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
+        
     }
     
+    func revisarNotificaciones(){
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -216,6 +236,37 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         self.calendar.reloadData()
     }
     
+    @IBAction func cerrarSesion(sender: AnyObject) {
+        
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
+        self.presentViewController( vc , animated: true, completion: nil)
+
+    }
     
     
 }

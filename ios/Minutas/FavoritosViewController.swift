@@ -8,11 +8,14 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
+import TwitterKit
 
 class FavoritosViewController:  UITableViewController, NewSearchViewControllerDelegate {
 
     @IBOutlet weak var tableV: UITableView!
      var favoritos = [[String : AnyObject]]()
+    var barButton:BBBadgeBarButtonItem!
     
     func newConversacionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
@@ -37,18 +40,34 @@ class FavoritosViewController:  UITableViewController, NewSearchViewControllerDe
         
         
         loadFavoritos()
+        
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        appDelegate.tabBarController = tabBarController
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
         
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
         
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
+        
+    }
+    
+    func revisarNotificaciones(){
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
         
         
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "pantallaFavoritos"{
@@ -155,7 +174,38 @@ class FavoritosViewController:  UITableViewController, NewSearchViewControllerDe
                 }
             }
         }
+    
+    @IBAction func cerrarSesion(sender: AnyObject) {
+        let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
+        
+        //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente
+        switch redSocial {
+        case "fb":
+            let loginManager = FBSDKLoginManager()
+            loginManager.logOut()
+            print("Sesion Cerrada en FB")
+            
+        case "tw":
+            Twitter.sharedInstance().logOut()
+            print("Sesion Cerrada en TW")
+        case "in":
+            LISDKAPIHelper.sharedInstance().cancelCalls()
+            LISDKSessionManager.clearSession()
+            print("Sesion Cerrada en IN")
+        default:
+            print("No hay necesidad de cerrar sesión " +  redSocial)
+        }
+        
+        
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.apodo)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.token)
+        NSUserDefaults.standardUserDefaults().setObject("", forKey: WebServiceResponseKey.redSocial)
+        
+        let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
+        self.presentViewController( vc , animated: true, completion: nil)
     }
+    
+}
     
 
 

@@ -16,6 +16,7 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     var peticiones = 1
+    var barButton:BBBadgeBarButtonItem!
     
     func newConversacionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
@@ -40,18 +41,32 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         
         //let thread = NSThread(target:self, selector:#selector(actualizacion), object:nil)
         
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        appDelegate.tabBarController = tabBarController
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
         
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
         
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
         
     }
     
+    func revisarNotificaciones(){
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
     
     
     // must be internal or public.

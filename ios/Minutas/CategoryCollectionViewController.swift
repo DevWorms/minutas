@@ -10,12 +10,14 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
+
 private let reuseIdentifier = "Cell"
 
 class CategoryCollectionViewController: UICollectionViewController, NewCategoryControllerDelegate {
     
     var categories = [[String : AnyObject]]()
-
+    var barButton:BBBadgeBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,22 +26,41 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
 
        
         // Do any additional setup after loading the view.
+        loadCategories()
+        
         
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: view.frame.width / 2.0 - 4.0, height: view.frame.width / 2.0 - 4.0)
      
+        
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        appDelegate.tabBarController = tabBarController
+        let imagenButton = UIImage(named: "ic_notifications_none_white_24pt")
+        let btnNotificacion = UIButton(type: .Custom)
+        btnNotificacion.frame = CGRectMake(0,0,imagenButton!.size.width, imagenButton!.size.height);
         
-        let currentIndex = appDelegate.tabBarController.selectedIndex
-        if currentIndex < appDelegate.tabBarController.tabBar.items?.count{
-            appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
-        }
+        btnNotificacion.addTarget(self, action: #selector(revisarNotificaciones), forControlEvents: UIControlEvents.TouchDown)
+        btnNotificacion.setBackgroundImage(imagenButton, forState: UIControlState.Normal)
         
-        loadCategories()
+        
+        barButton = BBBadgeBarButtonItem(customUIButton: btnNotificacion)
+        appDelegate.buttonBarController = barButton
+        self.navigationItem.leftBarButtonItem = barButton
+        
     }
-
+    
+    func revisarNotificaciones(){
+        
+        barButton.badgeValue = ""
+        let activity = "NotificacionViewController"
+        let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! NotificacionesTableViewController
+        
+        self.navigationController!.pushViewController(vc, animated: true)
+        
+        
+    }
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

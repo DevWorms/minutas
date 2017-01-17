@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var updateTimer: NSTimer?
     var mostrarNotificacion: Bool!
-    var tabBarController: UITabBarController!
+    var buttonBarController: BBBadgeBarButtonItem!
     var notificacionesPush: [Int]!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -253,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         print("App esta en otra pantalla")
                                         
                                         
-                                        if self.tabBarController != nil{
+                                        if self.buttonBarController != nil{
                                             /*
                                             for notificacion in self.notificaciones {
                                                 
@@ -273,10 +273,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     }
                                                     valor = valor + 1*/
                                                 if self.notificaciones.count > 0{
-                                                    self.tabBarController.tabBar.items?[1].badgeValue = "\(self.notificaciones.count)"
+                                                    self.buttonBarController.badgeValue = "\(self.notificaciones.count)"
                                                 }
                                                 else{
-                                                    self.tabBarController.tabBar.items?[1].badgeValue = nil
+                                                    self.buttonBarController.badgeValue = nil
                                                 }
                                             
                                                     

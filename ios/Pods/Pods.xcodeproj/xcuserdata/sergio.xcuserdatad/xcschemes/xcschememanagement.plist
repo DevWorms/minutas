@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BBBadgeBarButtonItem.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DatePickerCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,12 +57,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B895E58A8E8BCA6614332113A7A631A8</key>
+		<key>9432FC3317FA950AD444219B6AF67259</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>BC5000D645EEAF961C85907CDC796FE1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CD2BD5646BA433C12F2D9AD642383DD9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -63,6 +78,11 @@
 			<true/>
 		</dict>
 		<key>ED2850476F3FDDCCA74BF4A58AD09049</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF0CDCF65A1A776251C0F82587A23D26</key>
 		<dict>
 			<key>primary</key>
 			<true/>

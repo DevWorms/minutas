@@ -10,4 +10,5 @@ target 'Minutas' do
 	pod 'FBSDKShareKit'
 	pod 'FBSDKLoginKit'
 	pod 'DatePickerCell'
+	pod 'BBBadgeBarButtonItem'
 end

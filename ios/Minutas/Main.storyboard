@@ -827,7 +827,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iRr-AI-QuB" id="GZS-c1-uHd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
@@ -837,7 +837,7 @@
                                 <rect key="frame" x="0.0" y="328" width="375" height="197"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vdg-IG-aTS" id="8tF-jo-uXg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vz2-ak-Tzl">
@@ -848,7 +848,7 @@
                                                     <rect key="frame" x="0.0" y="28" width="375" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B2h-nM-fDm" id="jdC-dB-W7T">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="24"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableViewCellContentView>
                                                 </tableViewCell>
@@ -872,14 +872,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Calendario" id="Ho2-0M-9qb">
-                        <rightBarButtonItems>
-                            <barButtonItem image="ic_notifications_none_white_24pt" id="Pf4-VV-G0v">
-                                <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </barButtonItem>
-                            <barButtonItem image="ic_account_circle_white_24pt" id="Gwo-2c-gPA">
-                                <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="ic_account_circle_white_24pt" id="Gwo-2c-gPA">
+                            <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="cerrarSesion:" destination="8j3-42-rvc" id="uzX-fC-G6U"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -917,14 +915,14 @@
                                 </date>
                             </datePicker>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aOH-Bd-C1U">
-                                <rect key="frame" x="0.0" y="254" width="375" height="364"/>
+                                <rect key="frame" x="0.0" y="254" width="375" height="369"/>
                                 <color key="backgroundColor" red="0.0" green="0.36862745099999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="115" id="Oxg-pe-JjX" customClass="IndiceEficienciaTopCell" customModule="Minutas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Oxg-pe-JjX" id="ptw-lG-6NA">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK2-Rx-Dpy">
@@ -1056,7 +1054,16 @@
                             <constraint firstItem="saE-SQ-0jG" firstAttribute="centerX" secondItem="PNI-28-QPY" secondAttribute="centerX" id="yNd-1f-3Cd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Índice eficiencia" id="ATo-hk-LB9"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Índice eficiencia" id="ATo-hk-LB9">
+                        <barButtonItem key="rightBarButtonItem" image="ic_account_circle_white_24pt" style="plain" id="UOe-eN-9hs">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cerrarSesion:" destination="oOl-aU-G2F" id="kRU-df-OZ6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="consultarPorFecha" destination="saE-SQ-0jG" id="Nua-5e-NEu"/>
                         <outlet property="fechaInicio" destination="EU3-xi-62u" id="R3b-1w-sdn"/>
@@ -1118,7 +1125,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PenientesViewController" id="5Zs-WU-7nf" customClass="PendienteTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="21T-tX-8F3">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1196,7 +1203,6 @@
                                     <segue destination="uv3-u6-YcR" kind="presentation" identifier="nuevoPendiente" id="MFI-jU-CMm"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="ybC-eb-o5l"/>
                             <barButtonItem image="ic_account_circle_white_24pt" style="plain" id="dGA-xd-HZO">
                                 <connections>
                                     <action selector="usuario:" destination="5Zs-WU-7nf" id="sWW-fG-6QL"/>
@@ -1329,7 +1335,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XyT-8U-Mwd" id="S32-Ir-wFd">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="OE3-Ta-Gf2">
@@ -1395,7 +1401,7 @@
                         <viewControllerLayoutGuide type="bottom" id="g8b-nb-kOc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qzK-so-Xmn">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J1C-Rl-WEQ">
@@ -1491,9 +1497,6 @@
                                 <connections>
                                     <segue destination="5Ij-dP-6Uw" kind="presentation" identifier="nuevoTarea" id="ZqQ-4D-cMB"/>
                                 </connections>
-                            </barButtonItem>
-                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="CeA-0k-0Ya">
-                                <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </barButtonItem>
                             <barButtonItem image="ic_account_circle_white_24pt" style="plain" id="vFf-l7-EDc">
                                 <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1603,7 +1606,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jzE-y1-OjR" id="CU1-Pv-V2K">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-CG-Xcn">
@@ -1668,7 +1671,7 @@
             <objects>
                 <tableViewController id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKN-uY-NW1">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1676,7 +1679,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="122"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Aun-fo-hIX" id="eQ7-Du-x3a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx4-3X-CwS">
@@ -1758,9 +1761,6 @@
                                 <connections>
                                     <segue destination="9LL-kD-PBD" kind="presentation" identifier="nuevaReunion" id="CDW-8Q-P6w"/>
                                 </connections>
-                            </barButtonItem>
-                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="YC9-gS-iED">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                             <barButtonItem image="ic_account_circle_white_24pt" style="plain" id="GgB-DC-q7J">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2237,7 +2237,7 @@
                                         <rect key="frame" x="0.0" y="28" width="289" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C0v-6j-dSO" id="NSd-oN-I8x">
-                                            <rect key="frame" x="0.0" y="0.0" width="289" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asunto a tratar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="93N-mD-Gwd">
@@ -2267,7 +2267,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OZ0-Jv-P5z" id="7y3-b3-1ej">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-zS-2oJ">
@@ -2328,7 +2328,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ApL-3a-Gbe" id="9J2-0d-xcZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="d5H-iM-qjO">
@@ -2382,9 +2382,6 @@
                                 <connections>
                                     <segue destination="f5W-kk-2hy" kind="presentation" identifier="nuevaconversacion" id="iRT-WX-waQ"/>
                                 </connections>
-                            </barButtonItem>
-                            <barButtonItem image="ic_notifications_none_white_24pt" style="plain" id="1dQ-9D-CVa">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                             <barButtonItem image="ic_account_circle_white_24pt" style="plain" id="XNb-fA-Xol">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2583,7 +2580,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LCQ-ww-ty6" id="Knu-jQ-nVi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="W6H-a6-qla">
@@ -2650,7 +2647,7 @@
         <!--notificaciones-->
         <scene sceneID="EUM-X5-74D">
             <objects>
-                <tableViewController id="GqS-c4-4QI" customClass="NotificacionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NotificacionViewController" id="GqS-c4-4QI" customClass="NotificacionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" id="HGw-w8-OGG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2660,7 +2657,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jaH-5e-jqc" id="Vu2-lx-KNI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de usuario" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9V-FI-vqg">
@@ -2813,6 +2810,9 @@
                     <navigationItem key="navigationItem" title="configuración" id="mbs-bp-vaq">
                         <barButtonItem key="rightBarButtonItem" image="ic_account_circle_white_24pt" style="plain" id="jPK-eq-AnC">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="configuracion:" destination="8rE-Oe-5KQ" id="1oh-6c-q4E"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -2881,7 +2881,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="93"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bNZ-0Q-aNg" id="Oce-Jb-PRw">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="sr5-eL-44N">
@@ -2921,6 +2921,9 @@
                             </barButtonItem>
                             <barButtonItem image="ic_account_circle_white_24pt" id="c4V-fg-9bn">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="cerrarSesion:" destination="8zL-lw-djb" id="4FE-se-e17"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -3149,7 +3152,7 @@
             </objects>
             <point key="canvasLocation" x="15913" y="457"/>
         </scene>
-        <!--Buscador View Controller-->
+        <!--Buscador-->
         <scene sceneID="FM9-Q8-AzX">
             <objects>
                 <viewController id="cHE-8A-jAD" customClass="BuscadorViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
@@ -3235,7 +3238,14 @@
                             <constraint firstItem="Hjm-9Z-m88" firstAttribute="top" secondItem="PlU-TI-zUB" secondAttribute="bottom" id="xdd-KU-uJf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Bbx-oe-F6O"/>
+                    <navigationItem key="navigationItem" title="Buscador" id="liN-pO-R8u">
+                        <barButtonItem key="rightBarButtonItem" image="ic_account_circle_white_24pt" style="plain" id="ZmQ-J1-BMo">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="cerrarSesion:" destination="cHE-8A-jAD" id="E6m-R2-f2m"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PlU-TI-zUB" id="SPZ-Y7-bXd"/>
                         <outlet property="txtf_busqueda" destination="nR7-13-jEy" id="F3c-Nz-XaJ"/>
@@ -3334,7 +3344,6 @@
         <image name="ic_lock" width="48" height="48"/>
         <image name="ic_mail" width="48" height="48"/>
         <image name="ic_notificaciones" width="32" height="32"/>
-        <image name="ic_notifications_none_white_24pt" width="24" height="24"/>
         <image name="ic_telefono" width="48" height="48"/>
         <image name="ic_transfer" width="72" height="72"/>
         <image name="ic_twitter_white_36pt" width="36" height="36"/>
@@ -3350,10 +3359,10 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JRs-HU-D0B"/>
-        <segue reference="Jwn-G5-OGI"/>
+        <segue reference="OyL-kS-Hjm"/>
+        <segue reference="zL4-1A-9Lg"/>
         <segue reference="e2b-m4-vOf"/>
         <segue reference="DIM-it-vlr"/>
-        <segue reference="tIp-NX-JgW"/>
+        <segue reference="J9U-HL-Jh4"/>
     </inferredMetricsTieBreakers>
 </document>

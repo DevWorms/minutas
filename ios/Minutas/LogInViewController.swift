@@ -82,10 +82,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
             self.email = ""
             self.registrandose = false
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            /*let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
             appDelegate.tabBarController = tabBarController
-            
+            */
             
             
         }
