@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 protocol NewSearchViewControllerDelegate: NSObjectProtocol {
     func newConversacionControllerDidCancel()
     func newConversacionControllerDidFinish()
@@ -30,7 +31,10 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
     // 2 asignar usuario a pendiente
     // 3 asignar usuario tarea
     // 4 reasignar usuario tarea
-    // 5 delegar tarea
+    // 5 delegar tarea o subpendiente
+    // 6 delegar un pendiente
+    // 7 delegar un pendiente
+    // 8 aceptar un subpendiente
     
     var caminoFavorito = false
     var idAsignar = Int()
@@ -242,7 +246,21 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                             
                             parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
                             url = "\(WebServiceEndpoint.baseUrl)\("tasks/delegar")"
+                        }else if anadirUsuarioSolamente == 6{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("pendientes/delegar")"
+                            
+                        }else if anadirUsuarioSolamente == 7{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("pendientes/aceptar")"
+                        }else if anadirUsuarioSolamente == 8{
+                            
+                            parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.subPendienteId)=\(idAsignar)&\("user")=\(usuarios)"
+                            url = "\(WebServiceEndpoint.baseUrl)\("tasks/aceptar")"
                         }
+
                         
                         print(url)
                         print(parameterString)
@@ -400,7 +418,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         for iUser in j {
                             
-                            if iUser[0] as! String == "Usuario" {
+                            if (iUser as! [String])[0] == "Usuario" {
                                 if let strApodo = iUser[3][WebServiceResponseKey.apodo] as? String{
                                     self.usuarios.append(strApodo)
                                 }

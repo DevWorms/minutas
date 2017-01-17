@@ -10,11 +10,22 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class NotificacionesTableViewController: UITableViewController {
+class NotificacionesTableViewController: UITableViewController,NewSearchViewControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     var notificaciones = [[String : AnyObject]]()
+    var idTarea = Int()
+    
+    // idOperacion = 5 delegar subpendiente
+    // idOperacion = 6 delegar pendiente
+    // idOperacion = 7 aceptar pendiente
+    // idOperacion = 8 aceptar subpendiente
+    
+    
+    var idOperacion = Int()
+    
+    
     
     
     override func viewDidLoad() {
@@ -23,9 +34,28 @@ class NotificacionesTableViewController: UITableViewController {
         
         
         loadNotificaciones()
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        
     }
     
     
+    func newConversacionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func newConversacionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        leerNotificaciones(idTarea)
+        loadNotificaciones()
+        
+    }
+
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1.0
@@ -60,12 +90,90 @@ class NotificacionesTableViewController: UITableViewController {
         
         
         print(attrStr)
-        cell.notificacionIconNew.hidden = ((json[WebServiceResponseKey.notificacionLeida] as? Bool)!)
         
+        
+        let obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as? Bool
+        
+        if obligatorio == false {
+            cell.btnAceptar.hidden = false
+            cell.btnDelegar.hidden = false
+            cell.btnRechazar.hidden = false
+            
+            cell.btnAceptar.addTarget(self, action: #selector(self.buttonAceptar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.btnAceptar.tag = indexPath.row
+        
+        
+            cell.btnDelegar.addTarget(self, action: #selector(self.buttonDelegar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.btnDelegar.tag = indexPath.row
+            
+            cell.btnRechazar.addTarget(self, action: #selector(self.buttonRechazar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            cell.btnRechazar.tag = indexPath.row
+            
+        }
+        else{
+            cell.btnAceptar.hidden = true
+            cell.btnDelegar.hidden = true
+            cell.btnRechazar.hidden = true
+        }
+        
+       /*
+        cell.notificacionIconNew.hidden = ((json[WebServiceResponseKey.notificacionLeida] as? Bool)!)
+        */
         
         return cell
         
     }
+    
+    func buttonDelegar(sender:UIButton) {
+        let json = notificaciones[sender.tag]
+        
+        if json[WebServiceResponseKey.subPendienteId] != nil {
+            idOperacion = 5
+            idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
+        }else{
+            idOperacion = 6
+            idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
+        }
+        
+        self.performSegueWithIdentifier("delegarTarea", sender: nil)
+    }
+    
+    func buttonAceptar(sender:UIButton) {
+        let json = notificaciones[sender.tag]
+        
+        
+        if json[WebServiceResponseKey.subPendienteId] != nil {
+            idOperacion = 5
+            idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
+        }else{
+            idOperacion = 6
+            idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
+        }
+        
+        self.performSegueWithIdentifier("delegarTarea", sender: nil)
+    }
+  
+    func buttonRechazar(sender:UIButton) {
+        
+        let json = notificaciones[sender.tag]
+        
+        
+        if json[WebServiceResponseKey.subPendienteId] != nil {
+            
+            idTarea = (json[WebServiceResponseKey.subPendienteId] as? Int)!
+            rechazarNotificaciones(idTarea, opcion: 1)
+        }else{
+            
+            idTarea = (json[WebServiceResponseKey.pendienteId] as? Int)!
+            rechazarNotificaciones(idTarea, opcion: 2)
+        }
+        
+        
+        
+        leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
+    }
+  
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.notificaciones.count
@@ -79,7 +187,77 @@ class NotificacionesTableViewController: UITableViewController {
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     
+        if segue.identifier == "delegarTarea" {
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 6
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.idTarea
+            
+        }
+    }
+    
+    func leerNotificaciones(idNotificacion:Int!) {
+        
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        
+        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.notificaciones)=\(idNotificacion)"
+        
+        print(parameterString)
+        
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            let url = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificacionesLeidas)"
+            
+            print(url)
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+            urlRequest.HTTPMethod = "POST"
+            
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+        } else {
+            print("Error de codificación de caracteres.")
+        }
+        
+        
+    }
+
+    func rechazarNotificaciones(pendienteId:Int, opcion: Int) {
+        
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        
+        let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(pendienteId)"
+        
+        print(parameterString)
+        var url = WebServiceEndpoint.baseUrl
+        
+        switch opcion {
+        case 1:// sub pendiente
+            url = url + "\(WebServiceEndpoint.rechazartarea)"
+            
+            break
+        case 2: // pendiente
+            url = url + "\(WebServiceEndpoint.rechazarpendiente)"
+            break
+        default:
+            break
+            
+        }
+        
+        print(url)
+        
+        if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
+            
+            print(url)
+            let urlRequest = NSMutableURLRequest(URL: NSURL(string: url)!)
+            urlRequest.HTTPMethod = "POST"
+            
+            NSURLSession.sharedSession().uploadTaskWithRequest(urlRequest, fromData: httpBody, completionHandler: parseJson).resume()
+        } else {
+            print("Error de codificación de caracteres.")
+        }
+        
+        
     }
     
     

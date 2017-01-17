@@ -28,6 +28,13 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
         loadCalendario()
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+        
         // In loadView or viewDidLoad
         let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: 320, height: 300))
         calendar.dataSource = self

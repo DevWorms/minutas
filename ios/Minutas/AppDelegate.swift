@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     var updateTimer: NSTimer?
     var mostrarNotificacion: Bool!
+    var tabBarController: UITabBarController!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -81,8 +82,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         updateTimer = NSTimer.scheduledTimerWithTimeInterval(tiempoPush, target: self, selector: #selector(loadNotificaciones), userInfo: nil, repeats: true)
         
         mostrarNotificacion = false
+        
         registerBackgroundTask()
 
+        
+        let badgeCount: Int = 0
+        let application = UIApplication.sharedApplication()
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil))
+        application.applicationIconBadgeNumber = badgeCount
+        
         
         return true
     }
@@ -174,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
             //print(apiKey, userId)
             
-            let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/")!
+            let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/\(false)")!
             
             //print(url)
             NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
@@ -239,7 +247,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     if (self.mostrarNotificacion != nil) {
                                         print("App esta en otra pantalla")
                                         
+                                        
+                                        if self.tabBarController != nil{
+                                            /*
+                                            for notificacion in self.notificaciones {
+                                                
+                                                if (notificacion[WebServiceResponseKey.notificacionLeida] as! Bool) == false {
+                                             */
+                                                    //Manda las alertas al tabbar menu en forma de badges
+                                                /*
+                                                    let valueItem = (self.tabBarController.tabBar.items?[1].badgeValue )
+                                                    
+                                                    print(valueItem)
+                                                    var valor = 0
+                                                    
+                                                    if valueItem == nil || valueItem == "" {
+                                                        valor = 0
+                                                    }else{
+                                                        valor = Int(valueItem!)!
+                                                    }
+                                                    valor = valor + 1*/
+                                                if self.notificaciones.count > 0{
+                                                    self.tabBarController.tabBar.items?[1].badgeValue = "\(self.notificaciones.count)"
+                                                }
+                                                else{
+                                                    self.tabBarController.tabBar.items?[1].badgeValue = nil
+                                                }
+                                            
+                                                    
+                                               // }
+                                           // }
+                                        
+                                        }
                                     }
+                                    
                                 case .Background:
                                     self.mandarNotificacion()
                                     
@@ -310,6 +351,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 UIApplication.sharedApplication().scheduleLocalNotification(notification)
             }
+            
+            let application = UIApplication.sharedApplication()
+            
+            application.applicationIconBadgeNumber = notificaciones.count
             
         }
         

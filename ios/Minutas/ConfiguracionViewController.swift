@@ -20,6 +20,15 @@ class ConfiguracionViewController: UIViewController{
     @IBOutlet weak var opcionCadaHora: UISwitch!
     
     override func viewDidLoad() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
+       
+        
         let tiempoPush = NSUserDefaults.standardUserDefaults().doubleForKey(ApplicationConstants.ritmoNotificaciones)
         
         switch tiempoPush {

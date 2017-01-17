@@ -27,6 +27,13 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: view.frame.width / 2.0 - 4.0, height: view.frame.width / 2.0 - 4.0)
+     
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
         
         loadCategories()
     }

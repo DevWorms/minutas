@@ -40,6 +40,12 @@ class ConversacionesTableViewController: UITableViewController, NewSearchViewCon
         
         //let thread = NSThread(target:self, selector:#selector(actualizacion), object:nil)
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.tabBarController = tabBarController
+        
+        let currentIndex = appDelegate.tabBarController.selectedIndex
+        appDelegate.tabBarController.tabBar.items?[currentIndex].badgeValue = nil
         
     }
     
