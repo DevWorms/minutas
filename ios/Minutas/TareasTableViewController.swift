@@ -152,6 +152,16 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         cell.tareaCompletaSwitch.tag = indexPath.row
         cell.tareaCompletaSwitch.addTarget(self, action: #selector(self.switchChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
+        let isChecked = json[WebServiceResponseKey.statusPendiente] as? Int
+        
+        if isChecked == 1 {
+            cell.addComentarioBtn.hidden = true
+            cell.asignarBtn.hidden = true
+        } else {
+            cell.addComentarioBtn.hidden = false
+            cell.asignarBtn.hidden = false
+        }
+        
         cell.asignarBtn.tag = indexPath.row
         cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         

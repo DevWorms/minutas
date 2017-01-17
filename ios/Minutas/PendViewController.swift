@@ -25,7 +25,12 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var estatus: UILabel!
     @IBOutlet weak var responsables: UITextView!
     @IBOutlet weak var categorias: UIPickerView!
+    
     @IBOutlet weak var fechaCambio: UIDatePicker!
+    @IBOutlet weak var cambiarFechaBtn: UIButton!
+    @IBOutlet weak var addComentario: UIButton!
+    @IBOutlet weak var addUser: UIButton!
+    
     
     var pendienteJson = [String : AnyObject]()
     var pickerData = [String]()
@@ -55,6 +60,15 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
         categorias.delegate = self
         categorias.dataSource = self
+        
+        let isChecked = pendienteJson[WebServiceResponseKey.statusPendiente] as? Int //
+        
+        if isChecked == 1 {
+            self.fechaCambio.hidden = true
+            self.cambiarFechaBtn.hidden = true
+            self.addComentario.hidden = true
+            self.addUser.hidden = true
+        }
         
         pendienteIDm = pendienteJson[WebServiceResponseKey.pendienteId] as! Int
         
