@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "298"
             endingLineNumber = "298"
-            landmarkName = "tableView(tableView:cellForRowAtIndexPath:)"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "archivoExtra(sender:)"
+            landmarkName = "archivoExtra(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -886,7 +886,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XS-UJ-axd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6118" y="1187"/>
+            <point key="canvasLocation" x="6118" y="1226"/>
         </scene>
         <!--Índice eficiencia-->
         <scene sceneID="5R2-Qz-Uog">
@@ -1216,6 +1216,7 @@
                         <segue destination="X26-Ow-OA9" kind="show" identifier="tareas" id="tIp-NX-JgW"/>
                         <segue destination="oRX-Vg-pHW" kind="presentation" identifier="cerrarPendiente" id="eNv-bc-Ana"/>
                         <segue destination="saP-v3-pdE" kind="presentation" identifier="pend" id="Xwf-ea-QVx"/>
+                        <segue destination="Hlw-BS-FGB" kind="presentation" identifier="cerrarTarea" id="gHp-Li-Azp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="reg-o6-pdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1630,8 +1631,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="uv3-u6-YcR" id="rxc-s7-JUA"/>
-                                    <outlet property="delegate" destination="uv3-u6-YcR" id="26p-5t-fet"/>
+                                    <outlet property="dataSource" destination="5Ij-dP-6Uw" id="KpO-nq-NA4"/>
+                                    <outlet property="delegate" destination="5Ij-dP-6Uw" id="tBr-e9-Z5b"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1658,13 +1659,14 @@
                         <outlet property="btn_create" destination="p6R-93-f3k" id="11q-Tz-DLk"/>
                         <outlet property="navigationBar" destination="ua3-Xq-lfc" id="X10-Ov-axJ"/>
                         <outlet property="switch_autoasignar" destination="ecU-Dk-hld" id="Plj-GJ-sQx"/>
+                        <outlet property="tableView" destination="Xx0-Rw-OsF" id="qtS-nm-Xlh"/>
                         <outlet property="txtf_name" destination="SgI-8U-gdE" id="scR-Kz-syi"/>
                         <outlet property="txtf_usuarios_asignados" destination="9L7-qi-AKu" id="erB-iM-dbA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jQ-a7-zMK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5724" y="3512"/>
+            <point key="canvasLocation" x="6118" y="3458"/>
         </scene>
         <!--Reuniones-->
         <scene sceneID="kdE-VC-Ivz">
@@ -2123,7 +2125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oB5-fU-t9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7729" y="2749"/>
+            <point key="canvasLocation" x="7983" y="3083"/>
         </scene>
         <!--New Reunion View Controller-->
         <scene sceneID="DT7-jY-p7t">
@@ -3320,7 +3322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OuW-iq-0Xy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6605.6000000000004" y="3510.4947526236883"/>
+            <point key="canvasLocation" x="7230" y="3083"/>
         </scene>
     </scenes>
     <resources>

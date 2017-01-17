@@ -13,30 +13,41 @@ protocol NewTareaViewControllerDelegate: NSObjectProtocol {
     func newTareaControllerDidFinish()
 }
 
-class NewTareaViewController: UIViewController, UITextFieldDelegate {
+class NewTareaViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate,UITableViewDataSource, UITextViewDelegate {
     
     // MARK: Properties
     
     weak var delegate: NewTareaViewControllerDelegate?
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var switch_autoasignar: UISwitch!
-    @IBOutlet
-    weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBOutlet
     weak var btn_create: UIBarButtonItem!
     
     @IBOutlet weak var txtf_usuarios_asignados: UITextField!
-    @IBOutlet
-    weak var txtf_name: UITextField!
+    @IBOutlet weak var txtf_name: UITextField!
     
-    // MARK: Responding to view events
+    var usuarios = [String]()
+    var tap:UITapGestureRecognizer!
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         txtf_name.becomeFirstResponder()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.txtf_name.delegate = self
+        
+        if tap == nil{
+            tap = self.hideKeyboardWhenTappedAround()
+        }
+        
+        self.loadUsuarios("@")
     }
-    
+ 
     // MARK: Configuring the view's layout behavior
     
     override func viewDidLayoutSubviews() {
@@ -52,6 +63,23 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
     // MARK: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == self.txtf_usuarios_asignados{
+            
+            let arrayResponsables = self.txtf_usuarios_asignados.text!.componentsSeparatedByString("@")
+            let ultimaPalabra = arrayResponsables[arrayResponsables.count-1]
+            print("responsable clikeado" + ultimaPalabra)
+            if self.tableView.hidden == true {
+                self.tableView.hidden = false
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.filterString = ultimaPalabra
+                self.tableView?.reloadData()
+            }
+            
+        }
+        
         if string.isEmpty {
             if textField.text!.startIndex.distanceTo(textField.text!.endIndex) - range.length == 0 {
                 btn_create.enabled = false
@@ -61,6 +89,46 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        if textField == self.txtf_usuarios_asignados{
+            
+            if self.tableView.hidden == true {
+                self.tableView.hidden = false
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.removeGestureRecognitionText(self.tap)
+                self.tap = nil
+                self.tableView?.reloadData()
+            }
+            
+        }else{
+            if tap == nil{
+                tap = self.hideKeyboardWhenTappedAround()
+            }
+            if self.tableView.hidden == false {
+                self.tableView.hidden = true
+                
+            }
+        }
+        
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+        if textView == self.txtf_name {
+            
+            if tap == nil{
+                tap = self.hideKeyboardWhenTappedAround()
+            }
+            if self.tableView.hidden == false {
+                self.tableView.hidden = true
+            }
+        }
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -136,4 +204,134 @@ class NewTareaViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! SearchUsuarioCell
+            
+        cell.txtNombreUsuario.text = visibleResults[indexPath.item]
+            
+            /*let json = tareas[indexPath.item]
+             
+             cell.tituloTarea.text = json[WebServiceResponseKey.nombreSubPendientes] as? String
+             cell.tareaCompletaSwitch.on = json[WebServiceResponseKey.pendienteStatus] as! Bool
+             // cell.documentosAttachados.text = json[WebServiceResponseKey.fechaInicio] as? String
+             */
+        return cell
+    }
+    
+    lazy var visibleResults: [String] = self.usuarios
+    
+    /// A `nil` / empty filter string means show all results. Otherwise, show only results containing the filter.
+    var filterString: String? = nil {
+        didSet {
+            if filterString == nil || filterString!.isEmpty || self.usuarios.count <= 0 {
+                visibleResults = usuarios
+            }
+            else {
+                // Filter the results using a predicate based on the filter string.
+                let filterPredicate = NSPredicate(format: "self contains[c] %@", argumentArray: [filterString!.lowercaseString])
+                visibleResults = usuarios.filter { filterPredicate.evaluateWithObject($0) }
+                
+            }
+            
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if visibleResults.count == 0{
+                self.tableView.hidden = true
+            }
+        return visibleResults.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if tableView == self.tableView {
+            var arrayResponsables = self.txtf_usuarios_asignados.text!.componentsSeparatedByString("@")
+            print("texto basura " + arrayResponsables.popLast()!)
+            
+            var responsables = ""
+            print(arrayResponsables.description)
+            for str in arrayResponsables {
+                if(str != ""){
+                    responsables = responsables +  "@" + str
+                    print(responsables)
+                }
+            }
+            
+            let responsable =  visibleResults[indexPath.item] + ", "
+            
+            self.txtf_usuarios_asignados.text =  responsables + responsable
+            
+            tableView.hidden = true
+            if tap == nil{
+                tap = self.hideKeyboardWhenTappedAround()
+            }
+        }
+    }
+    
+    func loadUsuarios(strUsuario:String) {
+        let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
+        let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
+        
+        print(apiKey, userId)
+        
+        let urlStr = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.find)\(userId)/\(apiKey)/\(strUsuario)/"
+        print(urlStr)
+        let url = NSURL(string: urlStr)!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonUsuarios).resume()
+    }
+    
+    func parseJsonUsuarios(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.usuarios.count > 0 {
+                            self.usuarios.removeAll()
+                        }
+                        
+                        let jsonArray = json[WebServiceResponseKey.usuarios] as! [[String : AnyObject]]
+                        
+                        for jsonItem in jsonArray{
+                            
+                            let strApodo = jsonItem[WebServiceResponseKey.apodo] as? String
+                            self.usuarios.append(strApodo!)
+                            
+                        }
+                        
+                        print(self.usuarios.description)
+                        
+                        
+                        self.tableView?.reloadData()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+    
 }
