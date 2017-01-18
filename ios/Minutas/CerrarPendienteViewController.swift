@@ -229,14 +229,14 @@ class CerrarPendienteViewController: UIViewController, UIDocumentMenuDelegate, U
             requestBodyData.appendString("Content-Disposition: form-data; name=" + WebServiceRequestParameter.userId + "\r\n\r\n")
             requestBodyData.appendString("\( userId )\r\n")  // numero puede ser string o integer
             
-            let mimeType = "application/pdf"
+            /*let mimeType = "application/pdf"
             
             requestBodyData.appendString("--\(boundary)\r\n")
             requestBodyData.appendString("Content-Disposition: form-data; name=file; filename=" + ( MyFile.Name ) + "\r\n")
             requestBodyData.appendString("Content-Type: \(mimeType)\r\n\r\n")
             requestBodyData.appendData( NSData(contentsOfFile: MyFile.Path )! )
             requestBodyData.appendString("\r\n")
-            requestBodyData.appendString("--\(boundary)--\r\n")
+            requestBodyData.appendString("--\(boundary)--\r\n")*/
             
             
             //let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteId)=\(pendienteJson!)&\(WebServiceRequestParameter.mensaje)=\(acuerdo)&\(WebServiceRequestParameter.fileClose)=\(data!)"

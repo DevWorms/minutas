@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "archivoExtra(_:)"
+            landmarkName = "archivoExtra(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
