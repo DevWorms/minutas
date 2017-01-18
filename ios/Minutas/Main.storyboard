@@ -1675,10 +1675,10 @@
             </objects>
             <point key="canvasLocation" x="6118" y="3758"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Comment View Controller-->
         <scene sceneID="xxb-29-DRr">
             <objects>
-                <viewController id="nTy-CV-EES" sceneMemberID="viewController">
+                <viewController id="nTy-CV-EES" customClass="AddCommentViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="156-2R-Idm"/>
                         <viewControllerLayoutGuide type="bottom" id="qvA-AC-6xu"/>
@@ -1701,12 +1701,19 @@
                                 <state key="normal" title="Comentar">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendComment:" destination="nTy-CV-EES" eventType="touchUpInside" id="3XA-gM-GAN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="340" height="220"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="340" height="220"/>
+                    <connections>
+                        <outlet property="textView" destination="5Dq-gg-9hX" id="Pfd-JK-L5A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DI5-PF-y26" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3530,8 +3537,8 @@
         <segue reference="e2b-m4-vOf"/>
         <segue reference="tIp-NX-JgW"/>
         <segue reference="ibw-UW-qZD"/>
-        <segue reference="PoT-6i-6Nt"/>
         <segue reference="Vv3-Sv-yLE"/>
+        <segue reference="T6q-Fn-4W4"/>
         <segue reference="tBd-z3-a4R"/>
     </inferredMetricsTieBreakers>
 </document>

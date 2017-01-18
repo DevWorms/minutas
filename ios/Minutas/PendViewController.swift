@@ -198,6 +198,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     @IBAction func agregarComentarios(sender: AnyObject) {
+        self.performSegueWithIdentifier("addComment", sender: nil)
     }
     
     func parseJson(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
@@ -327,6 +328,18 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             
             vc.idPaComentarios = self.pendienteIDm
             vc.endpoint = "pendientes/comments/"
+            
+            let controller = vc.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
+        }else if segue.identifier == "addComment" {
+            let vc = segue.destinationViewController as! AddCommentViewController
+            
+            vc.idPaComentarios = self.pendienteIDm
+            vc.endpoint = "pendientes/comment"
+            vc.endpointDos = "id_pendiente"
             
             let controller = vc.popoverPresentationController
             

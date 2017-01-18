@@ -45,6 +45,8 @@ class ComentariosViewController: UIViewController, UITableViewDelegate, UITableV
         cell.date.text = json["created_at"] as? String
         cell.user.text = json["apodo"] as? String
         
+        //cell.comment.preferredMaxLayoutWidth = self.tableView.bounds.width
+        
         return cell
     }
     

@@ -142,9 +142,9 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     func addComment(sender:UIButton) {
         let json = tareas[sender.tag]
         
-        //idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
         
-        //self.performSegueWithIdentifier("delegarTarea", sender: nil)
+        self.performSegueWithIdentifier("addComment", sender: nil)
     }
     
     func seeComments(sender:UIButton) {
@@ -375,6 +375,18 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
             
             vc.idPaComentarios = self.idTarea
             vc.endpoint = "tasks/comments/"
+            
+            let controller = vc.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
+        }else if segue.identifier == "addComment" {
+            let vc = segue.destinationViewController as! AddCommentViewController
+            
+            vc.idPaComentarios = self.idTarea
+            vc.endpoint = "tasks/comment"
+            vc.endpointDos = "id_sub_pendiente"
             
             let controller = vc.popoverPresentationController
             
