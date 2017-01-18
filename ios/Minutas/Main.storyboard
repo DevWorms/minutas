@@ -2240,7 +2240,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-ZQ-Ha5">
-                                        <rect key="frame" x="0.0" y="166" width="295" height="42"/>
+                                        <rect key="frame" x="0.0" y="166" width="240" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="ZLt-wC-Ybd"/>
                                         </constraints>
@@ -3039,20 +3039,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Revisar mensajes cada 10 minutos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePm-0t-Fer">
-                                <rect key="frame" x="9" y="219" width="262" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="49" y="219" width="222" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Revisar mensajes cada 30 minutos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxV-cz-tJ8">
-                                <rect key="frame" x="9" y="269" width="265" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="50" y="269" width="224" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Revisar mensajes cada hora" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxZ-Fn-s7g">
-                                <rect key="frame" x="9" y="314" width="214" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="50" y="314" width="180" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3081,8 +3081,8 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recibir notificaciones cada segudo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-9i-Qmy">
-                                <rect key="frame" x="9" y="174" width="266.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="50" y="174" width="226" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3097,13 +3097,13 @@
                             <constraint firstItem="dCt-3Z-f2h" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="200" id="I9Q-tr-CbV"/>
                             <constraint firstItem="ePm-0t-Fer" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="155" id="KnN-51-sJ6"/>
                             <constraint firstItem="dCt-3Z-f2h" firstAttribute="leading" secondItem="QxV-cz-tJ8" secondAttribute="trailing" constant="40" id="LDi-mR-R9J"/>
-                            <constraint firstItem="hsG-Kh-9PT" firstAttribute="leading" secondItem="vxZ-Fn-s7g" secondAttribute="trailing" constant="91" id="OGB-Uu-UYZ"/>
                             <constraint firstItem="A5A-Zw-fdc" firstAttribute="leading" secondItem="b1z-9i-Qmy" secondAttribute="trailing" constant="42.5" id="OkS-Ml-pzQ"/>
                             <constraint firstItem="QxV-cz-tJ8" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="205" id="Pm0-Yn-S9d"/>
                             <constraint firstItem="n1U-ZX-wvp" firstAttribute="centerX" secondItem="TrQ-En-lRD" secondAttribute="centerX" id="ULd-4Y-KDd"/>
                             <constraint firstItem="ePV-oB-OTG" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="150" id="UQq-N4-yla"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ePV-oB-OTG" secondAttribute="trailing" constant="-4" id="bvh-Dr-bqU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A5A-Zw-fdc" secondAttribute="trailing" constant="-8" id="der-jD-urc"/>
+                            <constraint firstItem="hsG-Kh-9PT" firstAttribute="leading" secondItem="vxZ-Fn-s7g" secondAttribute="trailing" constant="84" id="eoB-NY-RNs"/>
                             <constraint firstItem="vxZ-Fn-s7g" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="250" id="jZY-gr-7hP"/>
                             <constraint firstItem="hsG-Kh-9PT" firstAttribute="top" secondItem="hY2-uv-XYj" secondAttribute="bottom" constant="245" id="kAf-Rh-P4W"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hsG-Kh-9PT" secondAttribute="trailing" constant="-4" id="wzM-Vd-LxL"/>

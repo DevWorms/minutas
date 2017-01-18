@@ -32,7 +32,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         loadCalendario()
         
         // In loadView or viewDidLoad
-        let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: 320, height: 300))
+        let calendar = FSCalendar(frame: CGRect(x: 30, y: 0, width: (self.view.frame.size.width - 50) , height: 300))
         calendar.dataSource = self
         calendar.delegate = self
         view.addSubview(calendar)
