@@ -284,9 +284,7 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     // para cuadrar las imagenes
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
-        
-        return cell.tituloTarea.frame.height + 20;
+        return 100
     }
     
     
