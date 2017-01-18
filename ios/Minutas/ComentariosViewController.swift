@@ -23,7 +23,7 @@ class ComentariosViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.dataSource = self
         
         // Along with auto layout, these are the keys for enabling variable cell height
-        self.tableView.estimatedRowHeight = 56.0
+        self.tableView.estimatedRowHeight = 44.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         loadComentarios(idPaComentarios)

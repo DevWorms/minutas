@@ -10,7 +10,7 @@ import UIKit
 import FBSDKLoginKit
 import TwitterKit
 
-class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, NewSearchViewControllerDelegate, CerrarTareaViewControllerDelegate {
+class TareasTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NewTareaViewControllerDelegate, NewSearchViewControllerDelegate, CerrarTareaViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
@@ -139,6 +139,22 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         self.performSegueWithIdentifier("delegarTarea", sender: nil)
     }
     
+    func addComment(sender:UIButton) {
+        let json = tareas[sender.tag]
+        
+        //idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        
+        //self.performSegueWithIdentifier("delegarTarea", sender: nil)
+    }
+    
+    func seeComments(sender:UIButton) {
+        let json = tareas[sender.tag]
+        
+        idTarea = json[WebServiceResponseKey.subPendienteId] as! Int
+        
+        self.performSegueWithIdentifier("showComentarios", sender: nil)
+    }
+    
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! TareasCell
@@ -159,11 +175,16 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
             cell.asignarBtn.hidden = true
         } else {
             cell.addComentarioBtn.hidden = false
+            cell.addComentarioBtn.tag = indexPath.row
+            cell.addComentarioBtn.addTarget(self, action: #selector(self.addComment(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
             cell.asignarBtn.hidden = false
+            cell.asignarBtn.tag = indexPath.row
+            cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
         
-        cell.asignarBtn.tag = indexPath.row
-        cell.asignarBtn.addTarget(self, action: #selector(self.buttonAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.comentariosBtn.tag = indexPath.row
+        cell.comentariosBtn.addTarget(self, action: #selector(self.seeComments(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         cell.reasignarBtn.tag = indexPath.row
         cell.reasignarBtn.addTarget(self, action: #selector(self.buttonReAsignar(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -349,9 +370,21 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
             (segue.destinationViewController as! CerrarTareaViewController).delegate = self
             (segue.destinationViewController as! CerrarTareaViewController).idTarea = self.idTarea
             (segue.destinationViewController as! CerrarTareaViewController).nameTarea = self.tarea
+        }else if segue.identifier == "showComentarios" {
+            let vc = segue.destinationViewController as! ComentariosViewController
+            
+            vc.idPaComentarios = self.idTarea
+            vc.endpoint = "tasks/comments/"
+            
+            let controller = vc.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
         }
-        
-        
     }
     
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
 }

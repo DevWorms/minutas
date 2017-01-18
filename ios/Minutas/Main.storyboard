@@ -635,7 +635,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfY-ZC-3b6">
                                             <rect key="frame" x="89" y="149" width="85" height="30"/>
-                                            <color key="backgroundColor" red="0.1563054602" green="0.49257445719999998" blue="0.96309353249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.14855219852731288" green="0.49322343374490429" blue="0.96309353249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="W2g-we-jh0"/>
                                                 <constraint firstAttribute="width" constant="85" id="sTL-9r-sJJ"/>
@@ -1126,7 +1126,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PenientesViewController" id="5Zs-WU-7nf" customClass="PendienteTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="21T-tX-8F3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1403,7 +1403,7 @@
                         <viewControllerLayoutGuide type="bottom" id="g8b-nb-kOc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qzK-so-Xmn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J1C-Rl-WEQ">
@@ -1514,6 +1514,12 @@
                         <segue destination="f5W-kk-2hy" kind="presentation" identifier="delegarTarea" id="LcM-Yk-yz5"/>
                         <segue destination="f5W-kk-2hy" kind="presentation" identifier="reasignarTarea" id="Lgt-JW-Pyb"/>
                         <segue destination="Hlw-BS-FGB" kind="presentation" identifier="cerrarTarea" id="ibw-UW-qZD"/>
+                        <segue destination="wGw-M2-oIN" kind="popoverPresentation" identifier="showComentarios" popoverAnchorView="J1C-Rl-WEQ" id="A4l-lY-k7d">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
+                        <segue destination="nTy-CV-EES" kind="popoverPresentation" identifier="addComment" popoverAnchorView="qzK-so-Xmn" id="PoT-6i-6Nt">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RqV-oX-RTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1667,14 +1673,51 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jQ-a7-zMK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6118" y="3458"/>
+            <point key="canvasLocation" x="6118" y="3758"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xxb-29-DRr">
+            <objects>
+                <viewController id="nTy-CV-EES" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="156-2R-Idm"/>
+                        <viewControllerLayoutGuide type="bottom" id="qvA-AC-6xu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mvc-f4-Evb">
+                        <rect key="frame" x="0.0" y="0.0" width="340" height="220"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Agregar un comentario: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Dq-gg-9hX">
+                                <rect key="frame" x="16" y="20" width="308" height="147"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-6D-W5O">
+                                <rect key="frame" x="16" y="175" width="308" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.14855219850000001" green="0.49322343369999999" blue="0.96309353249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Comentar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="340" height="220"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DI5-PF-y26" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7980.8000000000002" y="4142.4287856071969"/>
         </scene>
         <!--Reuniones-->
         <scene sceneID="kdE-VC-Ivz">
             <objects>
                 <tableViewController id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKN-uY-NW1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -2096,6 +2139,9 @@
                                         <state key="normal" image="mensaje"/>
                                         <connections>
                                             <action selector="agregarComentarios:" destination="saP-v3-pdE" eventType="touchUpInside" id="mJx-w6-Erd"/>
+                                            <segue destination="nTy-CV-EES" kind="popoverPresentation" identifier="addComment" popoverAnchorView="tgs-su-62C" id="T6q-Fn-4W4">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPn-5h-bx8">
@@ -3440,7 +3486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBI-kS-a1F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7229.6000000000004" y="3920.6896551724139"/>
+            <point key="canvasLocation" x="7230" y="4143"/>
         </scene>
     </scenes>
     <resources>
@@ -3479,11 +3525,13 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DIM-it-vlr"/>
-        <segue reference="zL4-1A-9Lg"/>
+        <segue reference="jBp-a8-zAI"/>
+        <segue reference="Jwn-G5-OGI"/>
         <segue reference="e2b-m4-vOf"/>
         <segue reference="tIp-NX-JgW"/>
         <segue reference="ibw-UW-qZD"/>
-        <segue reference="yn2-1d-H5l"/>
+        <segue reference="PoT-6i-6Nt"/>
+        <segue reference="Vv3-Sv-yLE"/>
+        <segue reference="tBd-z3-a4R"/>
     </inferredMetricsTieBreakers>
 </document>
