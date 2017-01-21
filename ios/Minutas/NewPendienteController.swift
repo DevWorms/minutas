@@ -253,7 +253,6 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
             //let categoryId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
             
             if let nombereText = txtf_name.text {
-                print(nombereText)
                 let styler = NSDateFormatter()
                 styler.dateFormat = "yyyy-MM-dd"
                 let fechaFinal = styler.stringFromDate(datePicketFechaTermino.date)
@@ -292,8 +291,6 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                 
                 let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)&\("auto_asignar")=\(autoasig)"
                 
-                print(parameterString)
-        
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                     let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(self.endPointPendiente)")!)
                     urlRequest.HTTPMethod = "POST"

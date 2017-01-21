@@ -229,29 +229,29 @@
 				49ECFE441E2312DB0046F26C /* ConversacionViewController.swift */,
 				5DC27E1A1DE7300B00857BC0 /* CategoryCollectionViewController.swift */,
 				5DC27E1B1DE7300B00857BC0 /* LogInViewController.swift */,
-				5DC27E1C1DE7300B00857BC0 /* NewCategoryViewController.swift */,
 				5DC27E1D1DE7300B00857BC0 /* PasswordRecoveryViewController.swift */,
 				5DC27E1E1DE7300B00857BC0 /* SignUpViewController.swift */,
-				49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */,
-				3BD4810C1E2EEE9500E86930 /* AddCommentViewController.swift */,
-				3BCFDF211E27111000FF0C31 /* PendViewController.swift */,
-				3BD481081E2ED1CB00E86930 /* ComentariosViewController.swift */,
-				49C746431DF49F6500985CE1 /* TareasTableViewController.swift */,
+				5DC27E1C1DE7300B00857BC0 /* NewCategoryViewController.swift */,
+				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
+				49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */,
 				49C746451DF4ABD700985CE1 /* NewPendienteController.swift */,
 				49C746491DF4BA7800985CE1 /* NewTareaViewController.swift */,
-				49C7464B1DF4E45D00985CE1 /* ReunionesTableViewController.swift */,
-				49C7464D1DF4E4AD00985CE1 /* NewReunionViewController.swift */,
-				49C746511DF4F1C400985CE1 /* NewMinutaViewController.swift */,
-				3BE3EC141E25D7A60056AE83 /* CerrarPendienteViewController.swift */,
-				3B50F79E1E2C7F04009534A9 /* CerrarTareaViewController.swift */,
-				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
 				49C746571DF4F51900985CE1 /* NewAsuntosViewController.swift */,
 				49E15D621DFEB4C700084EFB /* CalendarioTableViewController.swift */,
 				49E15D661DFEC05000084EFB /* CollapsibleTableViewController.swift */,
 				49E15D681DFEC07000084EFB /* CollapsibleTableViewHeader.swift */,
+				3BD4810C1E2EEE9500E86930 /* AddCommentViewController.swift */,
+				3BD481081E2ED1CB00E86930 /* ComentariosViewController.swift */,
+				49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */,
+				49C7464B1DF4E45D00985CE1 /* ReunionesTableViewController.swift */,
+				49C7463A1DF3673200985CE1 /* PendienteTableViewController.swift */,
+				49C746431DF49F6500985CE1 /* TareasTableViewController.swift */,
+				49C746531DF4F45700985CE1 /* AsuntosTableViewController.swift */,
+				3BCFDF211E27111000FF0C31 /* PendViewController.swift */,
+				3BE3EC141E25D7A60056AE83 /* CerrarPendienteViewController.swift */,
+				3B50F79E1E2C7F04009534A9 /* CerrarTareaViewController.swift */,
 				49BC23761E03BC5C0030EEF9 /* GraficasViewController.swift */,
 				49EA2A231E240A9E0000B5F5 /* SearchUserViewController.swift */,
-				49EA2A271E24670D0000B5F5 /* NotificacionesTableViewController.swift */,
 				4C2E48651E2585DD00720E8C /* FavoritosViewController.swift */,
 				49FE68B61E2869D6002002CE /* ConfiguracionViewController.swift */,
 				49FE68BA1E289F52002002CE /* ReporteViewController.swift */,
@@ -393,7 +393,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = LYQS42L4UG;
 						LastSwiftMigration = 0810;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -711,8 +711,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = LYQS42L4UG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -725,8 +725,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.fg.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e096402a-92b9-41a4-ab9c-36d0e5e264ee";
-				PROVISIONING_PROFILE_SPECIFIER = "prod minute";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -745,8 +745,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Minutas/Minutas.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = LYQS42L4UG;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -759,8 +759,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mx.com.fg.Minutas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e096402a-92b9-41a4-ab9c-36d0e5e264ee";
-				PROVISIONING_PROFILE_SPECIFIER = "prod minute";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "Minutas/Minutas-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;

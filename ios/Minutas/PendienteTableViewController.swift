@@ -24,6 +24,8 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     var rNombrePend = String()
     var rIdPend = Int()
     
+    var idReunion = 0
+    
     var barButton:BBBadgeBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -427,20 +429,30 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "nuevoPendiente" {
-            (segue.destinationViewController as! NewPendienteViewController).delegate = self
-            (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.categoryId
-            (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
-            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
-        }
             
-        else if segue.identifier == "pend"{
+            if self.idReunion == 0 {
+                (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.categoryId
+                (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.categoryId)
+                (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
+            }else {
+                (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
+                (segue.destinationViewController as! NewPendienteViewController).idRequested = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.reunionId)
+                (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
+                
+            }
+            
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            
+            
+        } else if segue.identifier == "pend"{
             (segue.destinationViewController as! PendViewController).pendienteJson = self.pendienteJson
             (segue.destinationViewController as! PendViewController).delegate = self
-        } else if segue.identifier == "cerrarPendiente" {
             
+        } else if segue.identifier == "cerrarPendiente" {
             (segue.destinationViewController as! CerrarPendienteViewController).delegate = self
             (segue.destinationViewController as! CerrarPendienteViewController).pendienteJson = self.rIdPend
             (segue.destinationViewController as! CerrarPendienteViewController).nombrePendiente = self.rNombrePend
+            
         }else if segue.identifier == "cerrarTarea"{
             (segue.destinationViewController as! CerrarTareaViewController).delegate = self
             (segue.destinationViewController as! CerrarTareaViewController).idTarea = self.rIdPend

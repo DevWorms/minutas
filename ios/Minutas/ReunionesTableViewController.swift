@@ -306,14 +306,15 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         }else if segue.identifier == "nuevoPendiente" {
             
             let json = reuniones[noCellReunionPend]
-            let rID = (json[WebServiceResponseKey.reunionId] as? Int)!
+            let reunionID = (json[WebServiceResponseKey.reunionId] as? Int)!
             
             (segue.destinationViewController as! NewPendienteViewController).delegate = self
             (segue.destinationViewController as! NewPendienteViewController).idRequest = WebServiceRequestParameter.reunionId
-            (segue.destinationViewController as! NewPendienteViewController).idRequested = rID
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = reunionID
             (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendienteReunion
         }else if segue.identifier == "pendientes" {
             (segue.destinationViewController as! PendienteTableViewController).initial = false
+            (segue.destinationViewController as! PendienteTableViewController).idReunion = 1
         }
     }
 
