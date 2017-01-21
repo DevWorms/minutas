@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentViewController: UIViewController {
+class AddCommentViewController: UIViewController, UITextFieldDelegate {
     
     var idPaComentarios = Int()
     var endpoint = String() //
@@ -72,6 +72,12 @@ class AddCommentViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.textView.resignFirstResponder()
+        
+        return true
     }
 
     /*

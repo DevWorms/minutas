@@ -107,21 +107,16 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NotificacionCell
         
         let json = notificaciones[indexPath.item]
-        print(json.description)
+        //print(json.description)
         
         let txt = "<font color=\"white\">" + (json[WebServiceResponseKey.notificacionText] as? String)! + " </font>"
-        var attrStr = try! NSAttributedString(
+        let attrStr = try! NSAttributedString(
             data: txt.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil)
         
-        
-        
         cell.textoNotificacion.attributedText = attrStr
-        
-        
-        
-        print(attrStr)
+        //print(attrStr)
         
         
         var obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as? Bool
@@ -341,8 +336,6 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         var parameterString = ""
         var url = ""
         
-        
-        
         switch opcion {
         case 1:// rechazar sub pendiente
             
@@ -379,6 +372,8 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         
         print(url)
         
+        //return
+        
         if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
             
             print(url)
@@ -398,11 +393,8 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
         let userId = NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId)
         
-        print(apiKey, userId)
-        
         let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.notificaciones)\(userId)/\(apiKey)/\(false)")!
         
-        print(url)
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJson).resume()
     }
     
@@ -453,12 +445,10 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
             if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
                 print(data)
                 
-                
-                
                 if data != nil {
                     if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
                     
-                    print(json)
+                    //print(json)
                         
                         dispatch_async(dispatch_get_main_queue()) {
                             if self.notificaciones.count > 0 {
