@@ -187,6 +187,35 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         
         let json = pendientes[indexPath.item]
         
+        if self.initial {
+            cell.fecha.hidden = false
+            cell.fecha.text = json["Fecha_Fin"] as? String
+            
+            cell.cateOrPendOrJunta.hidden = false
+            
+            if let pend = json["pendiente"] as? [String : AnyObject] {
+                cell.cateOrPendOrJunta.text = "Pendiente: " + (pend["Nombre_Pendiente"] as? String)!
+            } else if let reu = json["reunion"] as? [String : AnyObject] {
+                cell.cateOrPendOrJunta.text = "Reunión: " + (reu["Nombre_Reunion"] as? String)!
+            } else if let cat = json["categoria"] as? [String : AnyObject] {
+                cell.cateOrPendOrJunta.text = "Categoría: " + (cat["nombre_categoria"] as? String)!
+            }
+            
+            cell.status.hidden = true
+            
+        } else {
+            cell.fecha.hidden = true
+            cell.cateOrPendOrJunta.hidden = true
+            
+            let statVis = json[WebServiceResponseKey.pendienteStatusVisible] as? String
+            
+            if statVis == "Vencido" {
+                cell.status.hidden = false
+            } else {
+                cell.status.hidden = true
+            }
+        }
+        
         if let sub_pend = json[WebServiceResponseKey.nombreSubPendientes] {
             cell.tituloPendiente.text = sub_pend as? String
         } else {
@@ -201,14 +230,6 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         } else {
             cell.checkBox.setImage(cell.uncheckedImage, forState: .Normal)
             cell.viewStatusCerrado.hidden = true
-        }
-        
-        let statVis = json[WebServiceResponseKey.pendienteStatusVisible] as? String
-        
-        if statVis == "Vencido" {
-            cell.status.hidden = false
-        } else {
-            cell.status.hidden = true
         }
         
         cell.checkBox.tag = indexPath.row
@@ -325,21 +346,33 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
                             self.pendientes.removeAll()
                         }
                         
-                        //Cuando el pendiente es buscado por medio de la lupa del menu se debe mostrar unicamente el pendiente cuyo idPendiente sea diferente de 0
-                        if self.idPendiente > 0 {
+                        if self.initial {
                             
-                            for pend in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]]{
-                                if self.idPendiente == pend[WebServiceResponseKey.pendienteId] as! Int{
+                            for pend in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]] {
+                                if pend[WebServiceResponseKey.statusPendiente] as! Int == 0 {
                                     self.pendientes.append(pend)
                                 }
                                 
                             }
+                        } else {
                             
-                            
+                            //Cuando el pendiente es buscado por medio de la lupa del menu se debe mostrar unicamente el pendiente cuyo idPendiente sea diferente de 0
+                            if self.idPendiente > 0 {
+                                
+                                for pend in json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]]{
+                                    if self.idPendiente == pend[WebServiceResponseKey.pendienteId] as! Int{
+                                        self.pendientes.append(pend)
+                                    }
+                                    
+                                }
+                                
+                            }
+                            else{
+                                self.pendientes.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                            }
                         }
-                        else{
-                            self.pendientes.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
-                        }
+                        
+                        
                         
                         self.tableView?.reloadData()
                     }

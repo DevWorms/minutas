@@ -22,6 +22,8 @@ class PendienteCell: GenericCell {//, UIDocumentMenuDelegate, UIDocumentPickerDe
     @IBOutlet weak var tituloPendiente: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var btnTareas: UIButton!
+    @IBOutlet weak var fecha: UILabel!
+    @IBOutlet weak var cateOrPendOrJunta: UILabel!
     
     let checkedImage = UIImage(named: "ic_check_box")! as UIImage
     
