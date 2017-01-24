@@ -308,6 +308,7 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
     
     func pendienteDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
+        loadPendiente()
     }
     
     func pendienteDidFinish() {

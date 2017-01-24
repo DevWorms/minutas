@@ -30,6 +30,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var cambiarFechaBtn: UIButton!
     @IBOutlet weak var addComentario: UIButton!
     @IBOutlet weak var addUser: UIButton!
+    @IBOutlet weak var delegarBtn: UIButton!
     
     var pendienteJson = [String : AnyObject]()
     var pickerData = [String]()
@@ -67,6 +68,13 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             self.cambiarFechaBtn.hidden = true
             self.addComentario.hidden = true
             self.addUser.hidden = true
+            self.delegarBtn.hidden = true
+        }
+        
+        let delegarBool = pendienteJson["is_delegado"] as? Int
+        let userBool = pendienteJson["user_id"] as? Int
+        if delegarBool == 1 || userBool == NSUserDefaults.standardUserDefaults().integerForKey(WebServiceResponseKey.userId) {
+            self.delegarBtn.hidden = true
         }
         
         pendienteIDm = pendienteJson[WebServiceResponseKey.pendienteId] as! Int
@@ -110,18 +118,12 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         delegate?.pendienteDidCancel()
     }
     
-    @IBAction func ok(_: AnyObject) {
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func adjuntarArchivo(sender: AnyObject) {
-    }
-    
-    @IBAction func agregarUser(sender: AnyObject) {
     }
     
     @IBAction func verComentarios(sender: AnyObject) {
@@ -346,7 +348,12 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             if controller != nil {
                 controller?.delegate = self
             }
+        }else if segue.identifier == "delegarPendiente"{
+            (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = 6
+            (segue.destinationViewController as! SearchUserViewController).delegate = self
+            (segue.destinationViewController as! SearchUserViewController).idAsignar = self.pendienteIDm
         }
+        
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
