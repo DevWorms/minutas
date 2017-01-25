@@ -491,6 +491,16 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             (segue.destinationViewController as! CerrarTareaViewController).delegate = self
             (segue.destinationViewController as! CerrarTareaViewController).idTarea = self.rIdPend
             (segue.destinationViewController as! CerrarTareaViewController).nameTarea = self.rNombrePend
+            
+        }else if segue.identifier == "tareas"{
+            
+            let isChecked = self.pendienteJson[WebServiceResponseKey.statusPendiente] as? Int
+            
+            if isChecked == 0 {
+                (segue.destinationViewController as! TareasTableViewController).pendCerrado = false
+            } else {
+                (segue.destinationViewController as! TareasTableViewController).pendCerrado = true
+            }            
         }
     }
     

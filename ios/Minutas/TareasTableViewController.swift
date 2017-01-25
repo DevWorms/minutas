@@ -15,10 +15,12 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
     //Esta variable viene desde menu principal y hace referencia a los menus que deben de comprarse
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addTarea: UIBarButtonItem!
     
     var tareas = [[String : AnyObject]]()
     var idTarea = Int()
     var tarea = ""
+    var pendCerrado = false
     
     func newConversacionControllerDidCancel() {
         dismissViewControllerAnimated(true, completion: nil)
@@ -47,7 +49,9 @@ class TareasTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         
-        
+        if self.pendCerrado {
+            self.addTarea.enabled = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
