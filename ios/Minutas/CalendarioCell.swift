@@ -114,10 +114,7 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //let tM = self.tableMadre as! CalendarioTableViewController
-        //tM.rowCell = indexPath.item
-        
-        //tM.sectio
+        let tM = self.tableMadre as! CalendarioTableViewController
         
         if indexPath.section == 0 {
             print(indexPath.item)
@@ -132,15 +129,18 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
                 
                 self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
             }
+            
         } else if indexPath.section == 1 {
             print(indexPath.item)
             
-            let pendienteId = idPendientes?[indexPath.item]
+            let reunionId = idReuniones?[indexPath.item]
             
-            if pendienteId != nil {
-                NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
+            if reunionId != nil {
                 
-                self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+                tM.idReunionTocado = reunionId!
+                
+                self.tableMadre!.performSegueWithIdentifier("juntas", sender: nil)
+                
             }
         }
         

@@ -24,7 +24,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     var idActividad = [Int]()
     var reunion = [String]()
     var idReunion = [Int]()
-    var rowCell = Int()
+    var idReunionTocado = Int()
     var barButton:BBBadgeBarButtonItem!
    
     
@@ -325,6 +325,9 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         } else if segue.identifier ==  "nuevaReunion" {
             (segue.destinationViewController as! NewReunionViewController).delegate = self
             
+        } else if segue.identifier ==  "juntas" {
+            print(self.idReunionTocado)
+            (segue.destinationViewController as! ReunionesTableViewController).idDesdeCalendario = self.idReunionTocado
         }
     }
     

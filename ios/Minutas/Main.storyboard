@@ -961,6 +961,7 @@
                         <segue destination="X26-Ow-OA9" kind="show" identifier="tareas" id="J9U-HL-Jh4"/>
                         <segue destination="uv3-u6-YcR" kind="presentation" identifier="nuevoPendiente" id="pWX-lZ-P1v"/>
                         <segue destination="9LL-kD-PBD" kind="presentation" identifier="nuevaReunion" id="d5i-QF-OlO"/>
+                        <segue destination="8wR-kl-PI0" kind="show" identifier="juntas" id="ZPy-ej-XWJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XS-UJ-axd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1476,7 +1477,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XyT-8U-Mwd" id="S32-Ir-wFd">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="OE3-Ta-Gf2">
@@ -1824,7 +1825,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jzE-y1-OjR" id="CU1-Pv-V2K">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-CG-Xcn">
@@ -2619,7 +2620,7 @@
                                         <rect key="frame" x="0.0" y="28" width="289" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C0v-6j-dSO" id="NSd-oN-I8x">
-                                            <rect key="frame" x="0.0" y="0.0" width="289" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asunto a tratar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="93N-mD-Gwd">
@@ -3003,7 +3004,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LCQ-ww-ty6" id="Knu-jQ-nVi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="W6H-a6-qla">
@@ -3989,11 +3990,11 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zL4-1A-9Lg"/>
-        <segue reference="DIM-it-vlr"/>
-        <segue reference="e2b-m4-vOf"/>
-        <segue reference="CDW-8Q-P6w"/>
+        <segue reference="d5i-QF-OlO"/>
+        <segue reference="pWX-lZ-P1v"/>
+        <segue reference="ZPy-ej-XWJ"/>
         <segue reference="J9U-HL-Jh4"/>
+        <segue reference="DIM-it-vlr"/>
         <segue reference="PoT-6i-6Nt"/>
         <segue reference="Vv3-Sv-yLE"/>
         <segue reference="A4l-lY-k7d"/>
