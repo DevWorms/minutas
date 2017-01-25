@@ -882,7 +882,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7c-sv-1jc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9012" y="460"/>
+            <point key="canvasLocation" x="8553" y="457"/>
         </scene>
         <!--Calendario-->
         <scene sceneID="rxc-nm-V2n">
@@ -942,21 +942,30 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Calendario" id="Ho2-0M-9qb">
-                        <barButtonItem key="rightBarButtonItem" image="ic_account_circle_white_24pt" id="Gwo-2c-gPA">
-                            <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="cerrarSesion:" destination="8j3-42-rvc" id="uzX-fC-G6U"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="Vza-5v-vbk">
+                                <connections>
+                                    <action selector="buttonAdd:" destination="8j3-42-rvc" id="dfc-yR-oCb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="ic_account_circle_white_24pt" id="Gwo-2c-gPA">
+                                <color key="tintColor" red="1" green="0.99753254400000002" blue="0.98785364689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="cerrarSesion:" destination="8j3-42-rvc" id="uzX-fC-G6U"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="X26-Ow-OA9" kind="show" identifier="tareas" id="J9U-HL-Jh4"/>
+                        <segue destination="uv3-u6-YcR" kind="presentation" identifier="nuevoPendiente" id="pWX-lZ-P1v"/>
+                        <segue destination="9LL-kD-PBD" kind="presentation" identifier="nuevaReunion" id="d5i-QF-OlO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XS-UJ-axd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6118" y="1226"/>
+            <point key="canvasLocation" x="9462" y="1218"/>
         </scene>
         <!--Índice eficiencia-->
         <scene sceneID="5R2-Qz-Uog">
@@ -1197,7 +1206,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ood-Li-ge1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6118" y="459"/>
+            <point key="canvasLocation" x="9462" y="459"/>
         </scene>
         <!--Reportes-->
         <scene sceneID="uDb-4c-vZc">
@@ -1467,7 +1476,7 @@
                                         <rect key="frame" x="0.0" y="28" width="315" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XyT-8U-Mwd" id="S32-Ir-wFd">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_account_circle_white_24pt" translatesAutoresizingMaskIntoConstraints="NO" id="OE3-Ta-Gf2">
@@ -1553,7 +1562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w3K-0l-YmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8555.625" y="1978.5211267605634"/>
+            <point key="canvasLocation" x="8553" y="1977"/>
         </scene>
         <!--Tareas-->
         <scene sceneID="9oC-bY-D2u">
@@ -1725,7 +1734,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RqV-oX-RTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6117.6000000000004" y="2748.5757121439283"/>
+            <point key="canvasLocation" x="6262" y="2749"/>
         </scene>
         <!--New Tarea View Controller-->
         <scene sceneID="ZBi-uc-omY">
@@ -2064,7 +2073,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDk-eb-79X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9012" y="1217.5412293853074"/>
+            <point key="canvasLocation" x="8554" y="1218"/>
         </scene>
         <!--New Minuta View Controller-->
         <scene sceneID="pb5-PR-ZrE">
@@ -2610,7 +2619,7 @@
                                         <rect key="frame" x="0.0" y="28" width="289" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C0v-6j-dSO" id="NSd-oN-I8x">
-                                            <rect key="frame" x="0.0" y="0.0" width="289" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Asunto a tratar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="93N-mD-Gwd">
@@ -3578,7 +3587,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJF-Pi-oso" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5445" y="2748.5915492957747"/>
+            <point key="canvasLocation" x="5414" y="2749"/>
         </scene>
         <!--Pendientes-->
         <scene sceneID="jKj-jX-JP2">
@@ -3982,11 +3991,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="zL4-1A-9Lg"/>
         <segue reference="DIM-it-vlr"/>
-        <segue reference="MFI-jU-CMm"/>
-        <segue reference="tIp-NX-JgW"/>
+        <segue reference="e2b-m4-vOf"/>
+        <segue reference="CDW-8Q-P6w"/>
+        <segue reference="J9U-HL-Jh4"/>
         <segue reference="PoT-6i-6Nt"/>
         <segue reference="Vv3-Sv-yLE"/>
-        <segue reference="ibw-UW-qZD"/>
         <segue reference="A4l-lY-k7d"/>
+        <segue reference="ibw-UW-qZD"/>
     </inferredMetricsTieBreakers>
 </document>

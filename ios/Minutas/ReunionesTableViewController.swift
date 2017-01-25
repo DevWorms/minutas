@@ -303,6 +303,7 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
             
         }else if segue.identifier ==  "nuevaReunion"{
             (segue.destinationViewController as! NewReunionViewController).delegate = self
+            
         }else if segue.identifier == "nuevoPendiente" {
             
             let json = reuniones[noCellReunionPend]

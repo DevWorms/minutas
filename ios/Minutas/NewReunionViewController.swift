@@ -147,9 +147,12 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             
             dispatch_async(dispatch_get_main_queue()) {
-                self.removeGestureRecognitionText(self.tap)
-                self.tap = nil
-                self.tableView?.reloadData()
+                if self.tap != nil{
+                    self.removeGestureRecognitionText(self.tap)
+                    self.tap = nil
+                    self.tableView?.reloadData()
+                }
+                
             }
             
         }else{

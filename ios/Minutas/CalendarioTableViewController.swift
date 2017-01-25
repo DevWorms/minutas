@@ -12,7 +12,7 @@ import FSCalendar
 import FBSDKLoginKit
 import TwitterKit
 
-class CalendarioTableViewController: UITableViewController, FSCalendarDataSource, FSCalendarDelegate{
+class CalendarioTableViewController: UITableViewController, FSCalendarDataSource, FSCalendarDelegate, NewPendienteControllerDelegate, NewReunionViewControllerDelegate {
     
     private weak var calendar: FSCalendar!
     var agenda = [[String : AnyObject]]()
@@ -58,6 +58,24 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
     }
     
+    func newPendienteControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func newPendienteControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadCalendario()
+    }
+    
+    func newReunionControllerDidCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func newReunionControllerDidFinish() {
+        dismissViewControllerAnimated(true, completion: nil)
+        loadCalendario()
+    }
+    
     func revisarNotificaciones(){
         barButton.badgeValue = ""
         let activity = "NotificacionViewController"
@@ -73,6 +91,26 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func buttonAdd(sender: AnyObject) {
+        
+        let alertController = UIAlertController(title: "¿Qué deseas crear?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Crear Pendiente", style: .Default, handler: {(alert :UIAlertAction!) in
+            
+            self.performSegueWithIdentifier("nuevoPendiente", sender: nil)
+        })
+        alertController.addAction(deleteAction)
+        
+        let okAction = UIAlertAction(title: "Crear Junta", style: .Default, handler: {(alert :UIAlertAction!) in
+            self.performSegueWithIdentifier("nuevaReunion", sender: nil)
+        })
+        alertController.addAction(okAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = sender.frame
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
     
     // Make the background color show through
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -112,21 +150,6 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2//self.asuntos.count
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "pend" {
-            /*
-            print("tareasSegue>>>>>")
-            
-            let json = tareas[self.rowCell]
-            print(self.rowCell)
-            print(json)
-            let destino = segue.destinationViewController as! PendViewController
-            destino.pendienteJson = json*/
-        }
-    }
-    
     
     func loadCalendario() {
         let apiKey = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.apiKey)!
@@ -266,6 +289,21 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
         self.presentViewController( vc , animated: true, completion: nil)
 
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "nuevoPendiente" {
+            
+            (segue.destinationViewController as! NewPendienteViewController).idRequest = ""
+            (segue.destinationViewController as! NewPendienteViewController).idRequested = 0
+            (segue.destinationViewController as! NewPendienteViewController).endPointPendiente = WebServiceEndpoint.newPendiente
+            (segue.destinationViewController as! NewPendienteViewController).delegate = self
+            
+        } else if segue.identifier ==  "nuevaReunion" {
+            (segue.destinationViewController as! NewReunionViewController).delegate = self
+            
+        }
     }
     
     

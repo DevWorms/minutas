@@ -289,7 +289,11 @@ class NewPendienteViewController: UIViewController, UITextFieldDelegate,UIPicker
                     print(txtf_responsable.text!)
                }*/
                 
-                let parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(self.idRequest)=\(self.idRequested)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)&\("auto_asignar")=\(autoasig)"
+                var parameterString = "\(WebServiceRequestParameter.userId)=\(userId)&\(WebServiceRequestParameter.apiKey)=\(apiKey)&\(WebServiceRequestParameter.pendienteName)=\(nombereText)&\(WebServiceRequestParameter.descripcion)=\(txtf_descripcion.text)&\(WebServiceRequestParameter.autopostergar)=\(Int(autopostergarSwitch.on) )&\(WebServiceRequestParameter.prioridad)=\(prioridadSelected)&\(WebServiceRequestParameter.fechaFin)=\(fechaFinal)&\(WebServiceRequestParameter.responsable)=\(responsables)&\("auto_asignar")=\(autoasig)"
+                
+                if self.idRequest != "" {
+                    parameterString = parameterString + "&\(self.idRequest)=\(self.idRequested)"
+                }
                 
                 if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
                     let urlRequest = NSMutableURLRequest(URL: NSURL(string: "\(WebServiceEndpoint.baseUrl)\(self.endPointPendiente)")!)
