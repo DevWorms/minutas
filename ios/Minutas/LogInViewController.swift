@@ -201,7 +201,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate, SignUpControll
     
     @IBAction func loginFb(sender: AnyObject) {
         self.registrandose = false
-        let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
+        let readPermissions : [String]? = ["public_profile","email","user_friends"]
         
         let loginManager = FBSDKLoginManager()
         loginManager.logInWithReadPermissions(readPermissions) { (resultado, error) in

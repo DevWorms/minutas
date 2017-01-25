@@ -11,18 +11,12 @@ import TwitterKit
 import FBSDKLoginKit
 
 protocol SignUpControllerDelegate: NSObjectProtocol, NSURLSessionDelegate {
-    
     func signUpControllerDidCancel()
-    
     func signUpControllerDidFinishWithInfo(info: [String : String])
-    
     func signUpWithSocialNetworkControllerDidFinishWithInfo(id:String, redSocial: String)
-    
-    
-    
 }
 
-class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: Properties
     
@@ -36,38 +30,39 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     weak var cnstr_currentTextFieldSeparatorHeight: NSLayoutConstraint!
     
-    @IBOutlet
-    weak var navigationBar: UINavigationBar!
-    
-    @IBOutlet
-    weak var btn_signUp: UIBarButtonItem!
-    
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var btn_signUp: UIBarButtonItem!
     @IBOutlet weak var txtf_confirm_password: UITextField!
     @IBOutlet weak var txtf_name: UITextField!
+    @IBOutlet weak var txtf_username: UITextField!
+    @IBOutlet weak var txtf_email: UITextField!
+    @IBOutlet weak var txtf_phone: UITextField!
+    @IBOutlet weak var txtf_password: UITextField!
     
-    @IBOutlet
-    weak var txtf_username: UITextField!
+    @IBOutlet weak var pickEmpresas: UIPickerView!
+    @IBOutlet weak var codeEmpresa: UITextField!
+    @IBOutlet weak var swtEmpresa: UISwitch!
     
-    @IBOutlet
-    weak var txtf_email: UITextField!
-    
-    @IBOutlet
-    weak var txtf_phone: UITextField!
-    
-    @IBOutlet
-    weak var txtf_password: UITextField!
-    
-    @IBOutlet
-    var form: [UITextField]!
+    @IBOutlet var form: [UITextField]!
     
     var nombre = ""
     var email = ""
     var nombreUsuario = ""
     
+    var pickerData = ["Nombre de la empresa"]
+    var pickerDataID = [Int]()
+    var nopicke = 0
+    
+    
     // MARK: Managing the view
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.pickEmpresas.delegate = self
+        self.pickEmpresas.dataSource =  self
+        
+        loadEmp()
         
         let btn_passwordVisibility = UIButton(type: .System)
         btn_passwordVisibility.addTarget(self, action: #selector(toggleSecureTextEntry(_:)), forControlEvents: .TouchUpInside)
@@ -97,7 +92,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        txtf_name.becomeFirstResponder()
+        //txtf_name.becomeFirstResponder()
     }
     
     // MARK: Configuring the view's layout behavior
@@ -241,8 +236,28 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
                 parameterString = parameterString + "&\(WebServiceRequestParameter.token)=\(token)"
             }
             
+            if self.swtEmpresa.on {
+                
+                self.nopicke = NSUserDefaults.standardUserDefaults().integerForKey("prioridadSelected")
+                
+                if !((self.codeEmpresa.text?.isEmpty)!) &&
+                    (nopicke != 0) {
+                    
+                    parameterString = parameterString + "&\("id_empresa")=\(self.pickerDataID[nopicke - 1])&\("codigo_empresa")=\(self.codeEmpresa.text!)"
+                    
+                } else {
+                    let vc_alert = UIAlertController(title: "Un momento", message: "Información de empresa incompleta", preferredStyle: .Alert)
+                    vc_alert.addAction(UIAlertAction(title: "OK",
+                        style: UIAlertActionStyle.Default,
+                        handler: nil))
+                    self.presentViewController(vc_alert, animated: true, completion: nil)
+                    
+                    return
+                }
+            }
+            
             print(parameterString)
-        
+            
             let strUrl = "\(WebServiceEndpoint.baseUrl)\(WebServiceEndpoint.signup)"
             if let httpBody = parameterString.dataUsingEncoding(NSUTF8StringEncoding) {
             let urlRequest = NSMutableURLRequest(URL: NSURL(string: strUrl)!)
@@ -292,7 +307,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
     
     @IBAction func fbButton(sender: AnyObject) {
         self.cerrarSesion()
-        let readPermissions : [String]? = ["public_profile","email", "user_likes", "user_photos", "user_posts", "user_friends"]
+        let readPermissions : [String]? = ["public_profile","email","user_friends"]
         
         let loginManager = FBSDKLoginManager()
         loginManager.logInWithReadPermissions(readPermissions) { (resultado, error) in
@@ -501,6 +516,101 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, NSURLSessionD
         
     }
 
-   
+    // picker
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        NSUserDefaults.standardUserDefaults().setObject(row, forKey: "prioridadSelected")
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel;
+        
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: "Arial", size: 12)
+            pickerLabel?.textColor = UIColor.whiteColor()
+            pickerLabel?.textAlignment = NSTextAlignment.Center
+        }
+        
+        pickerLabel?.text = pickerData[row]
+        
+        return pickerLabel!;
+        
+    }
+    
+    func loadEmp() {
+        let url = NSURL(string: "\(WebServiceEndpoint.baseUrl)\("empresas/sample/")")!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonEmp).resume()
+    }
+    
+    func parseJsonEmp(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    //print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.pickerDataID.count > 0 {
+                            self.pickerData.removeAll()
+                            self.pickerDataID.removeAll()
+                        }
+                        
+                        if let variable = json["empresas"] as? [[String : AnyObject]] {
+                            for empresa in variable {
+                                
+                                if let nombreEmp = empresa["nombre_empresa"] as? String  {
+                                    
+                                    self.pickerData.append(nombreEmp)
+                                }
+                                
+                                if let idEmp = empresa["id_empresa"] as? Int  {
+                                    
+                                    self.pickerDataID.append(idEmp)
+                                }
+                                
+                                
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        self.pickEmpresas?.reloadAllComponents()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
     
 }

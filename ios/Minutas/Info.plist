@@ -39,7 +39,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>li4350214</string>
-				<string>fb880131518745577</string>
+				<string>fb342910756088185</string>
 			</array>
 		</dict>
 	</array>
@@ -65,7 +65,7 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>880131518745577</string>
+	<string>342910756088185</string>
 	<key>FacebookDisplayName</key>
 	<string>Minute</string>
 	<key>LIAppId</key>
