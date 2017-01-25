@@ -17,10 +17,13 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
     private weak var calendar: FSCalendar!
     var agenda = [[String : AnyObject]]()
     var agendiaEvento = [String]()
+    var agendaReuniones = [[String : AnyObject]]()
     var tareas = [[String : AnyObject]]()
     var celdaActiv = CalendarioCell()
     var actividad = [String]()
     var idActividad = [Int]()
+    var reunion = [String]()
+    var idReunion = [Int]()
     var rowCell = Int()
     var barButton:BBBadgeBarButtonItem!
    
@@ -106,6 +109,11 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         })
         alertController.addAction(okAction)
         
+        let cancelar = UIAlertAction(title: "Cancelar", style: .Destructive, handler: {(alert :UIAlertAction!) in
+            print("OK button tapped")
+        })
+        alertController.addAction(cancelar)
+        
         alertController.popoverPresentationController?.sourceView = view
         alertController.popoverPresentationController?.sourceRect = sender.frame
         
@@ -137,7 +145,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
             
             self.actividades(dateString)
             
-            self.celdaActiv.setUpTable( idActividad, items: actividad, tvc: self )
+            self.celdaActiv.setUpTable( idActividad, itemsPend: actividad, idItemsReu: idReunion, itemsReu: reunion, tvc: self )
             
             return self.celdaActiv
             
@@ -169,9 +177,11 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
                     dispatch_async(dispatch_get_main_queue()) {
                         if self.agenda.count > 0 {
                             self.agenda.removeAll()
+                            self.agendaReuniones.removeAll()
                         }
                         
                         self.agenda.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
+                        self.agendaReuniones.appendContentsOf(json[WebServiceResponseKey.reuniones] as! [[String : AnyObject]])
                         self.tableView?.reloadData()
                     }
                 } else {
@@ -232,7 +242,7 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
         self.actividades(dateString)
         
-        self.celdaActiv.setUpTable( idActividad, items: actividad, tvc: self )
+        self.celdaActiv.setUpTable( idActividad, itemsPend: actividad, idItemsReu: idReunion, itemsReu: reunion, tvc: self )
         
     }
     
@@ -240,6 +250,8 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         
         actividad = [String]()
         idActividad = [Int]()
+        reunion = [String]()
+        idReunion = [Int]()
         agendiaEvento = [String]()
         tareas = [[String : AnyObject]]()
         
@@ -251,6 +263,16 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
             }
             
             agendiaEvento.append( (dia[WebServiceResponseKey.fechaInicio] as? String)! )
+        }
+        
+        for dia in agendaReuniones {
+            if (dia[WebServiceResponseKey.diaReunion] as? String) == fecha {
+                reunion.append((dia[WebServiceResponseKey.nombreReunion] as? String)!)
+                idReunion.append((dia[WebServiceResponseKey.reunionId] as? Int)!)
+                tareas.append(dia)//
+            }
+            
+            agendiaEvento.append( (dia[WebServiceResponseKey.diaReunion] as? String)! )
         }
         
         print("tareas>>>")

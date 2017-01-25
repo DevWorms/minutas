@@ -201,15 +201,20 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         
         var asuntos = ""
         var indexPath : NSIndexPath
-        var txtAsunto = ""
+        //var txtAsunto = ""
         
         for indexAsunto in 0 ... (self.noAsunto-1) {
             
             indexPath = NSIndexPath(forRow: indexAsunto, inSection: 0)
-            txtAsunto = (self.tableViewAsunto.cellForRowAtIndexPath(indexPath) as! AsuntoReunionCell).txtf_asunto.text!
             
-            if txtAsunto != "" {
-                asuntos = asuntos + "&\(WebServiceRequestParameter.asuntos)=\(txtAsunto)"
+            if let cell = self.tableViewAsunto.cellForRowAtIndexPath(indexPath) as? AsuntoReunionCell {
+                if let txtAsunto = cell.txtf_asunto.text   {
+                    
+                    if txtAsunto != "" {
+                        asuntos = asuntos + "&\(WebServiceRequestParameter.asuntos)=\(txtAsunto)"
+                    }
+                    
+                }
             }
         }
         

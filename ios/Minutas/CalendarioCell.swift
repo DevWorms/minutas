@@ -27,25 +27,27 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     var subMenuTable:UITableView?
     var tableMadre: UITableViewController?
     var idPendientes = [Int]?()
+    var idReuniones = [Int]?()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setUpTable(nil, items: nil, tvc: nil)
+        setUpTable(nil, itemsPend: nil, idItemsReu: nil, itemsReu: nil, tvc: nil)
     }
     
-    func setUpTable(idItems: [Int]?, items: [String]?, tvc: UITableViewController?)
+    func setUpTable(idItemsPend: [Int]?, itemsPend: [String]?, idItemsReu: [Int]?, itemsReu: [String]?, tvc: UITableViewController?)
     {
         subMenuTable = UITableView(frame: CGRectZero, style:UITableViewStyle.Plain)
         subMenuTable?.delegate = self
         subMenuTable?.dataSource = self
         sections = [
-            Section(name: "Actividades", items: items),
-            //Section(name: "Reuniones", items: ["Reunion 1", "Reunion 2", "Reunion 3", "Reunion 4"]),
+            Section(name: "Pendientes", items: itemsPend),
+            Section(name: "Reuniones", items: itemsReu),
             
         ]
         
-        self.idPendientes = idItems
+        self.idPendientes = idItemsPend
+        self.idReuniones = idItemsReu
         self.tableMadre = tvc
         
         self.addSubview(subMenuTable!)
@@ -112,19 +114,37 @@ class CalendarioCell: UITableViewCell,UITableViewDataSource,UITableViewDelegate 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let tM = self.tableMadre as! CalendarioTableViewController
-        tM.rowCell = indexPath.item
+        //let tM = self.tableMadre as! CalendarioTableViewController
+        //tM.rowCell = indexPath.item
         
-        let pendienteId = idPendientes?[indexPath.item]
+        //tM.sectio
         
-        print("<<<<<<")
-        print(pendienteId)
-        
-        if pendienteId != nil {
-            NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
+        if indexPath.section == 0 {
+            print(indexPath.item)
             
-            self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+            let pendienteId = idPendientes?[indexPath.item]
+            
+            print("<<<<<<")
+            print(pendienteId)
+            
+            if pendienteId != nil {
+                NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
+                
+                self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+            }
+        } else if indexPath.section == 1 {
+            print(indexPath.item)
+            
+            let pendienteId = idPendientes?[indexPath.item]
+            
+            if pendienteId != nil {
+                NSUserDefaults.standardUserDefaults().setInteger(pendienteId!, forKey: WebServiceResponseKey.pendienteId)
+                
+                self.tableMadre!.performSegueWithIdentifier("tareas", sender: nil)
+            }
         }
+        
+        
         
     }
 }
