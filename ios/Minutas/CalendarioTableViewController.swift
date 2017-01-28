@@ -145,8 +145,6 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
             
             self.actividades(dateString)
             
-            self.celdaActiv.setUpTable( idActividad, itemsPend: actividad, idItemsReu: idReunion, itemsReu: reunion, tvc: self )
-            
             return self.celdaActiv
             
         default:
@@ -182,6 +180,33 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
                         
                         self.agenda.appendContentsOf(json[WebServiceResponseKey.pendientes] as! [[String : AnyObject]])
                         self.agendaReuniones.appendContentsOf(json[WebServiceResponseKey.reuniones] as! [[String : AnyObject]])
+                        
+                        
+                        let calendar = NSCalendar.currentCalendar()
+                        let dateFormatter = NSDateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+                        for dia in self.agenda {
+                            if let diasStringInicio = dia[WebServiceResponseKey.fechaInicio] as? String {
+                                
+                                var diaPendInicio = dateFormatter.dateFromString(diasStringInicio)
+                                let diaPendFinal = dateFormatter.dateFromString( (dia[WebServiceResponseKey.fechaFin] as! String) )
+                                
+                                while diaPendInicio!.compare(diaPendFinal!) != .OrderedDescending {
+                                    //print("mmmchas")
+                                    //print(dateFormatter.stringFromDate(diaPendInicio!))
+                                    self.agendiaEvento.append( dateFormatter.stringFromDate(diaPendInicio!) )
+                                    
+                                    diaPendInicio = calendar.dateByAddingUnit(.Day, value: 1, toDate: diaPendInicio!, options: [])
+                                }
+                            }
+                        }
+                        
+                        for dia in self.agendaReuniones {
+                            self.agendiaEvento.append( (dia[WebServiceResponseKey.diaReunion] as? String)! )
+                        }
+                        
+                        self.calendar.reloadData()
                         self.tableView?.reloadData()
                     }
                 } else {
@@ -215,7 +240,9 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         return nil
     }
 
-    var num = 0
+    func calendarCurrentMonthDidChange(calendar: FSCalendar) {
+        //self.calendar.reloadData()
+    }
     
     func calendar(calendar: FSCalendar, hasEventForDate date: NSDate) -> Bool {
         
@@ -224,6 +251,8 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.stringFromDate( date )
+        
+        print(agendiaEvento)
         
         for item in agendiaEvento {
             if item == dateString {
@@ -241,9 +270,6 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         print(dateString)
         
         self.actividades(dateString)
-        
-        self.celdaActiv.setUpTable( idActividad, itemsPend: actividad, idItemsReu: idReunion, itemsReu: reunion, tvc: self )
-        
     }
     
     func actividades(fecha: String?) {
@@ -252,17 +278,26 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
         idActividad = [Int]()
         reunion = [String]()
         idReunion = [Int]()
-        agendiaEvento = [String]()
         tareas = [[String : AnyObject]]()
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.dateFromString(fecha!)
+        
+        
         for dia in agenda {
-            if (dia[WebServiceResponseKey.fechaInicio] as? String) == fecha {
-                actividad.append((dia[WebServiceResponseKey.nombrePendiente] as? String)!)
-                idActividad.append((dia[WebServiceResponseKey.pendienteId] as? Int)!)
-                tareas.append(dia)
+            if let diasStringInicio = dia[WebServiceResponseKey.fechaInicio] as? String {
+                
+                let diaPendInicio = dateFormatter.dateFromString(diasStringInicio)
+                let diaPendFinal = dateFormatter.dateFromString( (dia[WebServiceResponseKey.fechaFin] as! String) )
+                
+                
+                if (date?.compare(diaPendInicio!) != .OrderedAscending) && (date?.compare(diaPendFinal!) != .OrderedDescending)  {
+                    actividad.append((dia[WebServiceResponseKey.nombrePendiente] as? String)!)
+                    idActividad.append((dia[WebServiceResponseKey.pendienteId] as? Int)!)
+                    tareas.append(dia)
+                }
             }
-            
-            agendiaEvento.append( (dia[WebServiceResponseKey.fechaInicio] as? String)! )
         }
         
         for dia in agendaReuniones {
@@ -272,13 +307,12 @@ class CalendarioTableViewController: UITableViewController, FSCalendarDataSource
                 tareas.append(dia)//
             }
             
-            agendiaEvento.append( (dia[WebServiceResponseKey.diaReunion] as? String)! )
         }
         
         print("tareas>>>")
         print(tareas)
         
-        self.calendar.reloadData()
+        self.celdaActiv.setUpTable( idActividad, itemsPend: actividad, idItemsReu: idReunion, itemsReu: reunion, tvc: self )
     }
     
     @IBAction func cerrarSesion(sender: AnyObject) {
