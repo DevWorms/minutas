@@ -217,6 +217,31 @@ class ConfiguracionViewController: UIViewController{
     }
     
     @IBAction func configuracion(sender: AnyObject) {
+        
+        let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+        
+        let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
+            self.cerrarSesion()
+            
+            //self.performSegueWithIdentifier("login", sender: nil)
+        })
+        alertController.addAction(deleteAction)
+        
+        let okAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: {(alert :UIAlertAction!) in
+            print("OK button tapped")
+        })
+        alertController.addAction(okAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = sender.frame
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func cerrarSesion(){
+        
         let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
         
         //Cierra la sesion activa en caso de que exista para poder iniciar sesion con una red social diferente

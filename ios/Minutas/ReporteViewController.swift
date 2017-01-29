@@ -62,7 +62,7 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.indice.count
+        return 1//self.indice.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -85,7 +85,7 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let json = indice
         
-        print(json.description)
+        //print(json.description)
         
         cell.nombreLabel.text = json[WebServiceResponseKey.nombre] as? String
         if let numeroPendientes = json[WebServiceResponseKey.numeroPendientes] as? Int{
@@ -172,6 +172,30 @@ class ReporteViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func cerrarSesion(sender: AnyObject) {
+        
+        let apodo = NSUserDefaults.standardUserDefaults().stringForKey(WebServiceResponseKey.apodo)
+        
+        let alertController = UIAlertController(title: "Apodo", message: apodo, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Cerrar sesión", style: UIAlertActionStyle.Destructive, handler: {(alert :UIAlertAction!) in
+            self.cerrarSesion()
+            
+            //self.performSegueWithIdentifier("login", sender: nil)
+        })
+        alertController.addAction(deleteAction)
+        
+        let okAction = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Default, handler: {(alert :UIAlertAction!) in
+            print("OK button tapped")
+        })
+        alertController.addAction(okAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        alertController.popoverPresentationController?.sourceRect = sender.frame
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+        
+    func cerrarSesion(){
         
         let redSocial = NSUserDefaults.standardUserDefaults().valueForKey(WebServiceResponseKey.redSocial)! as! String
         
