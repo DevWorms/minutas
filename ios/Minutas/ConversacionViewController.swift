@@ -28,6 +28,8 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
         loadConversacion()
         self.hideKeyboardWhenTappedAround()
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
@@ -169,7 +171,7 @@ class ConversacionViewController: UIViewController, UITableViewDelegate, UITable
                 
                 print(str + cell.conversacion.text!)
                 
-                cell.imagenDeUsuarioConstraint.constant = 5
+                cell.imagenDeUsuarioConstraint.constant = 0
                 cell.usuarios.textAlignment = .Left
                 cell.fechaChat.textAlignment = .Left
                 cell.conversacion.textAlignment = .Left
