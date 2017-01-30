@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentViewController: UIViewController, UITextFieldDelegate {
+class AddCommentViewController: UIViewController, UITextViewDelegate {
     
     var idPaComentarios = Int()
     var endpoint = String() //
@@ -18,6 +18,8 @@ class AddCommentViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.textView.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -74,10 +76,14 @@ class AddCommentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textView.text == "Agregar un comentario:" {
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
         self.textView.resignFirstResponder()
-        
-        return true
     }
 
     /*

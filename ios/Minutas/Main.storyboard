@@ -1234,7 +1234,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PenientesViewController" id="5Zs-WU-7nf" customClass="PendienteTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="21T-tX-8F3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -1911,7 +1911,7 @@
                                             <action selector="sendComment:" destination="nTy-CV-EES" eventType="touchUpInside" id="3XA-gM-GAN"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Agregar un comentario: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Dq-gg-9hX">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Agregar un comentario:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Dq-gg-9hX">
                                         <rect key="frame" x="53" y="20" width="243" height="147"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1960,7 +1960,7 @@
             <objects>
                 <tableViewController id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKN-uY-NW1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
@@ -4008,14 +4008,14 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d5i-QF-OlO"/>
+        <segue reference="Jwn-G5-OGI"/>
+        <segue reference="jBp-a8-zAI"/>
         <segue reference="pWX-lZ-P1v"/>
-        <segue reference="ZPy-ej-XWJ"/>
         <segue reference="J9U-HL-Jh4"/>
-        <segue reference="DIM-it-vlr"/>
-        <segue reference="PoT-6i-6Nt"/>
-        <segue reference="Vv3-Sv-yLE"/>
+        <segue reference="d5i-QF-OlO"/>
         <segue reference="A4l-lY-k7d"/>
         <segue reference="ibw-UW-qZD"/>
+        <segue reference="PoT-6i-6Nt"/>
+        <segue reference="Vv3-Sv-yLE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -99,9 +99,13 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         cell.reunionComplete.tag = indexPath.row
         cell.reunionComplete.addTarget(self, action: #selector(ReunionesTableViewController.switchChanged(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
-        cell.btnPendiente.tag = indexPath.row
-        cell.btnPendiente.addTarget(self, action: #selector(ReunionesTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        
+        if cell.reunionComplete.on {
+            cell.btnPendiente.enabled = false
+        } else {
+            cell.btnPendiente.enabled = true
+            cell.btnPendiente.tag = indexPath.row
+            cell.btnPendiente.addTarget(self, action: #selector(ReunionesTableViewController.buttonClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        }
         
         let str = (json[WebServiceResponseKey.horaReunion] as? String)!
         

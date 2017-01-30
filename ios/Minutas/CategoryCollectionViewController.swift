@@ -18,6 +18,8 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     var categories = [[String : AnyObject]]()
     var barButton:BBBadgeBarButtonItem!
     
+    var idReu = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -103,13 +105,12 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
             cell!.fecha.hidden = false
             
         }else{
-            cell?.reunion.hidden = false
             cell?.pendientes.hidden = false
-            
-            cell!.pendientes.tag = Int(idReunion!)!
             cell!.pendientes.tag = json[WebServiceResponseKey.categoryId] as! Int
-            
             cell!.pendientes.addTarget(self, action: #selector(CategoryCollectionViewController.pendientes(_:)), forControlEvents: .TouchUpInside)
+            
+            cell?.reunion.hidden = false
+            cell!.reunion.tag = Int(idReunion!)!
             cell!.reunion.addTarget(self, action: #selector(CategoryCollectionViewController.reunion(_:)), forControlEvents: .TouchUpInside)
             
             
@@ -130,8 +131,8 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     }
     
     func reunion(sender:UIButton){
-        let idCategoria = sender.tag
-        NSUserDefaults.standardUserDefaults().setInteger(idCategoria, forKey: WebServiceResponseKey.categoryId)
+        self.idReu = sender.tag
+        //NSUserDefaults.standardUserDefaults().setInteger(idCategoria, forKey: WebServiceResponseKey.categoryId)
         self.performSegueWithIdentifier("reunion", sender: nil)
         
     }
@@ -176,17 +177,6 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
     
     }
     */
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "nuevaCategoria" {
-            (segue.destinationViewController as! NewCategoryViewController).delegate = self
-        } else if segue.identifier == "categoria" {
-            (segue.destinationViewController as! PendienteTableViewController).initial = false
-        }
-    }
-    
-  
     
     @IBAction func usuario(sender: AnyObject) {
         
@@ -287,6 +277,18 @@ class CategoryCollectionViewController: UICollectionViewController, NewCategoryC
         
         let vc = storyboard!.instantiateViewControllerWithIdentifier("LogInViewController")
         self.presentViewController( vc , animated: true, completion: nil)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "nuevaCategoria" {
+            (segue.destinationViewController as! NewCategoryViewController).delegate = self
+        } else if segue.identifier == "categoria" {
+            (segue.destinationViewController as! PendienteTableViewController).initial = false
+        }else if segue.identifier == "reunion" {
+            (segue.destinationViewController as! ReunionesTableViewController).idDesdeCalendario = self.idReu
+        }
         
     }
     

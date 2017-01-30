@@ -82,9 +82,11 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         components.year = 0
         components.month = 0
         components.day = 0
-        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
         
+        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
         self.datePicker_fecha.minimumDate = minDate
+        
+        self.datePicker_duracion.minimumDate = minDate
         
         self.loadUsuarios("@")
     }
@@ -183,6 +185,9 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             if self.tableView.hidden == false {
                 self.tableView.hidden = true
+            }
+            if textView.text == "Objetivos de la reunion" {
+                textView.text = ""
             }
         }
         
