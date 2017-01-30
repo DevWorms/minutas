@@ -121,7 +121,6 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         
         var obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as? Bool
         
-        
         let notificacionesSubPendientes = json[WebServiceResponseKey.subPendienteIdNotificaciones]  as? Int
         
         let pendienteId = json[WebServiceResponseKey.pendienteId] as? Int
@@ -135,9 +134,9 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
                 print(pendienteId)
             }else{
                 obligatorio = true
-                let idNotificacion = json[WebServiceResponseKey.notificacionId] as? Int
-                print(idNotificacion)
-                leerNotificaciones(idNotificacion)
+                //let idNotificacion = json[WebServiceResponseKey.notificacionId] as? Int
+                //print(idNotificacion)
+                //leerNotificaciones(idNotificacion)
             }
         }
         
@@ -236,9 +235,6 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
             }
         }
         
-        
-       // leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
-        
     }
   
     func buttonRechazar(sender:UIButton) {
@@ -273,11 +269,6 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
             }
         }
         
-        
-        
-        
-        
-      //  leerNotificaciones(json[WebServiceResponseKey.notificacionId] as? Int)
     }
   
     
@@ -288,6 +279,14 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        let json = notificaciones[indexPath.item]
+        
+        let obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as! Bool
+        
+        if obligatorio {
+            let idNotificacion = json[WebServiceResponseKey.notificacionId] as? Int
+            leerNotificaciones(idNotificacion)
+        }
         
     }
     

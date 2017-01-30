@@ -3095,7 +3095,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.75686274509999996" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="67" id="jaH-5e-jqc" customClass="NotificacionCell" customModule="Minutas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="67" id="jaH-5e-jqc" customClass="NotificacionCell" customModule="Minutas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jaH-5e-jqc" id="Vu2-lx-KNI">
@@ -3123,7 +3123,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IrD-jT-jpD">
-                                            <rect key="frame" x="308" y="4" width="26" height="27"/>
+                                            <rect key="frame" x="289" y="4" width="26" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="27" id="G7T-Ss-FkQ"/>
                                                 <constraint firstAttribute="width" constant="26" id="S9K-fB-8Ky"/>
@@ -3134,7 +3134,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E80-cz-UED">
-                                            <rect key="frame" x="274" y="4" width="26" height="27"/>
+                                            <rect key="frame" x="237" y="4" width="26" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="26" id="7Su-SP-I79"/>
                                                 <constraint firstAttribute="height" constant="27" id="rhh-pC-5XA"/>
@@ -3147,14 +3147,14 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.36862745099999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="IrD-jT-jpD" secondAttribute="trailing" constant="33" id="1sH-yf-JWD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="IrD-jT-jpD" secondAttribute="trailing" constant="52" id="1sH-yf-JWD"/>
                                         <constraint firstItem="IrD-jT-jpD" firstAttribute="top" secondItem="Vu2-lx-KNI" secondAttribute="topMargin" constant="-4" id="3dz-EV-TW1"/>
                                         <constraint firstItem="ydS-2p-854" firstAttribute="top" secondItem="Vu2-lx-KNI" secondAttribute="topMargin" constant="-4" id="5hv-3h-uuK"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="n9V-FI-vqg" secondAttribute="leading" id="8fj-w4-LEN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="n9V-FI-vqg" secondAttribute="trailing" id="MiX-DN-yx2"/>
                                         <constraint firstItem="n9V-FI-vqg" firstAttribute="top" secondItem="Vu2-lx-KNI" secondAttribute="topMargin" constant="26" id="aRL-kX-a4v"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ydS-2p-854" secondAttribute="trailing" constant="-1" id="imr-3O-eXs"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="E80-cz-UED" secondAttribute="trailing" constant="67" id="rQX-bx-cfl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="E80-cz-UED" secondAttribute="trailing" constant="104" id="rQX-bx-cfl"/>
                                         <constraint firstItem="E80-cz-UED" firstAttribute="top" secondItem="Vu2-lx-KNI" secondAttribute="topMargin" constant="-4" id="sn7-j0-t4r"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -4016,6 +4016,6 @@
         <segue reference="A4l-lY-k7d"/>
         <segue reference="ibw-UW-qZD"/>
         <segue reference="PoT-6i-6Nt"/>
-        <segue reference="Vv3-Sv-yLE"/>
+        <segue reference="JRs-HU-D0B"/>
     </inferredMetricsTieBreakers>
 </document>
