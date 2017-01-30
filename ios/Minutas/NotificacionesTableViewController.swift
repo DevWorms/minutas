@@ -281,17 +281,17 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         
         let json = notificaciones[indexPath.item]
         
-        let obligatorio = json[WebServiceResponseKey.notificacionObligatoria] as! Bool
+        let notificacionesSubPendientes = json[WebServiceResponseKey.subPendienteIdNotificaciones]  as? Int
         
-        if obligatorio {
+        let pendienteId = json[WebServiceResponseKey.pendienteId] as? Int
+        
+        if notificacionesSubPendientes == nil && pendienteId == nil {
             let idNotificacion = json[WebServiceResponseKey.notificacionId] as? Int
             leerNotificaciones(idNotificacion)
         }
         
     }
-    
-
-    
+        
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "delegarTarea" {
             (segue.destinationViewController as! SearchUserViewController).anadirUsuarioSolamente = idOperacion
