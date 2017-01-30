@@ -46,6 +46,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     var noAsunto: Int = 1
     
+    var asuntosData = [0:""]
     
     // MARK: Responding to view events
     
@@ -91,7 +92,13 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBAction func addAsunto(sender: AnyObject) {
         
         self.noAsunto = self.noAsunto + 1
-        self.tableViewAsunto.reloadData()
+        
+        self.asuntosData[noAsunto-1] = ""
+        
+        self.tableViewAsunto.beginUpdates()
+        self.tableViewAsunto.insertRowsAtIndexPaths([NSIndexPath.init(forRow: noAsunto-1, inSection: 0)], withRowAnimation: .Top)
+        self.tableViewAsunto.endUpdates()
+        //self.tableViewAsunto.reloadData()
     }
     
     
@@ -186,37 +193,51 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         return true
     }
     
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField != self.txtf_name &&  textField != self.txtf_lugar &&  textField != self.txtf_usuarios {
+            print("TextField did end editing method called\(textField.text)")
+            print("TextField did end editing method called\(textField.tag)")
+            
+            self.asuntosData[textField.tag] = textField.text
+        }
+        
+    }
     
     // MARK: Actions
     
-    @IBAction
-    func cancelPasswordRecovery() {
+    @IBAction func cancelPasswordRecovery() {
         delegate?.newReunionControllerDidCancel()
     }
     
     // MARK: Networking
     
-    @IBAction
-    func createCategory() {
+    @IBAction func createCategory() {
+        
+        self.view.endEditing(true) // forza a llamar al metodo textFieldDidEndEditing
         
         var asuntos = ""
-        var indexPath : NSIndexPath
-        //var txtAsunto = ""
+        var valueAsunto = ""
+        //print(self.noAsunto)
+        //print(self.asuntosData)
         
         for indexAsunto in 0 ... (self.noAsunto-1) {
             
-            indexPath = NSIndexPath(forRow: indexAsunto, inSection: 0)
+            //indexPath = NSIndexPath(forRow: indexAsunto, inSection: 0)
             
-            if let cell = self.tableViewAsunto.cellForRowAtIndexPath(indexPath) as? AsuntoReunionCell {
-                if let txtAsunto = cell.txtf_asunto.text   {
+            //if let cell = self.tableViewAsunto.cellForRowAtIndexPath(indexPath) as? AsuntoReunionCell {
+                //if let txtAsunto = cell.txtf_asunto.text   {
+            
+                    valueAsunto = asuntosData[indexAsunto]!
                     
-                    if txtAsunto != "" {
-                        asuntos = asuntos + "&\(WebServiceRequestParameter.asuntos)=\(txtAsunto)"
+                    if valueAsunto != "" {
+                        asuntos = asuntos + "&\(WebServiceRequestParameter.asuntos)=\(valueAsunto)"
                     }
                     
-                }
-            }
+                //}
+            //}
         }
+        
+        //print(asuntos)
         
         if     !((txtf_name.text?.isEmpty)!)
             && !((txtf_usuarios.text?.isEmpty)!)
@@ -303,7 +324,13 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("CellAsunto", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("CellAsunto") as! AsuntoReunionCell
+            
+            cell.txtf_asunto.delegate = self
+            cell.txtf_asunto.tag = indexPath.row
+            
+            cell.txtf_asunto.text = self.asuntosData[indexPath.row]
+            
             return cell
         }
         
@@ -339,7 +366,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             return visibleResults.count
         } else {
-            return noAsunto
+            return self.noAsunto
         }
         
     }
