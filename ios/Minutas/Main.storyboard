@@ -1958,7 +1958,7 @@
         <!--Juntas-->
         <scene sceneID="kdE-VC-Ivz">
             <objects>
-                <tableViewController id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReunionesViewController" id="8wR-kl-PI0" customClass="ReunionesTableViewController" customModule="Minutas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" id="xKN-uY-NW1">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4008,14 +4008,14 @@
         <image name="sharedfolder" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xd1-1D-xSz"/>
-        <segue reference="jBp-a8-zAI"/>
-        <segue reference="Jwn-G5-OGI"/>
-        <segue reference="d5i-QF-OlO"/>
-        <segue reference="pWX-lZ-P1v"/>
+        <segue reference="iRT-WX-waQ"/>
         <segue reference="J9U-HL-Jh4"/>
+        <segue reference="ibw-UW-qZD"/>
         <segue reference="A4l-lY-k7d"/>
         <segue reference="PoT-6i-6Nt"/>
-        <segue reference="ibw-UW-qZD"/>
+        <segue reference="Jwn-G5-OGI"/>
+        <segue reference="DIM-it-vlr"/>
+        <segue reference="e2b-m4-vOf"/>
+        <segue reference="CDW-8Q-P6w"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -214,7 +214,10 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
                     print(pendienteIdBuscado, userId)
                     if url != "" && url != "#"{
                         var arrayUrl = url.componentsSeparatedByString("#")
-                        print("texto basura " + arrayUrl.popLast()!)
+                        
+                        if arrayUrl.count > 1{
+                            print("texto basura " + arrayUrl.popLast()!)
+                        }
                         
                         var arrayUrlStr = arrayUrl.popLast()!.componentsSeparatedByString("/")
                         
@@ -264,6 +267,18 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
                             activity = "TareasViewController"
                             let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! TareasTableViewController
                             vc.idTarea = jsonArray![WebServiceResponseKey.subPendienteId] as! Int
+                            
+                            self.navigationController!.pushViewController(vc, animated: true)
+                            break
+                        case "reunion":
+                            activity = "ReunionesViewController"
+                            let vc = storyboard!.instantiateViewControllerWithIdentifier(activity) as! ReunionesTableViewController
+
+                            
+                            print(jsonArray)
+                            var json =  [[String : AnyObject]]()
+                            json.append(jsonArray!)
+                            vc.reuniones = json
                             
                             self.navigationController!.pushViewController(vc, animated: true)
                             break
