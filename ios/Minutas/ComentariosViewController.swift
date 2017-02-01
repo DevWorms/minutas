@@ -27,9 +27,7 @@ class ComentariosViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         loadComentarios(idPaComentarios)
-
-        // Do any additional setup after loading the view.
-    }
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,7 +38,8 @@ class ComentariosViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ComentarioCell
         
         let json = comentarios[indexPath.item]
-        
+        print(json)
+
         cell.comment.text = json["comment"] as? String
         cell.date.text = json["created_at"] as? String
         cell.user.text = json["apodo"] as? String

@@ -247,7 +247,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
             {
                 pickerLabel = UILabel()
                 
-                pickerLabel?.font = UIFont(name: "Arial", size: 12)
+                pickerLabel?.font = UIFont(name: "Arial", size: 15)
                 pickerLabel?.textColor = UIColor.whiteColor()
                 pickerLabel?.textAlignment = NSTextAlignment.Center
             }
