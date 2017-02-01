@@ -107,7 +107,7 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! NotificacionCell
         
         let json = notificaciones[indexPath.item]
-        //print(json.description)
+        print(json.description)
         
         let txt = "<font color=\"white\">" + (json[WebServiceResponseKey.notificacionText] as? String)! + " </font>"
         let attrStr = try! NSAttributedString(

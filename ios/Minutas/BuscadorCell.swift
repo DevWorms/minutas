@@ -13,4 +13,18 @@ class BuscadorCell: GenericCell{
     @IBOutlet weak var nombreBusqueda: UILabel!
     
     @IBOutlet weak var tipoBusqueda: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if nombreBusqueda != nil{
+            nombreBusqueda.adjustsFontSizeToFitWidth = true
+        }
+        if tipoBusqueda != nil{
+            tipoBusqueda.adjustsFontSizeToFitWidth = true
+        }
+        
+    }
+    
+
 }

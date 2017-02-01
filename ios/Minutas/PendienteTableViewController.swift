@@ -55,6 +55,11 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
         appDelegate.buttonBarController = barButton
         self.navigationItem.leftBarButtonItem = barButton
         
+        // Along with auto layout, these are the keys for enabling variable cell height
+        self.tableView.estimatedRowHeight = 64.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
     }
     
     func revisarNotificaciones(){
@@ -395,12 +400,6 @@ class PendienteTableViewController: UITableViewController, NewPendienteControlle
             }
         }
     }
-    
-    // para cuadrar las imagenes
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 64
-    }
-    
     
     @IBAction func usuario(sender: AnyObject) {
         

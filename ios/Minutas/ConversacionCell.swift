@@ -23,6 +23,22 @@ class ConversacionCell: GenericCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        if tituloChat != nil {
+         self.tituloChat.adjustsFontSizeToFitWidth = true
+        }
+        if usuarios != nil {
+            self.usuarios.adjustsFontSizeToFitWidth = true
+        
+        }
+        if fechaChat != nil {
+            self.fechaChat.adjustsFontSizeToFitWidth = true
+        }
+        
+        if conversacion != nil {
+            self.conversacion.adjustsFontSizeToFitWidth = true
+        }
+        
+        
         //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
     

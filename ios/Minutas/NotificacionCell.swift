@@ -23,7 +23,9 @@ class NotificacionCell: GenericCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        if textoNotificacion != nil{
+            textoNotificacion.adjustsFontSizeToFitWidth = true
+        }
     }
     
     

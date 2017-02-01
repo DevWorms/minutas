@@ -16,6 +16,17 @@ class ComentarioCell: GenericCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        if comment != nil {
+            self.comment.adjustsFontSizeToFitWidth = true
+        }
+        if user != nil {
+            self.user.adjustsFontSizeToFitWidth = true
+        }
+        if date != nil {
+            self.date.adjustsFontSizeToFitWidth = true
+        }
+     
         // Initialization code
     }
 

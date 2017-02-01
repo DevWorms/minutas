@@ -21,6 +21,15 @@ class CategoriaCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        if nombre != nil {
+            nombre.adjustsFontSizeToFitWidth = true
+        }
+        if fecha != nil{
+            fecha.adjustsFontSizeToFitWidth = true
+        }
+        
+        
+
         //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
 

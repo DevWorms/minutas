@@ -16,7 +16,9 @@ class SearchUsuarioCell: GenericCell {
     var caminoFav = false
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        if txtNombreUsuario != nil{
+            txtNombreUsuario.adjustsFontSizeToFitWidth = true
+        }
     }
  
 

@@ -32,6 +32,21 @@ class PendienteCell: GenericCell {//, UIDocumentMenuDelegate, UIDocumentPickerDe
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if tituloPendiente != nil{
+            tituloPendiente.adjustsFontSizeToFitWidth = true
+        }
+        if status != nil{
+            status.adjustsFontSizeToFitWidth = true
+            
+        }
+        if fecha != nil{
+            fecha.adjustsFontSizeToFitWidth = true
+        }
+        if cateOrPendOrJunta != nil{
+            cateOrPendOrJunta.adjustsFontSizeToFitWidth = true
+        }
+        
+        
         
      //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }

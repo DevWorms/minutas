@@ -17,4 +17,19 @@ class IndiceEficienciaTopCell: UITableViewCell{
     @IBOutlet weak var numeroPendientesLabel: UILabel!
     @IBOutlet weak var incumplimiento: UILabel!
     @IBOutlet weak var numeroDiasAtrasoLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if numeroPendientesLabel != nil{
+            numeroPendientesLabel.adjustsFontSizeToFitWidth = true
+        }
+        if incumplimiento != nil{
+            incumplimiento.adjustsFontSizeToFitWidth = true
+        }
+        if numeroDiasAtrasoLabel != nil{
+            numeroDiasAtrasoLabel.adjustsFontSizeToFitWidth = true
+        }
+        
+    }
 }

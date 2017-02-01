@@ -172,26 +172,46 @@ class BuscadorViewController:  UIViewController, UITableViewDelegate, UITableVie
         let texto = json[1] as? String
         let url = json[2] as? String
         //let informacionArray = json[3] as? [String]
- 
+        if let opcion = tipo{
+            switch opcion {
+                case "pendiente":
+                    cell.selectionStyle = .Default
+                break
+                case "tarea":
+                    cell.selectionStyle = .Default
+                break
+                case "reunion":
+                    cell.selectionStyle = .Default
+                break
+                default:
+                    cell.selectionStyle = .None
+                break
+            }
+        }
         
+        
+    
+    
+    
+
         cell.nombreBusqueda.text = texto
         cell.tipoBusqueda.text = tipo
         print(json.description)
         print(cell.nombreBusqueda.text)
         return cell
-        
+    
     }
-    
-    
-        
+
+
+
     // MARK: UITableViewDataSource
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return visibleResults.count
     }
 
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         

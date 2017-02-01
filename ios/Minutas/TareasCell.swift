@@ -24,6 +24,13 @@ class TareasCell: GenericCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        if tituloTarea != nil {
+            tituloTarea.adjustsFontSizeToFitWidth = true
+        }
+        
+        if responsableTarea != nil{
+            responsableTarea.adjustsFontSizeToFitWidth = true
+        }
         //  categoriaPicker.setValue(UIColor.whiteColor(), forKeyPath: "textColor")
     }
     

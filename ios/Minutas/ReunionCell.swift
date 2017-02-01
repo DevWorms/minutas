@@ -19,6 +19,13 @@ class ReunionCell: GenericCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        if tituloReunion != nil{
+            tituloReunion.adjustsFontSizeToFitWidth = true
+        }
+        if fechaReunion != nil{
+            fechaReunion.adjustsFontSizeToFitWidth = true
+        }
         // Initialization code
     }
 

@@ -40,6 +40,8 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         appDelegate.buttonBarController = barButton
         self.navigationItem.leftBarButtonItem = barButton
         
+        // Along with auto layout, these are the keys for enabling variable cell height
+        
     }
     
     func revisarNotificaciones(){
@@ -265,10 +267,11 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         }
     }
     
+    
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 122
+        return 155
     }
     
     @IBAction func usuario(sender: AnyObject) {
