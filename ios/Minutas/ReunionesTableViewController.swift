@@ -173,18 +173,34 @@ class ReunionesTableViewController: UITableViewController, NewReunionViewControl
         
         for item in self.reuniones {
             if (item[WebServiceResponseKey.reunionId] as! Int) == idABuscar {
+                
                 name = item[WebServiceResponseKey.nombreReunion] as! String
-                parameterString = parameterString + "Lugar\r\n" + (item["Lugar_Reunion"] as! String) + "\r\n\n"
-                parameterString = parameterString + "Objetivo\r\n" + (item[WebServiceResponseKey.objetivoReunion] as! String) + "\r\n\n"
-                parameterString = parameterString + "Horario\r\n" + (item[WebServiceResponseKey.horaReunion] as! String) + "\r\n\n"
-                parameterString = parameterString + "Usuarios Asignados\r\n" + (item[WebServiceResponseKey.usuariosAsignados] as! String) + "\r\n\n"
+                parameterString = parameterString + "Lugar:\r\n" + (item["Lugar_Reunion"] as! String) + "\r\n\n"
+                parameterString = parameterString + "Objetivo:\r\n" + (item[WebServiceResponseKey.objetivoReunion] as! String) + "\r\n\n"
+                parameterString = parameterString + "Horario:\r\n" + (item[WebServiceResponseKey.horaReunion] as! String) + "\r\n\n"
+                parameterString = parameterString + "Usuarios Asignados:\r\n" + (item[WebServiceResponseKey.usuariosAsignados] as! String) + "\r\n\n"
                 
                 if let asuntos = item["asuntos"] as? [[String:AnyObject]] {
                     
-                    parameterString = parameterString + "Asuntos a tratar\r\n"
+                    parameterString = parameterString + "Asuntos a tratar:\r\n"
+                    
+                    var noAsunto = 1
                     
                     for asunto in asuntos {
-                        parameterString = parameterString + (asunto["asunto"] as! String) + "\r\n"
+                        parameterString = parameterString + " \(noAsunto).- " + (asunto["asunto"] as! String) + "\r\n"
+                        noAsunto = noAsunto + 1
+                    }
+                }
+                
+                if let acuerdos = item["minutas"] as? [[String:AnyObject]] {
+                    
+                    parameterString = parameterString + "\nAcuerdos:\r\n"
+                    
+                    var noAsunto = 1
+                    
+                    for acuerdo in acuerdos {
+                        parameterString = parameterString + " \(noAsunto).- " + (acuerdo["Acuerdo_Minuta"] as! String) + "\r\n"
+                        noAsunto = noAsunto + 1
                     }
                 }
             }
