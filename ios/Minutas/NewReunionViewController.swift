@@ -32,6 +32,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     
     var usuarios = [String]()
+    var lugares = [String]()
     var tap:UITapGestureRecognizer!
     
     var noAsunto: Int = 1
@@ -40,7 +41,6 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     var autocompleteTableView: UITableView!
     
-    var pastUrls = ["Men", "Women", "Cats", "Dogs", "Children"]
     var autocompleteUrls = [String]()
     
     // MARK: Responding to view events
@@ -57,7 +57,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         self.tableViewAsunto.delegate = self
         self.tableViewAsunto.delegate = self
         
-        autocompleteTableView = UITableView(frame: CGRectMake( txtf_lugar.frame.origin.x, txtf_lugar.frame.origin.y + 20, (txtf_lugar.frame.size.width + (txtf_lugar.frame.size.width/4)),(txtf_lugar.frame.height*3)), style: UITableViewStyle.Plain)
+        autocompleteTableView = UITableView(frame: CGRectMake( txtf_lugar.frame.origin.x, txtf_lugar.frame.origin.y + 20, (txtf_lugar.frame.size.width + (txtf_lugar.frame.size.width/3.5)),(txtf_lugar.frame.height*3)), style: UITableViewStyle.Plain)
         
         autocompleteTableView.delegate = self
         autocompleteTableView.dataSource = self
@@ -83,6 +83,8 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         
         self.datePicker_fecha.minimumDate = minDate
         self.datePicker_duracion.minimumDate = minDate
+        
+        self.loadLugares()
         
         self.loadUsuarios("@")
     }
@@ -178,7 +180,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     {
         autocompleteUrls.removeAll(keepCapacity: false)
         
-        for curString in pastUrls
+        for curString in self.lugares
         {
             let myString:NSString! = curString as NSString
             
@@ -550,5 +552,58 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
         }
     }
+
+    func loadLugares() {
+        let urlStr = "\(WebServiceEndpoint.baseUrl)\("places/1/1/a")"
+        print(urlStr)
+        let url = NSURL(string: urlStr)!
+        NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: parseJsonLugares).resume()
+    }
     
+    func parseJsonLugares(data: NSData?, urlResponse: NSURLResponse?, error: NSError?) {
+        if error != nil {
+            print(error!)
+        } else if urlResponse != nil {
+            if (urlResponse as! NSHTTPURLResponse).statusCode == HttpStatusCode.OK {
+                if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                    print(json)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if self.lugares.count > 0 {
+                            self.lugares.removeAll()
+                        }
+                        
+                        let jsonArray = json["places"] as! [[String : AnyObject]]
+                        
+                        for jsonItem in jsonArray{
+                            
+                            let strApodo = jsonItem["Lugar_Reunion"] as? String
+                            self.lugares.append(strApodo!)
+                            
+                        }
+                        
+                        print(self.lugares.description)
+                        
+                        
+                        self.autocompleteTableView?.reloadData()
+                    }
+                } else {
+                    print("HTTP Status Code: 200")
+                    print("El JSON de respuesta es inválido.")
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let json = try? NSJSONSerialization.JSONObjectWithData(data!, options: []) {
+                        let vc_alert = UIAlertController(title: nil, message: json[WebServiceResponseKey.message] as? String, preferredStyle: .Alert)
+                        vc_alert.addAction(UIAlertAction(title: "OK", style: .Cancel , handler: nil))
+                        self.presentViewController(vc_alert, animated: true, completion: nil)
+                        NSUserDefaults.standardUserDefaults().setObject("false", forKey: "login")
+                    } else {
+                        print("HTTP Status Code: 400 o 500")
+                        print("El JSON de respuesta es inválido.")
+                    }
+                }
+            }
+        }
+    }
+
 }
