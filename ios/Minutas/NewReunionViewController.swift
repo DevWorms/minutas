@@ -69,27 +69,32 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         //self.hideKeyboardWhenTappedAround()
         btn_create.enabled = true
         
+        let minDate: NSDate = NSCalendar.currentCalendar().dateByAddingComponents(NSDateComponents(), toDate: NSDate(), options: [])!
         
-        let currentDate: NSDate = NSDate()
-        
-        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        // let calendar: NSCalendar = NSCalendar.currentCalendar()
-        calendar.timeZone = NSTimeZone(name: "UTC")!
-        
-        let components: NSDateComponents = NSDateComponents()
-        components.calendar = calendar
-        
-        components.year = 0
-        components.month = 0
-        components.day = 0
-        
-        let minDate: NSDate = calendar.dateByAddingComponents(components, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
         self.datePicker_fecha.minimumDate = minDate
-        
         self.datePicker_duracion.minimumDate = minDate
         
         self.loadUsuarios("@")
     }
+    
+    @IBAction func fechaChanged(sender: UIDatePicker) {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let currentDate = dateFormatter.stringFromDate(NSDate())
+        let selectedDate = dateFormatter.stringFromDate(sender.date)
+        
+        var minDate: NSDate!
+        
+        if currentDate == selectedDate {
+            minDate = NSCalendar.currentCalendar().dateByAddingComponents(NSDateComponents(), toDate: NSDate(), options: [])!
+        }
+            
+        self.datePicker_duracion.minimumDate = minDate
+        
+    }
+    
     
     @IBAction func addAsunto(sender: AnyObject) {
         
