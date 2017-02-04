@@ -21,23 +21,13 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     weak var delegate: NewReunionViewControllerDelegate?
     
-    @IBOutlet
-    weak var navigationBar: UINavigationBar!
-    
-    @IBOutlet
-    weak var btn_create: UIBarButtonItem!
-    
-    @IBOutlet
-    weak var txtf_name: UITextField!
-    
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var btn_create: UIBarButtonItem!
+    @IBOutlet weak var txtf_name: UITextField!
     @IBOutlet weak var txtf_lugar: UITextField!
-    
     @IBOutlet weak var txtf_usuarios: UITextField!
-    
     @IBOutlet weak var txtf_objetivos: UITextView!
-    
     @IBOutlet weak var datePicker_fecha: UIDatePicker!
-    
     @IBOutlet weak var datePicker_duracion: UIDatePicker!
     
     
@@ -48,17 +38,37 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     var asuntosData = [0:""]
     
+    var autocompleteTableView: UITableView!
+    
+    var pastUrls = ["Men", "Women", "Cats", "Dogs", "Children"]
+    var autocompleteUrls = [String]()
+    
     // MARK: Responding to view events
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableViewAsunto.delegate = self
         self.tableViewAsunto.delegate = self
         
+        autocompleteTableView = UITableView(frame: CGRectMake( txtf_lugar.frame.origin.x, txtf_lugar.frame.origin.y + 20, (txtf_lugar.frame.size.width + (txtf_lugar.frame.size.width/4)),(txtf_lugar.frame.height*3)), style: UITableViewStyle.Plain)
+        
+        autocompleteTableView.delegate = self
+        autocompleteTableView.dataSource = self
+        autocompleteTableView.userInteractionEnabled = true
+        autocompleteTableView.hidden = true
+        
+        autocompleteTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AutoCompleteRowIdentifier")
+        self.view.addSubview(autocompleteTableView)
+        
         txtf_objetivos.delegate = self
+        txtf_lugar.delegate = self
         
         if tap == nil{
             tap = self.hideKeyboardWhenTappedAround()
@@ -149,7 +159,39 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             btn_create.enabled = true
         }
         
+        if textField == self.txtf_lugar {
+            
+            if self.autocompleteTableView.hidden == true {
+                self.autocompleteTableView.hidden = false
+            }
+            
+            let substring = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            
+            searchAutocompleteEntriesWithSubstring(substring)
+            //return true     // not sure about this - could be false
+        }
+        
         return true
+    }
+    
+    func searchAutocompleteEntriesWithSubstring(substring: String)
+    {
+        autocompleteUrls.removeAll(keepCapacity: false)
+        
+        for curString in pastUrls
+        {
+            let myString:NSString! = curString as NSString
+            
+            //let substringRange :NSRange! = myString.rangeOfString(substring)
+            let substringRange :NSRange! = myString.rangeOfString(substring,options: [.CaseInsensitiveSearch])
+            
+            if (substringRange.location  == 0)
+            {
+                autocompleteUrls.append(curString)
+            }
+        }
+        
+        autocompleteTableView.reloadData()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -169,7 +211,23 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
                 
             }
             
-        }else{
+        }else if textField == self.txtf_lugar {
+            if self.autocompleteTableView.hidden == false {
+                self.autocompleteTableView.hidden = true
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                if self.tap != nil{
+                    self.removeGestureRecognitionText(self.tap)
+                    self.tap = nil
+                    self.autocompleteTableView?.reloadData()
+                }
+                
+            }
+
+        }
+        
+        else{
             if tap == nil{
                 tap = self.hideKeyboardWhenTappedAround()
             }
@@ -190,6 +248,9 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             if self.tableView.hidden == false {
                 self.tableView.hidden = true
+            }
+            if self.autocompleteTableView.hidden == false {
+                self.autocompleteTableView.hidden = true
             }
             if textView.text == "Objetivos de la reunion" {
                 textView.text = ""
@@ -333,6 +394,17 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
              */
             return cell
         }
+        else if tableView == self.autocompleteTableView {
+            let autoCompleteRowIdentifier = "AutoCompleteRowIdentifier"
+            let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier(autoCompleteRowIdentifier, forIndexPath: indexPath) as UITableViewCell
+            
+            cell.userInteractionEnabled = true
+            
+            let index = indexPath.row as Int
+            
+            cell.textLabel!.text = autocompleteUrls[index]
+            return cell
+        }
         else {
             let cell = tableView.dequeueReusableCellWithIdentifier("CellAsunto") as! AsuntoReunionCell
             
@@ -375,6 +447,14 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
                 self.tableView.hidden = true
             }
             return visibleResults.count
+            
+        } else if tableView == self.autocompleteTableView {
+            if autocompleteUrls.count == 0 {
+                tableView.hidden = true
+            }
+
+            return autocompleteUrls.count
+            
         } else {
             return self.noAsunto
         }
@@ -404,6 +484,12 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
             if tap == nil{
                 tap = self.hideKeyboardWhenTappedAround()
             }
+            
+        } else if tableView == self.autocompleteTableView {
+            let selectedCell : UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            self.txtf_lugar.text = selectedCell.textLabel!.text
+            //print(selectedCell.textLabel!.text)
+            tableView.hidden = true
         }
     }
 
