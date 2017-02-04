@@ -23,6 +23,7 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var descripcion: UITextView!
     @IBOutlet weak var prioridadLabel: UILabel!
     @IBOutlet weak var estatus: UILabel!
+    @IBOutlet weak var diasAtraso: UILabel!
     @IBOutlet weak var responsables: UITextView!
     @IBOutlet weak var categorias: UIPickerView!
     
@@ -83,11 +84,11 @@ class PendViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
         fechaFin.text = pendienteJson[WebServiceResponseKey.fechaFin] as? String
         
-        if pendienteJson[WebServiceResponseKey.pendienteStatus] as! Bool{
-            estatus.text = "Cerrado"
-        }
-        else{
-            estatus.text = "Abierto"
+        estatus.text = pendienteJson[WebServiceResponseKey.pendienteStatusVisible] as? String
+        
+        if estatus.text == "Vencido" {
+            diasAtraso.hidden = false
+            diasAtraso.text = "Días de atraso: \(pendienteJson[WebServiceResponseKey.diasAtraso] as! Int)"
         }
         
         switch pendienteJson[WebServiceResponseKey.prioridad] as! Int {
