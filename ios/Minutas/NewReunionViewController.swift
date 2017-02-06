@@ -57,7 +57,7 @@ class NewReunionViewController: UIViewController, UITextFieldDelegate, UITableVi
         self.tableViewAsunto.delegate = self
         self.tableViewAsunto.delegate = self
         
-        autocompleteTableView = UITableView(frame: CGRectMake( txtf_lugar.frame.origin.x, txtf_lugar.frame.origin.y + 20, (txtf_lugar.frame.size.width + (txtf_lugar.frame.size.width/3.5)),(txtf_lugar.frame.height*3)), style: UITableViewStyle.Plain)
+        autocompleteTableView = UITableView(frame: CGRectMake( txtf_lugar.frame.origin.x, txtf_lugar.frame.origin.y + 20, (txtf_lugar.frame.size.width + (txtf_lugar.frame.size.width/4.5)),(txtf_lugar.frame.height*3)), style: UITableViewStyle.Plain)
         
         autocompleteTableView.delegate = self
         autocompleteTableView.dataSource = self
