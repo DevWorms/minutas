@@ -109,7 +109,7 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
         let json = notificaciones[indexPath.item]
         print(json.description)
         
-        let txt = "<font color=\"white\">" + (json[WebServiceResponseKey.notificacionText] as? String)! + " </font>"
+        let txt = "<font color=\"white\" size=\"5\"  face=\"Avenir Next\">" + (json[WebServiceResponseKey.notificacionText] as? String)! + " </font>"
         let attrStr = try! NSAttributedString(
             data: txt.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -482,7 +482,7 @@ class NotificacionesTableViewController: UITableViewController,NewSearchViewCont
     // para cuadrar las imagenes
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 64
+        return 121
     }
     
     @IBAction func usuario(sender: AnyObject) {
